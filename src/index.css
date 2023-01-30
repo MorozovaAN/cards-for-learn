@@ -5,7 +5,21 @@
 :root {
   /* Colors */
   --color-background-base: #ffffff;
+  --color-background-dark-100: #fcfcfc;
+  --color-background-dark-200: #f9f9fa;
+  --color-background-dark-300: #f5f5f5;
+  --color-background-dark-400: #efefef;
+  --color-background-dark-500: #dadada;
+  --color-background-transparent: rgba(255, 255, 255, 0.3);
+  --color-background-transparent-dark: rgba(109, 109, 109, 0.25);
+
   --color-primary-base: #366eff;
+  --color-primary-dark-100: #2a5de2;
+  --color-primary-transparent: rgba(54, 110, 255, 0.35);
+
+  --color-warn: #ff3636;
+  --colorwarn-dark: #dd2323;
+
   --color-on-primary-base: #000000;
 
   /* Sizes */
