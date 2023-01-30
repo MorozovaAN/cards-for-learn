@@ -1,5 +1,22 @@
 @import 'normalize.css';
 
+@import 'assets/fonts/fonts.scss';
+
+:root {
+  /* Colors */
+  --color-background-base: #ffffff;
+  --color-primary-base: #366eff;
+  --color-on-primary-base: #000000;
+
+  /* Sizes */
+  --width-main: 1020px;
+  --width-box-l: 440px;
+  --width-box-m: 400px;
+}
+
 body {
   margin: 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
 }
