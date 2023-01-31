@@ -78,12 +78,21 @@
 }
 
 .icon {
+  width: 30px;
+  height: 30px;
+  padding-top: 3px;
+
   background: transparent;
   border: none;
+  border-radius: 50%;
   outline: none;
+
+  transition: all 0.4s ease;
 
   &:hover {
     cursor: pointer;
+
+    background: var(--color-background-transparent-dark);
   }
 }
 
