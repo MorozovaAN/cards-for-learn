@@ -1,0 +1,45 @@
+.checkbox {
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+
+  vertical-align: middle;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 3px solid #0166cc;
+  border-radius: 3px;
+
+  appearance: none;
+
+  &:checked {
+    background: url('../../assets/img/icons/check-mark.svg') no-repeat 50% 50%;
+
+    appearance: none;
+  }
+
+  &:focus {
+    border-color: #0166cc;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.label {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+}
+
+.disabled {
+  cursor: default;
+
+  opacity: 0.5;
+}
