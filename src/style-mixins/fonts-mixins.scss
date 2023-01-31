@@ -1,0 +1,65 @@
+@mixin headline1() {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+@mixin headline2() {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+@mixin headline3() {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@mixin title($fontWeight: 400, $opacity: 1) {
+  font-size: 16px;
+  font-weight: $fontWeight;
+
+  opacity: $opacity;
+}
+
+@mixin subtitle($fontWeight: 400, $opacity: 1) {
+  font-size: 14px;
+  font-weight: $fontWeight;
+
+  opacity: $opacity;
+}
+
+@mixin body() {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+@mixin label1() {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+@mixin label2() {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@mixin label2() {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@mixin navigateLink() {
+
+  @include subtitle(500);
+
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  align-self: flex-start;
+
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-on-primary-base);
+  }
+}
