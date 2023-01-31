@@ -34,8 +34,19 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.32.0",
     "eslint-config-it-incubator": "^1.0.10",
     "eslint-config-prettier": "^8.5.0",
@@ -44,19 +55,32 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-storybook": "^0.6.10",
     "prettier": "^2.7.1",
     "prettier-config-it-incubator": "^1.0.1",
     "prettier-stylelint": "^0.4.2",
+    "prop-types": "^15.8.1",
     "sass": "^1.56.2",
     "stylelint": "^14.10.0",
     "stylelint-config-clean-order": "^0.9.0",
     "stylelint-prettier": "^2.0.0",
-    "typescript-plugin-css-modules": "^4.1.1"
+    "typescript-plugin-css-modules": "^4.1.1",
+    "webpack": "^5.75.0"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "name": "cards-for-learn",
@@ -65,7 +89,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sb": "start-storybook -p 6006 -s public",
+    "build-sb": "build-storybook -s public"
   },
   "version": "0.1.0"
 }
