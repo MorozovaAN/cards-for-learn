@@ -20,9 +20,9 @@ const Template: ComponentStory<typeof Button> = args => (
   <Button {...args}>{args.styleType === 'icon' ? <img src={icon} alt="" /> : 'Button'}</Button>
 )
 
-export const Primary = Template.bind({})
+export const Default = Template.bind({})
 
-Primary.args = {
+Default.args = {
   styleType: 'primary',
   disabled: false,
 }
