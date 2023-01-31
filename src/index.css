@@ -17,8 +17,9 @@
   --color-primary-dark-100: #2a5de2;
   --color-primary-transparent: rgba(54, 110, 255, 0.35);
 
-  --color-warn: #ff3636;
-  --colorwarn-dark: #dd2323;
+  --color-warn-base: #ff3636;
+  --color-warn-dark: #dd2323;
+  --color-warn-transparent: rgba(255, 54, 54, 0.35);
 
   --color-on-primary-base: #000000;
 
@@ -32,5 +33,6 @@ body {
   margin: 0;
 
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
   font-style: normal;
 }

@@ -1,4 +1,6 @@
 .idea/
+/src/stories/
+storybook-static/
 PROJECT-DOC.md
 
 # dependencies

@@ -1,0 +1,104 @@
+@mixin defaultButton() {
+  cursor: pointer;
+
+  box-sizing: border-box;
+  height: fit-content;
+  padding: 8px 20px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 1px;
+
+  border: none;
+  border-radius: 30px;
+
+  transition: all 0.4s ease;
+}
+
+.primary {
+
+  @include defaultButton;
+
+  color: var(--color-background-base);
+
+  background: var(--color-primary-base);
+  box-shadow: 0 4px 18px var(--color-primary-transparent),
+    inset 0 1px 0 var(--color-background-transparent);
+
+  &:hover {
+    background: var(--color-primary-dark-100);
+  }
+
+  &:active {
+    color: var(--color-primary-dark-100);
+
+    background: var(--color-background-dark-200);
+  }
+}
+
+.secondary {
+
+  @include defaultButton;
+
+  color: var(--color-on-primary-base);
+
+  background: var(--color-background-dark-100);
+  box-shadow: 0 2px 10px var(--color-background-transparent-dark),
+    inset 0 1px 0 var(--color-background-transparent);
+
+  &:hover {
+    background: var(--color-background-dark-300);
+  }
+
+  &:active {
+    background: var(--color-background-dark-500);
+  }
+}
+
+.warn {
+
+  @include defaultButton;
+
+  color: var(--color-background-base);
+
+  background: var(--color-warn-base);
+  box-shadow: 0 4px 18px var(--color-warn-transparent),
+    inset 0 1px 0 var(--color-background-transparent);
+
+  &:hover {
+    background: var(--color-warn-dark);
+  }
+
+  &:active {
+    color: var(--color-warn-dark);
+
+    background: var(--color-background-base);
+  }
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  padding-top: 3px;
+
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+
+  transition: all 0.4s ease;
+
+  &:hover {
+    cursor: pointer;
+
+    background: var(--color-background-transparent-dark);
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+
+  opacity: 0.5;
+}
