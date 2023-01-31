@@ -1,7 +1,5 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
 
-import { Subtitle } from '../typography/subtitle/Subtitle'
-
 import s from './Checkbox.module.scss'
 
 type DefaultInputPropsType = DetailedHTMLProps<
@@ -26,14 +24,14 @@ export const Checkbox: React.FC<SuperCheckboxPropsType> = ({
     onChangeChecked?.(e.currentTarget.checked)
   }
 
-  const finalLabelClassName = `${s.label} ${restProps.disabled && s.disabled} ${
+  const checkboxContainerClasses = `${s.label} ${restProps.disabled && s.disabled} ${
     className && className
   }`
 
   return (
-    <label className={finalLabelClassName}>
+    <label className={checkboxContainerClasses}>
       <input type="checkbox" onChange={onChangeCallback} className={s.checkbox} {...restProps} />
-      <Subtitle>{children}</Subtitle>
+      <p className={s.checkboxText}>{children}</p>
     </label>
   )
 }
