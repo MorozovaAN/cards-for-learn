@@ -49,6 +49,7 @@ Default.args = {
   type: 'text',
   label: 'Some label',
   placeholder: 'Write something...',
+  disabled: false,
 }
 export const ErrorInput = Template.bind({})
 
