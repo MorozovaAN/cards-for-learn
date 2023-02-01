@@ -2,9 +2,9 @@ import React from 'react'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { Button } from './Button'
+import icon from '../../assets/img/icons/teach.svg'
 
-import icon from '/assets/img/icons/teach.svg'
+import { Button } from './Button'
 
 import 'index.css'
 
