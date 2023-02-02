@@ -2,11 +2,10 @@ import { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 
-import { useTypedDispatch } from '../../hooks/useTypedDispatch'
-import { useMeMutation } from '../../modules/auth/authApi'
-
 import { setError } from './appSlice'
 
+import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useMeMutation } from 'modules/auth/authApi'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
