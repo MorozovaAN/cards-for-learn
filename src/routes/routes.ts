@@ -1,8 +1,8 @@
 export const PATH = {
   MAIN: '/',
-  SIGN_IN: '/signIn',
+  LOG_IN: '/login',
   PROFILE: '/profile',
-  REGISTER: '/register',
+  LOG_UP: '/log-up',
   NOT_FOUND: '/*',
   PASS_RECOVERY: '/password',
   SET_NEW_PASS: '/set-new-password/:token',
