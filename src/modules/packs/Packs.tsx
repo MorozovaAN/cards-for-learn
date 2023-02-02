@@ -2,9 +2,10 @@ import React from 'react'
 
 import { Navigate } from 'react-router-dom'
 
-import { PATH } from '../../routes/routes'
-import { Button } from '../../UI/button/Button'
 import { useLogoutMutation } from '../auth/authApi'
+
+import { PATH } from 'routes/routes'
+import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
   const [logout, { isSuccess }] = useLogoutMutation()

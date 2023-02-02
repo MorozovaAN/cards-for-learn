@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { LogIn } from '../modules/auth/logIn/LogIn'
-import { Packs } from '../modules/packs/Packs'
-
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
+
+import { LogIn } from 'modules/auth/logIn/LogIn'
+import { Packs } from 'modules/packs/Packs'
 
 export const RoutesComponent = () => {
   return (

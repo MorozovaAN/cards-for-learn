@@ -3,15 +3,15 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Navigate, NavLink } from 'react-router-dom'
 
-import { useTypedDispatch } from '../../../hooks/useTypedDispatch'
-import { setIsLoggedIn } from '../../../pages/app/appSlice'
-import { PATH } from '../../../routes/routes'
-import { Button } from '../../../UI/button/Button'
-import { Checkbox } from '../../../UI/checkbox/Checkbox'
-import { Input } from '../../../UI/input/Input'
-import { useLoginMutation } from '../authApi'
-
 import s from './Login.module.scss'
+
+import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useLoginMutation } from 'modules/auth/authApi'
+import { setIsLoggedIn } from 'pages/app/appSlice'
+import { PATH } from 'routes/routes'
+import { Button } from 'UI/button/Button'
+import { Checkbox } from 'UI/checkbox/Checkbox'
+import { Input } from 'UI/input/Input'
 
 interface FormikErrorType {
   email?: string
