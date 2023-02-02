@@ -1,13 +1,20 @@
 import React from 'react'
 
+import { Navigate } from 'react-router-dom'
+
+import { PATH } from '../../routes/routes'
 import { Button } from '../../UI/button/Button'
 import { useLogoutMutation } from '../auth/authApi'
 
 export const Packs = () => {
-  const [logout, {}] = useLogoutMutation()
+  const [logout, { isSuccess }] = useLogoutMutation()
 
   const handlerLogout = async () => {
-    await logout()
+    await logout().unwrap()
+  }
+
+  if (isSuccess) {
+    return <Navigate to={PATH.LOG_IN} />
   }
 
   return (
