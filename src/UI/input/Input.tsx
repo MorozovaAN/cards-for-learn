@@ -56,9 +56,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
 
   const showError = !textChange && type !== 'search'
 
-  const inputClasses = `${s.input} ${className ? className : ''} ${
-    type === 'password' ? s.inputError : ''
-  } ${type === 'search' && s.search}`
+  const inputClasses = `${s.input} ${className ? className : ''} ${type && s[type]}`
 
   const inputContainerClasses = `${s.inputContainer} ${
     inputContainerClassName && inputContainerClassName
