@@ -1,14 +1,18 @@
 import { useEffect } from 'react'
 
-import { useMeMutation } from '../modules/auth/authApi'
+import { CustomizedFetchBaseQueryError, useMeMutation } from '../modules/auth/authApi'
 
-import s from 'app/App.module.scss'
 export const App = () => {
-  const [initializeApp, { isLoading, error }] = useMeMutation()
+  const [initializeApp, { data, isLoading, error, isError, isSuccess }] = useMeMutation()
+  const err = error as CustomizedFetchBaseQueryError
 
   useEffect(() => {
     initializeApp({}).unwrap()
   }, [])
 
-  return isLoading ? <h2>loading</h2> : <div>success</div>
+  if (isError) {
+    return <div>{err.data.error}</div>
+  }
+
+  return <div>{'Success'}</div>
 }
