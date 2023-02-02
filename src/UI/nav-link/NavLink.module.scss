@@ -1,0 +1,20 @@
+@import 'src/style-mixins/fonts-mixins';
+
+.link {
+
+  @include title(600);
+
+  transition: all 0.4s ease-in;
+}
+
+.primary {
+
+  @include title(600);
+
+  color: var(--color-primary-base);
+
+  &:hover {
+    color: var(--color-on-primary-base);
+    text-decoration: none;
+  }
+}

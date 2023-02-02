@@ -9,7 +9,7 @@ export type CustomizedError = {
   status: number
 }
 
-export type Response = {
+export interface Response {
   _id: string
   email: string
   rememberMe: boolean
@@ -22,6 +22,17 @@ export type Response = {
   __v: number
   token: string
   tokenDeathTime: number
+}
+
+export type loginType = {
+  email: string
+  password: string
+  rememberMe: boolean
+}
+
+export type CommonType = {
+  info: string
+  error?: string
 }
 
 export const authApi = createApi({
@@ -38,7 +49,20 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
+    login: build.mutation<Response, loginType>({
+      query: loginData => ({
+        url: 'login',
+        method: 'POST',
+        body: loginData,
+      }),
+    }),
+    logout: build.mutation<CommonType, void>({
+      query: () => ({
+        url: 'me',
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
-export const { useMeMutation } = authApi
+export const { useMeMutation, useLoginMutation, useLogoutMutation } = authApi
