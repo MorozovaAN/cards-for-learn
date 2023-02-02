@@ -40,8 +40,8 @@ export const LogIn = () => {
 
       if (!values.password) {
         errors.password = 'Password is required'
-      } else if (values.password.length <= 8) {
-        errors.password = 'Password should be longer then 8 symbols!'
+      } else if (values.password.length < 8) {
+        errors.password = 'Password should be longer then 7 symbols!'
       }
 
       return errors
@@ -69,7 +69,7 @@ export const LogIn = () => {
           error={formik.touched.email ? formik.errors.email : ''}
         />
         <Input
-          type="text"
+          type="password"
           label="Password"
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
