@@ -11,7 +11,7 @@
 
   background-repeat: no-repeat;
   background-position: center center;
-  border: 3px solid #0166cc;
+  border: 3px solid var(--color-primary-base);
   border-radius: 3px;
 
   appearance: none;
@@ -23,7 +23,7 @@
   }
 
   &:focus {
-    border-color: #0166cc;
+    border-color: var(--color-primary-base);
   }
 
   &:disabled {

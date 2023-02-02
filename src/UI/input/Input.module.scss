@@ -5,9 +5,7 @@
 
   width: 100%;
 }
-.story {
-  width: 200px;
-}
+
 .input {
 
   @include title(500);
@@ -18,18 +16,19 @@
   width: 100%;
   height: fit-content;
   min-height: 20px;
-  padding: 5px;
+  padding: 8px 12px;
 
-  background: transparent;
+  color: var(--color-on-primary-light-400);
+
+  background: var(--color-background-dark-400);
   border: none;
-  border-bottom: 2px solid #aeaeae;
+  border-radius: 10px;
   outline: none;
 
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
-
-    opacity: 0.5;
+    color: var(--color-on-primary-light-500);
   }
 
   &:-webkit-autofill {
@@ -44,16 +43,16 @@
   display: block;
 
   margin: 0;
+  padding-bottom: 10px;
 
+  color: var(--color-on-primary-light-400);
   text-align: start;
-
-  opacity: 0.5;
 }
 
 @mixin positionAbsolute() {
   position: absolute;
   right: 0;
-  bottom: 8px;
+  bottom: 6px;
 }
 
 .errorContainer {
@@ -83,37 +82,32 @@
   margin-right: 10px;
 }
 
-.inputError {
+.password {
   padding-right: 42px;
 }
 
 .saveButton {
+  position: absolute;
+  right: 5px;
+  bottom: 3px;
 
-  @include positionAbsolute;
-
-  padding: 7px 10px;
+  padding: 8px 12px;
 
   font-size: 12px;
   font-weight: 400;
   line-height: 100%;
 
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 .search {
-  padding: 6px 10px;
-
-  background: var(--color-background-base);
-  border: 1px solid var(--color-background-dark-500);
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-
   &::placeholder {
+    padding-left: 20px;
 
-    @include subtitle($opacity: 0.5);
-
-    padding-left: 25px;
-
-    background: url('../../assets/img/icons/search.svg') no-repeat;
+    background: url('../../assets/img/icons/search.svg') no-repeat 0 50%;
   }
+}
+
+.story {
+  width: 200px;
 }
