@@ -1,9 +1,15 @@
 .container {
-  width: 400px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 50px auto;
+}
 
-  text-align: center;
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
 
-  border: 1px solid red;
+  width: 100%;
+}
+
+.link {
+  align-self: flex-end;
 }
