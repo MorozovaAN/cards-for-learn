@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate, NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import s from './Login.module.scss'
 
@@ -9,9 +9,11 @@ import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { useLoginMutation } from 'modules/auth/authApi'
 import { setIsLoggedIn } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
+import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 interface FormikErrorType {
   email?: string
@@ -58,10 +60,10 @@ export const LogIn = () => {
   }
 
   return (
-    <div className={s.container}>
+    <Box className={s.container}>
       <h2>Sign in</h2>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
           label="Email"
@@ -78,9 +80,9 @@ export const LogIn = () => {
           Remember me
         </Checkbox>
 
-        <div>
-          <NavLink to={PATH.PASS_RECOVERY}>Forgot password?</NavLink>
-        </div>
+        <NavLink url={PATH.PASS_RECOVERY} styleType="primary" className={s.link}>
+          Forgot password?
+        </NavLink>
 
         <Button
           styleType="primary"
@@ -96,7 +98,9 @@ export const LogIn = () => {
       </form>
 
       <div>Don`t have an account?</div>
-      <NavLink to={PATH.LOG_UP}>Sign Up</NavLink>
-    </div>
+      <NavLink url={PATH.LOG_UP} styleType="primary">
+        Sign Up
+      </NavLink>
+    </Box>
   )
 }
