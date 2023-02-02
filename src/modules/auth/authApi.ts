@@ -9,7 +9,7 @@ export type CustomizedError = {
   status: number
 }
 
-export interface MeResponse {
+export type Response = {
   _id: string
   email: string
   rememberMe: boolean
@@ -32,7 +32,7 @@ export const authApi = createApi({
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
 
   endpoints: build => ({
-    me: build.mutation<MeResponse, {}>({
+    me: build.mutation<Response, {}>({
       query: () => ({
         url: `me`,
         method: 'POST',

@@ -5,10 +5,12 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 /*import { PrivateRoutes } from './PrivateRoutes'*/
 import { PATH } from './routes'
 
+import { Profile } from 'modules/auth/profileModule/ProfileModule'
+
 export const RoutesComponent = () => {
   return (
     <Routes>
-      {/* <Route element={<PrivateRoutes />}>
+      {/*<Route element={<PrivateRoutes />}>
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.PACKS} element={<Packs />} />
         <Route path={PATH.CARDS} element={<Cards />} />
