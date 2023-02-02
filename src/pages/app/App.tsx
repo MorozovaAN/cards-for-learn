@@ -3,15 +3,15 @@ import { useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { useTypedDispatch } from '../../hooks/useTypedDispatch'
-import { CustomizedError, useMeMutation } from '../../modules/auth/authApi'
+import { useMeMutation } from '../../modules/auth/authApi'
 
 import { setError } from './appSlice'
 
+import { RoutesComponent } from 'routes/RoutesComponent'
 import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
 export const App = () => {
-  const [initializeApp, { isLoading, error, isSuccess, isError }] = useMeMutation()
-  const err = error as CustomizedError
+  const [initializeApp, { isLoading, error, isSuccess, isError, data }] = useMeMutation()
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const App = () => {
   }, [])
 
   useEffect(() => {
-    if (error) dispatch(setError(err.data.error))
+    if (error && 'data' in error) dispatch(setError(error.data.error))
   }, [error])
 
   if (!isSuccess && !isError) {
@@ -29,6 +29,7 @@ export const App = () => {
   return (
     <div>
       <ErrorSnackbar />
+      <RoutesComponent />
     </div>
   )
 }

@@ -9,6 +9,21 @@ export type CustomizedError = {
   status: number
 }
 
+export interface MeResponse {
+  _id: string
+  email: string
+  rememberMe: boolean
+  isAdmin: boolean
+  name: string
+  verified: boolean
+  publicCardPacksCount: number
+  created: Date
+  updated: Date
+  __v: number
+  token: string
+  tokenDeathTime: number
+}
+
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -17,8 +32,8 @@ export const authApi = createApi({
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
 
   endpoints: build => ({
-    me: build.mutation({
-      query: ({}) => ({
+    me: build.mutation<MeResponse, {}>({
+      query: () => ({
         url: `me`,
         method: 'POST',
       }),
