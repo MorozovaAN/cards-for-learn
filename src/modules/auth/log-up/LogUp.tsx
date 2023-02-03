@@ -19,17 +19,8 @@ type LogUpErrorType = {
   confirmPassword?: string
 }
 
-export type ErrType = {
-  data: {
-    error: string
-    email: string
-  }
-  status: number
-}
-
 export const LogUp = () => {
-  const [logUp, { error, isSuccess }] = useLogUpMutation()
-  const err: any = error
+  const [logUp] = useLogUpMutation()
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
 
@@ -62,13 +53,16 @@ export const LogUp = () => {
 
       return errors
     },
+
     onSubmit: values => {
       logUp({ email: values.email, password: values.password })
+        .unwrap()
+        .then(() => {
+          navigate(PATH.LOG_IN)
+        })
+        .catch(err => err.data.error && dispatch(setError(err.data.error)))
     },
   })
-
-  if (isSuccess) navigate(PATH.LOG_IN)
-  if (error) dispatch(setError(err.data.error))
 
   const buttonDisabled =
     !!formik.errors.email ||

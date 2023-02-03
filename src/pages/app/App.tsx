@@ -12,18 +12,18 @@ import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
 export const App = () => {
   const [initializeApp, { isLoading, error, isSuccess, isError }] = useMeMutation()
+
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
-    initializeApp({}).unwrap()
+    initializeApp({})
+      .unwrap()
+      .then()
+      .catch(err => err.data.error && dispatch(setError(err.data.error)))
   }, [])
 
-  useEffect(() => {
-    if (error && 'data' in error) dispatch(setError(error.data.error))
-  }, [error])
-
   if (!isSuccess && !isError) {
-    return <CircularProgress sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    return <CircularProgress classes={{ root: s.circular }} />
   }
 
   return (

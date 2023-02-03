@@ -6,5 +6,12 @@
   max-width: var(--width-main);
   height: 100%;
   min-height: 100vh;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.circular {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
