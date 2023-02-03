@@ -1,13 +1,4 @@
-import { FetchArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery'
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-export type CustomizedError = {
-  data: {
-    error: string
-    in: string
-  }
-  status: number
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface Response {
   _id: string
@@ -42,7 +33,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
-  }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
+  }),
 
   endpoints: build => ({
     me: build.mutation<Response, {}>({
