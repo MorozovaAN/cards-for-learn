@@ -12,9 +12,9 @@
     ]
   },
   "dependencies": {
-    "@mui/material": "^5.11.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.0",
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -36,6 +36,7 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
+    "@mui/icons-material": "^5.11.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-interactions": "^6.5.16",

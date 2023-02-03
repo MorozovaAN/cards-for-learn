@@ -25,6 +25,7 @@ type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
   textChangeBtnCallback?: (e: any) => void
   className?: string
   inputContainerClassName?: string
+  disableBtn?: boolean
 }
 export const Input: React.FC<SuperInputTextPropsType> = ({
   type,
@@ -34,6 +35,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
   textChangeBtnCallback,
   className,
   inputContainerClassName,
+  disableBtn,
   ...restProps
 }) => {
   const [typeLabel, setTypeLabel] = useState(type)
@@ -93,7 +95,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
             styleType="primary"
             className={s.saveButton}
             onClick={textChangeBtnCallbackHandle}
-            disabled={restProps.disabled}
+            disabled={disableBtn}
           >
             SAVE
           </Button>

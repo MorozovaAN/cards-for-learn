@@ -14,13 +14,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuthData: (state, action: PayloadAction<Response>) => {
-      state.email = action.payload.email
-      state.id = action.payload._id
-      state.name = action.payload.name
+    setAuthData: (state, action: PayloadAction<Response | undefined>) => {
+      if (action.payload) {
+        state.email = action.payload.email
+        state.id = action.payload._id
+        state.name = action.payload.name
+        state.avatar = action.payload.avatar
+      }
+    },
+    setName(state, action: PayloadAction<string>) {
+      state.name = action.payload
     },
   },
 })
 
-export const { setAuthData } = authSlice.actions
+export const { setAuthData, setName } = authSlice.actions
 export const authReducer = authSlice.reducer

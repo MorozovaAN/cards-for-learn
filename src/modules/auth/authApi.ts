@@ -22,6 +22,7 @@ export interface Response {
   __v: number
   token: string
   tokenDeathTime: number
+  avatar: string
 }
 
 export type loginType = {
@@ -34,20 +35,24 @@ export type CommonType = {
   info: string
   error?: string
 }
-
+export type UpdateProfile = {
+  name: string
+  avatar: string
+}
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
-
+  tagTypes: ['UserData'],
   endpoints: build => ({
     me: build.mutation<Response, {}>({
       query: () => ({
         url: `me`,
         method: 'POST',
       }),
+      invalidatesTags: ['UserData'],
     }),
     login: build.mutation<Response, loginType>({
       query: loginData => ({
@@ -62,7 +67,15 @@ export const authApi = createApi({
         method: 'DELETE',
       }),
     }),
+    updateProfile: build.mutation<Response, UpdateProfile>({
+      query: UpdateName => ({
+        url: 'me',
+        method: 'PUT',
+        body: UpdateName,
+      }),
+    }),
   }),
 })
 
-export const { useMeMutation, useLoginMutation, useLogoutMutation } = authApi
+export const { useMeMutation, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } =
+  authApi

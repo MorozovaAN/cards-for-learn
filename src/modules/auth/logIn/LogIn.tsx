@@ -6,8 +6,11 @@ import { Navigate, NavLink } from 'react-router-dom'
 import s from './Login.module.scss'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useTypedSelector } from 'hooks/useTypedSelector'
 import { useLoginMutation } from 'modules/auth/authApi'
+import { setAuthData } from 'modules/auth/authSlice'
 import { setIsLoggedIn } from 'pages/app/appSlice'
+import { isLoggedInSelector } from 'pages/app/selectors'
 import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
@@ -18,8 +21,10 @@ interface FormikErrorType {
   password?: string
   rememberMe?: boolean
 }
+
 export const LogIn = () => {
-  const [setLogin, { isSuccess }] = useLoginMutation()
+  const [setLogin, { isSuccess, data }] = useLoginMutation()
+  const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -51,8 +56,9 @@ export const LogIn = () => {
     },
   })
 
-  if (isSuccess) {
+  if (isSuccess || isLoggedIn) {
     dispatch(setIsLoggedIn(true))
+    dispatch(setAuthData(data))
 
     return <Navigate to={PATH.PACKS} />
   }
@@ -69,7 +75,7 @@ export const LogIn = () => {
           error={formik.touched.email ? formik.errors.email : ''}
         />
         <Input
-          type="text"
+          type="password"
           label="Password"
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
@@ -83,6 +89,7 @@ export const LogIn = () => {
         </div>
 
         <Button
+          type="submit"
           styleType="primary"
           disabled={
             !!formik.errors.password ||

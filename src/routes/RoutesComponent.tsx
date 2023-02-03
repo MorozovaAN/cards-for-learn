@@ -5,16 +5,15 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
-import { Profile } from 'modules/auth/profileModule/ProfileModule'
-
 import { LogIn } from 'modules/auth/logIn/LogIn'
+import { Profile } from 'modules/auth/profileModule/Profile'
 import { Packs } from 'modules/packs/Packs'
 
 export const RoutesComponent = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
-        {/*  <Route path={PATH.PROFILE} element={<Profile />} />*/}
+        <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.PACKS} element={<Packs />} />
         {/*  <Route path={PATH.CARDS} element={<Cards />} />*/}
         {/*  <Route path={PATH.CARD} element={<LearnCard />} />*/}
