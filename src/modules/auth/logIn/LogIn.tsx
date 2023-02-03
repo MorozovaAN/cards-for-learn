@@ -60,7 +60,7 @@ export const LogIn = () => {
   }
 
   return (
-    <Box className={s.container}>
+    <Box>
       <h2>Sign in</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
