@@ -7,6 +7,7 @@ import { PATH } from './routes'
 
 import { LogIn } from 'modules/auth/logIn/LogIn'
 import { Packs } from 'modules/packs/Packs'
+import { Error404Page } from 'pages/error-404-page/Error404Page'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 
 export const RoutesComponent = () => {
@@ -25,7 +26,7 @@ export const RoutesComponent = () => {
       {/*<Route path={PATH.PASS_RECOVERY} element={<ForgotPassword />} />*/}
       {/*<Route path={PATH.CHECK_EMAIL} element={<CheckEmail />} />*/}
       {/*<Route path={PATH.SET_NEW_PASS} element={<SetNewPassword />} />*/}
-      {/*<Route path={PATH.ERROR_404} element={<Error404 />} />*/}
+      <Route path={PATH.ERROR_404} element={<Error404Page />} />
       <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
     </Routes>
   )
