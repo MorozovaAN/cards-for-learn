@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 
+import s from './App.module.scss'
 import { setError, setIsLoggedIn } from './appSlice'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
@@ -11,35 +12,36 @@ import { RoutesComponent } from 'routes/RoutesComponent'
 import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
 export const App = () => {
-  const [initializeApp, { isLoading, error, isSuccess, isError, data }] = useMeMutation()
+  const [initializeApp, { data, isLoading, error, isSuccess, isError }] = useMeMutation()
+
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
-    initializeApp({}).unwrap()
+    initializeApp({})
+      .unwrap()
+      .then()
+      .catch(err => {
+        if (err.data.error) dispatch(setError(err.data.error))
+        else dispatch(setError('Something went wrong'))
+      })
   }, [])
 
-  useEffect(() => {
-    if (error && 'data' in error) {
-      if (error.data.error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
-        dispatch(setError(null))
-      } else {
-        dispatch(setError(error.data.error))
-      }
-    }
-  }, [error])
   if (isSuccess && data) {
     dispatch(setIsLoggedIn(true))
     dispatch(setAuthData(data))
   }
 
   if (!isSuccess && !isError) {
-    return <CircularProgress sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    return <CircularProgress classes={{ root: s.circular }} />
   }
 
   return (
-    <div>
+    <div className={s.app}>
       <ErrorSnackbar />
-      <RoutesComponent />
+
+      <section className={s.contentContainer}>
+        <RoutesComponent />
+      </section>
     </div>
   )
 }

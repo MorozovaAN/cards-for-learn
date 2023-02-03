@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate, NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import s from './Login.module.scss'
 
@@ -12,9 +12,11 @@ import { setAuthData } from 'modules/auth/authSlice'
 import { setIsLoggedIn } from 'pages/app/appSlice'
 import { isLoggedInSelector } from 'pages/app/selectors'
 import { PATH } from 'routes/routes'
+import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 interface FormikErrorType {
   email?: string
@@ -45,8 +47,8 @@ export const LogIn = () => {
 
       if (!values.password) {
         errors.password = 'Password is required'
-      } else if (values.password.length <= 8) {
-        errors.password = 'Password should be longer then 8 symbols!'
+      } else if (values.password.length < 8) {
+        errors.password = 'Password should be longer then 7 symbols!'
       }
 
       return errors
@@ -64,10 +66,10 @@ export const LogIn = () => {
   }
 
   return (
-    <div className={s.container}>
+    <Box>
       <h2>Sign in</h2>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
           label="Email"
@@ -84,9 +86,9 @@ export const LogIn = () => {
           Remember me
         </Checkbox>
 
-        <div>
-          <NavLink to={PATH.PASS_RECOVERY}>Forgot password?</NavLink>
-        </div>
+        <NavLink url={PATH.PASS_RECOVERY} styleType="primary" className={s.link}>
+          Forgot password?
+        </NavLink>
 
         <Button
           type="submit"
@@ -103,7 +105,9 @@ export const LogIn = () => {
       </form>
 
       <div>Don`t have an account?</div>
-      <NavLink to={PATH.LOG_UP}>Sign Up</NavLink>
-    </div>
+      <NavLink url={PATH.LOG_UP} styleType="primary">
+        Sign Up
+      </NavLink>
+    </Box>
   )
 }

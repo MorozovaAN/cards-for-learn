@@ -1,13 +1,4 @@
-import { FetchArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery'
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-export type CustomizedError = {
-  data: {
-    error: string
-    in: string
-  }
-  status: number
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface Response {
   _id: string
@@ -25,11 +16,13 @@ export interface Response {
   avatar: string
 }
 
-export type loginType = {
+export type LogInDataType = {
   email: string
   password: string
   rememberMe: boolean
 }
+
+type LogUpDataType = Pick<LogInDataType, 'email' | 'password'>
 
 export type CommonType = {
   info: string
@@ -44,17 +37,23 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
-  }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
-  tagTypes: ['UserData'],
+  }),
+
   endpoints: build => ({
     me: build.mutation<Response, {}>({
       query: () => ({
         url: `me`,
         method: 'POST',
       }),
-      invalidatesTags: ['UserData'],
     }),
-    login: build.mutation<Response, loginType>({
+    logUp: build.mutation<Response, LogUpDataType>({
+      query: logUpData => ({
+        url: 'register',
+        method: 'POST',
+        body: logUpData,
+      }),
+    }),
+    login: build.mutation<Response, LogInDataType>({
       query: loginData => ({
         url: 'login',
         method: 'POST',
@@ -68,14 +67,13 @@ export const authApi = createApi({
       }),
     }),
     updateProfile: build.mutation<Response, UpdateProfile>({
-      query: UpdateName => ({
+      query: UpdateProfile => ({
         url: 'me',
         method: 'PUT',
-        body: UpdateName,
+        body: UpdateProfile,
       }),
     }),
   }),
 })
 
-export const { useMeMutation, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } =
-  authApi
+export const { useMeMutation, useLoginMutation, useLogoutMutation } = authApi

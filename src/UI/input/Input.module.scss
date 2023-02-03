@@ -7,7 +7,6 @@
 }
 
 .input {
-
   @include title(500);
 
   display: block;
@@ -16,7 +15,7 @@
   width: 100%;
   height: fit-content;
   min-height: 20px;
-  padding: 8px 12px;
+  padding: 12px;
 
   color: var(--color-on-primary-light-400);
 
@@ -37,8 +36,7 @@
 }
 
 .label {
-
-  @include label1();
+  @include subtitle(600);
 
   display: block;
 
@@ -52,7 +50,7 @@
 @mixin positionAbsolute() {
   position: absolute;
   right: 0;
-  bottom: 6px;
+  bottom: 29px;
 }
 
 .errorContainer {
@@ -61,7 +59,6 @@
 }
 
 .error {
-
   @include subtitle(500);
 
   margin: 0;
@@ -72,7 +69,6 @@
 }
 
 .visibilityIcon {
-
   @include positionAbsolute;
 
   cursor: pointer;
