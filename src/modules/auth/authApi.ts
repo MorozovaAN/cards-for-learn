@@ -34,12 +34,23 @@ export type CommonType = {
   info: string
   error?: string
 }
+export type RequestForgotPasswordType = {
+  email: string
+  from?: string
+  message: string
+}
+
+export type RequestSetNewPasswordType = {
+  password: string
+  resetPasswordToken: string
+}
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
+    // }),
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
 
   endpoints: build => ({
@@ -49,20 +60,40 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
-    login: build.mutation<Response, loginType>({
-      query: loginData => ({
+    logIn: build.mutation<Response, loginType>({
+      query: body => ({
         url: 'login',
         method: 'POST',
-        body: loginData,
+        body,
       }),
     }),
-    logout: build.mutation<CommonType, void>({
+    logOut: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
         method: 'DELETE',
       }),
     }),
+    forgotPassword: build.mutation<CommonType, RequestForgotPasswordType>({
+      query: body => ({
+        url: 'forgot',
+        method: 'POST',
+        body,
+      }),
+    }),
+    setNewPassword: build.mutation<CommonType, RequestSetNewPasswordType>({
+      query: ({ password, resetPasswordToken }) => ({
+        url: 'set-new-password',
+        method: 'POST',
+        body: { password, resetPasswordToken },
+      }),
+    }),
   }),
 })
 
-export const { useMeMutation, useLoginMutation, useLogoutMutation } = authApi
+export const {
+  useMeMutation,
+  useLogInMutation,
+  useLogOutMutation,
+  useForgotPasswordMutation,
+  useSetNewPasswordMutation,
+} = authApi

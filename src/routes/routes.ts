@@ -1,6 +1,6 @@
 export const PATH = {
   MAIN: '/',
-  LOG_IN: '/log-in',
+  LOG_IN: '/log-in-page',
   PROFILE: '/profile',
   LOG_UP: '/log-up',
   NOT_FOUND: '/*',

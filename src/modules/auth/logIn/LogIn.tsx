@@ -1,13 +1,11 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate, NavLink } from 'react-router-dom'
-
-import s from './Login.module.scss'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
-import { useLoginMutation } from 'modules/auth/authApi'
-import { setIsLoggedIn } from 'pages/app/appSlice'
+import { useLogInMutation } from 'modules/auth/authApi'
+import { setError, setIsLoggedIn } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
@@ -19,8 +17,9 @@ interface FormikErrorType {
   rememberMe?: boolean
 }
 export const LogIn = () => {
-  const [setLogin, { isSuccess }] = useLoginMutation()
+  const [setLogin] = useLogInMutation()
   const dispatch = useTypedDispatch()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -48,17 +47,20 @@ export const LogIn = () => {
     },
     onSubmit: values => {
       setLogin(values)
+        .unwrap()
+        .then(() => {
+          dispatch(setIsLoggedIn(true))
+          navigate(PATH.PACKS)
+        })
+        .catch(err => {
+          if (err.data.error) dispatch(setError(err.data.error))
+          else dispatch(setError('Something went wrong'))
+        })
     },
   })
 
-  if (isSuccess) {
-    dispatch(setIsLoggedIn(true))
-
-    return <Navigate to={PATH.PACKS} />
-  }
-
   return (
-    <div className={s.container}>
+    <div>
       <h2>Sign in</h2>
 
       <form onSubmit={formik.handleSubmit}>
