@@ -24,11 +24,13 @@ export interface Response {
   tokenDeathTime: number
 }
 
-export type loginType = {
+export type LogInDataType = {
   email: string
   password: string
   rememberMe: boolean
 }
+
+type LogUpDataType = Pick<LogInDataType, 'email' | 'password'>
 
 export type CommonType = {
   info: string
@@ -49,7 +51,14 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
-    login: build.mutation<Response, loginType>({
+    logUp: build.mutation<Response, LogUpDataType>({
+      query: logUpData => ({
+        url: 'register',
+        method: 'POST',
+        body: logUpData,
+      }),
+    }),
+    login: build.mutation<Response, LogInDataType>({
       query: loginData => ({
         url: 'login',
         method: 'POST',
@@ -65,4 +74,4 @@ export const authApi = createApi({
   }),
 })
 
-export const { useMeMutation, useLoginMutation, useLogoutMutation } = authApi
+export const { useMeMutation, useLoginMutation, useLogoutMutation, useLogUpMutation } = authApi

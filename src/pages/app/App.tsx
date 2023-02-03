@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 
+import s from './App.module.scss'
 import { setError } from './appSlice'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
@@ -10,7 +11,7 @@ import { RoutesComponent } from 'routes/RoutesComponent'
 import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
 export const App = () => {
-  const [initializeApp, { isLoading, error, isSuccess, isError, data }] = useMeMutation()
+  const [initializeApp, { isLoading, error, isSuccess, isError }] = useMeMutation()
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
@@ -26,9 +27,12 @@ export const App = () => {
   }
 
   return (
-    <div>
+    <div className={s.app}>
       <ErrorSnackbar />
-      <RoutesComponent />
+
+      <section className={s.contentContainer}>
+        <RoutesComponent />
+      </section>
     </div>
   )
 }

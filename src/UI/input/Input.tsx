@@ -20,7 +20,7 @@ type DefaultInputPropsType = DetailedHTMLProps<
 type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
   type: string
   label?: string
-  error?: string
+  error?: string | false | undefined
   textChange?: boolean
   textChangeBtnCallback?: (e: any) => void
   className?: string
