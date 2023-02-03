@@ -19,7 +19,10 @@ export const App = () => {
     initializeApp({})
       .unwrap()
       .then()
-      .catch(err => err.data.error && dispatch(setError(err.data.error)))
+      .catch(err => {
+        if (err.data.error) dispatch(setError(err.data.error))
+        else dispatch(setError('Something went wrong'))
+      })
   }, [])
 
   if (!isSuccess && !isError) {
