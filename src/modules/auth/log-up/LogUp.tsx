@@ -105,6 +105,7 @@ export const LogUp = () => {
           Sign Up
         </Button>
       </form>
+
       <p>Already have an account?</p>
 
       <NavLink url={PATH.LOG_IN} styleType="primary">

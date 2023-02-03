@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import s from './Login.module.scss'
 
@@ -65,7 +64,6 @@ export const LogIn = () => {
   })
 
   return (
-    <div>
     <Box>
       <h2>Sign in</h2>
 

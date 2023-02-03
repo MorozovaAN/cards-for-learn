@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 
 import { useSetNewPasswordMutation } from 'modules/auth/authApi'
 import { ErrorsType } from 'modules/auth/forgotPassword/ForgotPassword'
+import s from 'modules/auth/forgotPassword/setNewPassword/SetNewPassword.module.scss'
+import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
 
@@ -36,10 +38,10 @@ export const SetNewPassword = () => {
   })
 
   return (
-    <section>
+    <Box>
       <h2>Create new password?</h2>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="password"
           error={formik.errors.password}
@@ -53,6 +55,6 @@ export const SetNewPassword = () => {
           Create new password
         </Button>
       </form>
-    </section>
+    </Box>
   )
 }

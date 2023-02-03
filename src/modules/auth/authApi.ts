@@ -66,7 +66,7 @@ export const authApi = createApi({
         body,
       }),
     }),
-    logout: build.mutation<CommonType, void>({
+    logOut: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
         method: 'DELETE',

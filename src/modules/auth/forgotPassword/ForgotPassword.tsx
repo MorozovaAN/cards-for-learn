@@ -2,14 +2,17 @@ import React from 'react'
 
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useForgotPasswordMutation } from 'modules/auth/authApi'
 import { forgotPasswordCurrentEmail } from 'modules/auth/authSlice'
+import s from 'modules/auth/forgotPassword/ForgotPassword.module.scss'
 import { setError } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
+import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 export type ErrorsType = {
   email?: string
@@ -59,10 +62,10 @@ export const ForgotPassword = () => {
   })
 
   return (
-    <div>
+    <Box>
       <h2>Forgot your password?</h2>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           placeholder="Email"
           type="email"
@@ -79,7 +82,9 @@ export const ForgotPassword = () => {
 
       <p>Did your remember your password?</p>
 
-      <NavLink to={PATH.LOG_IN}>Try to logging in</NavLink>
-    </div>
+      <NavLink url={PATH.LOG_IN} styleType="primary">
+        Try to logging in
+      </NavLink>
+    </Box>
   )
 }
