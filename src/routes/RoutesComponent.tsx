@@ -6,6 +6,7 @@ import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
 import { Packs } from 'modules/packs/Packs'
+import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { CheckEmailPage } from 'pages/check-email/CheckEmailPage'
 import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPage'
 import { LogInPage } from 'pages/log-in-page/LogInPage'
@@ -23,7 +24,7 @@ export const RoutesComponent = () => {
 
       <Route path={PATH.MAIN} element={<Navigate to={PATH.LOG_IN} />} />
       <Route path={PATH.LOG_IN} element={<LogInPage />} />
-      {/*<Route path={PATH.REGISTER} element={<Register />} />*/}
+        <Route path={PATH.LOG_UP} element={<LogUpPage />} />
       <Route path={PATH.PASS_RECOVERY} element={<ForgotPasswordPage />} />
       <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
       <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />

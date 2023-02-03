@@ -1,13 +1,4 @@
-import { FetchArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery'
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-export type CustomizedError = {
-  data: {
-    error: string
-    in: string
-  }
-  status: number
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface Response {
   _id: string
@@ -24,11 +15,13 @@ export interface Response {
   tokenDeathTime: number
 }
 
-export type loginType = {
+export type LogInDataType = {
   email: string
   password: string
   rememberMe: boolean
 }
+
+type LogUpDataType = Pick<LogInDataType, 'email' | 'password'>
 
 export type CommonType = {
   info: string
@@ -50,8 +43,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
-    // }),
-  }) as BaseQueryFn<string | FetchArgs, unknown, CustomizedError, {}>,
+  }),
 
   endpoints: build => ({
     me: build.mutation<Response, {}>({
@@ -60,14 +52,21 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
-    logIn: build.mutation<Response, loginType>({
+    logUp: build.mutation<Response, LogUpDataType>({
+      query: logUpData => ({
+        url: 'register',
+        method: 'POST',
+        body: logUpData,
+      }),
+    }),
+    logIn: build.mutation<Response, LogInDataType>({
       query: body => ({
         url: 'login',
         method: 'POST',
         body,
       }),
     }),
-    logOut: build.mutation<CommonType, void>({
+    logout: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
         method: 'DELETE',
@@ -96,4 +95,5 @@ export const {
   useLogOutMutation,
   useForgotPasswordMutation,
   useSetNewPasswordMutation,
+  useLogUpMutation,
 } = authApi

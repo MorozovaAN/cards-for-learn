@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+
+  width: 100%;
+}
+
+.link {
+  align-self: flex-end;
+}
