@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const appSlice = createSlice({
   name: 'app',
-  initialState: { error: null as null | string, isLoggedIn: false },
+  initialState: { isAuth: false, isLoggedIn: false },
   reducers: {
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload
+    setIsAuth: state => {
+      state.isAuth = true
     },
     setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload
@@ -13,5 +13,5 @@ const appSlice = createSlice({
   },
 })
 
-export const { setError, setIsLoggedIn } = appSlice.actions
+export const { setIsAuth, setIsLoggedIn } = appSlice.actions
 export const appReducer = appSlice.reducer

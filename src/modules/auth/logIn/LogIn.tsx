@@ -1,17 +1,17 @@
 import React from 'react'
 
+import { LinearProgress } from '@mui/material'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
 
 import s from './Login.module.scss'
 
-import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { useLoginMutation } from 'modules/auth/authApi'
-import { setIsLoggedIn } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
+import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
 
@@ -20,9 +20,10 @@ interface FormikErrorType {
   password?: string
   rememberMe?: boolean
 }
+
 export const LogIn = () => {
-  const [setLogin, { isSuccess }] = useLoginMutation()
-  const dispatch = useTypedDispatch()
+  const [setLogin, { isSuccess, isError, isLoading }] = useLoginMutation()
+  const errorMsg = isError ? 'not correct password or email' : ''
 
   const formik = useFormik({
     initialValues: {
@@ -53,54 +54,55 @@ export const LogIn = () => {
     },
   })
 
-  if (isSuccess) {
-    dispatch(setIsLoggedIn(true))
-
-    return <Navigate to={PATH.PACKS} />
-  }
+  if (isSuccess) return <Navigate to={PATH.PACKS} />
 
   return (
-    <Box>
-      <h2>Sign in</h2>
+    <>
+      {isLoading && <LinearProgress color="success" />}
+      <Box>
+        {isError && <ErrorSnackbar newError={errorMsg} />}
+        <h2>Sign in</h2>
 
-      <form onSubmit={formik.handleSubmit} className={s.form}>
-        <Input
-          type="email"
-          label="Email"
-          {...formik.getFieldProps('email')}
-          error={formik.touched.email ? formik.errors.email : ''}
-        />
-        <Input
-          type="password"
-          label="Password"
-          {...formik.getFieldProps('password')}
-          error={formik.touched.password ? formik.errors.password : ''}
-        />
-        <Checkbox {...formik.getFieldProps('rememberMe')} checked={formik.values.rememberMe}>
-          Remember me
-        </Checkbox>
+        <form onSubmit={formik.handleSubmit} className={s.form}>
+          <Input
+            type="email"
+            label="Email"
+            {...formik.getFieldProps('email')}
+            error={formik.touched.email ? formik.errors.email : ''}
+          />
+          <Input
+            type="password"
+            label="Password"
+            {...formik.getFieldProps('password')}
+            error={formik.touched.password ? formik.errors.password : ''}
+          />
+          <Checkbox {...formik.getFieldProps('rememberMe')} checked={formik.values.rememberMe}>
+            Remember me
+          </Checkbox>
 
-        <NavLink url={PATH.PASS_RECOVERY} styleType="primary" className={s.link}>
-          Forgot password?
+          <NavLink url={PATH.PASS_RECOVERY} styleType="primary" className={s.link}>
+            Forgot password?
+          </NavLink>
+
+          <Button
+            type="submit"
+            styleType="primary"
+            disabled={
+              !!formik.errors.password ||
+              !!formik.errors.email ||
+              !formik.values.email ||
+              !formik.values.password
+            }
+          >
+            Sign in
+          </Button>
+        </form>
+
+        <div>Don`t have an account?</div>
+        <NavLink url={PATH.LOG_UP} styleType="primary">
+          Sign Up
         </NavLink>
-
-        <Button
-          styleType="primary"
-          disabled={
-            !!formik.errors.password ||
-            !!formik.errors.email ||
-            !formik.values.email ||
-            !formik.values.password
-          }
-        >
-          Sign in
-        </Button>
-      </form>
-
-      <div>Don`t have an account?</div>
-      <NavLink url={PATH.LOG_UP} styleType="primary">
-        Sign Up
-      </NavLink>
-    </Box>
+      </Box>
+    </>
   )
 }

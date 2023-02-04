@@ -36,7 +36,7 @@ export const authApi = createApi({
   }),
 
   endpoints: build => ({
-    me: build.mutation<Response, {}>({
+    me: build.mutation<Response, void>({
       query: () => ({
         url: `me`,
         method: 'POST',
