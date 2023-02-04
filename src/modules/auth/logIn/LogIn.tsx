@@ -89,6 +89,7 @@ export const LogIn = () => {
         </NavLink>
 
         <Button
+          type="submit"
           styleType="primary"
           disabled={
             !!formik.errors.password ||
@@ -102,6 +103,7 @@ export const LogIn = () => {
       </form>
 
       <div>Don`t have an account?</div>
+
       <NavLink url={PATH.LOG_UP} styleType="primary">
         Sign Up
       </NavLink>

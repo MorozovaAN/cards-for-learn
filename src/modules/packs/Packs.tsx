@@ -20,7 +20,9 @@ export const Packs = () => {
   return (
     <div>
       packs
-      <Button onClick={handlerLogout}>Log OUT</Button>
+      <Button type="submit" onClick={handlerLogout}>
+        Log OUT
+      </Button>
     </div>
   )
 }

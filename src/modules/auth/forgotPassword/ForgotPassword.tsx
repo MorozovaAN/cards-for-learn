@@ -75,7 +75,11 @@ export const ForgotPassword = () => {
 
         <p>Enter your email address and we will send you further instructions </p>
 
-        <Button styleType="primary" disabled={formik.values.email === '' || !!formik.errors.email}>
+        <Button
+          type="submit"
+          styleType="primary"
+          disabled={formik.values.email === '' || !!formik.errors.email}
+        >
           Send Instructions
         </Button>
       </form>

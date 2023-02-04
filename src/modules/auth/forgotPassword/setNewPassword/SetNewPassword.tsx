@@ -51,7 +51,7 @@ export const SetNewPassword = () => {
 
         <p>Create new password and we will send you further instructions to email</p>
 
-        <Button styleType="primary" disabled={!!formik.errors.password}>
+        <Button type="submit" styleType="primary" disabled={!!formik.errors.password}>
           Create new password
         </Button>
       </form>

@@ -101,7 +101,7 @@ export const LogUp = () => {
           {...formik.getFieldProps('confirmPassword')}
         />
 
-        <Button styleType="primary" disabled={buttonDisabled}>
+        <Button type="submit" styleType="primary" disabled={buttonDisabled}>
           Sign Up
         </Button>
       </form>
