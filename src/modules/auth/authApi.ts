@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { setIsLoggedIn } from 'pages/app/appSlice'
+
 export interface Response {
   _id: string
   email: string
@@ -66,12 +68,22 @@ export const authApi = createApi({
         body,
       }),
     }),
+
     logOut: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
         method: 'DELETE',
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          dispatch(setIsLoggedIn(false))
+        } catch (err) {
+          console.log(err)
+        }
+      },
     }),
+
     forgotPassword: build.mutation<CommonType, RequestForgotPasswordType>({
       query: body => ({
         url: 'forgot',
@@ -79,6 +91,7 @@ export const authApi = createApi({
         body,
       }),
     }),
+
     setNewPassword: build.mutation<CommonType, RequestSetNewPasswordType>({
       query: ({ password, resetPasswordToken }) => ({
         url: 'set-new-password',
