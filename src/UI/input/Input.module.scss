@@ -7,6 +7,7 @@
 }
 
 .input {
+
   @include title(500);
 
   display: block;
@@ -30,12 +31,18 @@
     color: var(--color-on-primary-light-500);
   }
 
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 0 transparent;
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-background-dark-400) inset;
+
+    -webkit-text-fill-color: var(--color-on-primary-light-400) !important;
   }
 }
 
 .label {
+
   @include subtitle(600);
 
   display: block;
@@ -59,6 +66,7 @@
 }
 
 .error {
+
   @include subtitle(500);
 
   margin: 0;
@@ -69,6 +77,7 @@
 }
 
 .visibilityIcon {
+
   @include positionAbsolute;
 
   cursor: pointer;

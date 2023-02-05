@@ -1,19 +1,27 @@
 @mixin headline1() {
-  font-size: 26px;
+  margin: 0;
+
+  font-size: 28px;
   font-weight: 600;
 }
 
 @mixin headline2() {
+  margin: 0;
+
   font-size: 22px;
   font-weight: 600;
 }
 
 @mixin headline3() {
+  margin: 0;
+
   font-size: 18px;
   font-weight: 500;
 }
 
 @mixin title($fontWeight: 400, $opacity: 1) {
+  margin: 0;
+
   font-size: 16px;
   font-weight: $fontWeight;
 
@@ -21,6 +29,8 @@
 }
 
 @mixin subtitle($fontWeight: 400, $opacity: 1) {
+  margin: 0;
+
   font-size: 14px;
   font-weight: $fontWeight;
 
@@ -28,16 +38,22 @@
 }
 
 @mixin body() {
+  margin: 0;
+
   font-size: 13px;
   font-weight: 400;
 }
 
 @mixin label2() {
+  margin: 0;
+
   font-size: 12px;
   font-weight: 400;
 }
 
 @mixin label2() {
+  margin: 0;
+
   font-size: 16px;
   font-weight: 500;
 }

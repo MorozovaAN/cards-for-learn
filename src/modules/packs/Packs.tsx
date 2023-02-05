@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { useLogoutMutation } from '../auth/authApi'
+import { Navigate } from 'react-router-dom'
+
+import { useLogOutMutation } from '../auth/authApi'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { setIsLoggedIn } from 'pages/app/appSlice'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
-  const [logout, { isSuccess }] = useLogoutMutation()
-  const dispatch = useTypedDispatch()
-
+  const [logout, { isSuccess }] = useLogOutMutation()
+ const dispatch = useTypedDispatch()
   const handlerLogout = async () => {
     await logout().unwrap()
   }
