@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { LinearProgress } from '@mui/material'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
 
@@ -8,10 +7,11 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
+import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
-import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
 
@@ -21,16 +21,9 @@ type LogUpErrorType = {
   confirmPassword?: string
 }
 
-type ErrorType = {
-  data: {
-    error: string
-  }
-  status: number
-}
-
 export const LogUp = () => {
-  const [logUp, { isSuccess, error, isError, isLoading }] = useLogUpMutation()
-  const errorMsg = (error as ErrorType)?.data?.error
+  const [logUp, { isSuccess, isLoading }] = useLogUpMutation()
+  const dispatch = useTypedDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -63,6 +56,7 @@ export const LogUp = () => {
     },
 
     onSubmit: values => {
+      dispatch(setIsLoading(true))
       logUp({ email: values.email, password: values.password })
     },
   })
@@ -78,45 +72,45 @@ export const LogUp = () => {
     !formik.values.password
 
   return (
-    <>
-      {isLoading && <LinearProgress color="success" />}
+    <Box>
+      <h2 className={s.title}>Sign Up to Cards for learn</h2>
 
-      <Box>
-        {isError && <ErrorSnackbar newError={errorMsg} />}
-        <h2>Sign Up to Cards for learn</h2>
+      <form onSubmit={formik.handleSubmit} className={s.form}>
+        <Input
+          type="email"
+          label="Email*"
+          disabled={isLoading}
+          error={formik.touched.email && formik.errors.email}
+          {...formik.getFieldProps('email')}
+        />
 
-        <form onSubmit={formik.handleSubmit} className={s.form}>
-          <Input
-            type="email"
-            label="Email*"
-            error={formik.touched.email && formik.errors.email}
-            {...formik.getFieldProps('email')}
-          />
+        <Input
+          type="password"
+          label="Password*"
+          disabled={isLoading}
+          error={formik.touched.password && formik.errors.password}
+          {...formik.getFieldProps('password')}
+        />
 
-          <Input
-            type="password"
-            label="Password*"
-            error={formik.touched.password && formik.errors.password}
-            {...formik.getFieldProps('password')}
-          />
+        <Input
+          type="password"
+          label="Confirm password*"
+          disabled={isLoading}
+          error={formik.touched.confirmPassword && formik.errors.confirmPassword}
+          {...formik.getFieldProps('confirmPassword')}
+        />
 
-          <Input
-            type="password"
-            label="Confirm password*"
-            error={formik.touched.confirmPassword && formik.errors.confirmPassword}
-            {...formik.getFieldProps('confirmPassword')}
-          />
+        <Button type="submit" styleType="primary" disabled={buttonDisabled}>
+          Sign Up
+        </Button>
+      </form>
 
-          <Button type="submit" styleType="primary" disabled={buttonDisabled}>
-            Sign Up
-          </Button>
-        </form>
-        <p>Already have an account?</p>
-
+      <div className={s.navigateContainer}>
+        <p className={s.subtitle}>Already have an account?</p>
         <NavLink url={PATH.LOG_IN} styleType="primary">
           Sign In
         </NavLink>
-      </Box>
-    </>
+      </div>
+    </Box>
   )
 }

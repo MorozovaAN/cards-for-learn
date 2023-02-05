@@ -14,3 +14,14 @@
   top: 50%;
   left: 50%;
 }
+
+.linearProgress .progressBar {
+  position: absolute;
+  top: 0;
+
+  background: var(--color-secondary-base);
+}
+
+.linearProgress .progress {
+  background: var(--color-primary-base);
+}
