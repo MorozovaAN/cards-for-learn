@@ -11,7 +11,7 @@ import { isAuthSelector, isLoadingSelector } from 'pages/app/selectors'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
 
-export const AppPage = () => {
+export const App = () => {
   const [me] = useMeMutation()
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
