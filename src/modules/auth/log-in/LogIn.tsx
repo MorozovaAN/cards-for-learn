@@ -3,11 +3,12 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
 
-import s from './Login.module.scss'
-
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
-import { useLoginMutation } from 'modules/auth/authApi'
-import { setIsLoggedIn } from 'pages/app/appSlice'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useLogInMutation } from 'modules/auth/authApi'
+import s from 'modules/auth/log-in/LogIn.module.scss'
+import { setIsLoading } from 'pages/app/appSlice'
+import { isLoggedInSelector } from 'pages/app/selectors'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -20,8 +21,10 @@ interface FormikErrorType {
   password?: string
   rememberMe?: boolean
 }
+
 export const LogIn = () => {
-  const [setLogin, { isSuccess }] = useLoginMutation()
+  const [setLogin, { isLoading }] = useLogInMutation()
+  const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -48,35 +51,38 @@ export const LogIn = () => {
 
       return errors
     },
+
     onSubmit: values => {
+      dispatch(setIsLoading(true))
       setLogin(values)
     },
   })
 
-  if (isSuccess) {
-    dispatch(setIsLoggedIn(true))
-
-    return <Navigate to={PATH.PACKS} />
-  }
+  if (isLoggedIn) return <Navigate to={PATH.PACKS} />
 
   return (
     <Box>
-      <h2>Sign in</h2>
-
+      <h2 className={s.title}>Sign in</h2>
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
           label="Email"
+          disabled={isLoading}
           {...formik.getFieldProps('email')}
           error={formik.touched.email ? formik.errors.email : ''}
         />
         <Input
           type="password"
           label="Password"
+          disabled={isLoading}
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
         />
-        <Checkbox {...formik.getFieldProps('rememberMe')} checked={formik.values.rememberMe}>
+        <Checkbox
+          {...formik.getFieldProps('rememberMe')}
+          checked={formik.values.rememberMe}
+          disabled={isLoading}
+        >
           Remember me
         </Checkbox>
 
@@ -85,22 +91,26 @@ export const LogIn = () => {
         </NavLink>
 
         <Button
+          type="submit"
           styleType="primary"
           disabled={
             !!formik.errors.password ||
             !!formik.errors.email ||
             !formik.values.email ||
-            !formik.values.password
+            !formik.values.password ||
+            isLoading
           }
         >
           Sign in
         </Button>
       </form>
 
-      <div>Don`t have an account?</div>
-      <NavLink url={PATH.LOG_UP} styleType="primary">
-        Sign Up
-      </NavLink>
+      <div className={s.navigateContainer}>
+        <p className={s.subtitle}>Don`t have an account?</p>
+        <NavLink url={PATH.LOG_UP} styleType="primary">
+          Sign Up
+        </NavLink>
+      </div>
     </Box>
   )
 }
