@@ -6,8 +6,7 @@ import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
 import { Packs } from 'modules/packs/Packs'
-import { CheckEmailPage } from 'pages/check-email/CheckEmailPage'
-import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPage'
+import { ErrorPage } from 'pages/error-page/ErrorPage'
 import { LogInPage } from 'pages/log-in-page/LogInPage'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/newPasswordPage'
@@ -28,7 +27,7 @@ export const RoutesComponent = () => {
       <Route path={PATH.PASS_RECOVERY} element={<ForgotPasswordPage />} />
       <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
       <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />
-      {/*<Route path={PATH.ERROR_404} element={<Error404 />} />*/}
+        <Route path={PATH.ERROR_404} element={<ErrorPage />} />
       <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
     </Routes>
   )

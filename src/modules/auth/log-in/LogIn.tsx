@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
-
-import s from './Login.module.scss'
+import { Navigate } from 'react-router-dom'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useTypedSelector } from 'hooks/useTypedSelector'
 import { useLogInMutation } from 'modules/auth/authApi'
-import { setError, setIsLoggedIn } from 'pages/app/appSlice'
+import s from 'modules/auth/log-in/LogIn.module.scss'
+import { setIsLoading } from 'pages/app/appSlice'
+import { isLoggedInSelector } from 'pages/app/selectors'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -20,10 +21,11 @@ interface FormikErrorType {
   password?: string
   rememberMe?: boolean
 }
+
 export const LogIn = () => {
-  const [setLogin] = useLogInMutation()
+  const [setLogin, { isLoading }] = useLogInMutation()
+  const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const dispatch = useTypedDispatch()
-  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -49,38 +51,38 @@ export const LogIn = () => {
 
       return errors
     },
+
     onSubmit: values => {
+      dispatch(setIsLoading(true))
       setLogin(values)
-        .unwrap()
-        .then(() => {
-          dispatch(setIsLoggedIn(true))
-          navigate(PATH.PACKS)
-        })
-        .catch(err => {
-          if (err.data.error) dispatch(setError(err.data.error))
-          else dispatch(setError('Something went wrong'))
-        })
     },
   })
 
+  if (isLoggedIn) return <Navigate to={PATH.PACKS} />
+
   return (
     <Box>
-      <h2>Sign in</h2>
-
+      <h2 className={s.title}>Sign in</h2>
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
           label="Email"
+          disabled={isLoading}
           {...formik.getFieldProps('email')}
           error={formik.touched.email ? formik.errors.email : ''}
         />
         <Input
           type="password"
           label="Password"
+          disabled={isLoading}
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
         />
-        <Checkbox {...formik.getFieldProps('rememberMe')} checked={formik.values.rememberMe}>
+        <Checkbox
+          {...formik.getFieldProps('rememberMe')}
+          checked={formik.values.rememberMe}
+          disabled={isLoading}
+        >
           Remember me
         </Checkbox>
 
@@ -95,18 +97,20 @@ export const LogIn = () => {
             !!formik.errors.password ||
             !!formik.errors.email ||
             !formik.values.email ||
-            !formik.values.password
+            !formik.values.password ||
+            isLoading
           }
         >
           Sign in
         </Button>
       </form>
 
-      <div>Don`t have an account?</div>
-
-      <NavLink url={PATH.LOG_UP} styleType="primary">
-        Sign Up
-      </NavLink>
+      <div className={s.navigateContainer}>
+        <p className={s.subtitle}>Don`t have an account?</p>
+        <NavLink url={PATH.LOG_UP} styleType="primary">
+          Sign Up
+        </NavLink>
+      </div>
     </Box>
   )
 }

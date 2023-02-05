@@ -13,6 +13,10 @@
   @include headline1();
 }
 
+.link {
+  align-self: flex-end;
+}
+
 .navigateContainer {
   display: flex;
   flex-direction: column;

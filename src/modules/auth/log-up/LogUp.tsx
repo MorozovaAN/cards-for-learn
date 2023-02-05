@@ -1,12 +1,14 @@
+import React from 'react'
+
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
-import { setError } from 'pages/app/appSlice'
+import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -20,9 +22,8 @@ type LogUpErrorType = {
 }
 
 export const LogUp = () => {
-  const [logUp] = useLogUpMutation()
+  const [logUp, { isSuccess, isLoading }] = useLogUpMutation()
   const dispatch = useTypedDispatch()
-  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -55,17 +56,12 @@ export const LogUp = () => {
     },
 
     onSubmit: values => {
+      dispatch(setIsLoading(true))
       logUp({ email: values.email, password: values.password })
-        .unwrap()
-        .then(() => {
-          navigate(PATH.LOG_IN)
-        })
-        .catch(err => {
-          if (err.data.error) dispatch(setError(err.data.error))
-          else dispatch(setError('Something went wrong'))
-        })
     },
   })
+
+  if (isSuccess) return <Navigate to={PATH.LOG_IN} />
 
   const buttonDisabled =
     !!formik.errors.email ||
@@ -77,12 +73,13 @@ export const LogUp = () => {
 
   return (
     <Box>
-      <h2>Sign Up to Cards for learn</h2>
+      <h2 className={s.title}>Sign Up to Cards for learn</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
           label="Email*"
+          disabled={isLoading}
           error={formik.touched.email && formik.errors.email}
           {...formik.getFieldProps('email')}
         />
@@ -90,6 +87,7 @@ export const LogUp = () => {
         <Input
           type="password"
           label="Password*"
+          disabled={isLoading}
           error={formik.touched.password && formik.errors.password}
           {...formik.getFieldProps('password')}
         />
@@ -97,6 +95,7 @@ export const LogUp = () => {
         <Input
           type="password"
           label="Confirm password*"
+          disabled={isLoading}
           error={formik.touched.confirmPassword && formik.errors.confirmPassword}
           {...formik.getFieldProps('confirmPassword')}
         />
@@ -106,11 +105,12 @@ export const LogUp = () => {
         </Button>
       </form>
 
-      <p>Already have an account?</p>
-
-      <NavLink url={PATH.LOG_IN} styleType="primary">
-        Sign In
-      </NavLink>
+      <div className={s.navigateContainer}>
+        <p className={s.subtitle}>Already have an account?</p>
+        <NavLink url={PATH.LOG_IN} styleType="primary">
+          Sign In
+        </NavLink>
+      </div>
     </Box>
   )
 }
