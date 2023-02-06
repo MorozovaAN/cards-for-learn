@@ -29,7 +29,7 @@ export const NotificationBar = () => {
       {open && (
         <div className={s.notification} onClick={handleClose}>
           <div className={msgContainerClasses}>
-            {success ? <Success fill="#fff" /> : <Error fill="#fff" />}
+            {success ? <Success /> : <Error />}
             <p className={s.text}>{message}</p>
             <Close onClick={handleClose} fill="#fff" className={s.close} />
           </div>
