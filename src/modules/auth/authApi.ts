@@ -74,6 +74,7 @@ export const authApi = createApi({
         }
       },
     }),
+
     logUp: build.mutation<Response, LogUpDataType>({
       query: logUpData => ({
         url: 'register',
@@ -97,6 +98,7 @@ export const authApi = createApi({
         }
       },
     }),
+
     logIn: build.mutation<Response, LogInDataType>({
       query: loginData => ({
         url: 'login',
@@ -119,6 +121,7 @@ export const authApi = createApi({
         }
       },
     }),
+
     logOut: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
@@ -126,10 +129,19 @@ export const authApi = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
+          dispatch(setIsLoading(true))
           await queryFulfilled
-          dispatch(setIsLoggedIn(false))
+          // dispatch(setIsLoggedIn(false))
         } catch (err) {
-          console.log(err)
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setError(error))
+          } else {
+            dispatch(setError('Something went wrong'))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
         }
       },
     }),
@@ -140,6 +152,22 @@ export const authApi = createApi({
         method: 'POST',
         body,
       }),
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        try {
+          dispatch(setIsLoading(true))
+          await queryFulfilled
+        } catch (err) {
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setError(error))
+          } else {
+            dispatch(setError('Something went wrong'))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
     }),
 
     setNewPassword: build.mutation<CommonType, RequestSetNewPasswordType>({
