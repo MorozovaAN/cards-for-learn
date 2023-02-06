@@ -4,7 +4,7 @@ export const PATH = {
   LOG_IN: '/log-in',
   PASS_RECOVERY: '/password',
   SET_NEW_PASS: '/set-new-password/:token',
-  CHECK_EMAIL: '/checkEmail',
+  CHECK_EMAIL: '/check-email',
   PROFILE: '/profile',
   PACKS: '/packs',
   CARDS: '/cards/:id',

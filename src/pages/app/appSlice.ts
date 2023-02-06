@@ -4,8 +4,11 @@ const initialState = {
   isAuth: false,
   isLoggedIn: false,
   isLoading: false,
-  error: '',
-  success: '',
+  notification: {
+    message: '',
+    type: '' as NotificationType,
+    open: false,
+  },
 }
 
 const appSlice = createSlice({
@@ -21,14 +24,17 @@ const appSlice = createSlice({
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload
-    },
-    setSuccess: (state, action: PayloadAction<string>) => {
-      state.success = action.payload
+    setNotification: (
+      state,
+      action: PayloadAction<{ message: string; type: NotificationType }>
+    ) => {
+      state.notification.message = action.payload.message
+      state.notification.type = action.payload.type
     },
   },
 })
 
-export const { setIsAuth, setIsLoggedIn, setError, setSuccess, setIsLoading } = appSlice.actions
+type NotificationType = '' | 'error' | 'success'
+
+export const { setIsAuth, setIsLoggedIn, setNotification, setIsLoading } = appSlice.actions
 export const appReducer = appSlice.reducer

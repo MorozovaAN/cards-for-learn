@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
-import LinearProgress from '@mui/material/LinearProgress'
 
 import s from './App.module.scss'
 
@@ -10,7 +9,8 @@ import { useMeMutation } from 'modules/auth/authApi'
 import { Header } from 'modules/header/Header'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'pages/app/selectors'
 import { RoutesComponent } from 'routes/RoutesComponent'
-import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
+import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
+import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
@@ -19,7 +19,9 @@ export const App = () => {
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
 
   useEffect(() => {
-    me()
+    if (!isAuth) {
+      me()
+    }
   }, [])
 
   if (!isAuth) return <CircularProgress classes={{ root: s.circular }} />
@@ -27,12 +29,9 @@ export const App = () => {
   return (
     <div className={s.app}>
       {isLoggedIn && <Header />}
-      <ErrorSnackbar />
-      {isLoading && (
-        <div className={s.linearProgress}>
-          <LinearProgress classes={{ root: s.progressBar, bar: s.progress }} />
-        </div>
-      )}
+      <NotificationBar />
+
+      {isLoading && <LoadingProgress />}
 
       <section className={s.contentContainer}>
         <RoutesComponent />
