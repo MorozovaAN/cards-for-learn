@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { forgotPasswordCurrentEmail } from 'modules/auth/authSlice'
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'pages/app/appSlice'
 
 export const authApi = createApi({
@@ -28,6 +29,7 @@ export const authApi = createApi({
         }
       },
     }),
+
     logUp: build.mutation<Response, LogUpDataType>({
       query: logUpData => ({
         url: 'register',
@@ -53,6 +55,7 @@ export const authApi = createApi({
         }
       },
     }),
+
     logIn: build.mutation<Response, LogInDataType>({
       query: loginData => ({
         url: 'login',
@@ -75,11 +78,79 @@ export const authApi = createApi({
         }
       },
     }),
+
     logOut: build.mutation<CommonType, void>({
       query: () => ({
         url: 'me',
         method: 'DELETE',
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          dispatch(setIsLoading(true))
+          await queryFulfilled
+          // dispatch(setIsLoggedIn(false))
+        } catch (err) {
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setNotification({ message: error, type: 'error' }))
+          } else {
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
+    }),
+
+    forgotPassword: build.mutation<CommonType, RequestForgotPasswordType>({
+      query: body => ({
+        url: 'forgot',
+        method: 'POST',
+        body,
+      }),
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        try {
+          dispatch(setIsLoading(true))
+          await queryFulfilled
+          dispatch(forgotPasswordCurrentEmail(body.email))
+        } catch (err) {
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setNotification({ message: error, type: 'error' }))
+          } else {
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
+    }),
+
+    setNewPassword: build.mutation<CommonType, RequestSetNewPasswordType>({
+      query: ({ password, resetPasswordToken }) => ({
+        url: 'set-new-password',
+        method: 'POST',
+        body: { password, resetPasswordToken },
+      }),
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        try {
+          dispatch(setIsLoading(true))
+          await queryFulfilled
+          dispatch(setNotification({ message: 'Password changed successfully', type: 'success' }))
+        } catch (err) {
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setNotification({ message: error, type: 'error' }))
+          } else {
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
     }),
   }),
 })
@@ -121,4 +192,22 @@ type ErrorType = {
   }
 }
 
-export const { useMeMutation, useLogInMutation, useLogOutMutation, useLogUpMutation } = authApi
+export type RequestForgotPasswordType = {
+  email: string
+  from?: string
+  message: string
+}
+
+export type RequestSetNewPasswordType = {
+  password: string
+  resetPasswordToken: string
+}
+
+export const {
+  useForgotPasswordMutation,
+  useSetNewPasswordMutation,
+  useMeMutation,
+  useLogInMutation,
+  useLogOutMutation,
+  useLogUpMutation,
+} = authApi
