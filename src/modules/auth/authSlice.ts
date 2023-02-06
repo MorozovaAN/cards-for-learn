@@ -22,11 +22,8 @@ const authSlice = createSlice({
         state.avatar = action.payload.avatar
       }
     },
-    setName(state, action: PayloadAction<string>) {
-      state.name = action.payload
-    },
   },
 })
 
-export const { setAuthData, setName } = authSlice.actions
+export const { setAuthData } = authSlice.actions
 export const authReducer = authSlice.reducer

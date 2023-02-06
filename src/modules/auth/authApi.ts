@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { setAuthData } from 'modules/auth/authSlice'
 import { setError, setIsAuth, setIsLoading, setIsLoggedIn, setSuccess } from 'pages/app/appSlice'
 
 export interface Response {
@@ -17,7 +18,9 @@ export interface Response {
   tokenDeathTime: number
   avatar: string
 }
-
+export type UpdateProfileType = {
+  updatedUser: Response
+}
 export type LogInDataType = {
   email: string
   password: string
@@ -58,9 +61,10 @@ export const authApi = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled
+          const res = await queryFulfilled
 
           dispatch(setIsLoggedIn(true))
+          dispatch(setAuthData(res.data))
         } catch (err) {
           if ((err as ErrorType)?.error?.data?.error !== 'you are not authorized /ᐠ-ꞈ-ᐟ\\')
             dispatch(setError('Something went wrong'))
@@ -100,9 +104,10 @@ export const authApi = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled
+          const res = await queryFulfilled
 
           dispatch(setIsLoggedIn(true))
+          dispatch(setAuthData(res.data))
         } catch (err) {
           if ((err as ErrorType)?.error?.data?.error) {
             dispatch(setError('Not correct email or password'))
@@ -119,15 +124,44 @@ export const authApi = createApi({
         url: 'me',
         method: 'DELETE',
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsLoading(true))
+        try {
+          await queryFulfilled
+          dispatch(setIsLoggedIn(false))
+        } catch (err) {
+          dispatch(setError('Something went wrong'))
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
     }),
-    updateProfile: build.mutation<Response, UpdateProfile>({
+    updateProfile: build.mutation<UpdateProfileType, UpdateProfile>({
       query: UpdateProfile => ({
         url: 'me',
         method: 'PUT',
         body: UpdateProfile,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsLoading(true))
+        try {
+          const res = await queryFulfilled
+
+          dispatch(setAuthData(res.data.updatedUser))
+        } catch (err) {
+          dispatch(setError('Something went wrong'))
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
     }),
   }),
 })
 
-export const { useMeMutation, useLogInMutation, useLogOutMutation, useLogUpMutation } = authApi
+export const {
+  useMeMutation,
+  useLogInMutation,
+  useLogOutMutation,
+  useLogUpMutation,
+  useUpdateProfileMutation,
+} = authApi

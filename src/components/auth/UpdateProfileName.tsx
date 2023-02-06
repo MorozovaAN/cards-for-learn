@@ -4,15 +4,15 @@ import { useFormik } from 'formik'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import { useUpdateProfileMutation } from 'modules/auth/authApi'
+import { UpdateProfile, useUpdateProfileMutation } from 'modules/auth/authApi'
 import { nameSelector } from 'modules/auth/authSelectors/authSelectors'
-import { setName } from 'modules/auth/authSlice'
-import s from 'modules/auth/profileModule/Profile.module.scss'
+import s from 'modules/auth/profile/Profile.module.scss'
 import { Input } from 'UI/input/Input'
 import style from 'UI/input/Input.module.scss'
 
 type ProfileEditNamePropsType = {
   setEditMode: (value: boolean) => void
+  updateProfileCallback: (value: UpdateProfile) => void
 }
 
 interface FormikErrorType {
@@ -20,10 +20,11 @@ interface FormikErrorType {
   avatar?: string
 }
 
-export const ProfileEditName: React.FC<ProfileEditNamePropsType> = ({ setEditMode }) => {
+export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
+  setEditMode,
+  updateProfileCallback,
+}) => {
   const profileName = useTypedSelector(nameSelector)
-  const [updateName, { isLoading, isSuccess }] = useUpdateProfileMutation()
-  const dispatch = useTypedDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -40,8 +41,7 @@ export const ProfileEditName: React.FC<ProfileEditNamePropsType> = ({ setEditMod
       return errors
     },
     onSubmit: values => {
-      updateName(values).unwrap()
-      dispatch(setName(values.name))
+      updateProfileCallback(values)
       setEditMode(false)
       formik.resetForm()
     },
@@ -51,9 +51,6 @@ export const ProfileEditName: React.FC<ProfileEditNamePropsType> = ({ setEditMod
   useEffect(() => {
     formik.setFieldValue('name', profileName)
   }, [profileName])
-  useEffect(() => {
-    isLoading
-  }, [isLoading, isSuccess])
 
   return (
     <form onSubmit={formik.handleSubmit} className={s.profile_form}>
