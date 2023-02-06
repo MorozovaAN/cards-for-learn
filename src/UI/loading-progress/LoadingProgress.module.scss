@@ -1,0 +1,16 @@
+.linearProgress {
+  position: fixed;
+  z-index: 10;
+
+  width: 100%;
+}
+
+.linearProgress .progressBar {
+  top: 0;
+
+  background: var(--color-secondary-base);
+}
+
+.linearProgress .progress {
+  background: var(--color-primary-base);
+}
