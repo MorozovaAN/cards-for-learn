@@ -1,30 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { forgotPasswordCurrentEmail } from 'modules/auth/authSlice'
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'pages/app/appSlice'
 
-export type CommonType = {
-  info: string
-  error?: string
-}
-export type RequestForgotPasswordType = {
-  email: string
-  from?: string
-  message: string
-}
-
-export type RequestSetNewPasswordType = {
-  password: string
-  resetPasswordToken: string
-}
-
-type ErrorType = {
-  error: {
-    data: {
-      error: string
-    }
-    status: number
-  }
-}
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -115,9 +93,9 @@ export const authApi = createApi({
           const error = (err as ErrorType)?.error?.data?.error
 
           if (error) {
-            dispatch(setError(error))
+            dispatch(setNotification({ message: error, type: 'error' }))
           } else {
-            dispatch(setError('Something went wrong'))
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
           }
         } finally {
           dispatch(setIsLoading(false))
@@ -135,13 +113,14 @@ export const authApi = createApi({
         try {
           dispatch(setIsLoading(true))
           await queryFulfilled
+          dispatch(forgotPasswordCurrentEmail(body.email))
         } catch (err) {
           const error = (err as ErrorType)?.error?.data?.error
 
           if (error) {
-            dispatch(setError(error))
+            dispatch(setNotification({ message: error, type: 'error' }))
           } else {
-            dispatch(setError('Something went wrong'))
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
           }
         } finally {
           dispatch(setIsLoading(false))
@@ -155,6 +134,23 @@ export const authApi = createApi({
         method: 'POST',
         body: { password, resetPasswordToken },
       }),
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        try {
+          dispatch(setIsLoading(true))
+          await queryFulfilled
+          dispatch(setNotification({ message: 'Password changed successfully', type: 'success' }))
+        } catch (err) {
+          const error = (err as ErrorType)?.error?.data?.error
+
+          if (error) {
+            dispatch(setNotification({ message: error, type: 'error' }))
+          } else {
+            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+          }
+        } finally {
+          dispatch(setIsLoading(false))
+        }
+      },
     }),
   }),
 })
@@ -196,4 +192,22 @@ type ErrorType = {
   }
 }
 
-export const { useForgotPasswordMutation, useSetNewPasswordMutation,useMeMutation, useLogInMutation, useLogOutMutation, useLogUpMutation } = authApi
+export type RequestForgotPasswordType = {
+  email: string
+  from?: string
+  message: string
+}
+
+export type RequestSetNewPasswordType = {
+  password: string
+  resetPasswordToken: string
+}
+
+export const {
+  useForgotPasswordMutation,
+  useSetNewPasswordMutation,
+  useMeMutation,
+  useLogInMutation,
+  useLogOutMutation,
+  useLogUpMutation,
+} = authApi

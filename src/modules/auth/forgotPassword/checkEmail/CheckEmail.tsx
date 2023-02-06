@@ -16,7 +16,7 @@ export const CheckEmail = () => {
 
   return (
     <Box>
-      <h2>Check Email</h2>
+      <h2 className={s.title}>Check Email</h2>
 
       <img src={checkEmail} alt="check email" />
 
