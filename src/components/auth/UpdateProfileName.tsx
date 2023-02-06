@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 
 import { useFormik } from 'formik'
 
-import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import { UpdateProfile, useUpdateProfileMutation } from 'modules/auth/authApi'
+import { UpdateProfile } from 'modules/auth/authApi'
 import { nameSelector } from 'modules/auth/authSelectors/authSelectors'
 import s from 'modules/auth/profile/Profile.module.scss'
 import { Input } from 'UI/input/Input'
@@ -24,7 +23,7 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
   setEditMode,
   updateProfileCallback,
 }) => {
-  const profileName = useTypedSelector(nameSelector)
+  const userName = useTypedSelector(nameSelector)
 
   const formik = useFormik({
     initialValues: {
@@ -48,8 +47,8 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
   })
 
   useEffect(() => {
-    formik.setFieldValue('name', profileName)
-  }, [profileName])
+    formik.setFieldValue('name', userName)
+  }, [userName])
 
   return (
     <form onSubmit={formik.handleSubmit} className={s.profile_form}>

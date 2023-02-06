@@ -2,7 +2,6 @@ import React, { ChangeEvent, FC } from 'react'
 
 import s from './UpdateProfileAvatar.module.scss'
 
-import updateAva from 'assets/img/icons/updatePhoto.svg'
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { UpdateProfile } from 'modules/auth/authApi'
 import { setError } from 'pages/app/appSlice'

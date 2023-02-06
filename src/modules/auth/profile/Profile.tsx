@@ -18,10 +18,16 @@ import { Button } from 'UI/button/Button'
 export const Profile = () => {
   const emailFromState = useTypedSelector(emailSelector)
   const nameFromState = useTypedSelector(nameSelector)
-  const avatar = useTypedSelector(avatarSelector)
+  const avatarFromState = useTypedSelector(avatarSelector)
 
   const [logOut] = useLogOutMutation()
-  const [updateProfile, { data }] = useUpdateProfileMutation()
+  const [updateProfile, { name, avatar, email }] = useUpdateProfileMutation({
+    selectFromResult: ({ data }) => ({
+      name: data?.updatedUser?.name,
+      avatar: data?.updatedUser?.avatar,
+      email: data?.updatedUser?.email,
+    }),
+  })
   const [editMode, setEditMode] = useState(false)
   const updateProfileCallback = (value: UpdateProfile) => {
     updateProfile({ name: value.name, avatar: value.avatar })
@@ -38,11 +44,7 @@ export const Profile = () => {
       <h2 className={s.title}>Personal Information</h2>
 
       <div className={s.profile_img}>
-        <img
-          src={data?.updatedUser.avatar ? data?.updatedUser.avatar : avatar}
-          alt={'photo profile-page'}
-          className={s.img}
-        />
+        <img src={avatar ? avatar : avatarFromState} alt={'photo profile-page'} className={s.img} />
         <span className={s.photoUploader}>
           <UpdateProfileAvatar updateProfileCallback={updateProfileCallback} />
         </span>
@@ -55,16 +57,14 @@ export const Profile = () => {
         />
       ) : (
         <div className={s.name}>
-          {data?.updatedUser.name ? data?.updatedUser.name : nameFromState}
+          {name ? name : nameFromState}
           <Button onClick={editModeOpen} styleType="icon">
             <img src={editName} alt={'edit name icon'} />
           </Button>
         </div>
       )}
 
-      <p className={s.email}>
-        {data?.updatedUser.email ? data?.updatedUser.email : emailFromState}
-      </p>
+      <p className={s.email}>{email ? email : emailFromState}</p>
 
       <Button styleType={'primary'} className={s.logout} onClick={logout}>
         LogOut
