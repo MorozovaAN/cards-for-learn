@@ -73,3 +73,8 @@
     color: var(--color-on-primary-base);
   }
 }
+
+@mixin boxBorder() {
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+}

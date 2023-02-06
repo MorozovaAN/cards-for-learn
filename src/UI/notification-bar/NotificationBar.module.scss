@@ -1,0 +1,53 @@
+@import 'src/style-mixins/fonts-mixins';
+
+.notification {
+  cursor: pointer;
+
+  position: fixed;
+  z-index: 6;
+  top: 0;
+
+  width: 98vw;
+  height: 98vh;
+}
+
+.msgContainer {
+
+  @include boxBorder();
+
+  position: fixed;
+  z-index: 12;
+  bottom: 30px;
+  left: 30px;
+
+  display: flex;
+  flex-shrink: 1;
+  column-gap: 15px;
+  align-items: center;
+
+  width: fit-content;
+  padding: 15px;
+
+  color: var(--color-background-base);
+
+  background: var(--color-warn-base);
+  border-radius: 4px;
+}
+
+.successMsg {
+  background: var(--color-success-base);
+}
+
+.text {
+
+  @include subtitle();
+}
+
+.close {
+  cursor: pointer;
+
+  align-self: flex-start;
+
+  width: 10px;
+  height: 10px;
+}

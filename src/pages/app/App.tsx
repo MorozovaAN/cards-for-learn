@@ -9,7 +9,7 @@ import { useTypedSelector } from 'hooks/useTypedSelector'
 import { useMeMutation } from 'modules/auth/authApi'
 import { isAuthSelector, isLoadingSelector } from 'pages/app/selectors'
 import { RoutesComponent } from 'routes/RoutesComponent'
-import { ErrorSnackbar } from 'UI/error-snackbar/ErrorSnackbar'
+import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
@@ -26,7 +26,7 @@ export const App = () => {
 
   return (
     <div className={s.app}>
-      <ErrorSnackbar />
+      <NotificationBar />
 
       {isLoading && (
         <div className={s.linearProgress}>
