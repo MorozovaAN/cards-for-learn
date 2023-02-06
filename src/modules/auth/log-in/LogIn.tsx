@@ -61,7 +61,7 @@ export const LogIn = () => {
   if (isLoggedIn) return <Navigate to={PATH.PACKS} />
 
   return (
-    <Box>
+    <Box className={s.container}>
       <h2 className={s.title}>Sign in</h2>
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input

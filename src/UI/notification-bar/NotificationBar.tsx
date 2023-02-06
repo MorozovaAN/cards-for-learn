@@ -15,13 +15,23 @@ export const NotificationBar = () => {
   const [open, setOpen] = useState(false)
   const dispatch = useTypedDispatch()
 
+  const paddingSize = window.innerWidth - document.documentElement.clientWidth
+  const bodyWidth = document.documentElement.clientWidth
+
+  console.log(paddingSize)
   const handleClose = () => {
     setOpen(false)
     dispatch(setNotification({ message: '', type: '' }))
+    document.body.style.overflow = ''
+    document.body.style.width = `${bodyWidth}px`
   }
 
   useEffect(() => {
-    if (message) setOpen(true)
+    if (message) {
+      setOpen(true)
+      document.body.style.overflow = 'hidden'
+      document.body.style.width = `${bodyWidth - paddingSize}px`
+    }
   }, [message])
 
   return (
