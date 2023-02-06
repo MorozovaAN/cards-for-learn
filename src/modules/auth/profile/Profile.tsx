@@ -20,7 +20,7 @@ export const Profile = () => {
   const nameFromState = useTypedSelector(nameSelector)
   const avatar = useTypedSelector(avatarSelector)
 
-  const [logOut, {}] = useLogOutMutation()
+  const [logOut] = useLogOutMutation()
   const [updateProfile, { data }] = useUpdateProfileMutation()
   const [editMode, setEditMode] = useState(false)
   const updateProfileCallback = (value: UpdateProfile) => {
@@ -34,42 +34,41 @@ export const Profile = () => {
   }
 
   return (
-    <>
-      <Box>
-        <h2 className={s.title}>Personal Information</h2>
+    <Box>
+      <h2 className={s.title}>Personal Information</h2>
 
-        <div className={s.profile_img}>
-          <img
-            src={data?.updatedUser.avatar ? data?.updatedUser.avatar : avatar}
-            alt={'photo profile-page'}
-          />
-          <span className={s.photoUploader}>
-            <UpdateProfileAvatar updateProfileCallback={updateProfileCallback} />
-          </span>
+      <div className={s.profile_img}>
+        <img
+          src={data?.updatedUser.avatar ? data?.updatedUser.avatar : avatar}
+          alt={'photo profile-page'}
+          className={s.img}
+        />
+        <span className={s.photoUploader}>
+          <UpdateProfileAvatar updateProfileCallback={updateProfileCallback} />
+        </span>
+      </div>
+
+      {editMode ? (
+        <UpdateProfileName
+          setEditMode={setEditMode}
+          updateProfileCallback={updateProfileCallback}
+        />
+      ) : (
+        <div className={s.name}>
+          {data?.updatedUser.name ? data?.updatedUser.name : nameFromState}
+          <Button onClick={editModeOpen} styleType="icon">
+            <img src={editName} alt={'edit name icon'} />
+          </Button>
         </div>
+      )}
 
-        {editMode ? (
-          <UpdateProfileName
-            setEditMode={setEditMode}
-            updateProfileCallback={updateProfileCallback}
-          />
-        ) : (
-          <div className={s.profile_name}>
-            {data?.updatedUser.name ? data?.updatedUser.name : nameFromState}
-            <Button onClick={editModeOpen} styleType="icon">
-              <img src={editName} alt={'edit name'} />
-            </Button>
-          </div>
-        )}
+      <p className={s.email}>
+        {data?.updatedUser.email ? data?.updatedUser.email : emailFromState}
+      </p>
 
-        <p className={s.email}>
-          {data?.updatedUser.email ? data?.updatedUser.email : emailFromState}
-        </p>
-
-        <Button styleType={'primary'} className={s.profile_btn_logout} onClick={logout}>
-          LogOut
-        </Button>
-      </Box>
-    </>
+      <Button styleType={'primary'} className={s.logout} onClick={logout}>
+        LogOut
+      </Button>
+    </Box>
   )
 }

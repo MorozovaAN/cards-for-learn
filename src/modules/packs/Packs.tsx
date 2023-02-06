@@ -5,9 +5,9 @@ import { useLogOutMutation } from '../auth/authApi'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
-  const [logout, {}] = useLogOutMutation()
+  const [logout] = useLogOutMutation()
   const handlerLogout = async () => {
-    await logout().unwrap()
+    await logout()
   }
 
   return (

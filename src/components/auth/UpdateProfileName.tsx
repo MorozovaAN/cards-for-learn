@@ -47,7 +47,6 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
     },
   })
 
-  //нужно чтоб в инпуте сохранялось имя прошлое при обновлении
   useEffect(() => {
     formik.setFieldValue('name', profileName)
   }, [profileName])
