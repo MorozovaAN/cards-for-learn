@@ -91,7 +91,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
       </div>
       {textChange && (
         <Button
-          type={'submit'}
+          type="submit"
           styleType="primary"
           className={s.saveButton}
           onClick={textChangeBtnCallbackHandle}

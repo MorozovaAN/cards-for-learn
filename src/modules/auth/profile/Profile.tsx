@@ -12,10 +12,8 @@ import {
   emailSelector,
   nameSelector,
 } from 'modules/auth/authSelectors/authSelectors'
-import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
-import { NavLink } from 'UI/nav-link/NavLink'
 
 export const Profile = () => {
   const emailFromState = useTypedSelector(emailSelector)
@@ -58,17 +56,17 @@ export const Profile = () => {
         ) : (
           <div className={s.profile_name}>
             {data?.updatedUser.name ? data?.updatedUser.name : nameFromState}
-            <span onClick={editModeOpen} className={s.profile_name_edit}>
+            <Button onClick={editModeOpen} styleType="icon">
               <img src={editName} alt={'edit name'} />
-            </span>
+            </Button>
           </div>
         )}
 
-        <span className={s.email}>
+        <p className={s.email}>
           {data?.updatedUser.email ? data?.updatedUser.email : emailFromState}
-        </span>
+        </p>
 
-        <Button styleType={'secondary'} className={s.profile_btn_logout} onClick={logout}>
+        <Button styleType={'primary'} className={s.profile_btn_logout} onClick={logout}>
           LogOut
         </Button>
       </Box>
