@@ -1,10 +1,19 @@
-@import 'src/common/style-mixins/fonts-mixins';
+@import '../../common/style-mixins/mixins';
 
 .link {
 
   @include title(600);
 
-  transition: all 0.4s ease-in;
+  margin: 0;
+
+  color: inherit;
+  text-decoration: none;
+
+  transition: all 0.3s linear;
+
+  &:hover {
+    color: var(--color-primary-base);
+  }
 }
 
 .primary {
@@ -12,6 +21,7 @@
   @include title(600);
 
   color: var(--color-primary-base);
+  text-decoration: underline;
 
   &:hover {
     color: var(--color-on-primary-base);

@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 
-import s from './App.module.scss'
-
+import s from 'app/App.module.scss'
+import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useMeMutation } from 'modules/auth/authApi'
 import { Header } from 'modules/header/Header'
-import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'pages/app/selectors'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'

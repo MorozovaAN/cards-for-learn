@@ -3,19 +3,18 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
 
+import { isLoggedInSelector } from 'app/appSelectors'
+import { setIsLoading } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useLogInMutation } from 'modules/auth/authApi'
 import s from 'modules/auth/log-in/LogIn.module.scss'
-import { setIsLoading } from 'pages/app/appSlice'
-import { isLoggedInSelector } from 'pages/app/selectors'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
-
 interface FormikErrorType {
   email?: string
   password?: string

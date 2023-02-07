@@ -1,8 +1,6 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import 'src/common/style-mixins/mixins';
 
-  height: 100%;
-  min-height: 100vh;
+.contentContainer {
+
+  @include authPageContainer();
 }

@@ -1,11 +1,12 @@
 import React from 'react'
 
+import s from './CheckEmailPage.module.scss'
+
 import { CheckEmail } from 'modules/auth/forgotPassword/checkEmail/CheckEmail'
-import s from 'pages/forgot-password-page/ForgotPasswordPage.module.scss'
 
 export const CheckEmailPage = () => {
   return (
-    <div className={s.container}>
+    <div className={s.contentContainer}>
       <CheckEmail />
     </div>
   )

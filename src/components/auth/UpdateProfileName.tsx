@@ -4,8 +4,7 @@ import { useFormik } from 'formik'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfile } from 'modules/auth/authApi'
-import { nameSelector } from 'modules/auth/authSelectors/authSelectors'
-import s from 'modules/auth/profile/Profile.module.scss'
+import { nameSelector } from 'modules/auth/authSelectors'
 import { Input } from 'UI/input/Input'
 import style from 'UI/input/Input.module.scss'
 
@@ -51,11 +50,11 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
   }, [userName])
 
   return (
-    <form onSubmit={formik.handleSubmit} className={s.profile_form}>
+    <form onSubmit={formik.handleSubmit}>
       <Input
         type="text"
         textChange={true}
-        label="Nickname"
+        label="Set new nickname:"
         {...formik.getFieldProps('name')}
         textChangeBtnCallback={formik.handleSubmit}
         disableBtn={!!formik.errors.name}

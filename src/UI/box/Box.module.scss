@@ -1,7 +1,6 @@
-@import 'src/common/style-mixins/fonts-mixins';
+@import '../../common/style-mixins/mixins';
 
 .box {
-
   @include boxBorder();
 
   display: flex;

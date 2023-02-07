@@ -1,19 +1,14 @@
-@import '../../../common/style-mixins/fonts-mixins';
+@import 'src/common/style-mixins/mixins';
 
 .container {
-  margin: 50px 0;
+  margin: var(--margin-l) 0;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 30px;
-
-  width: 100%;
+  @include form();
 }
 
 .title {
-
   @include headline1();
 }
 
@@ -22,13 +17,10 @@
 }
 
 .navigateContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include navigateContainer();
 }
 
 .subtitle {
-
   @include title(600);
 
   margin: 0 0 10px 0;

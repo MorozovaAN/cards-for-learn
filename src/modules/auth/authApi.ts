@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'app/appSlice'
 import { forgotPasswordCurrentEmail, setAuthData } from 'modules/auth/authSlice'
-import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'pages/app/appSlice'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
