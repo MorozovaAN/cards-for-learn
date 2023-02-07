@@ -7,7 +7,7 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
-import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'

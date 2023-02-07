@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import s from './App.module.scss'
 
-import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useMeMutation } from 'modules/auth/authApi'
 import { Header } from 'modules/header/Header'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'pages/app/selectors'
