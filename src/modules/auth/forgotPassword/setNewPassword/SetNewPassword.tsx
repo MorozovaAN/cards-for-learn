@@ -24,7 +24,7 @@ export const SetNewPassword = () => {
 
       if (!values.password) {
         errors.password = 'Required field'
-      } else if (values.password.length < 8) {
+      } else if (values.password.trim().length < 8) {
         errors.password = 'Password must be more 7 characters'
       }
 

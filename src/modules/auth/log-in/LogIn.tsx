@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { passwordValidation } from 'common/utils/validationHelpers/passwordValidation'
 import { useLogInMutation } from 'modules/auth/authApi'
 import s from 'modules/auth/log-in/LogIn.module.scss'
 import { setIsLoading } from 'pages/app/appSlice'
@@ -16,7 +17,7 @@ import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
 
-interface FormikErrorType {
+export interface FormikErrorType {
   email?: string
   password?: string
   rememberMe?: boolean
@@ -43,10 +44,10 @@ export const LogIn = () => {
         errors.email = 'Invalid email address'
       }
 
-      if (!values.password) {
+      if (!values.password.trim()) {
         errors.password = 'Password is required'
-      } else if (values.password.length < 8) {
-        errors.password = 'Password should be longer then 7 symbols!'
+      } else if (values.password.trim().length <= 8) {
+        errors.password = 'Password should be longer then 8 symbols!'
       }
 
       return errors

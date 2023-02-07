@@ -8,6 +8,7 @@ import { useLogUpMutation } from '../authApi'
 import s from './LogUp.module.scss'
 
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { passwordValidation } from 'common/utils/validationHelpers/passwordValidation'
 import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
@@ -36,20 +37,20 @@ export const LogUp = () => {
       const errors: LogUpErrorType = {}
 
       if (!values.email) {
-        errors.email = 'Required field'
+        errors.email = 'Required'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address'
       }
 
-      if (!values.password) {
-        errors.password = 'Required field'
-      } else if (values.password.length < 8) {
-        errors.password = 'Password must be more 7 characters'
+      if (!values.password.trim()) {
+        errors.password = 'Required'
+      } else if (values.password.trim().length <= 8) {
+        errors.password = 'must be more 8 characters'
       }
       if (!values.confirmPassword) {
-        errors.confirmPassword = 'Required field'
+        errors.confirmPassword = 'Required'
       } else if (values.password !== values.confirmPassword) {
-        errors.confirmPassword = 'Passwords should be identical'
+        errors.confirmPassword = 'passwords should be identical'
       }
 
       return errors
