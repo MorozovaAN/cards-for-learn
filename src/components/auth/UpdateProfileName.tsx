@@ -2,11 +2,10 @@ import React, { useEffect } from 'react'
 
 import { useFormik } from 'formik'
 
+import { isLoadingSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfile } from 'modules/auth/authApi'
-import { nameSelector } from 'modules/auth/authSelectors/authSelectors'
-import s from 'modules/auth/profile/Profile.module.scss'
-import { isLoadingSelector } from 'pages/app/selectors'
+import { nameSelector } from 'modules/auth/authSelectors'
 import { Input } from 'UI/input/Input'
 import style from 'UI/input/Input.module.scss'
 
