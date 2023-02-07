@@ -4,19 +4,23 @@ import { Link } from 'react-router-dom'
 
 import s from './Header.module.scss'
 
+import profileLogout from 'assets/img/icons/logout.svg'
+import profileIcon from 'assets/img/icons/profile-user.svg'
 import logo from 'assets/img/logo.svg'
 import avatarPlug from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { PATH } from 'routes/routes'
-
-
-import profileIcon from 'assets/img/icons/profile-user.svg'
-import profileLogout from 'assets/img/icons/profile_logout.png'
 import { MenuList } from 'UI/menu-list/MenuList'
 export const Header = () => {
+  const [toggleV, setToggleVP] = useState(false)
   const userName = useTypedSelector(state => state.auth.name)
   const userAvatar = useTypedSelector(state => state.auth.avatar)
   const avatar = userAvatar ? userAvatar : avatarPlug
+
+  const menuListInProfile = [
+    { img: profileIcon, title: 'Profile', id: 4 },
+    { img: profileLogout, title: 'Log out', id: 5 },
+  ]
 
   return (
     <header className={s.headerContainer}>
@@ -25,26 +29,12 @@ export const Header = () => {
           <img src={logo} alt="logo" />
         </Link>
 
-        <div className={s.userInfoContainer}>
+        <div className={s.userInfoContainer} onClick={() => setToggleVP(!toggleV)}>
           <p className={s.name}>{userName}</p>
           <img src={avatar} alt="user avatar" className={s.avatar} />
+          <div className={s.menuListBox}>{toggleV && <MenuList menu={menuListInProfile} />}</div>
         </div>
       </nav>
     </header>
-  )
-  const [toggleV, setToggleVP] = useState(false)
-
-  const menuListInProfile = [
-    { img: profileIcon, title: 'Profile', id: 4 },
-    { img: profileLogout, title: 'Log out', id: 5 },
-  ]
-
-  return (
-    <div className={s.headerColor}>
-      <button className={s.menuBox} onClick={() => setToggleVP(!toggleV)}>
-        openInProfile
-      </button>
-      {toggleV && <MenuList menu={menuListInProfile} />}
-    </div>
   )
 }

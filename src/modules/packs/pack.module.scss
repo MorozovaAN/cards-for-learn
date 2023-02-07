@@ -9,7 +9,12 @@
   }
 }
 .menuBox {
-  //position: relative;
-  //
-  //width: 40px;
+  position: relative;
+
+  width: 40px;
+}
+.menuListBox {
+  position: absolute;
+  top: 35px;
+  left: -95px;
 }

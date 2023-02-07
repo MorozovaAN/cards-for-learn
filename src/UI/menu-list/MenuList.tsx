@@ -34,7 +34,7 @@ export const MenuList: FC<MenuProps> = menu => {
         logout()
         break
       default:
-        alert('Нет таких значений')
+        alert("Don't have value")
     }
   }
 
