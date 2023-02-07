@@ -1,7 +1,6 @@
-@import '../../common/style-mixins/mixins';
+@import 'src/common/style-mixins/mixins';
 
 .link {
-
   @include title(600);
 
   margin: 0;
@@ -17,7 +16,6 @@
 }
 
 .primary {
-
   @include title(600);
 
   color: var(--color-primary-base);

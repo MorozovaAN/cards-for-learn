@@ -1,4 +1,4 @@
-@import '../../common/style-mixins/mixins';
+@import 'src/common/style-mixins/mixins';
 
 .notification {
   cursor: pointer;
@@ -12,6 +12,7 @@
 }
 
 .msgContainer {
+
   @include boxBorder();
 
   position: fixed;
@@ -38,6 +39,7 @@
 }
 
 .text {
+
   @include subtitle();
 }
 

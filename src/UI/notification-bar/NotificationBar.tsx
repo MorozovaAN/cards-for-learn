@@ -21,9 +21,7 @@ export const NotificationBar = () => {
   }
 
   useEffect(() => {
-    if (message) {
-      setOpen(true)
-    }
+    if (message) setOpen(true)
   }, [message])
 
   return (
