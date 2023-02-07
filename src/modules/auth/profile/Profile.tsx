@@ -3,15 +3,16 @@ import React, { useState } from 'react'
 import s from './Profile.module.scss'
 
 import editName from 'assets/img/icons/edit.svg'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfileAvatar } from 'components/auth/UpdateProfileAvatar'
 import { UpdateProfileName } from 'components/auth/UpdateProfileName'
-import { useTypedSelector } from 'hooks/useTypedSelector'
 import { UpdateProfile, useLogOutMutation, useUpdateProfileMutation } from 'modules/auth/authApi'
 import {
   avatarSelector,
   emailSelector,
   nameSelector,
 } from 'modules/auth/authSelectors/authSelectors'
+import { isLoadingSelector } from 'pages/app/selectors'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 
@@ -19,6 +20,7 @@ export const Profile = () => {
   const emailFromState = useTypedSelector(emailSelector)
   const nameFromState = useTypedSelector(nameSelector)
   const avatarFromState = useTypedSelector(avatarSelector)
+  const isLoading = useTypedSelector(isLoadingSelector)
 
   const [logOut] = useLogOutMutation()
   const [updateProfile, { name, avatar, email }] = useUpdateProfileMutation({
@@ -58,7 +60,7 @@ export const Profile = () => {
       ) : (
         <div className={s.name}>
           {name ? name : nameFromState}
-          <Button onClick={editModeOpen} styleType="icon">
+          <Button onClick={editModeOpen} styleType="icon" disabled={isLoading}>
             <img src={editName} alt={'edit name icon'} />
           </Button>
         </div>
@@ -66,7 +68,7 @@ export const Profile = () => {
 
       <p className={s.email}>{email ? email : emailFromState}</p>
 
-      <Button styleType={'primary'} className={s.logout} onClick={logout}>
+      <Button styleType={'primary'} className={s.logout} onClick={logout} disabled={isLoading}>
         LogOut
       </Button>
     </Box>

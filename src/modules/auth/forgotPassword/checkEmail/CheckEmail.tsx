@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import checkEmail from 'assets/img/check-email.svg'
-import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import s from 'modules/auth/forgotPassword/checkEmail/CheckEmail.module.scss'
 import { currentEmailSelector } from 'modules/auth/selectors'
 import { PATH } from 'routes/routes'
