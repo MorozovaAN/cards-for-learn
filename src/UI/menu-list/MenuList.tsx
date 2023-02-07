@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
 
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useLogOutMutation } from 'modules/auth/authApi'
 import { MenuType } from 'modules/packs/Packs'
 import { PATH } from 'routes/routes'
+import s from 'UI/menu-list/MenuList.module.scss'
 
 type MenuProps = {
   menu: MenuType[]
@@ -13,6 +14,8 @@ type MenuProps = {
 export const MenuList: FC<MenuProps> = menu => {
   const [logout] = useLogOutMutation()
   const isLoggedIn = useTypedSelector(state => state.app.isLoggedIn)
+  const navigate = useNavigate()
+
   const handleMenuItem = (id: number) => {
     switch (id) {
       case 1:
@@ -25,7 +28,7 @@ export const MenuList: FC<MenuProps> = menu => {
         alert('modal learn')
         break
       case 4:
-        alert('component Profile')
+        navigate(PATH.PROFILE)
         break
       case 5:
         logout()
@@ -41,12 +44,12 @@ export const MenuList: FC<MenuProps> = menu => {
 
   const menuListData = menu.menu.map((i: MenuType) => {
     return (
-      <li key={i.id} onClick={() => handleMenuItem(i.id)}>
+      <li className={s.item} key={i.id} onClick={() => handleMenuItem(i.id)}>
         <img src={i.img} alt="icon" />
-        <h3>{i.title}</h3>
+        <h3 className={s.title}>{i.title}</h3>
       </li>
     )
   })
 
-  return <ul>{menuListData}</ul>
+  return <ul className={s.items}>{menuListData}</ul>
 }

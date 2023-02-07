@@ -9,7 +9,6 @@ const initialState = {
   name: 'My name',
   avatar: '',
   id: null as null | string,
-  currentEmail: '',
 }
 
 const authSlice = createSlice({
@@ -25,7 +24,7 @@ const authSlice = createSlice({
       }
     },
     forgotPasswordCurrentEmail(state, action: PayloadAction<string>) {
-      state.currentEmail = action.payload
+      state.email = action.payload
     },
   },
 })
