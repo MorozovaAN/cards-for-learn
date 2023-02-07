@@ -9,7 +9,9 @@ const initialState = {
   name: 'My name',
   avatar: '',
   id: null as null | string,
+  currentEmail: '',
 }
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -19,13 +21,14 @@ const authSlice = createSlice({
         state.email = action.payload.email
         state.id = action.payload._id
         state.name = action.payload.name
+        state.avatar = action.payload.avatar
       }
     },
-    setName(state, action: PayloadAction<string>) {
-      state.name = action.payload
+    forgotPasswordCurrentEmail(state, action: PayloadAction<string>) {
+      state.currentEmail = action.payload
     },
   },
 })
 
-export const { setAuthData, setName } = authSlice.actions
+export const { setAuthData, forgotPasswordCurrentEmail } = authSlice.actions
 export const authReducer = authSlice.reducer

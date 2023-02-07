@@ -1,0 +1,17 @@
+@import 'src/style-mixins/fonts-mixins';
+
+.text {
+  line-height: 28px;
+  text-align: center;
+}
+
+.textEmail {
+  display: block;
+
+  color: var(--color-primary-base);
+}
+
+.title {
+
+  @include headline1;
+}
