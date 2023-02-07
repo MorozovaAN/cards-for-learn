@@ -7,8 +7,8 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
+import { setIsLoading } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -41,10 +41,10 @@ export const LogUp = () => {
         errors.email = 'Invalid email address'
       }
 
-      if (!values.password) {
+      if (!values.password.trim()) {
         errors.password = 'Required field'
-      } else if (values.password.length < 8) {
-        errors.password = 'Password must be more 7 characters'
+      } else if (values.password.trim().length <= 8) {
+        errors.password = 'must be more 8 characters'
       }
       if (!values.confirmPassword) {
         errors.confirmPassword = 'Required field'
@@ -72,7 +72,7 @@ export const LogUp = () => {
     !formik.values.password
 
   return (
-    <Box>
+    <Box className={s.container}>
       <h2 className={s.title}>Sign Up to Cards for learn</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>

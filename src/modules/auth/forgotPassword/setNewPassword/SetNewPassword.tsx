@@ -19,12 +19,13 @@ export const SetNewPassword = () => {
     initialValues: {
       password: '',
     },
+
     validate: values => {
       const errors: ErrorsType = {}
 
       if (!values.password) {
         errors.password = 'Required field'
-      } else if (values.password.length < 8) {
+      } else if (values.password.trim().length < 8) {
         errors.password = 'Password must be more 7 characters'
       }
 
@@ -44,7 +45,9 @@ export const SetNewPassword = () => {
     <Box>
       <h2 className={s.title}>Create new password?</h2>
 
-      <p>Create new password and we will send you further instructions to email</p>
+      <p className={s.subtitle}>
+        Create new password and we will send you further instructions to email
+      </p>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input

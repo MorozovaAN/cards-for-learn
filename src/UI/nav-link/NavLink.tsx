@@ -10,6 +10,7 @@ type NavLinkType = {
   styleType?: 'primary'
   className?: string
 }
+
 export const NavLink: FC<NavLinkType> = ({ url, children, styleType, className }) => {
   const linkClasses = `${s.link} ${styleType && s[styleType]} ${className && className}`
 

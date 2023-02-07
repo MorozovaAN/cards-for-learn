@@ -19,8 +19,10 @@ const authSlice = createSlice({
       if (action.payload) {
         state.email = action.payload.email
         state.id = action.payload._id
-        state.name = action.payload.name
         state.avatar = action.payload.avatar
+        action.payload.email === action.payload.name
+          ? (state.name = `user${action.payload._id}`)
+          : (state.name = action.payload.name)
       }
     },
     forgotPasswordCurrentEmail(state, action: PayloadAction<string>) {

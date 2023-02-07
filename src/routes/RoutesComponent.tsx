@@ -6,12 +6,12 @@ import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
 import { Packs } from 'modules/packs/Packs'
-import { CheckEmailPage } from 'pages/check-email/CheckEmailPage'
+import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
 import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPage'
 import { LogInPage } from 'pages/log-in-page/LogInPage'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
-import { NewPasswordPage } from 'pages/new-password-page/newPasswordPage'
+import { NewPasswordPage } from 'pages/new-password-page/NewPasswordPage'
 import { ProfilePage } from 'pages/profile-page/ProfilePage'
 
 export const RoutesComponent = () => {

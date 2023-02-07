@@ -6,7 +6,7 @@ import { LogUp } from 'modules/auth/log-up/LogUp'
 
 export const LogUpPage = () => {
   return (
-    <div className={s.container}>
+    <div className={s.contentContainer}>
       <LogUp />
     </div>
   )
