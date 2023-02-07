@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { useTypedSelector } from 'hooks/useTypedSelector'
-import { avatarSelector } from 'modules/auth/authSelectors/authSelectors'
 import { forgotPasswordCurrentEmail, setAuthData } from 'modules/auth/authSlice'
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'pages/app/appSlice'
 
@@ -73,7 +71,7 @@ export const authApi = createApi({
           dispatch(setAuthData(res.data))
         } catch (err) {
           if ((err as ErrorType)?.error?.data?.error) {
-            dispatch(setNotification({ message: 'Not correct email or password', type: 'error' }))
+            dispatch(setNotification({ message: 'Incorrect email or password', type: 'error' }))
           } else {
             dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
           }

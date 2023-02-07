@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useFormik } from 'formik'
 
-import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfile } from 'modules/auth/authApi'
 import { nameSelector } from 'modules/auth/authSelectors/authSelectors'
 import s from 'modules/auth/profile/Profile.module.scss'
