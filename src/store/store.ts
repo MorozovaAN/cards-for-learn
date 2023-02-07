@@ -4,8 +4,6 @@ import { authApi } from 'modules/auth/authApi'
 import { authReducer } from 'modules/auth/authSlice'
 import { appReducer } from 'pages/app/appSlice'
 
-import { authReducer } from 'modules/auth/authSlice'
-
 export const store = configureStore({
   reducer: {
     app: appReducer,

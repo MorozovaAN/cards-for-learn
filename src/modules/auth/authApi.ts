@@ -1,53 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { forgotPasswordCurrentEmail } from 'modules/auth/authSlice'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import { avatarSelector } from 'modules/auth/authSelectors/authSelectors'
+import { forgotPasswordCurrentEmail, setAuthData } from 'modules/auth/authSlice'
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'pages/app/appSlice'
-import { setAuthData } from 'modules/auth/authSlice'
-import { setError, setIsAuth, setIsLoading, setIsLoggedIn, setSuccess } from 'pages/app/appSlice'
 
-export interface Response {
-  _id: string
-  email: string
-  rememberMe: boolean
-  isAdmin: boolean
-  name: string
-  verified: boolean
-  publicCardPacksCount: number
-  created: Date
-  updated: Date
-  __v: number
-  token: string
-  tokenDeathTime: number
-  avatar: string
-}
-export type UpdateProfileType = {
-  updatedUser: Response
-}
-export type LogInDataType = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
-
-type LogUpDataType = Pick<LogInDataType, 'email' | 'password'>
-
-export type CommonType = {
-  info: string
-  error?: string
-}
-export type UpdateProfile = {
-  name: string
-  avatar: string
-}
-
-type ErrorType = {
-  error: {
-    data: {
-      error: string
-    }
-    status: number
-  }
-}
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -137,7 +94,7 @@ export const authApi = createApi({
           await queryFulfilled
           dispatch(setIsLoggedIn(false))
         } catch (err) {
-          dispatch(setError('Something went wrong'))
+          dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -149,23 +106,19 @@ export const authApi = createApi({
         method: 'PUT',
         body: UpdateProfile,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         dispatch(setIsLoading(true))
         try {
           const res = await queryFulfilled
 
           dispatch(setAuthData(res.data.updatedUser))
-        } catch (err) {
-          dispatch(setError('Something went wrong'))
-        } finally {
-          dispatch(setIsLoading(false))
-        }
-      },
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          dispatch(setIsLoading(true))
-          await queryFulfilled
-          // dispatch(setIsLoggedIn(false))
+          if (arg.name === '') {
+            dispatch(
+              setNotification({ message: 'Avatar image changed successfully', type: 'success' })
+            )
+          } else {
+            dispatch(setNotification({ message: 'Nickname changed successfully', type: 'success' }))
+          }
         } catch (err) {
           const error = (err as ErrorType)?.error?.data?.error
 
@@ -245,6 +198,7 @@ export interface Response {
   __v: number
   token: string
   tokenDeathTime: number
+  avatar: string
 }
 
 export type LogInDataType = {
@@ -280,6 +234,14 @@ export type RequestSetNewPasswordType = {
   resetPasswordToken: string
 }
 
+export type UpdateProfileType = {
+  updatedUser: Response
+}
+
+export type UpdateProfile = {
+  name: string
+  avatar: string
+}
 export const {
   useForgotPasswordMutation,
   useSetNewPasswordMutation,
@@ -287,4 +249,5 @@ export const {
   useLogInMutation,
   useLogOutMutation,
   useLogUpMutation,
+  useUpdateProfileMutation,
 } = authApi

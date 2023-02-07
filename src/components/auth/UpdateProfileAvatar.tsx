@@ -4,7 +4,7 @@ import s from './UpdateProfileAvatar.module.scss'
 
 import { useTypedDispatch } from 'hooks/useTypedDispatch'
 import { UpdateProfile } from 'modules/auth/authApi'
-import { setError } from 'pages/app/appSlice'
+import { setNotification } from 'pages/app/appSlice'
 import { convertFileToBase64 } from 'utils/toBase64'
 
 type UpdateProfileAvatarType = {
@@ -22,7 +22,7 @@ export const UpdateProfileAvatar: FC<UpdateProfileAvatarType> = ({ updateProfile
           updateProfileCallback({ name: '', avatar: file64 })
         })
       } else {
-        dispatch(setError('Max file size should be 100 Kb!'))
+        dispatch(setNotification({ message: 'Max file size should be 100 Kb!', type: 'error' }))
       }
     }
   }
