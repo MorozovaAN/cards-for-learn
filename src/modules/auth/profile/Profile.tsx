@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import s from './Profile.module.scss'
 
+import defaultAva from 'assets/img/defaultUser.jpg'
 import editName from 'assets/img/icons/edit.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfileAvatar } from 'components/auth/UpdateProfileAvatar'
@@ -21,7 +22,7 @@ export const Profile = () => {
   const nameFromState = useTypedSelector(nameSelector)
   const avatarFromState = useTypedSelector(avatarSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
-
+  const initialAva = avatarFromState ? avatarFromState : defaultAva
   const [logOut] = useLogOutMutation()
   const [updateProfile, { name, avatar, email }] = useUpdateProfileMutation({
     selectFromResult: ({ data }) => ({
@@ -46,7 +47,7 @@ export const Profile = () => {
       <h2 className={s.title}>Personal Information</h2>
 
       <div className={s.profile_img}>
-        <img src={avatar ? avatar : avatarFromState} alt={'photo profile-page'} className={s.img} />
+        <img src={avatar ? avatar : initialAva} alt={'photo profile-page'} className={s.img} />
         <span className={s.photoUploader}>
           <UpdateProfileAvatar updateProfileCallback={updateProfileCallback} />
         </span>
