@@ -41,10 +41,10 @@ export const LogUp = () => {
         errors.email = 'Invalid email address'
       }
 
-      if (!values.password) {
+      if (!values.password.trim()) {
         errors.password = 'Required field'
-      } else if (values.password.length < 8) {
-        errors.password = 'Password must be more 7 characters'
+      } else if (values.password.trim().length <= 8) {
+        errors.password = 'must be more 8 characters'
       }
       if (!values.confirmPassword) {
         errors.confirmPassword = 'Required field'

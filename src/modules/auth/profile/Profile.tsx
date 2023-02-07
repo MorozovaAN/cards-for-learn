@@ -57,6 +57,7 @@ export const Profile = () => {
         <UpdateProfileName
           setEditMode={setEditMode}
           updateProfileCallback={updateProfileCallback}
+          editMode={editMode}
         />
       ) : (
         <div className={s.nameContainer}>

@@ -42,10 +42,10 @@ export const LogIn = () => {
         errors.email = 'Invalid email address'
       }
 
-      if (!values.password) {
+      if (!values.password.trim()) {
         errors.password = 'Password is required'
-      } else if (values.password.length < 8) {
-        errors.password = 'Password should be longer then 7 symbols!'
+      } else if (values.password.trim().length <= 8) {
+        errors.password = 'Password should be longer then 8 symbols!'
       }
 
       return errors
