@@ -1,0 +1,46 @@
+@import '../../../common/style-mixins/fonts-mixins';
+
+
+.img {
+  width: 96px;
+  height: 96px;
+
+  border-radius: 50%;
+}
+
+
+.title {
+
+  @include headline1();
+}
+
+
+.logout {
+  position: relative;
+
+  width: 127px;
+
+  &::after {
+    content: url('../../../assets/img/icons/profile_logout.png');
+
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.name {
+
+  @include headline3()
+}
+
+.email {
+
+  @include subtitle;
+
+  color: var(--color-on-primary-light-400);
+}

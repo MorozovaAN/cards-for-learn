@@ -12,12 +12,13 @@ import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPag
 import { LogInPage } from 'pages/log-in-page/LogInPage'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/newPasswordPage'
+import { ProfilePage } from 'pages/profile-page/ProfilePage'
 
 export const RoutesComponent = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
-        {/*  <Route path={PATH.PROFILE} element={<Profile />} />*/}
+        <Route path={PATH.PROFILE} element={<ProfilePage />} />
         <Route path={PATH.PACKS} element={<Packs />} />
         {/*  <Route path={PATH.CARDS} element={<Cards />} />*/}
         {/*  <Route path={PATH.CARD} element={<LearnCard />} />*/}

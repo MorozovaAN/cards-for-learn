@@ -7,7 +7,7 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
-import { useTypedDispatch } from 'hooks/useTypedDispatch'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
@@ -42,7 +42,7 @@ export const LogUp = () => {
       }
 
       if (!values.password) {
-        errors.password = 'Required'
+        errors.password = 'Required field'
       } else if (values.password.length < 8) {
         errors.password = 'Password must be more 7 characters'
       }

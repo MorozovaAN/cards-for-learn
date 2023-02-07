@@ -1,0 +1,33 @@
+.uploadPhoto {
+  cursor: pointer;
+
+  position: relative;
+
+  &::after {
+    content: url('../../assets/img/icons/updatePhoto.svg');
+
+    position: absolute;
+    top: 50%;
+    left: -26px;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -8px;
+    left: -35px;
+
+    width: 32px;
+    height: 32px;
+
+    background-color: var(--color-on-primary-light-500);
+    border: 1px solid var(--color-background-base);
+    border-radius: 50%;
+  }
+  & input[type='file'] {
+    display: none;
+  }
+
+}
