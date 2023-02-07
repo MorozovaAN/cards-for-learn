@@ -88,7 +88,7 @@ export const authApi = createApi({
         try {
           dispatch(setIsLoading(true))
           await queryFulfilled
-          // dispatch(setIsLoggedIn(false))
+          dispatch(setIsLoggedIn(false))
         } catch (err) {
           const error = (err as ErrorType)?.error?.data?.error
 
