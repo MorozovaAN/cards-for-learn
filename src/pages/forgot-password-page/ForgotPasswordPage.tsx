@@ -1,11 +1,12 @@
 import React from 'react'
 
+import s from './ForgotPasswordPage.module.scss'
+
 import { ForgotPassword } from 'modules/auth/forgotPassword/ForgotPassword'
-import s from 'pages/forgot-password-page/ForgotPasswordPage.module.scss'
 
 export const ForgotPasswordPage = () => {
   return (
-    <div className={s.container}>
+    <div className={s.contentContainer}>
       <ForgotPassword />
     </div>
   )

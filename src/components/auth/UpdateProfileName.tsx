@@ -58,11 +58,11 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
   }
 
   return (
-    <form onSubmit={formik.handleSubmit} className={s.profile_form}>
+    <form onSubmit={formik.handleSubmit}>
       <Input
         type="text"
         textChange={true}
-        label="Nickname"
+        label="Set new nickname:"
         {...formik.getFieldProps('name')}
         textChangeBtnCallback={formik.handleSubmit}
         disableBtn={!!formik.errors.name || isLoading}

@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom'
 
 import checkEmail from 'assets/img/check-email.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { emailSelector } from 'modules/auth/authSelectors'
 import s from 'modules/auth/forgotPassword/checkEmail/CheckEmail.module.scss'
-import { currentEmailSelector } from 'modules/auth/selectors'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 
 export const CheckEmail = () => {
   const navigate = useNavigate()
-  const currentEmail = useTypedSelector(currentEmailSelector)
+  const email = useTypedSelector(emailSelector)
 
   return (
     <Box>
@@ -20,12 +20,12 @@ export const CheckEmail = () => {
 
       <img src={checkEmail} alt="check email" />
 
-      <p className={s.text}>
+      <p className={s.subtitle}>
         We’ve sent an Email with instructions to
-        <span className={s.textEmail}>{currentEmail}</span>
+        <span className={s.email}>{email}</span>
       </p>
 
-      <Button styleType="primary" onClick={() => navigate(PATH.LOG_IN)}>
+      <Button styleType="primary" onClick={() => navigate(PATH.LOG_IN)} className={s.button}>
         Back to login
       </Button>
     </Box>

@@ -7,9 +7,8 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
+import { setIsLoading } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { passwordValidation } from 'common/utils/validationHelpers/passwordValidation'
-import { setIsLoading } from 'pages/app/appSlice'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -37,20 +36,20 @@ export const LogUp = () => {
       const errors: LogUpErrorType = {}
 
       if (!values.email) {
-        errors.email = 'Required'
+        errors.email = 'Required field'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address'
       }
 
       if (!values.password.trim()) {
-        errors.password = 'Required'
+        errors.password = 'Required field'
       } else if (values.password.trim().length <= 8) {
         errors.password = 'must be more 8 characters'
       }
       if (!values.confirmPassword) {
-        errors.confirmPassword = 'Required'
+        errors.confirmPassword = 'Required field'
       } else if (values.password !== values.confirmPassword) {
-        errors.confirmPassword = 'passwords should be identical'
+        errors.confirmPassword = 'Passwords should be identical'
       }
 
       return errors
@@ -73,7 +72,7 @@ export const LogUp = () => {
     !formik.values.password
 
   return (
-    <Box>
+    <Box className={s.container}>
       <h2 className={s.title}>Sign Up to Cards for learn</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
