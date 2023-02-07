@@ -1,4 +1,4 @@
-@import 'src/common/style-mixins/fonts-mixins';
+@import 'src/common/style-mixins/mixins';
 
 .inputContainer {
   position: relative;
@@ -25,10 +25,16 @@
   border-radius: 10px;
   outline: none;
 
+  transition: 0.3s ease-in;
+
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
     color: var(--color-on-primary-light-500);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
   }
 
   &:-webkit-autofill,
@@ -94,9 +100,9 @@
 .saveButton {
   position: absolute;
   right: 5px;
-  bottom: 3px;
+  bottom: 7px;
 
-  padding: 8px 12px;
+  padding: 10px 12px;
 
   font-size: 12px;
   font-weight: 400;

@@ -19,6 +19,7 @@ export const SetNewPassword = () => {
     initialValues: {
       password: '',
     },
+
     validate: values => {
       const errors: ErrorsType = {}
 
@@ -44,7 +45,9 @@ export const SetNewPassword = () => {
     <Box>
       <h2 className={s.title}>Create new password?</h2>
 
-      <p>Create new password and we will send you further instructions to email</p>
+      <p className={s.subtitle}>
+        Create new password and we will send you further instructions to email
+      </p>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input

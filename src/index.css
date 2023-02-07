@@ -10,6 +10,7 @@
   --color-background-dark-500: #e0ddda;
 
   --color-primary-base: #017c6e;
+  --color-primary-base-transparent: #017c6e42;
   --color-primary-dark-100: #01695d;
 
   --color-secondary-base: #d8eede;
@@ -22,15 +23,28 @@
   --color-on-primary-light-500: #969593;
 
   --color-success-base: #339536;
+
   /* Sizes */
   --width-main: 1020px;
   --width-box-l: 420px;
+  --margin-l: 50px;
 }
 
 body {
   margin: 0;
 
   font-family: 'Montserrat', sans-serif;
-  font-weight: 380;
+  font-weight: 400;
   font-style: normal;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  margin: 0;
 }
