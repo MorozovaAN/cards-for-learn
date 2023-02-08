@@ -1,8 +1,8 @@
-@IMPORT 'SRC/COMMON/STYLE-MIXINS/MIXINS';
+@import 'src/common/style-mixins/mixins';
 
-.CONTENTCONTAINER {
+.contentContainer {
 
-  @INCLUDE AUTHPAGECONTAINER();
+  @include authPageContainer;
 
 
 }
