@@ -9,12 +9,13 @@ import profileIcon from 'assets/img/icons/profile-user.svg'
 import logo from 'assets/img/logo.svg'
 import avatarPlug from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { avatarSelector, nameSelector } from 'modules/auth/authSelectors'
 import { PATH } from 'routes/routes'
 import { MenuList } from 'UI/menu-list/MenuList'
 export const Header = () => {
   const [toggleV, setToggleVP] = useState(false)
-  const userName = useTypedSelector(state => state.auth.name)
-  const userAvatar = useTypedSelector(state => state.auth.avatar)
+  const userName = useTypedSelector(nameSelector)
+  const userAvatar = useTypedSelector(avatarSelector)
   const avatar = userAvatar ? userAvatar : avatarPlug
 
   const menuListInProfile = [
