@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { App } from 'app/App'
 import { store } from 'store/store'
 
-createRoot(document.getElementById('root') as HTMLElement).render(
+createRoot(document.querySelector('#root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store}>
       <App />
