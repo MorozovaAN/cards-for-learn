@@ -7,3 +7,5 @@ export { SetNewPassword } from './auth/forgotPassword/setNewPassword/SetNewPassw
 export { authReducer } from './auth/authSlice'
 export { Header } from './header/Header'
 export { authApi } from './auth/authApi'
+export { useMeMutation } from './auth/authApi'
+export { useLogOutMutation } from './auth/authApi'
