@@ -10,6 +10,7 @@ import { ReactComponent as Success } from 'assets/img/icons/success.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import s from 'UI/notification-bar/NotificationBar.module.scss'
+
 export const NotificationBar = () => {
   const { type, message } = useTypedSelector(notificationSelector)
   const success = type === 'success'
