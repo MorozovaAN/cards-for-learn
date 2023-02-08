@@ -1,0 +1,20 @@
+.menuBtn {
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 1px solid transparent;
+
+  &::after {
+    content: url("../../assets/img/icons/drop-down-menu.svg");
+  }
+}
+.menuBox {
+  position: relative;
+
+  width: 40px;
+}
+.menuListBox {
+  position: absolute;
+  top: 35px;
+  left: -95px;
+}

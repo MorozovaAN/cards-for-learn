@@ -1,0 +1,39 @@
+@import 'src/common/style-mixins/mixins';
+
+.items {
+  position: relative;
+
+  width: 90px;
+  padding: 20px 17px 10px 20px;
+
+  background-color: var(--color-background-base);
+  border: 1px solid #CFCFCF;
+  border-radius: 2px;
+
+  &::after {
+    content: url("../../assets/img/icons/triangle.png");
+
+    position: absolute;
+    top: -14px;
+    right: 10px;
+  }
+}
+
+.item {
+  cursor: pointer;
+
+  display: flex;
+
+  list-style-type: none;
+}
+
+.title {
+
+  @include subtitle;
+
+  margin: 0 0 0 17px;
+}
+
+.item + .item {
+  margin-top: 15px;
+}
