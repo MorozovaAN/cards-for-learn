@@ -10,8 +10,8 @@ import { Button } from '../button/Button'
 
 import s from './Input.module.scss'
 
-import visibilityOff from 'assets/img/icons/visibility-off.svg'
-import visibilityOn from 'assets/img/icons/visibility-on.svg'
+import { ReactComponent as VisibilityOff } from 'assets/img/icons/visibility-off.svg'
+import { ReactComponent as VisibilityOn } from 'assets/img/icons/visibility-on.svg'
 
 type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -80,14 +80,22 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
         {...restProps}
       />
       <div>
-        {type === 'password' && (
-          <img
-            alt="password visibility icon"
-            className={s.visibilityIcon}
-            src={passwordVisible ? visibilityOff : visibilityOn}
-            onClick={togglePasswordVisible}
-          />
-        )}
+        {type === 'password' &&
+          (passwordVisible ? (
+            <VisibilityOn
+              onClick={togglePasswordVisible}
+              className={s.visibilityIcon}
+              fill="#676665"
+              alt="password visibility icon"
+            />
+          ) : (
+            <VisibilityOff
+              onClick={togglePasswordVisible}
+              className={s.visibilityIcon}
+              fill="#676665"
+              alt="password visibility icon"
+            />
+          ))}
       </div>
       {textChange && (
         <Button
