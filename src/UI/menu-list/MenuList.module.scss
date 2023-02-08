@@ -1,39 +1,69 @@
 @import 'src/common/style-mixins/mixins';
 
-.items {
-  position: relative;
+.menuList {
+  position: absolute;
 
-  width: 90px;
-  padding: 20px 17px 10px 20px;
-
+  @include boxBorder();
+  width: max-content;
   background-color: var(--color-background-base);
-  border: 1px solid #CFCFCF;
-  border-radius: 2px;
+  top: 59px;
+  right: 0;
+  padding: 8px 0;
 
-  &::after {
-    content: url("../../assets/img/icons/triangle.png");
-
+  &:before {
+    content: '';
     position: absolute;
+    width: 30px;
     top: -14px;
-    right: 10px;
+    right: 7px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: var(--color-background-base);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+.menuList div {
+  padding: 5px 20px;
+
+  &:hover {
+    background-color: var(--color-secondary-base);
   }
 }
 
-.item {
-  cursor: pointer;
-
-  display: flex;
-
-  list-style-type: none;
-}
-
-.title {
-
-  @include subtitle;
-
-  margin: 0 0 0 17px;
-}
-
-.item + .item {
-  margin-top: 15px;
-}
+//.items {
+//  position: relative;
+//
+//  width: 90px;
+//  padding: 20px 17px 10px 20px;
+//
+//  background-color: var(--color-background-base);
+//  border: 1px solid #CFCFCF;
+//  border-radius: 2px;
+//
+//  &::after {
+//    content: url("../../assets/img/icons/triangle.png");
+//
+//    position: absolute;
+//    top: -14px;
+//    right: 10px;
+//  }
+//}
+//
+//.item {
+//  cursor: pointer;
+//
+//  display: flex;
+//
+//  list-style-type: none;
+//}
+//
+//.title {
+//
+//  @include subtitle;
+//
+//  margin: 0 0 0 17px;
+//}
+//
+//.item + .item {
+//  margin-top: 15px;
+//}

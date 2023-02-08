@@ -27,10 +27,10 @@ export const Packs = () => {
     <div>
       packs
       <Button onClick={handlerLogout}>Log OUT</Button>
-      <div className={s.menuBox}>
-        <button className={s.menuBtn} onClick={() => setToggleV(!toggleV)}></button>
-        <div className={s.menuListBox}>{toggleV && <MenuList menu={menuListInPacks} />}</div>
-      </div>
+      {/*<div className={s.menuBox}>*/}
+      {/*  <button className={s.menuBtn} onClick={() => setToggleV(!toggleV)}></button>*/}
+      {/*  <div className={s.menuListBox}>{toggleV && <MenuList menu={menuListInPacks} />}</div>*/}
+      {/*</div>*/}
     </div>
   )
 }
