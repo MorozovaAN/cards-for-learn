@@ -9,12 +9,12 @@
 
 .title {
 
-  @include headline1();
+  @include headline1;
 }
 
 .name {
 
-  @include headline3();
+  @include headline3;
 }
 
 .email {

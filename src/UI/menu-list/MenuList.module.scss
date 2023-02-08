@@ -7,11 +7,11 @@
   padding: 20px 17px 10px 20px;
 
   background-color: var(--color-background-base);
-  border: 1px solid #CFCFCF;
+  border: 1px solid #cfcfcf;
   border-radius: 2px;
 
   &::after {
-    content: url("../../assets/img/icons/triangle.png");
+    content: url('../../assets/img/icons/triangle.png');
 
     position: absolute;
     top: -14px;

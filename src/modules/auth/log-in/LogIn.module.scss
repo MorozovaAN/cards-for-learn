@@ -5,11 +5,13 @@
 }
 
 .form {
-  @include form();
+
+  @include form;
 }
 
 .title {
-  @include headline1();
+
+  @include headline1;
 }
 
 .link {
@@ -17,10 +19,12 @@
 }
 
 .navigateContainer {
-  @include navigateContainer();
+
+  @include navigateContainer;
 }
 
 .subtitle {
+
   @include title(600);
 
   margin: 0 0 10px 0;
