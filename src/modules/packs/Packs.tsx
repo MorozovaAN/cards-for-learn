@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-import { useLogOutMutation } from '../auth/authApi'
-
 import edit from 'assets/img/icons/edit.svg'
 import teach from 'assets/img/icons/teach.svg'
 import trash from 'assets/img/icons/trash.svg'
+import { useLogOutMutation } from 'modules'
 import s from 'modules/packs/pack.module.scss'
 import { Button } from 'UI/button/Button'
 import { MenuList } from 'UI/menu-list/MenuList'
