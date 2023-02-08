@@ -3,8 +3,9 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
 
+import s from './ForgotPassword.module.scss'
+
 import { useForgotPasswordMutation } from 'modules/auth/authApi'
-import s from 'modules/auth/forgotPassword/ForgotPassword.module.scss'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -51,9 +52,9 @@ export const ForgotPassword = () => {
 
   return (
     <Box>
-      <h2 className={s.title}>Forgot your password?</h2>
+      <h2 className={s.headline}>Forgot your password?</h2>
 
-      <p>Enter your email address and we will send you further instructions </p>
+      <p className={s.title}>Enter your email address and we will send you further instructions</p>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input

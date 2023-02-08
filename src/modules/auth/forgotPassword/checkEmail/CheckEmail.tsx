@@ -2,10 +2,11 @@ import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import s from './CheckEmail.module.scss'
+
 import checkEmail from 'assets/img/check-email.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { emailSelector } from 'modules/auth/authSelectors'
-import s from 'modules/auth/forgotPassword/checkEmail/CheckEmail.module.scss'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -21,7 +22,7 @@ export const CheckEmail = () => {
       <img src={checkEmail} alt="check email" />
 
       <p className={s.subtitle}>
-        We’ve sent an Email with instructions to
+        We’ve sent an Email with instructions to&nbsp;
         <span className={s.email}>{email}</span>
       </p>
 
