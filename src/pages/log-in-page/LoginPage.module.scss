@@ -1,6 +1,8 @@
-.container {
-  display: flex;
-  justify-content: center;
+@import 'src/common/style-mixins/mixins';
 
-  padding: 50px 0;
+.contentContainer {
+
+  @include authPageContainer();
+
+
 }
