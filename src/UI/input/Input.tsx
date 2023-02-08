@@ -64,6 +64,10 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
     inputContainerClassName && inputContainerClassName
   }`
 
+  const visibilityIconClasses = `${s.visibilityIcon} ${
+    restProps.disabled && s.visibilityIconDisable
+  }`
+
   return (
     <div className={inputContainerClasses}>
       {label && (
@@ -84,14 +88,14 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
           (passwordVisible ? (
             <VisibilityOn
               onClick={togglePasswordVisible}
-              className={s.visibilityIcon}
+              className={visibilityIconClasses}
               fill="#676665"
               alt="password visibility icon"
             />
           ) : (
             <VisibilityOff
               onClick={togglePasswordVisible}
-              className={s.visibilityIcon}
+              className={visibilityIconClasses}
               fill="#676665"
               alt="password visibility icon"
             />

@@ -10,6 +10,8 @@
 
   @include title(500);
 
+  @include transitionMain();
+
   display: block;
 
   box-sizing: border-box;
@@ -24,8 +26,6 @@
   border: none;
   border-radius: 10px;
   outline: none;
-
-  transition: 0.3s ease-in;
 
   &::placeholder {
     font-size: 16px;
@@ -90,11 +90,19 @@
 
   @include positionAbsolute;
 
+  @include transitionMain();
+
   cursor: pointer;
 
   width: 24px;
   height: 24px;
   margin-right: 10px;
+}
+
+.visibilityIconDisable {
+  pointer-events: none;
+
+  opacity: 0.5;
 }
 
 .password {
@@ -104,7 +112,7 @@
 .saveButton {
   position: absolute;
   right: 5px;
-  bottom: 7px;
+  bottom: 6px;
 
   padding: 10px 12px;
 
