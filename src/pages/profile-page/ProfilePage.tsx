@@ -2,7 +2,7 @@ import React from 'react'
 
 import s from './ProfilePage.module.scss'
 
-import { Profile } from 'modules/auth/profile/Profile'
+import { Profile } from 'modules'
 import { PATH } from 'routes/routes'
 import { NavLink } from 'UI/nav-link/NavLink'
 
