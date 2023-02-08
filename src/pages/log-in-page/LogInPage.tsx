@@ -1,12 +1,20 @@
 import React from 'react'
 
+import { motion } from 'framer-motion'
+
+import s from './LoginPage.module.scss'
+
 import { LogIn } from 'modules'
-import s from 'pages/log-up-page/LogUpPage.module.scss'
 
 export const LogInPage = () => {
   return (
-    <div className={s.contentContainer}>
+    <motion.div
+      className={s.contentContainer}
+      initial={{ y: -500, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <LogIn />
-    </div>
+    </motion.div>
   )
 }

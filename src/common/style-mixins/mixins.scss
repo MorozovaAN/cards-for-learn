@@ -59,6 +59,7 @@
 }
 
 @mixin navigateLink() {
+
   @include subtitle(500);
 
   display: flex;
