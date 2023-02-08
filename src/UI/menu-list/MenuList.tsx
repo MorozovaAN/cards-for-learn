@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import { Navigate, useNavigate } from 'react-router-dom'
 
+import { isLoggedInSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useLogOutMutation } from 'modules/auth/authApi'
 import { MenuType } from 'modules/packs/Packs'
@@ -13,7 +14,7 @@ type MenuProps = {
 }
 export const MenuList: FC<MenuProps> = menu => {
   const [logout] = useLogOutMutation()
-  const isLoggedIn = useTypedSelector(state => state.app.isLoggedIn)
+  const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const navigate = useNavigate()
 
   const handleMenuItem = (id: number) => {
