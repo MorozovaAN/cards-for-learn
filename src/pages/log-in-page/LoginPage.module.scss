@@ -1,0 +1,8 @@
+@import 'src/common/style-mixins/mixins';
+
+.contentContainer {
+
+  @include authPageContainer;
+
+
+}
