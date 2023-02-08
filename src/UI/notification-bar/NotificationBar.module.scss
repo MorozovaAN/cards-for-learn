@@ -1,22 +1,13 @@
 @import 'src/common/style-mixins/mixins';
 
-.notification {
-  cursor: pointer;
-
-  position: fixed;
-  z-index: 6;
-  top: 0;
-
-  width: 98vw;
-  height: 98vh;
-}
-
 .msgContainer {
 
   @include boxBorder();
 
+  cursor: default;
+
   position: fixed;
-  z-index: 12;
+  z-index: 100;
   bottom: 30px;
   left: 30px;
 
@@ -50,4 +41,5 @@
 
   width: 10px;
   height: 10px;
+  padding: 0 8px 8px 8px;
 }
