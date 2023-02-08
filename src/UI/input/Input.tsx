@@ -94,7 +94,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
           type="submit"
           styleType="primary"
           className={s.saveButton}
-          onClick={textChangeBtnCallbackHandle}
+          onMouseDown={textChangeBtnCallbackHandle}
           disabled={disableBtn}
         >
           SAVE
