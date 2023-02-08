@@ -27,11 +27,11 @@
   /* Sizes */
   --width-main: 1020px;
   --width-box-l: 420px;
+
   --margin-l: 50px;
 }
 
 body {
-  height: 100%;
   margin: 0;
 
   font-family: 'Montserrat', sans-serif;

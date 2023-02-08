@@ -7,7 +7,7 @@
   cursor: default;
 
   position: fixed;
-  z-index: 15;
+  z-index: 100;
   bottom: 30px;
   left: 30px;
 
@@ -41,4 +41,5 @@
 
   width: 10px;
   height: 10px;
+  padding: 0 8px 8px 8px;
 }

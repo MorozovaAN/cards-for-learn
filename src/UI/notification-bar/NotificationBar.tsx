@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { createPortal } from 'react-dom'
 
+import s from './NotificationBar.module.scss'
+
 import { notificationSelector } from 'app/appSelectors'
 import { setNotification } from 'app/appSlice'
 import { ReactComponent as Close } from 'assets/img/icons/close.svg'
@@ -9,7 +11,6 @@ import { ReactComponent as Error } from 'assets/img/icons/error.svg'
 import { ReactComponent as Success } from 'assets/img/icons/success.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import s from 'UI/notification-bar/NotificationBar.module.scss'
 
 export const NotificationBar = () => {
   const { type, message } = useTypedSelector(notificationSelector)
@@ -29,7 +30,7 @@ export const NotificationBar = () => {
 
       setTimeout(() => {
         handleClose()
-      }, 4000)
+      }, 5000)
     }
   }, [message])
 
