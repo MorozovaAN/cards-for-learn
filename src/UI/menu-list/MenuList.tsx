@@ -34,6 +34,12 @@ export const MenuList: FC<MenuProps> = menu => {
       case 5:
         logout()
         break
+      case 6:
+        alert('modal packs')
+        break
+      case 7:
+        alert('modal cards')
+        break
       default:
         alert("Don't have value")
     }

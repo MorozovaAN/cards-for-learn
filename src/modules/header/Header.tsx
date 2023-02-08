@@ -20,6 +20,8 @@ export const Header = () => {
 
   const menuListInProfile = [
     { img: profileIcon, title: 'Profile', id: 4 },
+    { img: profileIcon, title: 'Packs', id: 6 },
+    { img: profileIcon, title: 'Cards', id: 7 },
     { img: profileLogout, title: 'Log out', id: 5 },
   ]
 
