@@ -2,7 +2,7 @@ import React from 'react'
 
 import s from './LogUpPage.module.scss'
 
-import { LogUp } from 'modules/auth/log-up/LogUp'
+import { LogUp } from 'modules'
 
 export const LogUpPage = () => {
   return (

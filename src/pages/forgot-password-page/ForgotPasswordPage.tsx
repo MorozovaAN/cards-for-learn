@@ -2,7 +2,7 @@ import React from 'react'
 
 import s from './ForgotPasswordPage.module.scss'
 
-import { ForgotPassword } from 'modules/auth/forgotPassword/ForgotPassword'
+import { ForgotPassword } from 'modules'
 
 export const ForgotPasswordPage = () => {
   return (
