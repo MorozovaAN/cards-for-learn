@@ -9,7 +9,7 @@ export const authApi = createApi({
     baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
     credentials: 'include',
   }),
-
+  // test
   endpoints: build => ({
     me: build.mutation<Response, void>({
       query: () => ({
