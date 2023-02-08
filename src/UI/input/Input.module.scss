@@ -10,6 +10,8 @@
 
   @include title(500);
 
+  @include transitionMain();
+
   display: block;
 
   box-sizing: border-box;
@@ -25,8 +27,6 @@
   border-radius: 10px;
   outline: none;
 
-  transition: 0.3s ease-in;
-
   &::placeholder {
     font-size: 16px;
     font-weight: 400;
@@ -35,6 +35,10 @@
 
   &:focus {
     box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 
   &:-webkit-autofill,
@@ -86,11 +90,19 @@
 
   @include positionAbsolute;
 
+  @include transitionMain();
+
   cursor: pointer;
 
   width: 24px;
   height: 24px;
   margin-right: 10px;
+}
+
+.visibilityIconDisable {
+  pointer-events: none;
+
+  opacity: 0.5;
 }
 
 .password {
@@ -100,7 +112,7 @@
 .saveButton {
   position: absolute;
   right: 5px;
-  bottom: 7px;
+  bottom: 6px;
 
   padding: 10px 12px;
 

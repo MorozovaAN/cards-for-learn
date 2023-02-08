@@ -8,9 +8,10 @@
   min-height: 100vh;
   margin: 0 auto;
 }
-
-.circular {
+.loader .circular {
   position: absolute;
   top: 50%;
   left: 50%;
+
+  color: var(--color-primary-base);
 }

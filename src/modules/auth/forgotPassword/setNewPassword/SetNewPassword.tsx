@@ -3,9 +3,10 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Navigate, useParams } from 'react-router-dom'
 
+import s from './SetNewPassword.module.scss'
+
 import { useSetNewPasswordMutation } from 'modules/auth/authApi'
 import { ErrorsType } from 'modules/auth/forgotPassword/ForgotPassword'
-import s from 'modules/auth/forgotPassword/setNewPassword/SetNewPassword.module.scss'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'

@@ -2,8 +2,9 @@ import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import s from './ErrorPage.module.scss'
+
 import error404 from 'assets/img/404.svg'
-import s from 'pages/error-page/ErrorPage.module.scss'
 import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
 

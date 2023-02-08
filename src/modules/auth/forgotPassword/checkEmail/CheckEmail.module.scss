@@ -2,12 +2,14 @@
 
 .title {
 
-  @include headline1();
+  @include headline1;
 }
 
 .subtitle {
 
-  @include headline3();
+  @include title;
+
+  text-align: center;
 }
 
 .email {

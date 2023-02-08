@@ -6,17 +6,17 @@
 
 .form {
 
-  @include form();
+  @include form;
 }
 
 .title {
 
-  @include headline1();
+  @include headline1;
 }
 
 .navigateContainer {
 
-  @include navigateContainer();
+  @include navigateContainer;
 }
 
 .subtitle {

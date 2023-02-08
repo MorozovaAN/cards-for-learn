@@ -22,7 +22,12 @@ export const App = () => {
     }
   }, [])
 
-  if (!isAuth) return <CircularProgress classes={{ root: s.circular }} />
+  if (!isAuth)
+    return (
+      <div className={s.loader}>
+        <CircularProgress classes={{ root: s.circular }} size={60} />
+      </div>
+    )
 
   return (
     <div className={s.app}>
