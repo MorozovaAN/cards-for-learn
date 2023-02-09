@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { motion, AnimatePresence } from 'framer-motion'
 import { createPortal } from 'react-dom'
 
@@ -27,17 +28,23 @@ export const NotificationBar = () => {
 
   const handleClose = () => {
     setOpen(false)
-    dispatch(setNotification({ message: '', type: '' }))
+    dispatch(setNotification({ message: '', type: type }))
   }
 
   useEffect(() => {
+    let timer: TimeoutId
+
     if (message) {
       setOpen(true)
 
-      setTimeout(() => {
+      timer = setTimeout(() => {
         handleClose()
       }, 5000)
+
+      console.log(timer)
     }
+
+    return () => clearTimeout(timer)
   }, [message])
 
   return createPortal(
