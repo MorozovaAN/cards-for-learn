@@ -13,11 +13,16 @@ import { ReactComponent as Success } from 'assets/img/icons/success.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 
+const pVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0 },
+}
+
 export const NotificationBar = () => {
   const { type, message } = useTypedSelector(notificationSelector)
-  const success = type === 'success'
-  const msgContainerClasses = `${s.msgContainer} ${success && s.successMsg}`
-  const [open, setOpen] = useState(true)
+  const msgContainerClasses = `${s.msgContainer} ${type === 'success' && s.successMsg}`
+  const [open, setOpen] = useState(false)
   const dispatch = useTypedDispatch()
 
   const handleClose = () => {
@@ -35,34 +40,25 @@ export const NotificationBar = () => {
     }
   }, [message])
 
-  //if (!open) return null
-
   return createPortal(
-    open ? (
-      <AnimatePresence>
+    <AnimatePresence>
+      {open && (
         <motion.div
           className={msgContainerClasses}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.5,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          // initial={{ height: 0, opacity: 0 }}
-          // animate={{ height: 'auto', opacity: 1 }}
-          // exit={{ height: 0 }}
-          // transition={{ duration: 0.5 }}
+          variants={pVariants}
+          initial={'hidden'}
+          animate={'visible'}
+          exit={'exit'}
         >
-          {success ? <Success /> : <Error />}
+          {type === 'success' && <Success />}
+          {type == 'error' && <Error />}
+
           <p className={s.text}>{message}</p>
+
           <Close onClick={handleClose} fill="#fff" className={s.close} />
         </motion.div>
-      </AnimatePresence>
-    ) : (
-      <></>
-    ),
+      )}
+    </AnimatePresence>,
     document.querySelector('body') as HTMLElement
   )
 }

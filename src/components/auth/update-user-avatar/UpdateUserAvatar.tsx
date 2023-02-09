@@ -1,16 +1,15 @@
 import React, { ChangeEvent, FC } from 'react'
 
-import s from './UpdateProfileAvatar.module.scss'
-
 import { setNotification } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { convertFileToBase64 } from 'common/utils/toBase64'
+import s from 'components/auth/update-user-avatar/UpdateUserAvatar.module.scss'
 import { UpdateProfile } from 'modules/auth/authApi'
 
 type UpdateProfileAvatarType = {
   updateProfileCallback: (value: UpdateProfile) => void
 }
-export const UpdateProfileAvatar: FC<UpdateProfileAvatarType> = ({ updateProfileCallback }) => {
+export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateProfileCallback }) => {
   const dispatch = useTypedDispatch()
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {

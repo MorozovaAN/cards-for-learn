@@ -5,7 +5,7 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   notification: {
-    message: 'some message',
+    message: '',
     type: '' as NotificationType,
     open: false,
   },
