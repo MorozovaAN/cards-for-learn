@@ -4,10 +4,10 @@ import { useFormik } from 'formik'
 
 import { isLoadingSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/auth/update-user-name/UpdateUserName.module.css'
 import { UpdateProfile } from 'modules/auth/authApi'
 import { nameSelector } from 'modules/auth/authSelectors'
 import { Input } from 'UI/input/Input'
-import style from 'UI/input/Input.module.scss'
 
 type ProfileEditNamePropsType = {
   setEditMode: (value: boolean) => void
@@ -20,7 +20,7 @@ interface FormikErrorType {
   avatar?: string
 }
 
-export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
+export const UpdateUserName: React.FC<ProfileEditNamePropsType> = ({
   setEditMode,
   updateProfileCallback,
   editMode,
@@ -52,12 +52,13 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
   useEffect(() => {
     formik.setFieldValue('name', userName)
   }, [userName])
+
   const onBlurHandler = () => {
     setEditMode(false)
   }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className={s.form}>
       <Input
         type="text"
         textChange={true}
@@ -67,8 +68,8 @@ export const UpdateProfileName: React.FC<ProfileEditNamePropsType> = ({
         disableBtn={!!formik.errors.name || isLoading}
         onBlur={onBlurHandler}
         autoFocus={editMode}
+        error={formik.errors.name}
       />
-      <span className={style.error}>{formik.errors.name}</span>
     </form>
   )
 }

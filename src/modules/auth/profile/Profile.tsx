@@ -7,8 +7,8 @@ import editName from 'assets/img/icons/edit.svg'
 import { ReactComponent as Logout } from 'assets/img/icons/exit.svg'
 import defaultAva from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { UpdateProfileAvatar } from 'components/auth/UpdateProfileAvatar'
-import { UpdateProfileName } from 'components/auth/UpdateProfileName'
+import { UpdateUserAvatar } from 'components/auth/update-user-avatar/UpdateUserAvatar'
+import { UpdateUserName } from 'components/auth/update-user-name/UpdateUserName'
 import { UpdateProfile, useLogOutMutation, useUpdateProfileMutation } from 'modules/auth/authApi'
 import { avatarSelector, emailSelector, nameSelector } from 'modules/auth/authSelectors'
 import { Box } from 'UI/box/Box'
@@ -49,12 +49,12 @@ export const Profile = () => {
       <div className={s.imgContainer}>
         <img src={avatar ? avatar : initialAva} alt="user avatar" className={s.avatar} />
         <span className={s.photoUploader}>
-          <UpdateProfileAvatar updateProfileCallback={updateProfileCallback} />
+          <UpdateUserAvatar updateProfileCallback={updateProfileCallback} />
         </span>
       </div>
 
       {editMode ? (
-        <UpdateProfileName
+        <UpdateUserName
           setEditMode={setEditMode}
           updateProfileCallback={updateProfileCallback}
           editMode={editMode}

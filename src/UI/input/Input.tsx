@@ -58,7 +58,9 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
 
   const showError = !textChange && type !== 'search'
 
-  const inputClasses = `${s.input} ${className ? className : ''} ${type && s[type]}`
+  const inputClasses = `${s.input} ${className ? className : ''} ${type && s[type]} ${
+    textChange && s.inputWithBtn
+  }`
 
   const inputContainerClasses = `${s.inputContainer} ${
     inputContainerClassName && inputContainerClassName
