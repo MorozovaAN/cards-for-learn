@@ -22,6 +22,12 @@ const Template: ComponentStory<typeof NavLink> = args => <NavLink {...args}>{arg
 export const Default = Template.bind({})
 
 Default.args = {
+  url: 'Default NavLink',
+}
+
+export const Primary = Template.bind({})
+
+Primary.args = {
   styleType: 'primary',
-  url: 'Email',
+  url: 'Primary NavLink',
 }
