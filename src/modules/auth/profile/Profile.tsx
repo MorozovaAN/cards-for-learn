@@ -4,7 +4,7 @@ import s from './Profile.module.scss'
 
 import { isLoadingSelector } from 'app/appSelectors'
 import editName from 'assets/img/icons/edit.svg'
-import { ReactComponent as Logout } from 'assets/img/icons/logout.svg'
+import { ReactComponent as Logout } from 'assets/img/icons/exit.svg'
 import defaultAva from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateProfileAvatar } from 'components/auth/UpdateProfileAvatar'

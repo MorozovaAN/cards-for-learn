@@ -25,9 +25,7 @@
   margin: 0 auto;
 }
 
-.userInfoContainer {
-  cursor: pointer;
-
+.userInfo {
   position: relative;
 
   display: flex;
@@ -41,13 +39,10 @@
 }
 
 .avatar {
+  cursor: pointer;
+
   width: 36px;
   height: 36px;
 
   border-radius: 50%;
-}
-.menuListBox {
-  position: absolute;
-  top: 50px;
-  right: 0;
 }
