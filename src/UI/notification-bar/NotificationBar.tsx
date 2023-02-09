@@ -40,8 +40,6 @@ export const NotificationBar = () => {
       timer = setTimeout(() => {
         handleClose()
       }, 5000)
-
-      console.log(timer)
     }
 
     return () => clearTimeout(timer)
