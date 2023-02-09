@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { MenuHeader } from 'components/auth/menu-header/MenuHeader'
 import { avatarSelector, nameSelector } from 'modules/auth/authSelectors'
-import { setShowMenu } from 'modules/auth/authSlice'
+import { setClickAway, setShowMenu } from 'modules/auth/authSlice'
 import s from 'modules/auth/header/Header.module.scss'
 import { PATH } from 'routes/routes'
 
@@ -18,9 +18,16 @@ export const Header = () => {
   const showMenu = useTypedSelector(state => state.auth.showMenu)
   const avatar = userAvatar ? userAvatar : avatarPlug
   const dispatch = useTypedDispatch()
-
+  const [leave, setLeave] = useState(false)
   const showMenuHandler = () => {
     dispatch(setShowMenu(!showMenu))
+  }
+  const mouseLeaveHandler = () => {
+    setLeave(true)
+    dispatch(setClickAway(false))
+  }
+  const mouseOverHandler = () => {
+    setLeave(false)
   }
 
   return (
@@ -32,8 +39,15 @@ export const Header = () => {
 
         <div className={s.userInfo}>
           <p className={s.name}>{userName}</p>
-          <img src={avatar} alt="user avatar" className={s.avatar} onClick={showMenuHandler} />
-          <MenuHeader />
+          <img
+            src={avatar}
+            alt="user avatar"
+            className={s.avatar}
+            onClick={showMenuHandler}
+            onMouseLeave={mouseLeaveHandler}
+            onMouseOver={mouseOverHandler}
+          />
+          <MenuHeader isLeave={leave} />
         </div>
       </nav>
     </header>

@@ -1,3 +1,5 @@
+import { MutableRefObject } from 'react'
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { Response } from 'modules/auth/authApi'
@@ -10,6 +12,7 @@ const initialState = {
   avatar: '',
   id: null as null | string,
   showMenu: false,
+  clickAway: false,
 }
 
 const authSlice = createSlice({
@@ -30,10 +33,15 @@ const authSlice = createSlice({
       state.email = action.payload
     },
     setShowMenu: (state, action: PayloadAction<boolean>) => {
+      console.log(action.payload)
       state.showMenu = action.payload
+    },
+    setClickAway: (state, action: PayloadAction<boolean>) => {
+      state.clickAway = action.payload
     },
   },
 })
 
-export const { setAuthData, forgotPasswordCurrentEmail, setShowMenu } = authSlice.actions
+export const { setAuthData, forgotPasswordCurrentEmail, setShowMenu, setClickAway } =
+  authSlice.actions
 export const authReducer = authSlice.reducer
