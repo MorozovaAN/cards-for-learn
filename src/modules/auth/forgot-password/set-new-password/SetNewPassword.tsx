@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import s from './SetNewPassword.module.scss'
 
 import { useSetNewPasswordMutation } from 'modules/auth/authApi'
-import { ErrorsType } from 'modules/auth/forgotPassword/ForgotPassword'
+import { ErrorsType } from 'modules/auth/forgot-password/ForgotPassword'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'

@@ -1,12 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'app/appSlice'
+import { baseURL } from 'common/constants/base-URL'
+import { ErrorType } from 'common/types/types'
+import { errorHandler } from 'common/utils/errorHandler'
 import { forgotPasswordCurrentEmail, setAuthData } from 'modules/auth/authSlice'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://neko-back.herokuapp.com/2.0/auth/',
+    baseUrl: `${baseURL}/auth/`,
     credentials: 'include',
   }),
 
@@ -44,13 +47,7 @@ export const authApi = createApi({
             setNotification({ message: 'You have successfully registered', type: 'success' })
           )
         } catch (err) {
-          const error = (err as ErrorType)?.error?.data?.error
-
-          if (error) {
-            dispatch(setNotification({ message: error, type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
-          }
+          errorHandler(err, dispatch)
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -118,13 +115,7 @@ export const authApi = createApi({
             dispatch(setNotification({ message: 'Nickname changed successfully', type: 'success' }))
           }
         } catch (err) {
-          const error = (err as ErrorType)?.error?.data?.error
-
-          if (error) {
-            dispatch(setNotification({ message: error, type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
-          }
+          errorHandler(err, dispatch)
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -143,13 +134,7 @@ export const authApi = createApi({
           await queryFulfilled
           dispatch(forgotPasswordCurrentEmail(body.email))
         } catch (err) {
-          const error = (err as ErrorType)?.error?.data?.error
-
-          if (error) {
-            dispatch(setNotification({ message: error, type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
-          }
+          errorHandler(err, dispatch)
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -168,13 +153,7 @@ export const authApi = createApi({
           await queryFulfilled
           dispatch(setNotification({ message: 'Password changed successfully', type: 'success' }))
         } catch (err) {
-          const error = (err as ErrorType)?.error?.data?.error
-
-          if (error) {
-            dispatch(setNotification({ message: error, type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
-          }
+          errorHandler(err, dispatch)
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -210,15 +189,6 @@ type LogUpDataType = Pick<LogInDataType, 'email' | 'password'>
 export type CommonType = {
   info: string
   error?: string
-}
-
-type ErrorType = {
-  error: {
-    data: {
-      error: string
-    }
-    status: number
-  }
 }
 
 export type RequestForgotPasswordType = {
