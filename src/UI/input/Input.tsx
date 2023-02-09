@@ -56,8 +56,6 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
     passwordVisible ? setTypeLabel('text') : setTypeLabel(type)
   }, [passwordVisible])
 
-  const showError = !textChange && type !== 'search'
-
   const inputClasses = `${s.input} ${className ? className : ''} ${type && s[type]} ${
     textChange && s.inputWithBtn
   }`
@@ -115,9 +113,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
         </Button>
       )}
 
-      {showError && (
-        <div className={s.errorContainer}>{error && <p className={s.error}>{error}</p>}</div>
-      )}
+      <div className={s.errorContainer}>{error && <p className={s.error}>{error}</p>}</div>
     </div>
   )
 }
