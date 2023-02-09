@@ -39,6 +39,9 @@ export const UpdateUserName: React.FC<ProfileEditNamePropsType> = ({
       if (!values.name.trim()) {
         errors.name = 'Name is required'
       }
+      if (values.name.length > 30) {
+        errors.name = 'Sorry, your nick length should be less then 30 symbols.'
+      }
 
       return errors
     },
