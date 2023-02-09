@@ -31,9 +31,9 @@ export const App = () => {
 
   return (
     <div className={s.app}>
-      {isLoggedIn && <Header />}
       <NotificationBar />
 
+      {isLoggedIn && <Header />}
       {isLoading && <LoadingProgress />}
 
       <section className={s.contentContainer}>

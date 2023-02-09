@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
+import { motion, AnimatePresence } from 'framer-motion'
 import { createPortal } from 'react-dom'
 
 import s from './NotificationBar.module.scss'
@@ -12,36 +14,56 @@ import { ReactComponent as Success } from 'assets/img/icons/success.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 
+const pVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0 },
+}
+
 export const NotificationBar = () => {
   const { type, message } = useTypedSelector(notificationSelector)
-  const success = type === 'success'
-  const msgContainerClasses = `${s.msgContainer} ${success && s.successMsg}`
+  const msgContainerClasses = `${s.msgContainer} ${type === 'success' && s.successMsg}`
   const [open, setOpen] = useState(false)
   const dispatch = useTypedDispatch()
 
   const handleClose = () => {
     setOpen(false)
-    dispatch(setNotification({ message: '', type: '' }))
+    dispatch(setNotification({ message: '', type: type }))
   }
 
   useEffect(() => {
+    let timer: TimeoutId
+
     if (message) {
       setOpen(true)
 
-      setTimeout(() => {
+      timer = setTimeout(() => {
         handleClose()
       }, 5000)
     }
+
+    return () => clearTimeout(timer)
   }, [message])
 
-  if (!open) return null
-
   return createPortal(
-    <div className={msgContainerClasses}>
-      {success ? <Success /> : <Error />}
-      <p className={s.text}>{message}</p>
-      <Close onClick={handleClose} fill="#fff" className={s.close} />
-    </div>,
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className={msgContainerClasses}
+          variants={pVariants}
+          initial={'hidden'}
+          animate={'visible'}
+          exit={'exit'}
+        >
+          {type === 'success' && <Success />}
+          {type == 'error' && <Error />}
+
+          <p className={s.text}>{message}</p>
+
+          <Close onClick={handleClose} fill="#fff" className={s.close} />
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.querySelector('body') as HTMLElement
   )
 }
