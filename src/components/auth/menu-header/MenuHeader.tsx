@@ -1,5 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 
+import { motion, Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as LogoutIcon } from 'assets/img/icons/exit.svg'
@@ -21,6 +22,15 @@ export const MenuHeader: FC<MenuHeaderType> = ({ isLeave }) => {
   const [logOut] = useLogOutMutation()
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
+
+  const itemVariants: Variants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', stiffness: 300, damping: 24 },
+    },
+    closed: { opacity: 0, y: 0, transition: { duration: 0.2 } },
+  }
   const profileNavigateHandler = () => {
     dispatch(setShowMenu(false))
     navigate(PATH.PROFILE)
@@ -44,21 +54,23 @@ export const MenuHeader: FC<MenuHeaderType> = ({ isLeave }) => {
     }
   }, [open, isLeave, clickAway])
 
-  return open ? (
-    <ClickAwayListener onClickAway={clickAwayHandler}>
-      <MenuList>
-        <li onClick={profileNavigateHandler}>
-          <UserIcon /> Profile
-        </li>
+  return (
+    <motion.div initial={false} animate={open ? 'open' : 'closed'}>
+      <ClickAwayListener onClickAway={clickAwayHandler}>
+        <MenuList>
+          <motion.li onClick={profileNavigateHandler} variants={itemVariants}>
+            <UserIcon /> Profile
+          </motion.li>
 
-        <li onClick={packsNavigateHandler}>
-          <PacksIcon /> Packs
-        </li>
+          <motion.li onClick={packsNavigateHandler} variants={itemVariants}>
+            <PacksIcon /> Packs
+          </motion.li>
 
-        <li onClick={logoutHandler}>
-          <LogoutIcon /> Log out
-        </li>
-      </MenuList>
-    </ClickAwayListener>
-  ) : null
+          <motion.li onClick={logoutHandler} variants={itemVariants}>
+            <LogoutIcon /> Log out
+          </motion.li>
+        </MenuList>
+      </ClickAwayListener>
+    </motion.div>
+  )
 }
