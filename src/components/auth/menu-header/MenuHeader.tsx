@@ -1,50 +1,89 @@
-import React from 'react'
+import React, { FC, useEffect } from 'react'
 
+import { motion, Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+
+import s from './MenuHeader.module.scss'
 
 import { ReactComponent as LogoutIcon } from 'assets/img/icons/exit.svg'
 import { ReactComponent as PacksIcon } from 'assets/img/icons/packs.svg'
 import { ReactComponent as UserIcon } from 'assets/img/icons/user.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { ClickAwayListener } from 'common/utils/ClickAwayListener'
 import { useLogOutMutation } from 'modules'
-import { setShowMenu } from 'modules/auth/authSlice'
+import { clickAwaySelector } from 'modules/auth/authSelectors'
+import { setClickAway } from 'modules/auth/authSlice'
 import { PATH } from 'routes/routes'
 import { MenuList } from 'UI/menu-list/MenuList'
 
-export const MenuHeader = () => {
-  const open = useTypedSelector(state => state.auth.showMenu)
+type MenuHeaderType = {
+  isLeave: boolean
+  open: boolean
+  setShowMenu: (showMenu: boolean) => void
+}
+
+const itemVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 24 },
+  },
+  closed: { opacity: 0, y: 0, transition: { duration: 0.2 } },
+}
+
+export const MenuHeader: FC<MenuHeaderType> = ({ isLeave, open, setShowMenu }) => {
+  const clickAway = useTypedSelector(clickAwaySelector)
   const [logOut] = useLogOutMutation()
-  const dispatch = useTypedDispatch()
   const navigate = useNavigate()
+  const dispatch = useTypedDispatch()
 
   const profileNavigateHandler = () => {
-    dispatch(setShowMenu(false))
+    setShowMenu(false)
     navigate(PATH.PROFILE)
   }
+
   const packsNavigateHandler = () => {
-    dispatch(setShowMenu(false))
+    setShowMenu(false)
     navigate(PATH.PACKS)
   }
 
   const logoutHandler = () => {
     logOut().unwrap()
-    dispatch(setShowMenu(false))
+    setShowMenu(false)
   }
 
+  const clickAwayHandler = () => {
+    dispatch(setClickAway(true))
+  }
+
+  useEffect(() => {
+    if (open && isLeave && clickAway) {
+      setShowMenu(false)
+    }
+  }, [open, isLeave, clickAway])
+
   return (
-    <MenuList open={open}>
-      <li onClick={profileNavigateHandler}>
-        <UserIcon /> Profile
-      </li>
+    <motion.div
+      initial={false}
+      animate={open ? 'open' : 'closed'}
+      className={open ? s.menuHeader : ''}
+    >
+      <ClickAwayListener onClickAway={clickAwayHandler}>
+        <MenuList>
+          <motion.li onClick={profileNavigateHandler} variants={itemVariants}>
+            <UserIcon /> Profile
+          </motion.li>
 
-      <li onClick={packsNavigateHandler}>
-        <PacksIcon /> Packs
-      </li>
+          <motion.li onClick={packsNavigateHandler} variants={itemVariants}>
+            <PacksIcon /> Packs
+          </motion.li>
 
-      <li onClick={logoutHandler}>
-        <LogoutIcon /> Log out
-      </li>
-    </MenuList>
+          <motion.li onClick={logoutHandler} variants={itemVariants}>
+            <LogoutIcon /> Log out
+          </motion.li>
+        </MenuList>
+      </ClickAwayListener>
+    </motion.div>
   )
 }

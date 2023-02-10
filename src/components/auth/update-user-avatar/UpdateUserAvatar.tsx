@@ -4,12 +4,12 @@ import { setNotification } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { convertFileToBase64 } from 'common/utils/toBase64'
 import s from 'components/auth/update-user-avatar/UpdateUserAvatar.module.scss'
-import { UpdateProfile } from 'modules/auth/authApi'
 
 type UpdateProfileAvatarType = {
-  updateProfileCallback: (value: UpdateProfile) => void
+  updateAvatarCallback: (avatar: string) => void
 }
-export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateProfileCallback }) => {
+
+export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateAvatarCallback }) => {
   const dispatch = useTypedDispatch()
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateProfileCal
 
       if (file.size < 100000) {
         convertFileToBase64(file, (file64: string) => {
-          updateProfileCallback({ name: '', avatar: file64 })
+          updateAvatarCallback(file64)
         })
       } else {
         dispatch(setNotification({ message: 'Max file size should be 100 Kb!', type: 'error' }))

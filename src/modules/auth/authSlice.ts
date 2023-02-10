@@ -9,7 +9,7 @@ const initialState = {
   name: 'My name',
   avatar: '',
   id: null as null | string,
-  showMenu: false,
+  clickAway: false,
 }
 
 const authSlice = createSlice({
@@ -29,11 +29,11 @@ const authSlice = createSlice({
     forgotPasswordCurrentEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload
     },
-    setShowMenu: (state, action: PayloadAction<boolean>) => {
-      state.showMenu = action.payload
+    setClickAway: (state, action: PayloadAction<boolean>) => {
+      state.clickAway = action.payload
     },
   },
 })
 
-export const { setAuthData, forgotPasswordCurrentEmail, setShowMenu } = authSlice.actions
+export const { setAuthData, forgotPasswordCurrentEmail, setClickAway } = authSlice.actions
 export const authReducer = authSlice.reducer
