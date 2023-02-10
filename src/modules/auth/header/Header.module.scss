@@ -16,12 +16,14 @@
 }
 
 .headerContent {
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   width: 100%;
   max-width: var(--width-main);
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -36,6 +38,12 @@
 .name {
 
   @include title(500);
+
+  overflow: hidden;
+
+  max-width: 200px;
+
+  text-overflow: ellipsis;
 }
 
 .avatar {

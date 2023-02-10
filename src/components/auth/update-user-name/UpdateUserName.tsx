@@ -5,24 +5,22 @@ import { useFormik } from 'formik'
 import { isLoadingSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import s from 'components/auth/update-user-name/UpdateUserName.module.css'
-import { UpdateProfile } from 'modules/auth/authApi'
 import { nameSelector } from 'modules/auth/authSelectors'
 import { Input } from 'UI/input/Input'
 
-type ProfileEditNamePropsType = {
+type ProfileEditNameType = {
   setEditMode: (value: boolean) => void
-  updateProfileCallback: (value: UpdateProfile) => void
+  updateNameCallback: (name: string) => void
   editMode: boolean
 }
 
 interface FormikErrorType {
   name?: string
-  avatar?: string
 }
 
-export const UpdateUserName: React.FC<ProfileEditNamePropsType> = ({
+export const UpdateUserName: React.FC<ProfileEditNameType> = ({
   setEditMode,
-  updateProfileCallback,
+  updateNameCallback,
   editMode,
 }) => {
   const userName = useTypedSelector(nameSelector)
@@ -31,8 +29,8 @@ export const UpdateUserName: React.FC<ProfileEditNamePropsType> = ({
   const formik = useFormik({
     initialValues: {
       name: '',
-      avatar: '',
     },
+
     validate: values => {
       const errors: FormikErrorType = {}
 
@@ -40,13 +38,14 @@ export const UpdateUserName: React.FC<ProfileEditNamePropsType> = ({
         errors.name = 'Name is required'
       }
       if (values.name.length > 30) {
-        errors.name = 'Sorry, your nick length should be less then 30 symbols.'
+        errors.name = 'Sorry, max nick length 30 symbols or less'
       }
 
       return errors
     },
+
     onSubmit: values => {
-      updateProfileCallback(values)
+      updateNameCallback(values.name)
       setEditMode(false)
       formik.resetForm()
     },

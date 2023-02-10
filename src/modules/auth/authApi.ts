@@ -95,29 +95,41 @@ export const authApi = createApi({
         }
       },
     }),
-    updateProfile: build.mutation<UpdateProfileType, UpdateProfile>({
-      query: UpdateProfile => ({
+
+    updateUserName: build.mutation<UpdateProfileType, string>({
+      query: name => ({
         url: 'me',
         method: 'PUT',
-        body: UpdateProfile,
+        body: { name, avatar: '' },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        dispatch(setIsLoading(true))
         try {
           const res = await queryFulfilled
 
           dispatch(setAuthData(res.data.updatedUser))
-          if (arg.name === '') {
-            dispatch(
-              setNotification({ message: 'Avatar image changed successfully', type: 'success' })
-            )
-          } else {
-            dispatch(setNotification({ message: 'Nickname changed successfully', type: 'success' }))
-          }
+          dispatch(setNotification({ message: 'Nickname changed successfully', type: 'success' }))
         } catch (err) {
           errorHandler(err, dispatch)
-        } finally {
-          dispatch(setIsLoading(false))
+        }
+      },
+    }),
+
+    updateUserAvatar: build.mutation<UpdateProfileType, string>({
+      query: avatar => ({
+        url: 'me',
+        method: 'PUT',
+        body: { name: '', avatar },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled
+
+          dispatch(setAuthData(res.data.updatedUser))
+          dispatch(
+            setNotification({ message: 'Avatar image changed successfully', type: 'success' })
+          )
+        } catch (err) {
+          errorHandler(err, dispatch)
         }
       },
     }),
@@ -217,5 +229,6 @@ export const {
   useLogInMutation,
   useLogOutMutation,
   useLogUpMutation,
-  useUpdateProfileMutation,
+  useUpdateUserNameMutation,
+  useUpdateUserAvatarMutation,
 } = authApi

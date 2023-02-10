@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
 
+import Skeleton from '@mui/material/Skeleton'
+
 import s from './Profile.module.scss'
 
-import { isLoadingSelector } from 'app/appSelectors'
 import editName from 'assets/img/icons/edit.svg'
 import { ReactComponent as Logout } from 'assets/img/icons/exit.svg'
-import defaultAva from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateUserAvatar } from 'components/auth/update-user-avatar/UpdateUserAvatar'
 import { UpdateUserName } from 'components/auth/update-user-name/UpdateUserName'
-import { UpdateProfile, useLogOutMutation, useUpdateProfileMutation } from 'modules/auth/authApi'
+import {
+  useLogOutMutation,
+  useUpdateUserAvatarMutation,
+  useUpdateUserNameMutation,
+} from 'modules/auth/authApi'
 import { avatarSelector, emailSelector, nameSelector } from 'modules/auth/authSelectors'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 
 export const Profile = () => {
-  const emailFromState = useTypedSelector(emailSelector)
-  const nameFromState = useTypedSelector(nameSelector)
-  const avatarFromState = useTypedSelector(avatarSelector)
-  const isLoading = useTypedSelector(isLoadingSelector)
-  const initialAva = avatarFromState ? avatarFromState : defaultAva
+  const email = useTypedSelector(emailSelector)
+  const name = useTypedSelector(nameSelector)
+  const avatar = useTypedSelector(avatarSelector)
   const [logOut] = useLogOutMutation()
-  const [updateProfile, { name, avatar, email }] = useUpdateProfileMutation({
-    selectFromResult: ({ data }) => ({
-      name: data?.updatedUser?.name,
-      avatar: data?.updatedUser?.avatar,
-      email: data?.updatedUser?.email,
-    }),
-  })
+  const [updateUserName, { isLoading: isLoadingName }] = useUpdateUserNameMutation()
+  const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation()
   const [editMode, setEditMode] = useState(false)
 
-  const updateProfileCallback = (value: UpdateProfile) => {
-    updateProfile({ name: value.name, avatar: value.avatar })
+  const updateNameCallback = (name: string) => {
+    updateUserName(name)
+  }
+  const updateAvatarCallback = (avatar: string) => {
+    updateUserAvatar(avatar)
   }
 
   const logout = () => {
@@ -42,35 +42,67 @@ export const Profile = () => {
     setEditMode(true)
   }
 
+  const showUserName = isLoadingName ? (
+    <div className={s.skeletonNameContainer}>
+      <Skeleton
+        classes={{ root: s.skeletonName }}
+        width={300}
+        height={30}
+        animation="wave"
+        variant="rectangular"
+      />
+    </div>
+  ) : (
+    <div className={s.nameContainer}>
+      <p className={s.name}>{name}</p>
+      <Button styleType="icon" onClick={editModeOpen} disabled={isLoadingName || isLoadingAvatar}>
+        <img src={editName} alt="edit name icon" width="15" />
+      </Button>
+    </div>
+  )
+
   return (
     <Box>
       <h2 className={s.title}>Personal Information</h2>
 
-      <div className={s.imgContainer}>
-        <img src={avatar ? avatar : initialAva} alt="user avatar" className={s.avatar} />
-        <span className={s.photoUploader}>
-          <UpdateUserAvatar updateProfileCallback={updateProfileCallback} />
-        </span>
-      </div>
+      {isLoadingAvatar ? (
+        <div className={s.skeletonAvatarContainer}>
+          <Skeleton
+            classes={{ root: s.skeletonAvatar }}
+            width={120}
+            height={120}
+            animation="wave"
+            variant="circular"
+          />
+        </div>
+      ) : (
+        <div className={s.imgContainer}>
+          <img src={avatar} alt="user avatar" className={s.avatar} />
+
+          <span className={s.photoUploader}>
+            <UpdateUserAvatar updateAvatarCallback={updateAvatarCallback} />
+          </span>
+        </div>
+      )}
 
       {editMode ? (
         <UpdateUserName
           setEditMode={setEditMode}
-          updateProfileCallback={updateProfileCallback}
+          updateNameCallback={updateNameCallback}
           editMode={editMode}
         />
       ) : (
-        <div className={s.nameContainer}>
-          <p className={s.name}>{name ? name : nameFromState}</p>
-          <Button onClick={editModeOpen} styleType="icon" disabled={isLoading}>
-            <img src={editName} alt="edit name icon" />
-          </Button>
-        </div>
+        <>{showUserName}</>
       )}
 
-      <p className={s.email}>{email ? email : emailFromState}</p>
+      <p className={s.email}>{email}</p>
 
-      <Button styleType="primary" className={s.logout} onClick={logout} disabled={isLoading}>
+      <Button
+        styleType="primary"
+        className={s.logout}
+        onClick={logout}
+        disabled={isLoadingName || isLoadingAvatar}
+      >
         <div className={s.btnTextContainer}>
           <Logout fill="#fff" width="17" /> <span>LogOut</span>
         </div>

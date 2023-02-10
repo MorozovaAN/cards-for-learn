@@ -15,6 +15,22 @@
 .name {
 
   @include headline3;
+
+  max-width: 90%;
+
+  word-wrap: break-word;
+}
+
+.skeletonNameContainer .skeletonName {
+  border-radius: 6px;
+}
+
+.skeletonNameContainer .skeletonName, .skeletonAvatarContainer .skeletonAvatar{
+  background-color: rgb(224 221 217 / 65%);
+
+  &:after {
+    background: linear-gradient( 90deg, transparent, rgb(217 214 214 / 78%), transparent );
+  }
 }
 
 .email {
@@ -29,6 +45,8 @@
   display: flex;
   column-gap: 5px;
   align-items: center;
+
+  max-width: 100%;
 }
 
 .logout {
