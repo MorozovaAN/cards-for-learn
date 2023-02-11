@@ -57,7 +57,7 @@ export const LogUp = () => {
 
     onSubmit: values => {
       dispatch(setIsLoading(true))
-      logUp({ email: values.email, password: values.password })
+      logUp({ email: values.email.toLowerCase(), password: values.password })
     },
   })
 
