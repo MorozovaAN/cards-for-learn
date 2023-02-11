@@ -19,8 +19,8 @@ export type ErrorsType = {
 
 const payload = {
   form: 'test-front-admin <ai73a@yandex.by>',
-  message: `<div style="background-color: #d6f3d7; padding: 30px; font-weight: 600; width: 230px; border: 1px solid green; color: #026c60">
-            password recovery link: <a style="text-decoration: none; font-weight: 900; color: black;" href='http://localhost:3000/set-new-password/$token$'>follow me</a>
+  message: `<div style="background-color: #d6f3d7; padding: 30px; font-weight: 600; width: 230px; border: 1px solid green; color: black">
+            Password recovery link: <a style="text-decoration: none; font-weight: 900; color: #026c60;" href='http://localhost:3000/set-new-password/$token$'>follow me</a>
         </div>`,
 }
 
@@ -74,7 +74,7 @@ export const ForgotPassword = () => {
       </form>
 
       <div className={s.navigateContainer}>
-        <p className={s.subtitle}>Did your remember your password?</p>
+        <p className={s.subtitle}>Do you remember your password?</p>
         <NavLink url={PATH.LOG_IN} styleType="primary">
           Try to logging in
         </NavLink>
