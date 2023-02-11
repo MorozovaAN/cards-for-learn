@@ -1,6 +1,8 @@
+import { QuerySubState, RootState } from '@reduxjs/toolkit/dist/query/core/apiState'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { baseURL } from 'common/constants/base-URL'
+import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 
 export const packsApi = createApi({
   reducerPath: 'packsApi',
@@ -10,10 +12,12 @@ export const packsApi = createApi({
   }),
 
   endpoints: build => ({
-    getPacks: build.query<ResponsePacksType, void>({
-      query: () => ({
+    getPacks: build.query<ResponsePacksType, BaseQueryParamsType>({
+      query: arg => ({
         url: `pack`,
-        params: {},
+        params: {
+          ...arg,
+        },
       }),
     }),
   }),

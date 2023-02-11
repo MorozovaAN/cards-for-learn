@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
 import edit from 'assets/img/icons/edit.svg'
 import teach from 'assets/img/icons/teach.svg'
 import trash from 'assets/img/icons/trash.svg'
+import { baseQueryParams, BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { useLogOutMutation } from 'modules'
 import { Pack } from 'modules/packs/pack/Pack'
 import s from 'modules/packs/pack.module.scss'
@@ -13,9 +14,11 @@ import { Button } from 'UI/button/Button'
 import { MenuList } from 'UI/menu-list/MenuList'
 
 export const Packs = () => {
-  const [] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
+
   const [logout] = useLogOutMutation()
-  const { data: packs } = useGetPacksQuery()
+  const { data: packs } = useGetPacksQuery(baseParams)
 
   const [toggleV, setToggleV] = useState(false)
 
@@ -28,9 +31,13 @@ export const Packs = () => {
   const handlerLogout = async () => {
     await logout()
   }
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setBaseParams({ ...baseParams, packName: e.currentTarget.value })
+  }
 
   return (
     <div>
+      <input type="text" onChange={onChangeHandler} />
       {packs?.cardPacks?.map(pack => {
         return <Pack name={pack.name} key={pack._id} />
       })}
