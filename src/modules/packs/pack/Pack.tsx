@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
 import { ResponsePackType } from 'modules/packs/packsApi'
+
 type PackType = {
   name: string
 }

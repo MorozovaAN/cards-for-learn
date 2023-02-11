@@ -20,7 +20,7 @@ export type ErrorsType = {
 const payload = {
   form: 'test-front-admin <ai73a@yandex.by>',
   message: `<div style="background-color: #d6f3d7; padding: 30px; font-weight: 600; width: 230px; border: 1px solid green; color: #026c60">
-            password recovery link: <a style="text-decoration: none; font-weight: 900; color: black;" href='http://localhost:3000/set-new-password/$token$'>follow me</a>
+            password recovery link: <a style="text-decoration: none; font-weight: 900; color: black;" href='https://cards-for-learn-rnpg2c25d-morozovaan.vercel.app/set-new-password/$token$'>follow me</a>
         </div>`,
 }
 
