@@ -32,7 +32,7 @@ export const Packs = () => {
   return (
     <div>
       {packs?.cardPacks?.map(pack => {
-        return <Pack pack={pack} key={pack._id} />
+        return <Pack name={pack.name} key={pack._id} />
       })}
       <Button onClick={handlerLogout}>Log OUT</Button>
       {/*<div className={s.menuBox}>*/}
