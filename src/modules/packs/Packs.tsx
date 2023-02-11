@@ -15,7 +15,7 @@ import { MenuList } from 'UI/menu-list/MenuList'
 export const Packs = () => {
   const [] = useSearchParams()
   const [logout] = useLogOutMutation()
-  const { data: cardPacks } = useGetPacksQuery()
+  const { data: packs } = useGetPacksQuery()
 
   const [toggleV, setToggleV] = useState(false)
 
@@ -31,7 +31,7 @@ export const Packs = () => {
 
   return (
     <div>
-      {cardPacks?.cardPacks?.map(pack => {
+      {packs?.cardPacks?.map(pack => {
         return <Pack pack={pack} key={pack._id} />
       })}
       <Button onClick={handlerLogout}>Log OUT</Button>
