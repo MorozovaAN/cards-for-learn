@@ -6,7 +6,7 @@ export const PATH = {
   SET_NEW_PASS: '/set-new-password/:token',
   CHECK_EMAIL: '/check-email',
   PROFILE: '/profile',
-  PACKS: '/packs',
+  PACKS: '/packs/',
   CARDS: '/cards/:id',
   CARD: '/cards/:id/learn',
   ERROR_404: '/404',

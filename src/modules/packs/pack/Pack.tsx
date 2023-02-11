@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-export const Pack = () => {
-  return <div></div>
+import { ResponsePackType } from 'modules/packs/packsApi'
+type PackType = {
+  name: string
+}
+export const Pack: FC<PackType> = ({ name }) => {
+  return <div>{name}</div>
 }
