@@ -54,6 +54,8 @@ export const LogIn = () => {
 
     onSubmit: values => {
       dispatch(setIsLoading(true))
+      values = { ...values, email: values.email.toLowerCase() }
+
       setLogin(values)
     },
   })
