@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 import s from './ForgotPassword.module.scss'
 
@@ -17,15 +17,10 @@ export type ErrorsType = {
   password?: string
 }
 
-const payload = {
-  form: 'test-front-admin <ai73a@yandex.by>',
-  message: `<div style="background-color: #d6f3d7; padding: 30px; font-weight: 600; width: 230px; border: 1px solid green; color: black">
-            Password recovery link: <a style="text-decoration: none; font-weight: 900; color: #026c60;" href='http://localhost:3000/set-new-password/$token$'>follow me</a>
-        </div>`,
-}
-
 export const ForgotPassword = () => {
   const [forgotPassword, { isSuccess }] = useForgotPasswordMutation()
+  const index = window.location.href.lastIndexOf('/')
+  const location = window.location.href.slice(0, index)
 
   const formik = useFormik({
     initialValues: {
@@ -44,6 +39,13 @@ export const ForgotPassword = () => {
     },
 
     onSubmit: values => {
+      let payload = {
+        form: 'test-front-admin <ai73a@yandex.by>',
+        message: `<div style="background-color: #d6f3d7; padding: 30px; font-weight: 600; width: 230px; border: 1px solid green; color: black">
+            Password recovery link: <a style="text-decoration: none; font-weight: 900; color: #026c60;" href=\`${location}/set-new-password/$token$\`>follow me</a>
+        </div>`,
+      }
+
       forgotPassword({ email: values.email, ...payload })
     },
   })
