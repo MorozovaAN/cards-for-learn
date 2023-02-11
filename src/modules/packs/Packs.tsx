@@ -14,7 +14,6 @@ import { Button } from 'UI/button/Button'
 import { MenuList } from 'UI/menu-list/MenuList'
 
 export const Packs = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
 
   const [logout] = useLogOutMutation()
