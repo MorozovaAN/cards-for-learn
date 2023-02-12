@@ -1,17 +1,14 @@
 import React, { ChangeEvent, useState } from 'react'
 
-import { useSearchParams } from 'react-router-dom'
-
 import edit from 'assets/img/icons/edit.svg'
 import teach from 'assets/img/icons/teach.svg'
 import trash from 'assets/img/icons/trash.svg'
 import { baseQueryParams, BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { useLogOutMutation } from 'modules'
 import { Pack } from 'modules/packs/pack/Pack'
-import s from 'modules/packs/pack.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
-import { MenuList } from 'UI/menu-list/MenuList'
+import { Search } from 'UI/search/Search'
 
 export const Packs = () => {
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
@@ -36,10 +33,14 @@ export const Packs = () => {
 
   return (
     <div>
+      <Search class={'need write here class'} selector={'Packs'} />
+
       <input type="text" onChange={onChangeHandler} />
+
       {packs?.cardPacks?.map(pack => {
         return <Pack name={pack.name} key={pack._id} />
       })}
+
       <Button onClick={handlerLogout}>Log OUT</Button>
       {/*<div className={s.menuBox}>*/}
       {/*  <button className={s.menuBtn} onClick={() => setToggleV(!toggleV)}></button>*/}
