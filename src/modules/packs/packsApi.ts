@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { setIsLoading, setIsLoggedIn, setNotification } from 'app/appSlice'
+import { setIsLoading, setNotification } from 'app/appSlice'
 import { baseURL } from 'common/constants/base-URL'
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { ErrorType } from 'common/types/types'
-import { setAuthData } from 'modules/auth/authSlice'
 
 export const packsApi = createApi({
   reducerPath: 'packsApi',
@@ -51,9 +50,17 @@ export const packsApi = createApi({
       },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
+    updatePack: build.mutation<ResponseUpdateNamePack, UpdateNamePackType>({
+      query: body => ({
+        url: 'pack',
+        method: 'PUT',
+        body,
+      }),
+      // invalidatesTags: [{ type: 'packs', id: 'LIST' }],
+    }),
   }),
 })
-export const { useGetPacksQuery, useAddPackMutation } = packsApi
+export const { useGetPacksQuery, useAddPackMutation, useUpdatePackMutation } = packsApi
 
 //types
 export type PackType = {
@@ -83,8 +90,11 @@ export type ResponsePackType = {
   created: string
   updated: string
 }
-export type ResponseNewPack = {
-  newCardsPack: PackType
+export type UpdateNamePackType = {
+  cardsPack: {
+    _id: string
+    name: string
+  }
 }
 export type AddPackType = {
   cardsPack: {
@@ -92,4 +102,10 @@ export type AddPackType = {
     deckCover: string
     private: boolean
   }
+}
+export type ResponseUpdateNamePack = {
+  updatedCardsPack: PackType
+}
+export type ResponseNewPack = {
+  newCardsPack: PackType
 }
