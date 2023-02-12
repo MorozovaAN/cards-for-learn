@@ -78,7 +78,7 @@ export const LogUp = () => {
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
-          label="Email*"
+          label="Email"
           disabled={isLoading}
           error={formik.touched.email && formik.errors.email}
           {...formik.getFieldProps('email')}
@@ -86,7 +86,7 @@ export const LogUp = () => {
 
         <Input
           type="password"
-          label="Password*"
+          label="Password"
           disabled={isLoading}
           error={formik.touched.password && formik.errors.password}
           {...formik.getFieldProps('password')}
@@ -94,7 +94,7 @@ export const LogUp = () => {
 
         <Input
           type="password"
-          label="Confirm password*"
+          label="Confirm password"
           disabled={isLoading}
           error={formik.touched.confirmPassword && formik.errors.confirmPassword}
           {...formik.getFieldProps('confirmPassword')}
