@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { setIsLoading, setIsLoggedIn, setNotification } from 'app/appSlice'
+import { setIsLoading, setNotification } from 'app/appSlice'
 import { baseURL } from 'common/constants/base-URL'
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { ErrorType } from 'common/types/types'
-import { setAuthData } from 'modules/auth/authSlice'
 
 export const packsApi = createApi({
   reducerPath: 'packsApi',
