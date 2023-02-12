@@ -10,12 +10,14 @@ import { useLogOutMutation } from 'modules'
 import { Pack } from 'modules/packs/pack/Pack'
 import s from 'modules/packs/pack.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
+import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Button } from 'UI/button/Button'
 import { MenuList } from 'UI/menu-list/MenuList'
 
 export const Packs = () => {
-  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
-
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(paramsHelper({ searchParams }))
+  const params = paramsHelper({ searchParams })
   const [logout] = useLogOutMutation()
   const { data: packs } = useGetPacksQuery(baseParams)
 
@@ -31,7 +33,8 @@ export const Packs = () => {
     await logout()
   }
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setBaseParams({ ...baseParams, packName: e.currentTarget.value })
+    setSearchParams({ packName: e.currentTarget.value })
+    setBaseParams({ ...params, packName: e.currentTarget.value })
   }
 
   return (

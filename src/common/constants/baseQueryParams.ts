@@ -9,7 +9,7 @@ export const baseQueryParams: BaseQueryParamsType = {
   packName: '',
   sortPacks: sortingPacksMethods.desUpdate,
 }
-export type BaseQueryParamsType = {
+export type ParamsType = {
   pageCount: number
   page: number
   min: number
@@ -18,3 +18,4 @@ export type BaseQueryParamsType = {
   packName: string
   sortPacks: string
 }
+export type BaseQueryParamsType = Partial<ParamsType>
