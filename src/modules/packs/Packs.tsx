@@ -1,22 +1,29 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
+
+import { useSearchParams } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { baseQueryParams, BaseQueryParamsType } from 'common/constants/baseQueryParams'
+import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { formatDate } from 'common/utils/formatDate'
 import { Search } from 'components/search/Search'
 import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Pack } from 'modules/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
+import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
   const [toggle, setToggle] = useState(false)
-  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(paramsHelper({ searchParams }))
+  const params = paramsHelper({ searchParams })
+
   const { data: packs } = useGetPacksQuery(baseParams)
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setBaseParams({ ...baseParams, packName: e.currentTarget.value })
+  const onChangeHandler = (packName: string) => {
+    setSearchParams({ packName })
+    setBaseParams({ ...params, packName })
   }
 
   return (
@@ -27,9 +34,7 @@ export const Packs = () => {
 
       {toggle && <AddPackModal />}
 
-      <Search class={'need write here class'} selector={'Packs'} />
-
-      <input type="text" onChange={onChangeHandler} />
+      <Search class={'need write here class'} selector={'Packs'} onChange={onChangeHandler} />
 
       <div className={s.packsContainer}>
         {packs?.cardPacks?.map(p => {
