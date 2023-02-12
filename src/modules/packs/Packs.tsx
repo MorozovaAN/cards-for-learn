@@ -24,6 +24,7 @@ export const Packs = () => {
       <Button styleType="primary" onClick={() => setToggle(!toggle)}>
         Add new Pack
       </Button>
+
       {toggle && <AddPackModal />}
 
       <Search class={'need write here class'} selector={'Packs'} />
