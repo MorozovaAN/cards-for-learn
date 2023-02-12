@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
 import { Input } from 'UI/input/Input'
@@ -8,6 +7,7 @@ import { Input } from 'UI/input/Input'
 type SearchProps = {
   class?: string
   selector: string
+  onChange: (value: string) => void
 }
 
 export const Search: FC<SearchProps> = props => {
@@ -19,13 +19,9 @@ export const Search: FC<SearchProps> = props => {
     setValue(e.currentTarget.value)
   }
 
-  // useEffect(() => {
-  //   if (props.selector === 'Packs') {
-  //     dispatch(setSearchName(value))
-  //   } else {
-  //     // dispatch(setCardQuestion(value))
-  //   }
-  // }, [debouncedValue])
+  useEffect(() => {
+    props.onChange(debouncedValue)
+  }, [debouncedValue])
 
   // useEffect(() => {
   //   if (packName === '') setValue(packName)
