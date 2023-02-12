@@ -1,5 +1,3 @@
-import React, { FC } from 'react'
-
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 type ParamsHelperType = {

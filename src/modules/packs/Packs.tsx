@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { baseQueryParams, BaseQueryParamsType } from 'common/constants/baseQueryParams'
+import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { formatDate } from 'common/utils/formatDate'
 import { Search } from 'components/search/Search'
 import { AddPackModal } from 'modules/packs/modals/AddPackModal'
@@ -15,10 +15,10 @@ import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
   const [toggle, setToggle] = useState(false)
-
   const [searchParams, setSearchParams] = useSearchParams()
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(paramsHelper({ searchParams }))
   const params = paramsHelper({ searchParams })
+
   const { data: packs } = useGetPacksQuery(baseParams)
 
   const onChangeHandler = (packName: string) => {
