@@ -129,9 +129,7 @@ export const authApi = createApi({
             setNotification({ message: 'Avatar image changed successfully', type: 'success' })
           )
         } catch (err) {
-          dispatch(
-            setNotification({ message: 'Sorry, max file size should be 120 Kb!', type: 'error' })
-          )
+          dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
         }
       },
     }),
