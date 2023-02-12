@@ -4,11 +4,11 @@ import edit from 'assets/img/icons/edit.svg'
 import teach from 'assets/img/icons/teach.svg'
 import trash from 'assets/img/icons/trash.svg'
 import { baseQueryParams, BaseQueryParamsType } from 'common/constants/baseQueryParams'
+import { Search } from 'components/search/Search'
 import { useLogOutMutation } from 'modules'
 import { Pack } from 'modules/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
-import { Search } from 'UI/search/Search'
 
 export const Packs = () => {
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
