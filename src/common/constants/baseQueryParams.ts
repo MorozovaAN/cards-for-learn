@@ -1,14 +1,15 @@
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 
 export const baseQueryParams: BaseQueryParamsType = {
-  pageCount: 5,
+  pageCount: 8,
   page: 1,
-  min: 0,
+  min: 5,
   max: 110,
   user_id: '',
   packName: '',
   sortPacks: sortingPacksMethods.desUpdate,
 }
+
 export type BaseQueryParamsType = {
   pageCount: number
   page: number

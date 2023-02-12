@@ -10,23 +10,16 @@ import { Pack } from 'modules/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
 
+
 export const Packs = () => {
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(baseQueryParams)
-
-  const [logout] = useLogOutMutation()
   const { data: packs } = useGetPacksQuery(baseParams)
-
-  const [toggleV, setToggleV] = useState(false)
-
-  const menuListInPacks = [
-    { img: edit, title: 'Edit', id: 1 },
-    { img: teach, title: 'Delete', id: 2 },
-    { img: trash, title: 'Learn', id: 3 },
-  ]
-
+  
+  const [logout] = useLogOutMutation()
   const handlerLogout = async () => {
     await logout()
   }
+
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setBaseParams({ ...baseParams, packName: e.currentTarget.value })
   }
@@ -37,21 +30,28 @@ export const Packs = () => {
 
       <input type="text" onChange={onChangeHandler} />
 
-      {packs?.cardPacks?.map(pack => {
-        return <Pack name={pack.name} key={pack._id} />
-      })}
+
+ 
 
       <Button onClick={handlerLogout}>Log OUT</Button>
-      {/*<div className={s.menuBox}>*/}
-      {/*  <button className={s.menuBtn} onClick={() => setToggleV(!toggleV)}></button>*/}
-      {/*  <div className={s.menuListBox}>{toggleV && <MenuList menu={menuListInPacks} />}</div>*/}
-      {/*</div>*/}
+
+
+      <div className={s.packsContainer}>
+        {packs?.cardPacks?.map(p => {
+          const dateUpdate = formatDate(p.updated)
+
+          return (
+            <Pack
+              key={p._id}
+              packId={p._id}
+              name={p.name}
+              cardsCount={p.cardsCount}
+              author={p.user_name}
+              updated={dateUpdate}
+            />
+          )
+        })}
+      </div>
     </div>
   )
-}
-
-export type MenuType = {
-  img: string
-  title: string
-  id: number
 }
