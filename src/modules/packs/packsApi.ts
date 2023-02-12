@@ -56,7 +56,7 @@ export const packsApi = createApi({
         method: 'PUT',
         body,
       }),
-      // invalidatesTags: [{ type: 'packs', id: 'LIST' }],
+      invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
   }),
 })

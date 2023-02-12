@@ -34,6 +34,7 @@ export const App = () => {
       <NotificationBar />
 
       {isLoggedIn && <Header />}
+
       {isLoading && <LoadingProgress />}
 
       <section className={s.contentContainer}>
