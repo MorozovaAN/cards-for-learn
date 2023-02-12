@@ -1,0 +1,46 @@
+@import "src/common/style-mixins/mixins";
+
+.pack {
+
+  @include subtitle;
+
+  @include boxBorder;
+
+  display: grid;
+  grid-template-rows: 39px 20px 39px 20px 40px;
+  gap: 12px;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 220px;
+  padding: 15px;
+
+  line-height: 1.25;
+
+  background-color: var(--color-secondary-base) ;
+}
+
+.pack p {
+  overflow: hidden;
+
+  max-height: 100%;
+}
+
+.name {
+
+  @include title(600);
+
+  text-align: center;
+}
+
+.subtitle {
+
+  @include title(600);
+}
+
+.button {
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  align-self: end;
+}
