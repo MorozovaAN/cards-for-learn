@@ -3,11 +3,14 @@
 }
 
 .contentContainer {
+  box-sizing: border-box;
   max-width: var(--width-main);
   height: 100%;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 10px var(--margin-m);
 }
+
 .loader .circular {
   position: absolute;
   top: 50%;
