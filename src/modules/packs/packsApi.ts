@@ -1,4 +1,3 @@
-import { QuerySubState, RootState } from '@reduxjs/toolkit/dist/query/core/apiState'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { baseURL } from 'common/constants/base-URL'
