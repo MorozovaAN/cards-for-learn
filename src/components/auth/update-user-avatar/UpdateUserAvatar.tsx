@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC } from 'react'
 
-import { setNotification } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { convertFileToBase64 } from 'common/utils/toBase64'
 import s from 'components/auth/update-user-avatar/UpdateUserAvatar.module.scss'
@@ -10,8 +9,6 @@ type UpdateProfileAvatarType = {
 }
 
 export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateAvatarCallback }) => {
-  const dispatch = useTypedDispatch()
-
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
