@@ -3,7 +3,6 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
-import { setSearchName } from 'modules/packs/packsSlise'
 import { Input } from 'UI/input/Input'
 
 type SearchProps = {
@@ -12,9 +11,7 @@ type SearchProps = {
 }
 
 export const Search: FC<SearchProps> = props => {
-  const dispatch = useTypedDispatch()
   const disabled = useTypedSelector(state => state.app.isLoading)
-  const packName = useTypedSelector(state => state.packs.queryParams.packName)
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value)
 
@@ -22,17 +19,17 @@ export const Search: FC<SearchProps> = props => {
     setValue(e.currentTarget.value)
   }
 
-  useEffect(() => {
-    if (props.selector === 'Packs') {
-      dispatch(setSearchName(value))
-    } else {
-      // dispatch(setCardQuestion(value))
-    }
-  }, [debouncedValue])
+  // useEffect(() => {
+  //   if (props.selector === 'Packs') {
+  //     dispatch(setSearchName(value))
+  //   } else {
+  //     // dispatch(setCardQuestion(value))
+  //   }
+  // }, [debouncedValue])
 
-  useEffect(() => {
-    if (packName === '') setValue(packName)
-  }, [packName])
+  // useEffect(() => {
+  //   if (packName === '') setValue(packName)
+  // }, [packName])
 
   return (
     <Input
