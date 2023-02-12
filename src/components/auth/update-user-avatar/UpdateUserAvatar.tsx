@@ -16,13 +16,9 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateAvatarCall
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      if (file.size < 100000) {
-        convertFileToBase64(file, (file64: string) => {
-          updateAvatarCallback(file64)
-        })
-      } else {
-        dispatch(setNotification({ message: 'Max file size should be 100 Kb!', type: 'error' }))
-      }
+      convertFileToBase64(file, (file64: string) => {
+        updateAvatarCallback(file64)
+      })
     }
   }
 
