@@ -24,7 +24,7 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({ updateAvatarCall
 
   return (
     <label className={s.uploadPhoto}>
-      <input type="file" onChange={uploadHandler} className={s.input} />
+      <input type="file" onChange={uploadHandler} className={s.input} accept=".jpg,.png" />
     </label>
   )
 }
