@@ -22,13 +22,15 @@ export const Packs = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { data: packs } = useGetPacksQuery(paramsHelper({ searchParams }))
 
+  console.log(searchParams)
   const onChangeHandler = (packName: string) => {
     setSearchParams({ packName })
   }
+
   const [sortPacks, setSortPacks] = useState(sortingPacksMethods.ascCardsCount)
   const selectOnChangeHandler = (e: any) => {
     setSortPacks(e.currentTarget.value)
-    setBaseParams({ ...params, sortPacks })
+    setSearchParams({ sortPacks })
   }
 
   return (

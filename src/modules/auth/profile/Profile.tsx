@@ -62,7 +62,7 @@ export const Profile = () => {
   )
 
   return (
-    <Box>
+    <Box className={s.profileBox}>
       <h2 className={s.title}>Personal Information</h2>
 
       {isLoadingAvatar ? (
