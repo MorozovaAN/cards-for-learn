@@ -1,0 +1,44 @@
+.packsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+
+  padding: 20px 0;
+}
+
+.filters {
+  display: flex;
+  column-gap: 25px;
+  align-items: flex-end;
+
+  height: 55px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.select {
+  flex-shrink: 0;
+  align-self: flex-start;
+
+  width: 260px;
+}
+
+.buttonsContainer {
+  display: flex;
+}
+
+.btnMy {
+  width: 85px;
+  height: 42px;
+
+  border-radius: 10px 0 0 10px;
+}
+
+.btnOther {
+  width: 85px;
+  height: 42px;
+
+  background-color: var(--color-secondary-base);
+  border-radius:  0 10px 10px 0;
+}

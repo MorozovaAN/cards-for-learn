@@ -1,5 +1,9 @@
 @import 'src/common/style-mixins/mixins';
 
+.profileBox {
+  background-color: var(--color-background-dark-100) ;
+}
+
 .avatar {
   width: 120px;
   height: 120px;
