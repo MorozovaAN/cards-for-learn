@@ -45,8 +45,8 @@ export const LogIn = () => {
 
       if (!values.password.trim()) {
         errors.password = 'Password is required'
-      } else if (values.password.trim().length <= 8) {
-        errors.password = 'Password should be longer then 8 symbols!'
+      } else if (values.password.trim().length < 8) {
+        errors.password = 'Password should be 8 symbols at less'
       }
 
       return errors

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -20,14 +20,10 @@ import { Button } from 'UI/button/Button'
 export const Packs = () => {
   const [toggle, setToggle] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
-  const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(paramsHelper({ searchParams }))
-  const params = paramsHelper({ searchParams })
-
-  const { data: packs } = useGetPacksQuery(baseParams)
+  const { data: packs } = useGetPacksQuery(paramsHelper({ searchParams }))
 
   const onChangeHandler = (packName: string) => {
     setSearchParams({ packName })
-    setBaseParams({ ...params, packName })
   }
   const [sortPacks, setSortPacks] = useState(sortingPacksMethods.ascCardsCount)
   const selectOnChangeHandler = (e: any) => {
