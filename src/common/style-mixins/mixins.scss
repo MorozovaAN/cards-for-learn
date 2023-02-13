@@ -12,11 +12,11 @@
   font-weight: 600;
 }
 
-@mixin headline3() {
+@mixin headline3($fontWeight: 500,) {
   margin: 0;
 
   font-size: 18px;
-  font-weight: 500;
+  font-weight: $fontWeight;
 }
 
 @mixin title($fontWeight: 400, $opacity: 1) {

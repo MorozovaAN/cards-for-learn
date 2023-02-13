@@ -1,39 +1,56 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import CircularProgress from '@mui/material/CircularProgress'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
 
-import s from './pack.module.scss'
-
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { formatDate } from 'common/utils/formatDate'
 import { Search } from 'components/search/Search'
 import { Pack } from 'modules/packs/pack/Pack'
+import s from 'modules/packs/Packs.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [sortPacks, setSortPacks] = useState(sortingPacksMethods.ascCardsCount)
-  const { data: packs } = useGetPacksQuery(paramsHelper({ searchParams }))
-  let sortLabel = ''
+  const [searchParams, setSearchParams] = useSearchParams({
+    sortPacks: sortingPacksMethods.desCardsCount,
+  })
+  const [sortPacks, setSortPacks] = useState(sortingPacksMethods.desCardsCount)
+  const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }))
+  const [sortLabel, setSortLabel] = useState(' by cards count')
 
-  switch (sortPacks) {
-    case sortingPacksMethods.desName || sortingPacksMethods.ascName:
-      sortLabel = ' by pack name'
-      break
-    case sortingPacksMethods.ascCardsCount || sortingPacksMethods.desCardsCount:
-      sortLabel = ' by cards count'
-      break
-    case sortingPacksMethods.ascUpdate || sortingPacksMethods.desUpdate:
-      sortLabel = ' by latest update'
-      break
-    case sortingPacksMethods.desUserName || sortingPacksMethods.ascUserName:
-      sortLabel = ' by creator name'
-  }
+  useEffect(() => {
+    switch (sortPacks) {
+      case sortingPacksMethods.desName:
+        setSortLabel(' by pack name')
+        break
+      case sortingPacksMethods.ascName:
+        setSortLabel(' by pack name')
+        break
+      case sortingPacksMethods.ascCardsCount:
+        setSortLabel(' by cards count')
+        break
+      case sortingPacksMethods.desCardsCount:
+        setSortLabel(' by cards count')
+        break
+      case sortingPacksMethods.ascUpdate:
+        setSortLabel(' by latest update')
+        break
+      case sortingPacksMethods.desUpdate:
+        setSortLabel(' by latest update')
+        break
+      case sortingPacksMethods.desUserName:
+        setSortLabel(' by creator name')
+        break
+      case sortingPacksMethods.ascUserName:
+        setSortLabel(' by creator name')
+        break
+    }
+  }, [sortPacks])
 
   const onChangeHandler = (packName: string) => {
     setSearchParams({ packName })
@@ -41,7 +58,7 @@ export const Packs = () => {
 
   const selectOnChangeHandler = (e: any) => {
     setSortPacks(e.currentTarget.value)
-    setSearchParams({ sortPacks })
+    setSearchParams({ sortPacks: e.currentTarget.value })
   }
 
   return (
@@ -70,8 +87,8 @@ export const Packs = () => {
                 <option value={sortingPacksMethods.ascName}>from Z to A</option>
               </optgroup>
               <optgroup label="Sort by cards count">
-                <option value={sortingPacksMethods.ascCardsCount}>from largest to smallest</option>
-                <option value={sortingPacksMethods.desCardsCount}>from smallest to largest</option>
+                <option value={sortingPacksMethods.desCardsCount}>from largest to smallest</option>
+                <option value={sortingPacksMethods.ascCardsCount}>from smallest to largest</option>
               </optgroup>
               <optgroup label="Sort by latest update">
                 <option value={sortingPacksMethods.ascUpdate}>late to early</option>
@@ -87,20 +104,26 @@ export const Packs = () => {
       </div>
 
       <div className={s.packsContainer}>
-        {packs?.cardPacks?.map(p => {
-          const dateUpdate = formatDate(p.updated)
+        {isFetching ? (
+          <CircularProgress classes={{ root: s.circular }} size={60} />
+        ) : (
+          <>
+            {packs?.cardPacks?.map(p => {
+              const dateUpdate = formatDate(p.updated)
 
-          return (
-            <Pack
-              key={p._id}
-              packId={p._id}
-              name={p.name}
-              cardsCount={p.cardsCount}
-              author={p.user_name}
-              updated={dateUpdate}
-            />
-          )
-        })}
+              return (
+                <Pack
+                  key={p._id}
+                  packId={p._id}
+                  name={p.name}
+                  cardsCount={p.cardsCount}
+                  author={p.user_name}
+                  updated={dateUpdate}
+                />
+              )
+            })}
+          </>
+        )}
       </div>
     </div>
   )

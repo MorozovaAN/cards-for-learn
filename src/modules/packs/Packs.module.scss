@@ -1,7 +1,7 @@
 .packsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 40px;
   justify-content: center;
 
   padding: 20px 0;
@@ -39,5 +39,6 @@
   width: 85px;
   height: 42px;
 
+  background-color: var(--color-secondary-base);
   border-radius:  0 10px 10px 0;
 }

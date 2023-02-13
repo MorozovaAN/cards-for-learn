@@ -24,7 +24,7 @@ export const Pack: FC<PackType> = ({ packId, name, cardsCount, author, updated }
       </p>
 
       <p>
-        <span className={s.subtitle}>Creator: </span>
+        <span className={`${s.subtitle} ${s.creator}`}>Create by: </span>
         {author}
       </p>
 
