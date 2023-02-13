@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
@@ -11,6 +11,7 @@ import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Pack } from 'modules/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { paramsHelper } from 'modules/packs/paramsHelper'
+import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
@@ -18,6 +19,7 @@ export const Packs = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [baseParams, setBaseParams] = useState<BaseQueryParamsType>(paramsHelper({ searchParams }))
   const params = paramsHelper({ searchParams })
+  const navigate = useNavigate()
 
   const { data: packs } = useGetPacksQuery(baseParams)
 
@@ -26,10 +28,18 @@ export const Packs = () => {
     setBaseParams({ ...params, packName })
   }
 
+  const handleMyPacks = () => {
+    navigate(PATH.MY_PACKS)
+  }
+
   return (
     <div>
       <Button styleType="primary" onClick={() => setToggle(!toggle)}>
         Add new Pack
+      </Button>
+
+      <Button styleType="primary" onClick={handleMyPacks}>
+        My Packs
       </Button>
 
       {toggle && <AddPackModal />}
