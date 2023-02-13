@@ -20,7 +20,7 @@ export default {
     textChange: {
       description: 'On/off btn for save current input value',
     },
-    inputContainerClassName: {
+    inputContainerClass: {
       description: 'Styles for input container',
     },
     label: {

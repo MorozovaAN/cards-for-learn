@@ -6,3 +6,19 @@
 
   padding: 20px 0;
 }
+
+.filters {
+  display: flex;
+  column-gap: 25px;
+  align-items: flex-end;
+
+  height: 55px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.select {
+  align-self: flex-start;
+
+  width: 220px;
+}
