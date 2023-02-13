@@ -18,7 +18,26 @@
 }
 
 .select {
+  flex-shrink: 0;
   align-self: flex-start;
 
-  width: 280px;
+  width: 260px;
+}
+
+.buttonsContainer {
+  display: flex;
+}
+
+.btnMy {
+  width: 85px;
+  height: 42px;
+
+  border-radius: 10px 0 0 10px;
+}
+
+.btnOther {
+  width: 85px;
+  height: 42px;
+
+  border-radius:  0 10px 10px 0;
 }

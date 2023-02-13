@@ -17,18 +17,22 @@ export const Pack: FC<PackType> = ({ packId, name, cardsCount, author, updated }
   return (
     <div className={s.pack}>
       <p className={s.name}>{name}</p>
+
       <p>
-        <span className={s.subtitle}>Cards: </span>
+        <span className={s.subtitle}>Cards in pack: </span>
         {cardsCount}
       </p>
+
       <p>
-        <span className={s.subtitle}>Created by: </span>
+        <span className={s.subtitle}>Creator: </span>
         {author}
       </p>
+
       <p>
         <span className={s.subtitle}>Last Updated: </span>
         {updated}
       </p>
+
       <Button styleType="primary" className={s.button}>
         <p>Learn this pack</p> <LearnIcon width="16" />
       </Button>

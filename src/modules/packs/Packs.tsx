@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -7,27 +7,38 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { formatDate } from 'common/utils/formatDate'
 import { Search } from 'components/search/Search'
-import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Pack } from 'modules/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
-  const [toggle, setToggle] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [sortPacks, setSortPacks] = useState(sortingPacksMethods.ascCardsCount)
   const { data: packs } = useGetPacksQuery(paramsHelper({ searchParams }))
+  let sortLabel = ''
 
-  console.log(searchParams)
+  switch (sortPacks) {
+    case sortingPacksMethods.desName || sortingPacksMethods.ascName:
+      sortLabel = ' by pack name'
+      break
+    case sortingPacksMethods.ascCardsCount || sortingPacksMethods.desCardsCount:
+      sortLabel = ' by cards count'
+      break
+    case sortingPacksMethods.ascUpdate || sortingPacksMethods.desUpdate:
+      sortLabel = ' by latest update'
+      break
+    case sortingPacksMethods.desUserName || sortingPacksMethods.ascUserName:
+      sortLabel = ' by creator name'
+  }
+
   const onChangeHandler = (packName: string) => {
     setSearchParams({ packName })
   }
 
-  const [sortPacks, setSortPacks] = useState(sortingPacksMethods.ascCardsCount)
   const selectOnChangeHandler = (e: any) => {
     setSortPacks(e.currentTarget.value)
     setSearchParams({ sortPacks })
@@ -35,17 +46,24 @@ export const Packs = () => {
 
   return (
     <div>
-      {/*<Button styleType="primary" onClick={() => setToggle(!toggle)}>*/}
-      {/*  Add new Pack*/}
-      {/*</Button>*/}
-
-      {toggle && <AddPackModal />}
       <div className={s.filters}>
         <Search selector="Packs" onChange={onChangeHandler} />
 
+        <div className={s.buttonsContainer}>
+          <Button styleType="primary" className={s.btnMy}>
+            My
+          </Button>
+          <Button styleType="secondary" className={s.btnOther}>
+            Other
+          </Button>
+        </div>
+
         <div className={s.select}>
           <FormControl>
-            <InputLabel variant="standard">Sort packs</InputLabel>
+            <InputLabel variant="standard">
+              Sort packs
+              {sortLabel}
+            </InputLabel>
             <NativeSelect value={sortPacks} onChange={selectOnChangeHandler}>
               <optgroup label="Sort by pack name">
                 <option value={sortingPacksMethods.desName}>from A to Z</option>
