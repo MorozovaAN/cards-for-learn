@@ -58,7 +58,11 @@ export const SetNewPassword = () => {
           {...formik.getFieldProps('password')}
         />
 
-        <Button type="submit" styleType="primary" disabled={!!formik.errors.password}>
+        <Button
+          type="submit"
+          styleType="primary"
+          disabled={!!formik.errors.password || !formik.values.password}
+        >
           Create new password
         </Button>
       </form>
