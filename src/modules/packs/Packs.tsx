@@ -16,9 +16,7 @@ import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
-  const [searchParams, setSearchParams] = useSearchParams({
-    sortPacks: sortingPacksMethods.desCardsCount,
-  })
+  const [searchParams, setSearchParams] = useSearchParams()
   const [sortPacks, setSortPacks] = useState(sortingPacksMethods.desCardsCount)
   const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }))
   const [sortLabel, setSortLabel] = useState(' by cards count')
@@ -51,20 +49,25 @@ export const Packs = () => {
         break
     }
   }, [sortPacks])
+  const onChangeParamsHandler = (property: string, value: string) => {
+    const params = paramsHelper({ searchParams })
+    const newParams = { ...params, [property]: value }
 
-  const onChangeHandler = (packName: string) => {
+    setSearchParams(newParams)
+  }
+  /*const onChangeHandler = (packName: string) => {
     setSearchParams({ packName })
   }
 
   const selectOnChangeHandler = (e: any) => {
     setSortPacks(e.currentTarget.value)
     setSearchParams({ sortPacks: e.currentTarget.value })
-  }
+  }*/
 
   return (
     <div>
       <div className={s.filters}>
-        <Search selector="Packs" onChange={onChangeHandler} />
+        <Search selector="Packs" onChange={onChangeParamsHandler} />
 
         <div className={s.buttonsContainer}>
           <Button styleType="primary" className={s.btnMy}>
@@ -81,7 +84,7 @@ export const Packs = () => {
               Sort packs
               {sortLabel}
             </InputLabel>
-            <NativeSelect value={sortPacks} onChange={selectOnChangeHandler}>
+            <NativeSelect value={sortPacks}>
               <optgroup label="Sort by pack name">
                 <option value={sortingPacksMethods.desName}>from A to Z</option>
                 <option value={sortingPacksMethods.ascName}>from Z to A</option>
