@@ -7,7 +7,7 @@
   @include boxBorder;
 
   display: grid;
-  grid-template-rows: repeat(4, 20px);
+  grid-template-rows: 24px repeat(3, 20px);
   gap: 12px;
   align-items: center;
 

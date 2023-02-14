@@ -2,7 +2,7 @@ import React from 'react'
 
 import { baseQueryParams } from 'common/constants/baseQueryParams'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { Pack } from 'components/packs/pack/Pack'
+import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 
 export const MyPacks = () => {
@@ -21,7 +21,7 @@ export const MyPacks = () => {
     <div>
       {myPacks?.map(pack => {
         return (
-          <Pack
+          <OtherPack
             key={pack._id}
             packId={pack._id}
             name={pack.name}
