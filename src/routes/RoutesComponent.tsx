@@ -7,13 +7,13 @@ import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
 import { MyPacks } from 'modules/packs/myPacks/MyPacks'
-import { Packs } from 'modules/packs/Packs'
 import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
 import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPage'
 import { LogInPage } from 'pages/log-in-page/LogInPage'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/NewPasswordPage'
+import { PacksPage } from 'pages/packs-page/PacksPage'
 import { ProfilePage } from 'pages/profile-page/ProfilePage'
 
 export const RoutesComponent = () => {
@@ -24,7 +24,7 @@ export const RoutesComponent = () => {
       <Routes location={location} key={location.pathname}>
         <Route element={<PrivateRoutes />}>
           <Route path={PATH.PROFILE} element={<ProfilePage />} />
-          <Route path={PATH.PACKS} element={<Packs />} />
+          <Route path={PATH.PACKS} element={<PacksPage />} />
           <Route path={PATH.MY_PACKS} element={<MyPacks />} />
           {/*  <Route path={PATH.CARDS} element={<Cards />} />*/}
           {/*  <Route path={PATH.CARD} element={<LearnCard />} />*/}

@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useSearchParams } from 'react-router-dom'
 
-import { formatDate } from 'common/utils/formatDate'
+import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Search } from 'components/search/Search'
-import { SortPacks } from 'components/sort/SortPacks'
-import { Pack } from 'modules/packs/pack/Pack'
+import { AddPackModal } from 'modules/packs/modals/AddPackModal'
+import { Packs } from 'modules/packs/Packs'
 import s from 'modules/packs/Packs.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { paramsHelper } from 'modules/packs/paramsHelper'
+import { SortPacks } from 'modules/packs/sort/SortPacks'
 import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
@@ -17,6 +18,7 @@ export const PacksPage = () => {
   const params = paramsHelper({ searchParams })
   const [skip, setSkip] = useState(true)
   const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }), { skip })
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     if (skip) {
@@ -33,18 +35,15 @@ export const PacksPage = () => {
 
   return (
     <div>
+      <Button styleType="primary" onClick={() => setToggle(!toggle)}>
+        Add new Pack
+      </Button>
+
+      {toggle && <AddPackModal />}
+
       <div className={s.filters}>
         <Search selector="Packs" onChange={onChangeParamsHandler} />
-
-        <div className={s.buttonsContainer}>
-          <Button styleType="primary" className={s.btnMy}>
-            My
-          </Button>
-          <Button styleType="secondary" className={s.btnOther}>
-            Other
-          </Button>
-        </div>
-
+        <MyOtherButtons />
         <SortPacks onChange={onChangeParamsHandler} />
       </div>
 
@@ -52,22 +51,7 @@ export const PacksPage = () => {
         {isFetching ? (
           <CircularProgress classes={{ root: s.circular }} size={60} />
         ) : (
-          <>
-            {packs?.cardPacks?.map(p => {
-              const dateUpdate = formatDate(p.updated)
-
-              return (
-                <Pack
-                  key={p._id}
-                  packId={p._id}
-                  name={p.name}
-                  cardsCount={p.cardsCount}
-                  author={p.user_name}
-                  updated={dateUpdate}
-                />
-              )
-            })}
-          </>
+          <>{packs !== undefined && <Packs packs={packs.cardPacks} />}</>
         )}
       </div>
     </div>
