@@ -72,6 +72,7 @@ export type PackType = {
   created: string
   updated: string
 }
+
 export type ResponsePacksType = {
   cardPacks: ResponsePackType[]
   cardPacksTotalCount: number
@@ -90,12 +91,14 @@ export type ResponsePackType = {
   created: string
   updated: string
 }
+
 export type UpdateNamePackType = {
   cardsPack: {
     _id: string
     name: string
   }
 }
+
 export type AddPackType = {
   cardsPack: {
     name: string
@@ -103,9 +106,11 @@ export type AddPackType = {
     private: boolean
   }
 }
+
 export type ResponseUpdateNamePack = {
   updatedCardsPack: PackType
 }
+
 export type ResponseNewPack = {
   newCardsPack: PackType
 }

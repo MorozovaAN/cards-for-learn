@@ -2,7 +2,7 @@ import React from 'react'
 
 import { baseQueryParams } from 'common/constants/baseQueryParams'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { Pack } from 'modules/packs/pack/Pack'
+import { Pack } from 'components/packs/pack/Pack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 
 export const MyPacks = () => {

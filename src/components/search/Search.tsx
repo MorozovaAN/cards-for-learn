@@ -4,13 +4,13 @@ import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
 import { Input } from 'UI/input/Input'
 
-type SearchProps = {
+type SearchType = {
   class?: string
   selector: string
   onChange: (property: string, value: string) => void
 }
 
-export const Search: FC<SearchProps> = props => {
+export const Search: FC<SearchType> = props => {
   const disabled = useTypedSelector(state => state.app.isLoading)
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value)

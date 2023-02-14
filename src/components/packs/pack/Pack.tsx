@@ -23,6 +23,7 @@ export const Pack: FC<PackType> = ({ packId, name, cardsCount, author, updated }
 
   const packIdFromParams = searchParams.get('id') as string
   const nameFromParams = searchParams.get('namePack') as string
+
   const handleTogglePack = () => {
     setToggle(!toggle)
     setSearchParams({ namePack: name, id: packId })
