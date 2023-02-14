@@ -1,4 +1,8 @@
+import * as diagnostics_channel from 'diagnostics_channel'
+
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
+
+import { useSearchParams } from 'react-router-dom'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
@@ -8,6 +12,7 @@ type SearchType = {
   class?: string
   selector: string
   onChange: (property: string, value: string) => void
+  value: string | undefined
 }
 
 export const Search: FC<SearchType> = props => {
@@ -20,12 +25,12 @@ export const Search: FC<SearchType> = props => {
   }
 
   useEffect(() => {
-    props.onChange('packName', debouncedValue)
+    debouncedValue && props.onChange('packName', debouncedValue)
   }, [debouncedValue])
 
-  // useEffect(() => {
-  //   if (packName === '') setValue(packName)
-  // }, [packName])
+  useEffect(() => {
+    if (props.value === '') setValue(props.value)
+  }, [props.value])
 
   return (
     <Input

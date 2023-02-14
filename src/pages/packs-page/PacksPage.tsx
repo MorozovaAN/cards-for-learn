@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Paginator } from 'components/paginator/Paginator'
+import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Packs } from 'modules/packs/Packs'
@@ -43,9 +44,10 @@ export const PacksPage = () => {
       {toggle && <AddPackModal />}
 
       <div className={s.filters}>
-        <Search selector="Packs" onChange={onChangeParamsHandler} />
+        <Search selector="Packs" onChange={onChangeParamsHandler} value={params.packName} />
         <MyOtherButtons />
         <SortPacks onChange={onChangeParamsHandler} />
+        <ResetAllFilters disabled={isFetching} />
       </div>
 
       <div className={s.packsContainer}>
