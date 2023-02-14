@@ -13,7 +13,7 @@ export const paramsHelper = ({ searchParams }: ParamsHelperType) => {
     max: searchParams.get('max') || '110',
     user_id: searchParams.get('user_id') || '',
     packName: searchParams.get('packName') || '',
-    sortPacks: searchParams.get('sortPacks') || sortingPacksMethods.desUpdate,
+    sortPacks: searchParams.get('sortPacks') || sortingPacksMethods.desCardsCount,
   }
 
   return baseQueryParams

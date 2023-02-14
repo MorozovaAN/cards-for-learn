@@ -50,9 +50,17 @@ export const packsApi = createApi({
       },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
+    updatePack: build.mutation<ResponseUpdateNamePack, UpdateNamePackType>({
+      query: body => ({
+        url: 'pack',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [{ type: 'packs', id: 'LIST' }],
+    }),
   }),
 })
-export const { useGetPacksQuery, useAddPackMutation } = packsApi
+export const { useGetPacksQuery, useAddPackMutation, useUpdatePackMutation } = packsApi
 
 //types
 export type PackType = {
@@ -64,6 +72,7 @@ export type PackType = {
   created: string
   updated: string
 }
+
 export type ResponsePacksType = {
   cardPacks: ResponsePackType[]
   cardPacksTotalCount: number
@@ -82,13 +91,26 @@ export type ResponsePackType = {
   created: string
   updated: string
 }
-export type ResponseNewPack = {
-  newCardsPack: PackType
+
+export type UpdateNamePackType = {
+  cardsPack: {
+    _id: string
+    name: string
+  }
 }
+
 export type AddPackType = {
   cardsPack: {
     name: string
     deckCover: string
     private: boolean
   }
+}
+
+export type ResponseUpdateNamePack = {
+  updatedCardsPack: PackType
+}
+
+export type ResponseNewPack = {
+  newCardsPack: PackType
 }
