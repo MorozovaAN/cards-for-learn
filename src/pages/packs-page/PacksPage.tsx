@@ -45,10 +45,9 @@ export const PacksPage = () => {
       {toggle && <AddPackModal />}
 
       <div className={s.filters}>
-        <Search selector="Packs" onChange={onChangeParamsHandler} />
-        <MyOtherButtons onChange={onChangeParamsHandler} myPacks={myPacks} />
         <Search selector="Packs" onChange={onChangeParamsHandler} value={params.packName} />
-        <MyOtherButtons />
+        <MyOtherButtons onChange={onChangeParamsHandler} myPacks={myPacks} />
+
         <SortPacks onChange={onChangeParamsHandler} />
         <ResetAllFilters disabled={isFetching} />
       </div>
