@@ -27,7 +27,7 @@ export const SetNewPassword = () => {
       if (!values.password) {
         errors.password = 'Required field'
       } else if (values.password.trim().length < 8) {
-        errors.password = 'Password must be more 7 characters'
+        errors.password = 'Password should be 8 symbols at less'
       }
 
       return errors
@@ -53,12 +53,16 @@ export const SetNewPassword = () => {
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="password"
-          error={formik.errors.password}
+          error={formik.touched.password && formik.errors.password}
           placeholder="Password"
           {...formik.getFieldProps('password')}
         />
 
-        <Button type="submit" styleType="primary" disabled={!!formik.errors.password}>
+        <Button
+          type="submit"
+          styleType="primary"
+          disabled={!!formik.errors.password || !formik.values.password}
+        >
           Create new password
         </Button>
       </form>

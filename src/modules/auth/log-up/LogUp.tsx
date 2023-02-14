@@ -43,8 +43,8 @@ export const LogUp = () => {
 
       if (!values.password.trim()) {
         errors.password = 'Required field'
-      } else if (values.password.trim().length <= 8) {
-        errors.password = 'must be more 8 characters'
+      } else if (values.password.trim().length < 8) {
+        errors.password = 'Password should be 8 symbols at less'
       }
       if (!values.confirmPassword) {
         errors.confirmPassword = 'Required field'

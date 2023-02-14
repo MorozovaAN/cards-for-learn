@@ -24,7 +24,7 @@ type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
   textChange?: boolean
   textChangeBtnCallback?: (e: any) => void
   className?: string
-  inputContainerClassName?: string
+  inputContainerClass?: string
   disableBtn?: boolean
 }
 export const Input: React.FC<SuperInputTextPropsType> = ({
@@ -34,7 +34,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
   textChange,
   textChangeBtnCallback,
   className,
-  inputContainerClassName,
+  inputContainerClass,
   disableBtn,
   ...restProps
 }) => {
@@ -60,9 +60,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
     textChange && s.inputWithBtn
   }`
 
-  const inputContainerClasses = `${s.inputContainer} ${
-    inputContainerClassName && inputContainerClassName
-  }`
+  const inputContainerClasses = `${s.inputContainer} ${inputContainerClass && inputContainerClass}`
 
   const visibilityIconClasses = `${s.visibilityIcon} ${
     restProps.disabled && s.visibilityIconDisable
@@ -113,7 +111,9 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
         </Button>
       )}
 
-      <div className={s.errorContainer}>{error && <p className={s.error}>{error}</p>}</div>
+      {type !== 'search' && (
+        <div className={s.errorContainer}>{error && <p className={s.error}>{error}</p>}</div>
+      )}
     </div>
   )
 }
