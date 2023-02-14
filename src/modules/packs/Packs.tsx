@@ -4,11 +4,12 @@ import CircularProgress from '@mui/material/CircularProgress'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import NativeSelect from '@mui/material/NativeSelect'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { formatDate } from 'common/utils/formatDate'
 import { Search } from 'components/search/Search'
+import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Pack } from 'modules/packs/pack/Pack'
 import s from 'modules/packs/Packs.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
@@ -18,9 +19,12 @@ import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [sortPacks, setSortPacks] = useState(sortingPacksMethods.desCardsCount)
+  const [sortPacks] = useState(sortingPacksMethods.desCardsCount)
   const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }))
   const [sortLabel, setSortLabel] = useState(' by cards count')
+
+  const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     switch (sortPacks) {
@@ -71,24 +75,22 @@ export const Packs = () => {
 
   return (
     <div>
+      <Button styleType="primary" onClick={() => setToggle(!toggle)}>
+        Add new Pack
+      </Button>
+      {toggle && <AddPackModal />}
+
       <div className={s.filters}>
         <Search selector="Packs" onChange={onChangeParamsHandler} />
 
         <div className={s.buttonsContainer}>
-          <Button styleType="primary" className={s.btnMy}>
+          <Button styleType="primary" className={s.btnMy} onClick={handleMyPacks}>
             My
           </Button>
           <Button styleType="secondary" className={s.btnOther}>
             Other
           </Button>
         </div>
-      {/*<Button styleType="primary" onClick={() => setToggle(!toggle)}>*/}
-      {/*  Add new Pack*/}
-      {/*</Button>*/}
-
-      {/*<Button styleType="primary" onClick={handleMyPacks}>*/}
-      {/*  My Packs*/}
-      {/*</Button>*/}
 
         <div className={s.select}>
           <FormControl>
