@@ -8,6 +8,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { formatDate } from 'common/utils/formatDate'
+import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { Pack } from 'modules/packs/pack/Pack'
 import s from 'modules/packs/Packs.module.scss'
@@ -56,13 +57,13 @@ export const Packs = () => {
     setSearchParams(newParams)
   }
   /*const onChangeHandler = (packName: string) => {
-    setSearchParams({ packName })
-  }
-
-  const selectOnChangeHandler = (e: any) => {
-    setSortPacks(e.currentTarget.value)
-    setSearchParams({ sortPacks: e.currentTarget.value })
-  }*/
+        setSearchParams({ packName })
+      }
+    
+      const selectOnChangeHandler = (e: any) => {
+        setSortPacks(e.currentTarget.value)
+        setSearchParams({ sortPacks: e.currentTarget.value })
+      }*/
 
   return (
     <div>
@@ -128,6 +129,16 @@ export const Packs = () => {
           </>
         )}
       </div>
+      {packs && (
+        <Paginator
+          disabled={isFetching}
+          pageCount={packs.pageCount}
+          totalCount={packs.cardPacksTotalCount}
+          currentPage={packs.page}
+          setPageCallback={onChangeParamsHandler}
+          setRowCallback={onChangeParamsHandler}
+        />
+      )}
     </div>
   )
 }
