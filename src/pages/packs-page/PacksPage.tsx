@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useSearchParams } from 'react-router-dom'
 
 import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
+import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { Packs } from 'modules/packs/Packs'
@@ -54,6 +55,16 @@ export const PacksPage = () => {
           <>{packs !== undefined && <Packs packs={packs.cardPacks} />}</>
         )}
       </div>
+      {packs && (
+        <Paginator
+          pageCount={packs.pageCount}
+          totalCount={packs.cardPacksTotalCount}
+          currentPage={packs.page}
+          setPageCallback={onChangeParamsHandler}
+          setRowCallback={onChangeParamsHandler}
+          disabled={isFetching}
+        />
+      )}
     </div>
   )
 }
