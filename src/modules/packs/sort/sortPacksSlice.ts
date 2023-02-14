@@ -14,7 +14,7 @@ const sortPacksSlice = createSlice({
       const value = action.payload
 
       if (value === sortingPacksMethods.desName || value === sortingPacksMethods.ascName) {
-        state.sortPacksLabel = 'pack name'
+        state.sortPacksLabel = 'other-pack name'
 
         return
       }
