@@ -5,12 +5,11 @@ import InputLabel from '@mui/material/InputLabel'
 import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
 
-import s from './SortPacks.module.scss'
-import { setSortLabel } from './sortPacksSlice'
-
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/sort/SortPacks.module.scss'
+import { setSortLabel } from 'components/sort/sortPacksSlice'
 
 type SortPacksType = {
   onChange: (property: string, value: string) => void

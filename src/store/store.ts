@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { appReducer } from 'app/appSlice'
+import { sortPacksReducer } from 'components/sort/sortPacksSlice'
 import { authReducer, authApi } from 'modules'
 import { packsApi } from 'modules/packs/packsApi'
-import { sortPacksReducer } from 'modules/packs/sort/sortPacksSlice'
 
 export const store = configureStore({
   reducer: {
