@@ -8,7 +8,7 @@ type DefaultButtonType = DetailedHTMLProps<
 >
 
 type ButtonType = DefaultButtonType & {
-  styleType?: 'primary' | 'secondary' | 'warn' | 'icon'
+  styleType?: 'primary' | 'secondary' | 'warn' | 'icon' | 'iconPrimary'
 }
 export const Button: FC<ButtonType> = ({ styleType, className, ...restProps }) => {
   const finalClassName = `${styleType && s[styleType]} ${className && className} ${

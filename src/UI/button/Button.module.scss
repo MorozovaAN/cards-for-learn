@@ -42,7 +42,7 @@
 
   color: var(--color-on-primary-base);
 
-  background: var(--color-background-dark-400);
+  background: var(--color-secondary-base);
 
   &:hover {
     background: var(--color-background-dark-500);
@@ -90,6 +90,25 @@
     cursor: pointer;
 
     background: var(--color-background-dark-400);
+  }
+}
+
+.iconPrimary {
+  width: 100%;
+  height: 35px;
+  padding-top: 3px;
+
+  background: var(--color-primary-base);
+  border: none;
+  border-radius: 30px;
+  outline: none;
+
+  transition: all 0.4s ease;
+
+  &:hover {
+    cursor: pointer;
+
+    background: var(--color-primary-dark-100);
   }
 }
 

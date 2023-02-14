@@ -21,6 +21,7 @@ export const PacksPage = () => {
   const [skip, setSkip] = useState(true)
   const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }), { skip })
   const [toggle, setToggle] = useState(false)
+  const myPacks = searchParams.get('user_id')
 
   useEffect(() => {
     if (skip) {
@@ -44,6 +45,8 @@ export const PacksPage = () => {
       {toggle && <AddPackModal />}
 
       <div className={s.filters}>
+        <Search selector="Packs" onChange={onChangeParamsHandler} />
+        <MyOtherButtons onChange={onChangeParamsHandler} myPacks={myPacks} />
         <Search selector="Packs" onChange={onChangeParamsHandler} value={params.packName} />
         <MyOtherButtons />
         <SortPacks onChange={onChangeParamsHandler} />
@@ -54,7 +57,7 @@ export const PacksPage = () => {
         {isFetching ? (
           <CircularProgress classes={{ root: s.circular }} size={60} />
         ) : (
-          <>{packs !== undefined && <Packs packs={packs.cardPacks} />}</>
+          <>{packs !== undefined && <Packs packs={packs.cardPacks} myPacks={myPacks} />}</>
         )}
       </div>
       {packs && (
