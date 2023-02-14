@@ -7,7 +7,7 @@ import { Input } from 'UI/input/Input'
 type SearchProps = {
   class?: string
   selector: string
-  onChange: (value: string) => void
+  onChange: (property: string, value: string) => void
 }
 
 export const Search: FC<SearchProps> = props => {
@@ -20,7 +20,7 @@ export const Search: FC<SearchProps> = props => {
   }
 
   useEffect(() => {
-    props.onChange(debouncedValue)
+    props.onChange('packName', debouncedValue)
   }, [debouncedValue])
 
   // useEffect(() => {
