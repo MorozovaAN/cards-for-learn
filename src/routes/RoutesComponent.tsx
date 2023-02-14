@@ -6,6 +6,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
+import { MyPacks } from 'modules/packs/myPacks/MyPacks'
 import { Packs } from 'modules/packs/Packs'
 import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
@@ -24,6 +25,7 @@ export const RoutesComponent = () => {
         <Route element={<PrivateRoutes />}>
           <Route path={PATH.PROFILE} element={<ProfilePage />} />
           <Route path={PATH.PACKS} element={<Packs />} />
+          <Route path={PATH.MY_PACKS} element={<MyPacks />} />
           {/*  <Route path={PATH.CARDS} element={<Cards />} />*/}
           {/*  <Route path={PATH.CARD} element={<LearnCard />} />*/}
         </Route>
