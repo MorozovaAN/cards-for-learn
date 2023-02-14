@@ -7,7 +7,7 @@ type ParamsHelperType = {
 
 export const paramsHelper = ({ searchParams }: ParamsHelperType) => {
   let baseQueryParams: BaseQueryParamsType = {
-    pageCount: searchParams.get('pageCount') || '6',
+    pageCount: searchParams.get('pageCount') || '26',
     page: searchParams.get('page') || '1',
     min: searchParams.get('min') || '0',
     max: searchParams.get('max') || '110',

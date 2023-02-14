@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { appReducer } from 'app/appSlice'
 import { authReducer, authApi } from 'modules'
 import { packsApi } from 'modules/packs/packsApi'
+import { packsReducer } from 'modules/packs/packsSlise'
 import { sortPacksReducer } from 'modules/packs/sort/sortPacksSlice'
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     app: appReducer,
     auth: authReducer,
     sortPacks: sortPacksReducer,
+    packs: packsReducer,
     [authApi.reducerPath]: authApi.reducer,
     [packsApi.reducerPath]: packsApi.reducer,
   },
