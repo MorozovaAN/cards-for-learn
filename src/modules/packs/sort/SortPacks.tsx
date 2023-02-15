@@ -8,22 +8,40 @@ import { useSearchParams } from 'react-router-dom'
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { paramsHelper } from 'modules/packs/paramsHelper'
 import s from 'modules/packs/sort/SortPacks.module.scss'
 import { setSortLabel } from 'modules/packs/sort/sortPacksSlice'
 
 type SortPacksType = {
-  onChange: (property: string, value: string) => void
+  //onChange: (property: string, value: string) => void
 }
 
-export const SortPacks: FC<SortPacksType> = ({ onChange }) => {
-  const [searchParams] = useSearchParams()
+const setSortLabelFunc = (value: string) => {
+  const obj = {
+    [sortingPacksMethods.ascName]: 'pack name',
+    [sortingPacksMethods.desName]: 'pack name',
+    [sortingPacksMethods.ascCardsCount]: 'cards count',
+    [sortingPacksMethods.desCardsCount]: 'cards count',
+    [sortingPacksMethods.ascUpdate]: 'latest update',
+    [sortingPacksMethods.desUpdate]: 'latest update',
+    [sortingPacksMethods.ascUserName]: 'creator name',
+    [sortingPacksMethods.desUserName]: 'creator name',
+  }
+
+  // @ts-ignore //todo fix
+  return obj[value]
+}
+
+export const SortPacks: FC<SortPacksType> = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const sortValue = searchParams.get('sortPacks')
-  const sortLabel = useTypedSelector(state => state.sortPacks.sortPacksLabel)
-  const dispatch = useTypedDispatch()
+    ? searchParams.get('sortPacks')
+    : sortingPacksMethods.desCardsCount
+  // @ts-ignore //todo fix
+  const sortLabel = setSortLabelFunc(sortValue)
 
   const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSortLabel(e.currentTarget.value))
-    onChange('sortPacks', e.currentTarget.value)
+    setSearchParams({ ...paramsHelper({ searchParams }), sortPacks: e.currentTarget.value })
   }
 
   return (

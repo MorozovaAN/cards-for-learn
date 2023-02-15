@@ -1,24 +1,24 @@
 import React, { FC } from 'react'
 
+import { useSearchParams } from 'react-router-dom'
+
 import s from './MyOtherButtons.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { Button } from 'UI/button/Button'
 
-type MyOtherButtonsType = {
-  myPacks: string | null
-  onChange: (property: string, value: string) => void
-}
-
-export const MyOtherButtons: FC<MyOtherButtonsType> = ({ onChange, myPacks }) => {
+export const MyOtherButtons = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const myId = useTypedSelector(state => state.auth.id)
+  const myPacks = searchParams.has('user_id')
 
   const btnMyOnClickHandler = () => {
-    onChange('user_id', myId ? myId : '')
+    setSearchParams({ user_id: myId ? myId : '' })
   }
 
   const btnOtherOnClickHandler = () => {
-    onChange('user_id', '')
+    searchParams.delete('user_id')
+    setSearchParams(searchParams)
   }
 
   return (

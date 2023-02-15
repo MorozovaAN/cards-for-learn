@@ -3,34 +3,41 @@ import { ChangeEvent, FC } from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import Pagination from '@mui/material/Pagination'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { useSearchParams } from 'react-router-dom'
 
 import s from './Paginator.module.scss'
+
+import { paramsHelper } from 'modules/packs/paramsHelper'
 
 type PaginationPropsType = {
   pageCount: number
   totalCount: number
   currentPage: number
-  setPageCallback: (property: string, page: string) => void
-  setRowCallback: (property: string, pageCount: string) => void
   disabled: boolean
 }
 export const Paginator: FC<PaginationPropsType> = ({
   pageCount,
   totalCount,
-  setPageCallback,
-  setRowCallback,
   currentPage,
   disabled,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const pages = Math.ceil(totalCount / pageCount)
   const pageValue = pageCount.toString()
+  const p = paramsHelper({ searchParams })
+
+  console.log(p)
 
   const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
-    setPageCallback('page', page.toString())
+    setSearchParams({ ...paramsHelper({ searchParams }), page: page.toString() })
+    // searchParams.append('page', page.toString())
+    // setSearchParams(searchParams)
   }
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
-    setRowCallback('pageCount', event.target.value)
+    setSearchParams({ ...p, pageCount: event.target.value })
+    // searchParams.append('pageCount', event.target.value)
+    // setSearchParams(searchParams)
   }
 
   return (

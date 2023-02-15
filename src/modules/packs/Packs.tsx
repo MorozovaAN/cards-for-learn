@@ -7,7 +7,7 @@ import { OtherPack } from 'components/packs/other-pack/OtherPack'
 type PacksType = {
   // packs: PackType[]
   packs: any
-  myPacks: string | null
+  myPacks: boolean
 }
 
 export const Packs: FC<PacksType> = ({ packs, myPacks }) => {

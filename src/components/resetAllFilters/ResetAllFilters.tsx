@@ -13,7 +13,7 @@ type ResetAllFiltersType = {
 export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const handelResetFilters = () => {
-    setSearchParams(baseQueryParams)
+    setSearchParams({})
   }
 
   return (

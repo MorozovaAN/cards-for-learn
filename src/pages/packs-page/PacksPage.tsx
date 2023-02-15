@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import { useSearchParams } from 'react-router-dom'
 
+import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
@@ -17,38 +18,16 @@ import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const params = paramsHelper({ searchParams })
-  const [skip, setSkip] = useState(true)
-  const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }), { skip })
-  const [toggle, setToggle] = useState(false)
-  const myPacks = searchParams.get('user_id')
+  const myPacks = searchParams.has('user_id')
+  const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }))
 
-  useEffect(() => {
-    if (skip) {
-      setSearchParams(params)
-      setSkip(false)
-    }
-  }, [])
-
-  const onChangeParamsHandler = (property: string, value: string) => {
-    const newParams = { ...params, [property]: value }
-
-    setSearchParams(newParams)
-  }
-
-  return (
+  return packs ? (
     <div>
-      <Button styleType="primary" onClick={() => setToggle(!toggle)}>
-        Add new Pack
-      </Button>
-
-      {toggle && <AddPackModal />}
-
       <div className={s.filters}>
-        <Search selector="Packs" onChange={onChangeParamsHandler} value={params.packName} />
-        <MyOtherButtons onChange={onChangeParamsHandler} myPacks={myPacks} />
+        <Search selector="Packs" disabled={isFetching} />
+        <MyOtherButtons />
 
-        <SortPacks onChange={onChangeParamsHandler} />
+        <SortPacks />
         <ResetAllFilters disabled={isFetching} />
       </div>
 
@@ -56,19 +35,18 @@ export const PacksPage = () => {
         {isFetching ? (
           <CircularProgress classes={{ root: s.circular }} size={60} />
         ) : (
-          <>{packs !== undefined && <Packs packs={packs.cardPacks} myPacks={myPacks} />}</>
+          <Packs packs={packs.cardPacks} myPacks={myPacks} />
         )}
       </div>
-      {packs && (
-        <Paginator
-          pageCount={packs.pageCount}
-          totalCount={packs.cardPacksTotalCount}
-          currentPage={packs.page}
-          setPageCallback={onChangeParamsHandler}
-          setRowCallback={onChangeParamsHandler}
-          disabled={isFetching}
-        />
-      )}
+
+      <Paginator
+        pageCount={packs.pageCount}
+        totalCount={packs.cardPacksTotalCount}
+        currentPage={packs.page}
+        disabled={isFetching}
+      />
     </div>
+  ) : (
+    <CircularProgress classes={{ root: s.circular }} size={60} />
   )
 }
