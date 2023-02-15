@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -6,39 +6,17 @@ import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
 
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'modules/packs/paramsHelper'
 import s from 'modules/packs/sort/SortPacks.module.scss'
-import { setSortLabel } from 'modules/packs/sort/sortPacksSlice'
+import { setSortLabel } from 'modules/packs/sort/utils/setSortLabel'
 
-type SortPacksType = {
-  //onChange: (property: string, value: string) => void
-}
-
-const setSortLabelFunc = (value: string) => {
-  const obj = {
-    [sortingPacksMethods.ascName]: 'pack name',
-    [sortingPacksMethods.desName]: 'pack name',
-    [sortingPacksMethods.ascCardsCount]: 'cards count',
-    [sortingPacksMethods.desCardsCount]: 'cards count',
-    [sortingPacksMethods.ascUpdate]: 'latest update',
-    [sortingPacksMethods.desUpdate]: 'latest update',
-    [sortingPacksMethods.ascUserName]: 'creator name',
-    [sortingPacksMethods.desUserName]: 'creator name',
-  }
-
-  // @ts-ignore //todo fix
-  return obj[value]
-}
-
-export const SortPacks: FC<SortPacksType> = () => {
+export const SortPacks = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const sortValue = searchParams.get('sortPacks')
     ? searchParams.get('sortPacks')
     : sortingPacksMethods.desCardsCount
-  // @ts-ignore //todo fix
-  const sortLabel = setSortLabelFunc(sortValue)
+
+  const sortLabel = setSortLabel(sortValue as sortingPacksMethods) //todo
 
   const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setSearchParams({ ...paramsHelper({ searchParams }), sortPacks: e.currentTarget.value })

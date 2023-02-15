@@ -2,7 +2,6 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
 import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Input } from 'UI/input/Input'
