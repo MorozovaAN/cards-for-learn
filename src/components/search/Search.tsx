@@ -1,44 +1,48 @@
-import * as diagnostics_channel from 'diagnostics_channel'
-
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDebounce } from 'common/utils/useDebounce'
+import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Input } from 'UI/input/Input'
 
 type SearchType = {
-  class?: string
   selector: string
-  onChange: (property: string, value: string) => void
-  value: string | undefined
+  disabled: boolean
 }
 
-export const Search: FC<SearchType> = props => {
-  const disabled = useTypedSelector(state => state.app.isLoading)
-  const [value, setValue] = useState<string>('')
-  const debouncedValue = useDebounce<string>(value)
+export const Search: FC<SearchType> = ({ selector, disabled }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [value, setValue] = useState(searchParams.get('packName'))
+  const debouncedValue = useDebounce(value)
 
   const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
 
   useEffect(() => {
-    debouncedValue && props.onChange('packName', debouncedValue)
+    if (debouncedValue) {
+      setSearchParams({ ...paramsHelper(searchParams), packName: debouncedValue })
+    }
   }, [debouncedValue])
 
   useEffect(() => {
-    if (props.value === '') setValue(props.value)
-  }, [props.value])
+    if (!searchParams.has('packName')) setValue('')
+  }, [searchParams])
+
+  useEffect(() => {
+    if (!value) {
+      searchParams.delete('packName')
+      setSearchParams(searchParams)
+    }
+  }, [value])
 
   return (
     <Input
       type="search"
       onChange={handleSearchValueChange}
-      value={value}
+      value={value ? value : ''}
       placeholder="Provide your text"
-      className={props.class}
       disabled={disabled}
     />
   )

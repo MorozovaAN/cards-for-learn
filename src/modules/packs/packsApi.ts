@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { setIsLoading, setNotification } from 'app/appSlice'
 import { baseURL } from 'common/constants/base-URL'
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
+import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { ErrorType } from 'common/types/types'
 
 export const packsApi = createApi({
@@ -18,6 +19,11 @@ export const packsApi = createApi({
       query: arg => ({
         url: `pack`,
         params: {
+          pageCount: '6',
+          min: arg.user_id ? '0' : '5',
+          sortPacks: arg.user_id
+            ? sortingPacksMethods.desUpdate
+            : sortingPacksMethods.desCardsCount,
           ...arg,
         },
       }),

@@ -3,34 +3,35 @@ import { ChangeEvent, FC } from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import Pagination from '@mui/material/Pagination'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { useSearchParams } from 'react-router-dom'
 
 import s from './Paginator.module.scss'
+
+import { paramsHelper } from 'modules/packs/paramsHelper'
 
 type PaginationPropsType = {
   pageCount: number
   totalCount: number
   currentPage: number
-  setPageCallback: (property: string, page: string) => void
-  setRowCallback: (property: string, pageCount: string) => void
   disabled: boolean
 }
+
 export const Paginator: FC<PaginationPropsType> = ({
   pageCount,
   totalCount,
-  setPageCallback,
-  setRowCallback,
   currentPage,
   disabled,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const pages = Math.ceil(totalCount / pageCount)
-  const pageValue = pageCount.toString()
 
   const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
-    setPageCallback('page', page.toString())
+    setSearchParams({ ...paramsHelper(searchParams), page: page.toString() })
   }
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
-    setRowCallback('pageCount', event.target.value)
+    searchParams.delete('page')
+    setSearchParams({ ...paramsHelper(searchParams), pageCount: event.target.value })
   }
 
   return (
@@ -61,7 +62,7 @@ export const Paginator: FC<PaginationPropsType> = ({
         <Select
           disabled={disabled}
           sx={{ fontFamily: 'inherit', fontSize: 'inherit' }}
-          value={pageValue}
+          value={pageCount.toString()}
           onChange={handleChangeRowsPerPage}
         >
           <MenuItem value={6}>6</MenuItem>

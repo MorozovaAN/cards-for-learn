@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -6,24 +6,28 @@ import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
 
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { paramsHelper } from 'modules/packs/paramsHelper'
 import s from 'modules/packs/sort/SortPacks.module.scss'
-import { setSortLabel } from 'modules/packs/sort/sortPacksSlice'
+import { setSortLabel } from 'modules/packs/sort/utils/setSortLabel'
 
-type SortPacksType = {
-  onChange: (property: string, value: string) => void
-}
+export const SortPacks = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const myPacks = searchParams.get('user_id')
+    ? sortingPacksMethods.desUpdate
+    : sortingPacksMethods.desCardsCount
+  const sortValue = searchParams.get('sortPacks') ? searchParams.get('sortPacks') : myPacks
 
-export const SortPacks: FC<SortPacksType> = ({ onChange }) => {
-  const [searchParams] = useSearchParams()
-  const sortValue = searchParams.get('sortPacks')
-  const sortLabel = useTypedSelector(state => state.sortPacks.sortPacksLabel)
-  const dispatch = useTypedDispatch()
+  const sortLabel = setSortLabel(sortValue as sortingPacksMethods)
 
   const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSortLabel(e.currentTarget.value))
-    onChange('sortPacks', e.currentTarget.value)
+    setSearchParams({ ...paramsHelper(searchParams), sortPacks: e.currentTarget.value })
+    if (
+      e.currentTarget.value === sortingPacksMethods.desCardsCount ||
+      (e.currentTarget.value === sortingPacksMethods.desUpdate && searchParams.has('user_id'))
+    ) {
+      searchParams.delete('sortPacks')
+      setSearchParams(searchParams)
+    }
   }
 
   return (
