@@ -1,8 +1,13 @@
-import React, { ChangeEvent } from 'react'
+import React, { FC, forwardRef } from 'react'
 
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import NativeSelect from '@mui/material/NativeSelect'
+import OptionGroupUnstyled, { OptionGroupUnstyledProps } from '@mui/base/OptionGroupUnstyled'
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
+import PopperUnstyled from '@mui/base/PopperUnstyled'
+import SelectUnstyled, {
+  SelectUnstyledProps,
+  selectUnstyledClasses,
+} from '@mui/base/SelectUnstyled'
+import styled from '@mui/system/styled'
 import { useSearchParams } from 'react-router-dom'
 
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
@@ -10,53 +15,185 @@ import { paramsHelper } from 'modules/packs/paramsHelper'
 import s from 'modules/packs/sort/SortPacks.module.scss'
 import { setSortLabel } from 'modules/packs/sort/utils/setSortLabel'
 
-export const SortPacks = () => {
+const StyledButton = styled('button')(
+  () => `
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 42px;
+  width: 240px;
+  padding: 0 12px;
+  border-radius: 10px;
+  text-align: left;
+  background: var(--color-background-dark-400);
+  color: var(--color-on-primary-light-400);
+  outline: none;
+  border:none;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+   
+  &:hover, &:focus {
+    box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &.${selectUnstyledClasses.expanded} {
+    &::after {
+      content: '▴';
+      float: right;
+    }
+  }
+
+  &::after {
+    content: '▾';
+    float: right;
+  }
+  `
+)
+
+const StyledListBox = styled('ul')(
+  () => `
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 6px 0;
+  margin: 14px 0;
+  width: 240px;
+  border-radius: 10px;
+  overflow: auto;
+  outline: 0px;
+  background: var(--color-background-dark-400);
+  color: var(--color-on-primary-light-400);
+  box-shadow: 0px 7px 15px var(--color-on-primary-light-400);
+  `
+)
+
+const StyledOption = styled(OptionUnstyled)(
+  () => `
+  list-style: none;
+  padding: 6px;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background-color: var(--color-background-dark-500);
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: var(--color-on-primary-light-400);
+    color: var(--color-background-base);
+  }
+  `
+)
+
+const StyledGroupRoot = styled('li')`
+  list-style: none;
+`
+
+const StyledGroupHeader = styled('span')`
+  display: block;
+  padding: 10px 0 5px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #5c5c5c;
+`
+
+const StyledGroupOptions = styled('ul')`
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+
+  > li {
+    padding-left: 20px;
+  }
+`
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+`
+
+type SortPacksType = {
+  disabled: boolean
+}
+
+export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const myPacks = searchParams.get('user_id')
     ? sortingPacksMethods.desUpdate
     : sortingPacksMethods.desCardsCount
   const sortValue = searchParams.get('sortPacks') ? searchParams.get('sortPacks') : myPacks
-
   const sortLabel = setSortLabel(sortValue as sortingPacksMethods)
-
-  const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSearchParams({ ...paramsHelper(searchParams), sortPacks: e.currentTarget.value })
+  const selectOnChangeHandler = (_: any, value: string | null) => {
+    value && setSearchParams({ ...paramsHelper(searchParams), sortPacks: value })
     if (
-      e.currentTarget.value === sortingPacksMethods.desCardsCount ||
-      (e.currentTarget.value === sortingPacksMethods.desUpdate && searchParams.has('user_id'))
+      value === sortingPacksMethods.desCardsCount ||
+      (value === sortingPacksMethods.desUpdate && searchParams.has('user_id'))
     ) {
       searchParams.delete('sortPacks')
       setSearchParams(searchParams)
     }
   }
 
+  function CustomSelect(props: SelectUnstyledProps<string>) {
+    const slots: SelectUnstyledProps<string>['slots'] = {
+      root: StyledButton,
+      listbox: StyledListBox,
+      popper: StyledPopper,
+      ...props.slots,
+    }
+
+    return <SelectUnstyled {...props} slots={slots} />
+  }
+
+  const CustomOptionGroup = forwardRef(function CustomOptionGroup(
+    props: OptionGroupUnstyledProps,
+    ref: React.ForwardedRef<any>
+  ) {
+    const slots: OptionGroupUnstyledProps['slots'] = {
+      root: StyledGroupRoot,
+      label: StyledGroupHeader,
+      list: StyledGroupOptions,
+      ...props.slots,
+    }
+
+    return <OptionGroupUnstyled {...props} ref={ref} slots={slots} />
+  })
+
   return (
-    <div className={s.select}>
-      <FormControl>
-        <InputLabel variant="standard">Sort packs by {sortLabel}</InputLabel>
+    <div>
+      <p className={s.sortLabel}> Sort packs by {sortLabel}</p>
 
-        <NativeSelect value={sortValue} onChange={selectOnChangeHandler}>
-          <optgroup label="Sort by pack name">
-            <option value={sortingPacksMethods.desName}>from A to Z</option>
-            <option value={sortingPacksMethods.ascName}>from Z to A</option>
-          </optgroup>
+      <CustomSelect value={sortValue} onChange={selectOnChangeHandler} disabled={disabled}>
+        <CustomOptionGroup label="Sort by pack name">
+          <StyledOption value={sortingPacksMethods.desName}>from A to Z</StyledOption>
+          <StyledOption value={sortingPacksMethods.ascName}>from Z to A</StyledOption>
+        </CustomOptionGroup>
 
-          <optgroup label="Sort by cards count">
-            <option value={sortingPacksMethods.desCardsCount}>from largest to smallest</option>
-            <option value={sortingPacksMethods.ascCardsCount}>from smallest to largest</option>
-          </optgroup>
+        <CustomOptionGroup label="Sort by cards count">
+          <StyledOption value={sortingPacksMethods.desCardsCount}>
+            from largest to smallest
+          </StyledOption>
+          <StyledOption value={sortingPacksMethods.ascCardsCount}>
+            from smallest to largest
+          </StyledOption>
+        </CustomOptionGroup>
 
-          <optgroup label="Sort by latest update">
-            <option value={sortingPacksMethods.ascUpdate}>late to early</option>
-            <option value={sortingPacksMethods.desUpdate}>early to late</option>
-          </optgroup>
+        <CustomOptionGroup label="Sort by latest update">
+          <StyledOption value={sortingPacksMethods.ascUpdate}>late to early</StyledOption>
+          <StyledOption value={sortingPacksMethods.desUpdate}>early to late</StyledOption>
+        </CustomOptionGroup>
 
-          <optgroup label="Sort by creator name">
-            <option value={sortingPacksMethods.desUserName}>from A to Z</option>
-            <option value={sortingPacksMethods.ascUserName}>from Z to A</option>
-          </optgroup>
-        </NativeSelect>
-      </FormControl>
+        <CustomOptionGroup label="Sort by creator name">
+          <StyledOption value={sortingPacksMethods.desUserName}>from A to Z</StyledOption>
+          <StyledOption value={sortingPacksMethods.ascUserName}>from Z to A</StyledOption>
+        </CustomOptionGroup>
+      </CustomSelect>
     </div>
   )
 }
