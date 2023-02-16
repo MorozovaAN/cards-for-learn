@@ -38,6 +38,7 @@ export const PacksPage = () => {
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
   return responsePacks ? (
     <div>
       <div className={s.filters}>

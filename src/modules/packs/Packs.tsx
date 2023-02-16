@@ -1,14 +1,16 @@
 import React, { FC, useState } from 'react'
 
-import s from './Packs.module.scss'
-
 import { useSearchParams } from 'react-router-dom'
+
+import s from './Packs.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
+import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 import { PackType } from 'modules/packs/packsApi'
+import { Button } from 'UI/button/Button'
 
 type PacksType = {
   responsePacks: PackType[]
@@ -58,6 +60,4 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
       </div>
     </>
   )
-import { AddPackModal } from 'modules/packs/modals/AddPackModal'
-import { Button } from 'UI/button/Button'
 }
