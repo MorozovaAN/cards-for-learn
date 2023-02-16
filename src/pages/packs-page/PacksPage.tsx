@@ -1,5 +1,5 @@
-
 import React, { useEffect } from 'react'
+
 import CircularProgress from '@mui/material/CircularProgress'
 import { useSearchParams } from 'react-router-dom'
 
@@ -23,26 +23,26 @@ export const PacksPage = () => {
   const myId = useTypedSelector(state => state.auth.id)
   const myPacks = searchParams.has('user_id')
   const packs = responsePacks?.cardPacks?.filter(p => p.user_id !== myId)
-    const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
-    const dispatch = useTypedDispatch()
+  const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
+  const dispatch = useTypedDispatch()
 
-    useEffect(() => {
-        function handleScroll() {
-            const top = window.scrollY
+  useEffect(() => {
+    function handleScroll() {
+      const top = window.scrollY
 
-            if (top >= 300) {
-                dispatch(setShowButton(true))
-            } else {
-                dispatch(setShowButton(false))
-            }
-        }
-        window.addEventListener('scroll', handleScroll)
+      if (top >= 300) {
+        dispatch(setShowButton(true))
+      } else {
+        dispatch(setShowButton(false))
+      }
+    }
 
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    window.addEventListener('scroll', handleScroll)
 
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  return <>responsePacks ? (
+  return responsePacks ? (
     <div>
       <div className={s.filters}>
         <Search selector="Packs" disabled={isFetching} />
@@ -66,14 +66,13 @@ export const PacksPage = () => {
         currentPage={responsePacks.page}
         disabled={isFetching}
       />
+      {showButton && (
+        <div className={s.scrollBtn}>
+          <ButtonScroll />
+        </div>
+      )}
     </div>
   ) : (
     <CircularProgress classes={{ root: s.circular }} size={60} />
   )
-      {showButton && (
-          <div className={s.scrollBtn}>
-              <ButtonScroll />
-          </div>
-      )}
-  </>
 }

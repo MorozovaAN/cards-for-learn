@@ -1,4 +1,12 @@
 .packsContainer {
+  padding: 20px 0;
+
+  //display: flex;
+  //flex-wrap: wrap;
+  //gap: 40px;
+  //justify-content: center;
+}
+.packContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;

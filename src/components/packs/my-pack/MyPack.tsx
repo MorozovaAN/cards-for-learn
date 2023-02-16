@@ -26,7 +26,7 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
 
   const handleTogglePack = () => {
     setToggle(!toggle)
-    setSearchParams({ namePack: name, id: packId })
+    // setSearchParams({ namePack: name, id: packId })
   }
 
   return (
@@ -52,12 +52,12 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
           <EditIcon width="18" fill="#fff" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnTrash} onClick={handleTogglePack}>
+        <Button styleType="iconPrimary" className={s.btnTrash}>
           <TrashIcon width="18" height="20" />
         </Button>
       </div>
-      {/*{toggle && <UpdatePackName packId={packId} name={name} />}*/}
-      {toggle && <UpdatePackName packId={packIdFromParams} name={nameFromParams} />}
+      {toggle && <UpdatePackName packId={packId} name={name} />}
+      {/*{toggle && <UpdatePackName packId={packIdFromParams} name={nameFromParams} />}*/}
     </div>
   )
 }
