@@ -9,7 +9,7 @@ import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { PackType } from 'modules/packs/packsApi'
 
 type PacksType = {
-  responsePacks: any //todo должно быть PackType[]
+  responsePacks: PackType[]
 }
 
 export const Packs: FC<PacksType> = ({ responsePacks }) => {
@@ -20,26 +20,30 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
     ? responsePacks
     : responsePacks.filter((p: PackType) => p.user_id !== myId)
 
-  return packs.map((p: any) => {
-    const dateUpdate = formatDate(p.updated)
+  return (
+    <>
+      {packs.map(p => {
+        const dateUpdate = formatDate(p.updated)
 
-    return myPacksPage ? (
-      <MyPack
-        key={p._id}
-        packId={p._id}
-        name={p.name}
-        cardsCount={p.cardsCount}
-        updated={dateUpdate}
-      />
-    ) : (
-      <OtherPack
-        key={p._id}
-        packId={p._id}
-        name={p.name}
-        cardsCount={p.cardsCount}
-        author={p.user_name}
-        updated={dateUpdate}
-      />
-    )
-  })
+        return myPacksPage ? (
+          <MyPack
+            key={p._id}
+            packId={p._id}
+            name={p.name}
+            cardsCount={p.cardsCount}
+            updated={dateUpdate}
+          />
+        ) : (
+          <OtherPack
+            key={p._id}
+            packId={p._id}
+            name={p.name}
+            cardsCount={p.cardsCount}
+            author={p.user_name}
+            updated={dateUpdate}
+          />
+        )
+      })}
+    </>
+  )
 }
