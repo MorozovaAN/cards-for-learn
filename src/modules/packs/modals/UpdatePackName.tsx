@@ -10,11 +10,12 @@ type UpdatePackProps = {
   name: string
 }
 export const UpdatePackName: FC<UpdatePackProps> = ({ packId, name }) => {
-  const [nameValue, setNameValue] = useState<string>(name)
   const [updatePackName] = useUpdatePackMutation()
+  const [nameValue, setNameValue] = useState<string>(name)
+  const [checked, setChecked] = useState<boolean>(false)
 
   const handleUpdatePack = () => {
-    updatePackName({ cardsPack: { _id: packId, name: nameValue } })
+    updatePackName({ cardsPack: { _id: packId, name: nameValue, private: checked } })
   }
 
   return (
@@ -28,7 +29,8 @@ export const UpdatePackName: FC<UpdatePackProps> = ({ packId, name }) => {
         error={!nameValue.length ? 'write name other-pack' : ''}
       />
       <div>
-        <Checkbox />
+        Private pack
+        <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
       </div>
       <Button styleType="primary" disabled={!nameValue} onClick={handleUpdatePack}>
         Save
