@@ -10,19 +10,19 @@ import { Button } from 'UI/button/Button'
 type ResetAllFiltersType = {
   disabled: boolean
 }
+
 export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const handelResetFilters = () => {
-    if (searchParams.has('user_id')) {
-      const userId = searchParams.get('user_id') as string
+  const resetFiltersHandler = () => {
+    const userId = searchParams.get('user_id') as string
 
-      setSearchParams({ user_id: userId })
-    } else setSearchParams({})
+    if (userId) setSearchParams({ user_id: userId })
+    else setSearchParams({})
   }
 
   return (
-    <Button className={s.button} styleType="icon" onClick={handelResetFilters} disabled={disabled}>
+    <Button className={s.button} styleType="icon" onClick={resetFiltersHandler} disabled={disabled}>
       <div className={s.tooltip} data-tooltip="reset all filters">
         <img src={defaultFilters} alt="reset all filters icon" />
       </div>
