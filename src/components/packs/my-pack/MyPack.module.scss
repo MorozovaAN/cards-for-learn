@@ -26,6 +26,24 @@
   max-height: 100%;
 }
 
+.private {
+  position: relative;
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 15px;
+
+    width: 15px;
+    height: 20px;
+
+    background-color: var(--color-primary-base);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
 .name {
 
   @include headline3(600);

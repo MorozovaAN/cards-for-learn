@@ -64,9 +64,21 @@ export const packsApi = createApi({
       }),
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
+    deletePack: build.mutation<ResponseDeletePackType, string>({
+      query: packId => ({
+        url: `/pack?id=${packId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'packs', id: 'LIST' }],
+    }),
   }),
 })
-export const { useGetPacksQuery, useAddPackMutation, useUpdatePackMutation } = packsApi
+export const {
+  useGetPacksQuery,
+  useAddPackMutation,
+  useUpdatePackMutation,
+  useDeletePackMutation,
+} = packsApi
 
 //types
 export type PackType = {
@@ -77,6 +89,7 @@ export type PackType = {
   cardsCount: number
   created: string
   updated: string
+  private: boolean //todo
 }
 
 export type ResponsePacksType = {
@@ -96,6 +109,7 @@ export type ResponsePackType = {
   cardsCount: number
   created: string
   updated: string
+  private: boolean //todo
 }
 
 export type UpdateNamePackType = {
@@ -120,4 +134,8 @@ export type ResponseUpdateNamePack = {
 
 export type ResponseNewPack = {
   newCardsPack: PackType
+}
+
+export type ResponseDeletePackType = {
+  deletedCardsPack: PackType
 }
