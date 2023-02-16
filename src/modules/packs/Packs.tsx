@@ -2,23 +2,30 @@ import React, { FC, useState } from 'react'
 
 import s from './Packs.module.scss'
 
+import { useSearchParams } from 'react-router-dom'
+
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
-import { AddPackModal } from 'modules/packs/modals/AddPackModal'
-import { Button } from 'UI/button/Button'
+import { PackType } from 'modules/packs/packsApi'
 
 type PacksType = {
-  packs: any //todo должно быть PackType[]
-  myPacks: boolean
+  responsePacks: PackType[]
 }
 
-export const Packs: FC<PacksType> = ({ packs, myPacks }) => {
+export const Packs: FC<PacksType> = ({ responsePacks }) => {
+  const [searchParams] = useSearchParams()
+  const myId = useTypedSelector(state => state.auth.id)
+  const myPacksPage = searchParams.has('user_id')
+  const packs = myPacksPage
+    ? responsePacks
+    : responsePacks.filter((p: PackType) => p.user_id !== myId)
   const [toggle, setToggle] = useState(false)
 
   return (
     <>
-      {myPacks && (
+      {myPacksPage && (
         <Button styleType="primary" onClick={() => setToggle(!toggle)}>
           Add new Pack
         </Button>
@@ -26,10 +33,10 @@ export const Packs: FC<PacksType> = ({ packs, myPacks }) => {
 
       {toggle && <AddPackModal />}
       <div className={s.packContainer}>
-        {packs.map((p: any) => {
+        {packs.map(p => {
           const dateUpdate = formatDate(p.updated)
 
-          return myPacks ? (
+          return myPacksPage ? (
             <MyPack
               key={p._id}
               packId={p._id}
@@ -51,4 +58,6 @@ export const Packs: FC<PacksType> = ({ packs, myPacks }) => {
       </div>
     </>
   )
+import { AddPackModal } from 'modules/packs/modals/AddPackModal'
+import { Button } from 'UI/button/Button'
 }

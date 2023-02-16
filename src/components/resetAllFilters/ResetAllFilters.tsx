@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './ResetAllFilters.module.scss'
 
-import defaultFilters from 'assets/img/icons/reset-all-filters.svg'
+import { ReactComponent as ResetFilters } from 'assets/img/icons/reset-all-filters.svg'
 import { Button } from 'UI/button/Button'
 
 type ResetAllFiltersType = {
@@ -22,10 +22,13 @@ export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   }
 
   return (
-    <Button className={s.button} styleType="icon" onClick={resetFiltersHandler} disabled={disabled}>
-      <div className={s.tooltip} data-tooltip="reset all filters">
-        <img src={defaultFilters} alt="reset all filters icon" />
-      </div>
+    <Button
+      styleType="iconPrimary"
+      className={s.button}
+      onClick={resetFiltersHandler}
+      disabled={disabled}
+    >
+      <ResetFilters />
     </Button>
   )
 }

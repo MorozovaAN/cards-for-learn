@@ -20,9 +20,6 @@ import { ButtonScroll } from 'UI/button/ButtonScroll'
 export const PacksPage = () => {
   const [searchParams] = useSearchParams()
   const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
-  const myId = useTypedSelector(state => state.auth.id)
-  const myPacks = searchParams.has('user_id')
-  const packs = responsePacks?.cardPacks?.filter(p => p.user_id !== myId)
   const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
   const dispatch = useTypedDispatch()
 
@@ -41,13 +38,11 @@ export const PacksPage = () => {
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
   return responsePacks ? (
     <div>
       <div className={s.filters}>
         <Search selector="Packs" disabled={isFetching} />
         <MyOtherButtons />
-
         <SortPacks />
         <ResetAllFilters disabled={isFetching} />
       </div>
@@ -56,7 +51,7 @@ export const PacksPage = () => {
         {isFetching ? (
           <CircularProgress classes={{ root: s.circular }} size={60} />
         ) : (
-          <Packs packs={myPacks ? responsePacks.cardPacks : packs} myPacks={myPacks} />
+          <Packs responsePacks={responsePacks.cardPacks} />
         )}
       </div>
 
