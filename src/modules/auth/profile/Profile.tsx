@@ -6,6 +6,7 @@ import s from './Profile.module.scss'
 
 import editName from 'assets/img/icons/edit.svg'
 import { ReactComponent as Logout } from 'assets/img/icons/exit.svg'
+import defaultAvatar from 'assets/img/user-avatar-default.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { UpdateUserAvatar } from 'components/auth/update-user-avatar/UpdateUserAvatar'
 import { UpdateUserName } from 'components/auth/update-user-name/UpdateUserName'
@@ -77,7 +78,7 @@ export const Profile = () => {
         </div>
       ) : (
         <div className={s.imgContainer}>
-          <img src={avatar} alt="user avatar" className={s.avatar} />
+          <img src={avatar ? avatar : defaultAvatar} alt="user avatar" className={s.avatar} />
 
           <span className={s.photoUploader}>
             <UpdateUserAvatar updateAvatarCallback={updateAvatarCallback} />
