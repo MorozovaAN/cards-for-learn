@@ -26,11 +26,12 @@ export const Paginator: FC<PaginationPropsType> = ({
   const pages = Math.ceil(totalCount / pageCount)
 
   const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
-    setSearchParams({ ...paramsHelper({ searchParams }), page: page.toString() })
+    setSearchParams({ ...paramsHelper(searchParams), page: page.toString() })
   }
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
-    setSearchParams({ ...paramsHelper({ searchParams }), pageCount: event.target.value })
+    searchParams.delete('page')
+    setSearchParams({ ...paramsHelper(searchParams), pageCount: event.target.value })
   }
 
   return (

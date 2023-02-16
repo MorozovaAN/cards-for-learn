@@ -9,6 +9,7 @@ export const baseQueryParams: BaseQueryParamsType = {
   packName: '',
   sortPacks: sortingPacksMethods.desUpdate,
 }
+
 export type ParamsType = {
   pageCount: string
   page: string

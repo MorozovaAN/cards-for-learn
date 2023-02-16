@@ -12,14 +12,22 @@ import { setSortLabel } from 'modules/packs/sort/utils/setSortLabel'
 
 export const SortPacks = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const sortValue = searchParams.get('sortPacks')
-    ? searchParams.get('sortPacks')
+  const myPacks = searchParams.get('user_id')
+    ? sortingPacksMethods.desUpdate
     : sortingPacksMethods.desCardsCount
+  const sortValue = searchParams.get('sortPacks') ? searchParams.get('sortPacks') : myPacks
 
-  const sortLabel = setSortLabel(sortValue as sortingPacksMethods) //todo
+  const sortLabel = setSortLabel(sortValue as sortingPacksMethods)
 
   const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSearchParams({ ...paramsHelper({ searchParams }), sortPacks: e.currentTarget.value })
+    setSearchParams({ ...paramsHelper(searchParams), sortPacks: e.currentTarget.value })
+    if (
+      e.currentTarget.value === sortingPacksMethods.desCardsCount ||
+      (e.currentTarget.value === sortingPacksMethods.desUpdate && searchParams.has('user_id'))
+    ) {
+      searchParams.delete('sortPacks')
+      setSearchParams(searchParams)
+    }
   }
 
   return (

@@ -5,15 +5,20 @@ import { useSearchParams } from 'react-router-dom'
 import s from './ResetAllFilters.module.scss'
 
 import defaultFilters from 'assets/img/icons/reset-all-filters.svg'
-import { baseQueryParams } from 'common/constants/baseQueryParams'
 import { Button } from 'UI/button/Button'
+
 type ResetAllFiltersType = {
   disabled: boolean
 }
 export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
+
   const handelResetFilters = () => {
-    setSearchParams({})
+    if (searchParams.has('user_id')) {
+      const userId = searchParams.get('user_id') as string
+
+      setSearchParams({ user_id: userId })
+    } else setSearchParams({})
   }
 
   return (

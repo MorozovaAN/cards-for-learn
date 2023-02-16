@@ -18,13 +18,11 @@ export const Search: FC<SearchType> = ({ selector, disabled }) => {
 
   const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
-    searchParams.delete('sortPacks')
-    setSearchParams(searchParams)
   }
 
   useEffect(() => {
     if (debouncedValue) {
-      setSearchParams({ ...paramsHelper({ searchParams }), packName: debouncedValue })
+      setSearchParams({ ...paramsHelper(searchParams), packName: debouncedValue })
     }
   }, [debouncedValue])
 
@@ -38,10 +36,6 @@ export const Search: FC<SearchType> = ({ selector, disabled }) => {
       setSearchParams(searchParams)
     }
   }, [value])
-
-  // useEffect(() => {
-  //   if (props.value === '') setValue(props.value)
-  // }, [props.value]) //todo спросить зачем это
 
   return (
     <Input

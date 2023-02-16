@@ -5,8 +5,7 @@ import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
 
 type PacksType = {
-  // packs: PackType[]
-  packs: any
+  packs: any //todo должно быть PackType[]
   myPacks: boolean
 }
 
