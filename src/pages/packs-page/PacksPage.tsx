@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
 
+import React, { useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useSearchParams } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Paginator } from 'components/paginator/Paginator'
+import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { Packs } from 'modules/packs/Packs'
 import s from 'modules/packs/Packs.module.scss'
@@ -17,84 +18,62 @@ import { SortPacks } from 'modules/packs/sort/SortPacks'
 import { ButtonScroll } from 'UI/button/ButtonScroll'
 
 export const PacksPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const params = paramsHelper({ searchParams })
-  const [skip, setSkip] = useState(true)
-  const { data: packs, isFetching } = useGetPacksQuery(paramsHelper({ searchParams }), { skip })
-  const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
-  const dispatch = useTypedDispatch()
+  const [searchParams] = useSearchParams()
+  const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
+  const myId = useTypedSelector(state => state.auth.id)
+  const myPacks = searchParams.has('user_id')
+  const packs = responsePacks?.cardPacks?.filter(p => p.user_id !== myId)
+    const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
+    const dispatch = useTypedDispatch()
 
-  // const monitorHeight = window.screen.height
-  // console.log(`The height is ${monitorHeight}px.`)
-  //
-  // const windowHeight = window.innerHeight
-  // console.log(`The height is ${windowHeight}px.`)
+    useEffect(() => {
+        function handleScroll() {
+            const top = window.scrollY
 
-  // const visibleHeight = document.documentElement.clientHeight
-  // console.log(`The height is ${visibleHeight}px.`)
+            if (top >= 300) {
+                dispatch(setShowButton(true))
+            } else {
+                dispatch(setShowButton(false))
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
 
-  // const screenHeight = window.screen.height
-  // console.log(screenHeight)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
-  useEffect(() => {
-    if (skip) {
-      setSearchParams(params)
-      setSkip(false)
-    }
-  }, [])
 
-  useEffect(() => {
-    function handleScroll() {
-      const top = window.scrollY
-
-      if (top >= 300) {
-        dispatch(setShowButton(true))
-      } else {
-        dispatch(setShowButton(false))
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const onChangeParamsHandler = (property: string, value: string) => {
-    const newParams = { ...params, [property]: value }
-
-    setSearchParams(newParams)
-  }
-
-  return (
+  return <>responsePacks ? (
     <div>
       <div className={s.filters}>
-        <Search selector="Packs" onChange={onChangeParamsHandler} />
+        <Search selector="Packs" disabled={isFetching} />
         <MyOtherButtons />
-        <SortPacks onChange={onChangeParamsHandler} />
+
+        <SortPacks />
+        <ResetAllFilters disabled={isFetching} />
       </div>
 
       <div className={s.packsContainer}>
         {isFetching ? (
           <CircularProgress classes={{ root: s.circular }} size={60} />
         ) : (
-          <>{packs !== undefined && <Packs packs={packs.cardPacks} />}</>
+          <Packs packs={myPacks ? responsePacks.cardPacks : packs} myPacks={myPacks} />
         )}
       </div>
-      {packs && (
-        <Paginator
-          pageCount={packs.pageCount}
-          totalCount={packs.cardPacksTotalCount}
-          currentPage={packs.page}
-          setPageCallback={onChangeParamsHandler}
-          setRowCallback={onChangeParamsHandler}
-          disabled={isFetching}
-        />
-      )}
 
-      {showButton && (
-        <div className={s.scrollBtn}>
-          <ButtonScroll />
-        </div>
-      )}
+      <Paginator
+        pageCount={responsePacks.pageCount}
+        totalCount={responsePacks.cardPacksTotalCount}
+        currentPage={responsePacks.page}
+        disabled={isFetching}
+      />
     </div>
+  ) : (
+    <CircularProgress classes={{ root: s.circular }} size={60} />
   )
+      {showButton && (
+          <div className={s.scrollBtn}>
+              <ButtonScroll />
+          </div>
+      )}
+  </>
 }

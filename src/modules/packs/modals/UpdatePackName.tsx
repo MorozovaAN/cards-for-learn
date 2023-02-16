@@ -26,7 +26,7 @@ export const UpdatePackName: FC<UpdatePackProps> = ({ packId, name }) => {
         onChange={e => setNameValue(e.currentTarget.value)}
         type="text"
         label="Name pack"
-        error={!nameValue.length ? 'write name pack' : ''}
+        error={!nameValue.length ? 'write name other-pack' : ''}
       />
       <div>
         Private pack

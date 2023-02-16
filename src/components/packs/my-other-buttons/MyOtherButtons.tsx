@@ -1,23 +1,41 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
-import s from 'modules/packs/Packs.module.scss'
-import { PATH } from 'routes/routes'
+import s from './MyOtherButtons.module.scss'
+
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { Button } from 'UI/button/Button'
 
 export const MyOtherButtons = () => {
-  const navigate = useNavigate()
-  const handleMyPacks = () => {
-    navigate(PATH.MY_PACKS)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const myId = useTypedSelector(state => state.auth.id)
+  const myPacks = searchParams.has('user_id')
+
+  const btnMyOnClickHandler = () => {
+    setSearchParams({ user_id: myId ? myId : '' })
+  }
+
+  const btnOtherOnClickHandler = () => {
+    searchParams.delete('user_id')
+    setSearchParams(searchParams)
   }
 
   return (
     <div className={s.buttonsContainer}>
-      <Button styleType="primary" className={s.btnMy} onClick={handleMyPacks}>
+      <Button
+        styleType={myPacks ? 'primary' : 'secondary'}
+        className={s.btnMy}
+        onClick={btnMyOnClickHandler}
+      >
         My
       </Button>
-      <Button styleType="secondary" className={s.btnOther}>
+
+      <Button
+        styleType={myPacks ? 'secondary' : 'primary'}
+        className={s.btnOther}
+        onClick={btnOtherOnClickHandler}
+      >
         Other
       </Button>
     </div>

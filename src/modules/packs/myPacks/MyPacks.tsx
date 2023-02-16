@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 
-import s from './MyPacks.module.scss'
-
 import { baseQueryParams } from 'common/constants/baseQueryParams'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { Pack } from 'components/packs/pack/Pack'
-import { AddPackModal } from 'modules/packs/modals/AddPackModal'
+import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
+import { AddPackModal } from 'modules/packs/modals/AddPackModal'
 
 export const MyPacks = () => {
   const myId = useTypedSelector(state => state.auth.id)
@@ -20,25 +18,23 @@ export const MyPacks = () => {
 
   return (
     <div>
-      <Button styleType="primary" onClick={() => setToggle(!toggle)}>
-        Add new Pack
-      </Button>
-      {toggle && <AddPackModal />}
+        <Button styleType="primary" onClick={() => setToggle(!toggle)}>
+            Add new Pack
+        </Button>
+        {toggle && <AddPackModal />}
 
-      <div className={s.myPackInner}>
-        {myPacks?.map(pack => {
-          return (
-            <Pack
-              key={pack._id}
-              packId={pack._id}
-              name={pack.name}
-              cardsCount={pack.cardsCount}
-              author={pack.user_name}
-              updated={pack.updated}
-            />
-          )
-        })}
-      </div>
+      {myPacks?.map(pack => {
+        return (
+          <OtherPack
+            key={pack._id}
+            packId={pack._id}
+            name={pack.name}
+            cardsCount={pack.cardsCount}
+            author={pack.user_name}
+            updated={pack.updated}
+          />
+        )
+      })}
     </div>
   )
 }

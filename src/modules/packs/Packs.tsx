@@ -1,20 +1,28 @@
 import React, { FC } from 'react'
 
 import { formatDate } from 'common/utils/formatDate'
-import { Pack } from 'components/packs/pack/Pack'
-import { PackType } from 'modules/packs/packsApi'
+import { MyPack } from 'components/packs/my-pack/MyPack'
+import { OtherPack } from 'components/packs/other-pack/OtherPack'
 
 type PacksType = {
-  // packs: PackType[]
-  packs: any
+  packs: any //todo должно быть PackType[]
+  myPacks: boolean
 }
 
-export const Packs: FC<PacksType> = ({ packs }) => {
+export const Packs: FC<PacksType> = ({ packs, myPacks }) => {
   return packs.map((p: any) => {
     const dateUpdate = formatDate(p.updated)
 
-    return (
-      <Pack
+    return myPacks ? (
+      <MyPack
+        key={p._id}
+        packId={p._id}
+        name={p.name}
+        cardsCount={p.cardsCount}
+        updated={dateUpdate}
+      />
+    ) : (
+      <OtherPack
         key={p._id}
         packId={p._id}
         name={p.name}
