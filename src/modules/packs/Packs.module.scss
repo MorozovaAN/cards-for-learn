@@ -1,4 +1,12 @@
 .packsContainer {
+  padding: 20px 0;
+
+  //display: flex;
+  //flex-wrap: wrap;
+  //gap: 40px;
+  //justify-content: center;
+}
+.packContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
@@ -15,4 +23,28 @@
   height: 55px;
   margin-top: 40px;
   margin-bottom: 30px;
+}
+
+.buttonsContainer {
+  display: flex;
+}
+
+.btnMy {
+  width: 85px;
+  height: 42px;
+
+  border-radius: 10px 0 0 10px;
+}
+
+.btnOther {
+  width: 85px;
+  height: 42px;
+
+  background-color: var(--color-secondary-base);
+  border-radius:  0 10px 10px 0;
+}
+.scrollBtn {
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
 }

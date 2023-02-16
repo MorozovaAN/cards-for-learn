@@ -1,7 +1,5 @@
 import React, { FC, useState } from 'react'
 
-import { useSearchParams } from 'react-router-dom'
-
 import s from './MyPack.module.scss'
 
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
@@ -19,14 +17,9 @@ type PackType = {
 
 export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
   const [toggle, setToggle] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const packIdFromParams = searchParams.get('id') as string
-  const nameFromParams = searchParams.get('namePack') as string
 
   const handleTogglePack = () => {
     setToggle(!toggle)
-    setSearchParams({ namePack: name, id: packId })
   }
 
   return (
@@ -52,12 +45,11 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
           <EditIcon width="18" fill="#fff" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnTrash} onClick={handleTogglePack}>
+        <Button styleType="iconPrimary" className={s.btnTrash}>
           <TrashIcon width="18" height="20" />
         </Button>
       </div>
-      {/*{toggle && <UpdatePackName packId={packId} name={name} />}*/}
-      {toggle && <UpdatePackName packId={packIdFromParams} name={nameFromParams} />}
+      {toggle && <UpdatePackName packId={packId} name={name} />}
     </div>
   )
 }
