@@ -43,8 +43,8 @@ export const PacksPage = () => {
     <div>
       <div className={s.filters}>
         <Search selector="Packs" disabled={isFetching} />
-        <MyOtherButtons />
-        <SortPacks />
+        <MyOtherButtons disabled={isFetching} />
+        <SortPacks disabled={isFetching} />
         <ResetAllFilters disabled={isFetching} />
       </div>
 

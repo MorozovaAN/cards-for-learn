@@ -43,7 +43,6 @@ export const Paginator: FC<PaginationPropsType> = ({
         page={currentPage}
         size="small"
         shape="rounded"
-        /*classes={{ ul: s.pagination }}*/
         sx={{
           '.MuiPagination-ul': {
             columnGap: '10px',
@@ -56,22 +55,24 @@ export const Paginator: FC<PaginationPropsType> = ({
         }}
       />
 
-      <div className={s.showPerPage}>
-        <p className={s.nameShowPerPage}>Show</p>
+      <p className={s.nameShowPerPage}>Show</p>
 
-        <Select
-          disabled={disabled}
-          sx={{ fontFamily: 'inherit', fontSize: 'inherit' }}
-          value={pageCount.toString()}
-          onChange={handleChangeRowsPerPage}
-        >
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={9}>9</MenuItem>
-          <MenuItem value={12}>12</MenuItem>
-          <MenuItem value={15}>15</MenuItem>
-        </Select>
-        <p className={s.nameShowPerPage}>packs per page</p>
-      </div>
+      <Select
+        disabled={disabled}
+        sx={{
+          fontFamily: 'inherit',
+          fontSize: 'inherit',
+          height: '30px',
+        }}
+        value={pageCount.toString()}
+        onChange={handleChangeRowsPerPage}
+      >
+        <MenuItem value={6}>6</MenuItem>
+        <MenuItem value={9}>9</MenuItem>
+        <MenuItem value={12}>12</MenuItem>
+        <MenuItem value={15}>15</MenuItem>
+      </Select>
+      <p className={s.nameShowPerPage}>packs per page</p>
     </div>
   )
 }
