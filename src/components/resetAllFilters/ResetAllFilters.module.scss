@@ -1,12 +1,8 @@
-
 .button {
-  padding: 3px 7px 5px 3px;
+  flex-shrink: 0;
 
-  background-color: var(--color-background-dark-100);
-  border: 1px solid;
-  border-radius: 4px;
-}
+  width: 42px;
+  height: 42px;
 
-.button:hover {
-  background-color: var(--color-primary-base);
+  border-radius: 10px;
 }
