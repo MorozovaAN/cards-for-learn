@@ -1,8 +1,9 @@
-.packsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: flex-start;
+@import 'src/common/style-mixins/mixins';
 
-  padding: 20px 0;
+.skeletonPackContainer .skeletonPack {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 194px;
 }

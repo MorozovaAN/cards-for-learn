@@ -89,30 +89,10 @@ export const PacksPage = () => {
       </div>
 
       <div className={s.packsContainer}>
-        {responsePacks ? (
-          <Packs responsePacks={responsePacks.cardPacks} />
-        ) : (
-          <div className={s.packsContainer}>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-            <div className={s.skeletonPackContainer}>
-              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-            </div>
-          </div>
-        )}
+        <Packs
+          responsePacks={responsePacks ? responsePacks.cardPacks : null}
+          isFetching={isFetching}
+        />
       </div>
 
       {responsePacks && (
