@@ -88,12 +88,10 @@ export const PacksPage = () => {
         )}
       </div>
 
-      <div className={s.packsContainer}>
-        <Packs
-          responsePacks={responsePacks ? responsePacks.cardPacks : null}
-          isFetching={isFetching}
-        />
-      </div>
+      <Packs
+        responsePacks={responsePacks ? responsePacks.cardPacks : null}
+        isFetching={isFetching}
+      />
 
       {responsePacks && (
         <Paginator

@@ -99,6 +99,9 @@
 
     background: var(--color-primary-dark-100);
   }
+  &:active {
+    transform: scale(1.1);
+  }
 }
 
 .disabled {
