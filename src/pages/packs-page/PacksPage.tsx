@@ -42,7 +42,7 @@ export const PacksPage = () => {
   return responsePacks ? (
     <div>
       <div className={s.filters}>
-        <Search selector="Packs" disabled={isFetching} />
+        <Search disabled={isFetching} selector={'Packs'} param={'packName'} />
         <MyOtherButtons disabled={isFetching} />
         <SortPacks disabled={isFetching} />
         <ResetAllFilters disabled={isFetching} />

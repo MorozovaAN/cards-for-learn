@@ -5,6 +5,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
+
 import { CardsPage } from 'pages/cards-page/CardsPage'
 import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
