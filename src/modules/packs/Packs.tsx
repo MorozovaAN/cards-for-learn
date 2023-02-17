@@ -35,7 +35,7 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
 
       {toggle && <AddPackModal />}
 
-      <div className={s.packContainer}>
+      <div className={s.packsContainer}>
         {packs.map(p => {
           const dateUpdate = formatDate(p.updated)
 

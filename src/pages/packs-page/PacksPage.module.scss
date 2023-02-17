@@ -1,0 +1,57 @@
+@import 'src/common/style-mixins/mixins';
+
+.packsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: flex-start;
+
+  padding: 20px 0;
+}
+
+.filters {
+  display: flex;
+  column-gap: 25px;
+  align-items: flex-end;
+
+  height: 55px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters {
+
+  @include skeletonBase;
+
+  height: 42px;
+}
+
+.skeletonSearchContainer .skeletonSearch {
+  width: 453px;
+}
+
+.skeletonButtonsContainer .skeletonButtons {
+  width: 170px;
+}
+
+.skeletonSortPacksContainer .skeletonSortPacks {
+  width: 240px;
+}
+
+.skeletonResetFiltersContainer .skeletonResetFilters {
+  width: 42px;
+}
+
+.skeletonPackContainer .skeletonPack {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 194px;
+}
+
+.scrollBtn {
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
+}

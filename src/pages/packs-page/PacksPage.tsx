@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 
-import CircularProgress from '@mui/material/CircularProgress'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
+
+import s from './PacksPage.module.scss'
 
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -12,7 +13,6 @@ import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { Packs } from 'modules/packs/Packs'
-import s from 'modules/packs/Packs.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { setShowButton } from 'modules/packs/packsSlise'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
@@ -75,18 +75,45 @@ export const PacksPage = () => {
           </div>
         )}
 
-        <ResetAllFilters disabled={isFetching} />
+        {responsePacks ? (
+          <ResetAllFilters disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonResetFiltersContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonResetFilters }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
       </div>
 
-      {responsePacks && (
-        <div className={s.packsContainer}>
-          {isFetching ? (
-            <CircularProgress classes={{ root: s.circular }} size={60} />
-          ) : (
-            <Packs responsePacks={responsePacks.cardPacks} />
-          )}
-        </div>
-      )}
+      <div className={s.packsContainer}>
+        {responsePacks ? (
+          <Packs responsePacks={responsePacks.cardPacks} />
+        ) : (
+          <div className={s.packsContainer}>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+            <div className={s.skeletonPackContainer}>
+              <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+            </div>
+          </div>
+        )}
+      </div>
 
       {responsePacks && (
         <Paginator
@@ -96,6 +123,7 @@ export const PacksPage = () => {
           disabled={isFetching}
         />
       )}
+
       {showButton && (
         <div className={s.scrollBtn}>
           <ButtonScroll />

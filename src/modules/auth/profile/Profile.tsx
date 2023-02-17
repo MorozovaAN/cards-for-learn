@@ -62,13 +62,7 @@ export const Profile = () => {
 
       {isLoadingAvatar ? (
         <div className={s.skeletonAvatarContainer}>
-          <Skeleton
-            classes={{ root: s.skeletonAvatar }}
-            width={120}
-            height={120}
-            animation="wave"
-            variant="circular"
-          />
+          <Skeleton classes={{ root: s.skeletonAvatar }} animation="wave" variant="circular" />
         </div>
       ) : (
         <div className={s.imgContainer}>

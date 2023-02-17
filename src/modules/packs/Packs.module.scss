@@ -1,50 +1,8 @@
 .packsContainer {
-  padding: 20px 0;
-}
-
-.packContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  justify-content: center;
+  justify-content: flex-start;
 
   padding: 20px 0;
-}
-
-.filters {
-  display: flex;
-  column-gap: 25px;
-  align-items: flex-end;
-
-  height: 55px;
-  margin-top: 40px;
-  margin-bottom: 30px;
-}
-
-.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks {
-  height: 42px;
-
-  background-color: var(--color-background-dark-400);
-  border-radius: 10px;
-  &:after {
-    background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
-  }
-}
-
-.skeletonSearchContainer .skeletonSearch {
-  width: 450px;
-}
-
-.skeletonButtonsContainer .skeletonButtons {
-  width: 170px;
-}
-
-.skeletonSortPacksContainer .skeletonSortPacks {
-  width: 240px;
-}
-
-.scrollBtn {
-  position: fixed;
-  right: 100px;
-  bottom: 100px;
 }

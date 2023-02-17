@@ -28,16 +28,11 @@
 .skeletonNameContainer .skeletonName {
   width:300px;
   height: 30px;
-
-  border-radius: 10px;
 }
 
 .skeletonNameContainer .skeletonName, .skeletonAvatarContainer .skeletonAvatar{
-  background-color: var(--color-background-dark-400);
 
-  &:after {
-    background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
-  }
+ @include skeletonBase;
 }
 
 .email {
@@ -45,6 +40,13 @@
   @include subtitle;
 
   color: var(--color-on-primary-light-400);
+}
+
+.skeletonAvatarContainer .skeletonAvatar {
+  width: 120px;
+  height:120px;
+
+  border-radius: 50%;
 }
 
 .btnTextContainer,
