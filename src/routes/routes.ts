@@ -7,8 +7,8 @@ export const PATH = {
   CHECK_EMAIL: '/check-email',
   PROFILE: '/profile',
   PACKS: '/packs/',
-  CARDS: '/cards/:id',
-  CARD: '/cards/:id/learn',
+  CARDS: '/cards',
+  CARD: '/card',
   ERROR_404: '/404',
   NOT_FOUND: '/*',
 } as const
