@@ -2,8 +2,8 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
+import { paramsHelper } from 'common/utils/paramsHelper'
 import { useDebounce } from 'common/utils/useDebounce'
-import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Input } from 'UI/input/Input'
 
 type SearchType = {
