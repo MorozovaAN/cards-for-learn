@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './Paginator.module.scss'
 
-import { paramsHelper } from 'modules/packs/paramsHelper'
+import { paramsHelper } from 'common/utils/paramsHelper'
 
 type PaginationPropsType = {
   pageCount: number
