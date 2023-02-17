@@ -15,6 +15,7 @@ export const cardsApi = createApi({
       query: arg => ({
         url: `card`,
         params: {
+          pageCount: '6',
           ...arg,
         },
       }),
@@ -40,14 +41,14 @@ type GetCardsResponseType = {
   token: string
   tokenDeathTime: number
 }
-type GetCardsRequestType = {
+export type GetCardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
   cardsPack_id: string
-  min?: number
+  min?: string
   sortCards?: string
-  page?: number
-  pageCount?: number
+  page?: string
+  pageCount?: string
 }
 type CardType = {
   answer: string

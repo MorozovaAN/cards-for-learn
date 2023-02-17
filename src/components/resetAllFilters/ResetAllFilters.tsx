@@ -15,9 +15,11 @@ export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const resetFiltersHandler = () => {
-    const userId = searchParams.get('user_id') as string
+    const userId = searchParams.get('user_id')
+    const cardsPack_id = searchParams.get('cardsPack_id')
 
     if (userId) setSearchParams({ user_id: userId })
+    else if (cardsPack_id) setSearchParams({ cardsPack_id })
     else setSearchParams({})
   }
 
