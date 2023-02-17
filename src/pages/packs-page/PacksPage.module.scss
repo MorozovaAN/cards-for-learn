@@ -1,14 +1,5 @@
 @import 'src/common/style-mixins/mixins';
 
-.packsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: flex-start;
-
-  padding: 40px 0;
-}
-
 .filters {
   display: flex;
   column-gap: 25px;
