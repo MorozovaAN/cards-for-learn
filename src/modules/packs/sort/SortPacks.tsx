@@ -132,7 +132,7 @@ export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
   const selectOnChangeHandler = (_: any, value: string | null) => {
     value && setSearchParams({ ...paramsHelper(searchParams), sortPacks: value })
     if (
-      value === sortingPacksMethods.desCardsCount ||
+      (value === sortingPacksMethods.desCardsCount && !searchParams.has('user_id')) ||
       (value === sortingPacksMethods.desUpdate && searchParams.has('user_id'))
     ) {
       searchParams.delete('sortPacks')

@@ -1,9 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { appReducer } from 'app/appSlice'
-import { authApi, authReducer } from 'modules'
-import { packsApi } from 'modules/packs/packsApi'
-import { packsReducer } from 'modules/packs/packsSlise'
+import { authApi, authReducer, packsReducer, packsApi, cardsApi } from 'modules'
 
 export const store = configureStore({
   reducer: {
@@ -12,9 +10,10 @@ export const store = configureStore({
     packs: packsReducer,
     [authApi.reducerPath]: authApi.reducer,
     [packsApi.reducerPath]: packsApi.reducer,
+    [cardsApi.reducerPath]: cardsApi.reducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(authApi.middleware, packsApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, packsApi.middleware, cardsApi.middleware),
 })
 
 export type RootStateType = ReturnType<typeof store.getState>
