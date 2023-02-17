@@ -16,7 +16,6 @@ type PacksType = {
   isFetching: boolean
 }
 
-// @ts-ignore
 export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const [searchParams] = useSearchParams()
   const myId = useTypedSelector(state => state.auth.id)
@@ -24,50 +23,66 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const packs = myPacksPage
     ? responsePacks
     : responsePacks?.filter((p: PackType) => p.user_id !== myId)
+  const skeletons = []
 
-  return isFetching ? (
+  for (let i = 1; i <= 6; i++) {
+    skeletons.push(
+      <div className={s.skeletonPackContainer}>
+        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+      </div>
+    )
+  }
+
+  return (
     <>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-      <div className={s.skeletonPackContainer}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-    </>
-  ) : (
-    packs?.map(p => {
-      const dateUpdate = formatDate(p.updated)
-
-      return myPacksPage ? (
-        <MyPack
-          key={p._id}
-          packId={p._id}
-          name={p.name}
-          cardsCount={p.cardsCount}
-          updated={dateUpdate}
-        />
+      {isFetching ? (
+        <>
+          {skeletons.map(s => {
+            return s
+          })}
+          {/*<div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+          <div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+          <div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+          <div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+          <div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+          <div className={s.skeletonPackContainer}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>*/}
+        </>
       ) : (
-        <OtherPack
-          key={p._id}
-          packId={p._id}
-          name={p.name}
-          cardsCount={p.cardsCount}
-          author={p.user_name}
-          updated={dateUpdate}
-        />
-      )
-    })
+        packs?.map(p => {
+          const dateUpdate = formatDate(p.updated)
+
+          return myPacksPage ? (
+            <MyPack
+              key={p._id}
+              packId={p._id}
+              name={p.name}
+              cardsCount={p.cardsCount}
+              updated={dateUpdate}
+            />
+          ) : (
+            <OtherPack
+              key={p._id}
+              packId={p._id}
+              name={p.name}
+              cardsCount={p.cardsCount}
+              author={p.user_name}
+              updated={dateUpdate}
+            />
+          )
+        })
+      )}
+    </>
   )
 }
