@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -39,36 +40,67 @@ export const PacksPage = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  return responsePacks ? (
+  return (
     <div>
       <div className={s.filters}>
-        <Search selector="Packs" disabled={isFetching} />
-        <MyOtherButtons disabled={isFetching} />
-        <SortPacks disabled={isFetching} />
+        {responsePacks ? (
+          <Search selector="Packs" disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonSearchContainer}>
+            <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />
+          </div>
+        )}
+
+        {responsePacks ? (
+          <MyOtherButtons disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonButtonsContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonButtons }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
+        {responsePacks ? (
+          <SortPacks disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonSortPacksContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonSortPacks }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
         <ResetAllFilters disabled={isFetching} />
       </div>
 
-      <div className={s.packsContainer}>
-        {isFetching ? (
-          <CircularProgress classes={{ root: s.circular }} size={60} />
-        ) : (
-          <Packs responsePacks={responsePacks.cardPacks} />
-        )}
-      </div>
+      {responsePacks && (
+        <div className={s.packsContainer}>
+          {isFetching ? (
+            <CircularProgress classes={{ root: s.circular }} size={60} />
+          ) : (
+            <Packs responsePacks={responsePacks.cardPacks} />
+          )}
+        </div>
+      )}
 
-      <Paginator
-        pageCount={responsePacks.pageCount}
-        totalCount={responsePacks.cardPacksTotalCount}
-        currentPage={responsePacks.page}
-        disabled={isFetching}
-      />
+      {responsePacks && (
+        <Paginator
+          pageCount={responsePacks.pageCount}
+          totalCount={responsePacks.cardPacksTotalCount}
+          currentPage={responsePacks.page}
+          disabled={isFetching}
+        />
+      )}
       {showButton && (
         <div className={s.scrollBtn}>
           <ButtonScroll />
         </div>
       )}
     </div>
-  ) : (
-    <CircularProgress classes={{ root: s.circular }} size={60} />
   )
 }

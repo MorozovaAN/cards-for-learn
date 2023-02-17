@@ -1,11 +1,7 @@
 .packsContainer {
   padding: 20px 0;
-
-  //display: flex;
-  //flex-wrap: wrap;
-  //gap: 40px;
-  //justify-content: center;
 }
+
 .packContainer {
   display: flex;
   flex-wrap: wrap;
@@ -25,24 +21,28 @@
   margin-bottom: 30px;
 }
 
-.buttonsContainer {
-  display: flex;
-}
-
-.btnMy {
-  width: 85px;
+.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks {
   height: 42px;
 
-  border-radius: 10px 0 0 10px;
+  background-color: var(--color-background-dark-400);
+  border-radius: 10px;
+  &:after {
+    background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
+  }
 }
 
-.btnOther {
-  width: 85px;
-  height: 42px;
-
-  background-color: var(--color-secondary-base);
-  border-radius:  0 10px 10px 0;
+.skeletonSearchContainer .skeletonSearch {
+  width: 450px;
 }
+
+.skeletonButtonsContainer .skeletonButtons {
+  width: 170px;
+}
+
+.skeletonSortPacksContainer .skeletonSortPacks {
+  width: 240px;
+}
+
 .scrollBtn {
   position: fixed;
   right: 100px;

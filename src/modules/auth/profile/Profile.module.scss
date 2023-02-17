@@ -33,7 +33,7 @@
   background-color: rgb(224 221 217 / 65%);
 
   &:after {
-    background: linear-gradient( 90deg, transparent, rgb(217 214 214 / 78%), transparent );
+    background: linear-gradient( 90deg, transparent,var(--color-on-primary-light-transparent), transparent );
   }
 }
 
