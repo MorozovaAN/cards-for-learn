@@ -45,13 +45,7 @@ export const Profile = () => {
 
   const showUserName = isLoadingName ? (
     <div className={s.skeletonNameContainer}>
-      <Skeleton
-        classes={{ root: s.skeletonName }}
-        width={300}
-        height={30}
-        animation="wave"
-        variant="rectangular"
-      />
+      <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
     </div>
   ) : (
     <div className={s.nameContainer}>

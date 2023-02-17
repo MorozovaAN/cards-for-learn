@@ -1,5 +1,9 @@
-.app {
+.appDefault {
   background: var(--color-background-base);
+}
+
+.appSecondary {
+  background: var(--color-background-dark-100);
 }
 
 .contentContainer {

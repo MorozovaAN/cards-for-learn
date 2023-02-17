@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
+import { useLocation } from 'react-router-dom'
+
+import { appBackgroundSwitch } from './utils/appBackgroundSwitch'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
@@ -12,9 +15,11 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
+  let location = useLocation()
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
+  const appClass = appBackgroundSwitch(location.pathname) ? s.appSecondary : s.appDefault
 
   useEffect(() => {
     if (!isAuth) {
@@ -30,7 +35,7 @@ export const App = () => {
     )
 
   return (
-    <div className={s.app}>
+    <div className={appClass}>
       <NotificationBar />
 
       {isLoggedIn && <Header />}
