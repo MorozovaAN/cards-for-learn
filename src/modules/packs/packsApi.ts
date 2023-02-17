@@ -89,7 +89,7 @@ export type PackType = {
   cardsCount: number
   created: string
   updated: string
-  private: boolean //todo
+  private: boolean
 }
 
 export type ResponsePacksType = {
@@ -109,7 +109,7 @@ export type ResponsePackType = {
   cardsCount: number
   created: string
   updated: string
-  private: boolean //todo
+  private: boolean
 }
 
 export type UpdateNamePackType = {

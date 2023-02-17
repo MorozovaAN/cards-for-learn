@@ -17,7 +17,7 @@
 
   line-height: 1.25;
 
-  background-color: var(--color-secondary-base-transparent) ;
+  background-color: var(--color-secondary-base-transparent);
 }
 
 .pack p {
@@ -26,7 +26,7 @@
   max-height: 100%;
 }
 
-.private {
+.privateValue {
   position: relative;
 
   &:after {
@@ -44,6 +44,7 @@
     border-bottom-left-radius: 5px;
   }
 }
+
 .name {
 
   @include headline3(600);

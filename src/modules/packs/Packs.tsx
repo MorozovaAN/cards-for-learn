@@ -23,7 +23,6 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
   const packs = myPacksPage
     ? responsePacks
     : responsePacks.filter((p: PackType) => p.user_id !== myId)
-  const privateObjects = responsePacks.filter((p: PackType) => (p.private ? p : null)) //todo
 
   const [toggle, setToggle] = useState(false)
 
@@ -48,7 +47,7 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
               name={p.name}
               cardsCount={p.cardsCount}
               updated={dateUpdate}
-              privateObjects={privateObjects} //todo
+              privatePack={p.private}
             />
           ) : (
             <OtherPack
