@@ -24,6 +24,7 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
   const packs = myPacksPage
     ? responsePacks
     : responsePacks.filter((p: PackType) => p.user_id !== myId)
+
   const [toggle, setToggle] = useState(false)
 
   return (
@@ -48,6 +49,7 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
                 name={p.name}
                 cardsCount={p.cardsCount}
                 updated={dateUpdate}
+                privatePack={p.private}
               />
             ) : (
               <OtherPack

@@ -17,13 +17,32 @@
 
   line-height: 1.25;
 
-  background-color: var(--color-secondary-base-transparent) ;
+  background-color: var(--color-secondary-base-transparent);
 }
 
 .pack p {
   overflow: hidden;
 
   max-height: 100%;
+}
+
+.privateValue {
+  position: relative;
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 15px;
+
+    width: 15px;
+    height: 20px;
+
+    background-color: var(--color-primary-base);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
 }
 
 .name {
