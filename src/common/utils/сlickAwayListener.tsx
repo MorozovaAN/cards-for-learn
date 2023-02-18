@@ -1,20 +1,16 @@
 import React, { FC, useEffect, useRef } from 'react'
 
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-
-interface ClickAwayListenerProps {
+interface ClickAwayListenerType {
   onClickAway: () => void
-
   children: React.ReactElement
 }
 
-export const ClickAwayListener: FC<ClickAwayListenerProps> = ({ onClickAway, children }) => {
+export const ClickAwayListener: FC<ClickAwayListenerType> = ({ onClickAway, children }) => {
   const rootRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const handleClickAway = (event: MouseEvent) => {
       const eventTarget = event.target as Node
-
       const isClickInside = rootRef.current?.contains(eventTarget)
 
       if (!isClickInside) onClickAway()

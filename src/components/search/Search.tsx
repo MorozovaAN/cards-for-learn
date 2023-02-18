@@ -2,18 +2,20 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
+import { paramsHelper } from 'common/utils/paramsHelper'
 import { useDebounce } from 'common/utils/useDebounce'
-import { paramsHelper } from 'modules/packs/paramsHelper'
 import { Input } from 'UI/input/Input'
 
 type SearchType = {
-  selector: string
   disabled: boolean
+  selector: string
+  param: string
 }
 
-export const Search: FC<SearchType> = ({ selector, disabled }) => {
+export const Search: FC<SearchType> = ({ disabled, selector, param }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [value, setValue] = useState(searchParams.get('packName'))
+  const [value, setValue] = useState(searchParams.get(`${param}`))
+
   const debouncedValue = useDebounce(value)
 
   const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,18 +23,21 @@ export const Search: FC<SearchType> = ({ selector, disabled }) => {
   }
 
   useEffect(() => {
-    if (debouncedValue) {
+    if (debouncedValue && selector === 'Packs') {
       setSearchParams({ ...paramsHelper(searchParams), packName: debouncedValue })
+    }
+    if (debouncedValue && selector === 'Cards') {
+      setSearchParams({ ...paramsHelper(searchParams), cardQuestion: debouncedValue })
     }
   }, [debouncedValue])
 
   useEffect(() => {
-    if (!searchParams.has('packName')) setValue('')
+    if (!searchParams.has(`${param}`)) setValue('')
   }, [searchParams])
 
   useEffect(() => {
     if (!value) {
-      searchParams.delete('packName')
+      searchParams.delete(`${param}`)
       setSearchParams(searchParams)
     }
   }, [value])

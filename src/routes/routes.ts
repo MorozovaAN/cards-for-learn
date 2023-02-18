@@ -7,7 +7,7 @@ export const PATH = {
   CHECK_EMAIL: '/check-email',
   PROFILE: '/profile',
   PACKS: '/packs/',
-  CARDS: '/cards/:id',
+  CARDS: '/cards',
   CARD: '/cards/:id/learn',
   ERROR_404: '/404',
   NOT_FOUND: '/*',
