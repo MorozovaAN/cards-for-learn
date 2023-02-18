@@ -1,0 +1,65 @@
+@import 'src/common/style-mixins/mixins';
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.37);
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin-top: -174px;
+  margin-left: -225px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.close {
+  cursor: pointer;
+
+  align-self: flex-end;
+
+  width: 22px;
+  height: 22px;
+}
+
+.title {
+
+  @include headline1;
+
+  align-self: center;
+}
+
+.subtitle {
+
+  @include title;
+}
+
+.checkbox {
+  align-self: flex-start;
+}
+
+.button {
+  width: 100%;
+}

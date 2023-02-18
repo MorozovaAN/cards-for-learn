@@ -5,7 +5,10 @@ import s from './MyPack.module.scss'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
-import { UpdatePackName } from 'modules/packs/modals/UpdatePackName'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { EditPackName } from 'modules/packs/modals/edit-pack-name-modal/EditPackName'
+import { useUpdatePackMutation } from 'modules/packs/packsApi'
+import { setCurrentPackName, setShowAddPackModal } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
@@ -16,10 +19,11 @@ type PackType = {
 }
 
 export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
-  const [toggle, setToggle] = useState(false)
+  const dispatch = useTypedDispatch()
 
-  const handleTogglePack = () => {
-    setToggle(!toggle)
+  const openEditPackNameModalHandler = () => {
+    dispatch(setCurrentPackName(name))
+    dispatch(setShowAddPackModal(true))
   }
 
   return (
@@ -41,7 +45,11 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
           <LearnIcon width="18" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnEdit} onClick={handleTogglePack}>
+        <Button
+          styleType="iconPrimary"
+          className={s.btnEdit}
+          onClick={openEditPackNameModalHandler}
+        >
           <EditIcon width="18" fill="#fff" />
         </Button>
 
@@ -49,7 +57,8 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
           <TrashIcon width="18" height="20" />
         </Button>
       </div>
-      {toggle && <UpdatePackName packId={packId} name={name} />}
+
+      <EditPackName packId={packId} name={name} />
     </div>
   )
 }

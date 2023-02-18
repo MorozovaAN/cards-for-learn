@@ -50,8 +50,9 @@ export const AddPackModal = () => {
             value={name}
             onChange={e => setName(e.currentTarget.value)}
             type="text"
-            label="Name pack"
+            label="Name of the new pack"
             autoFocus
+            error={!name.length && 'Write name of the new pack'}
           />
 
           <div className={s.checkbox}>
