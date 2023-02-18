@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import s from './MyPack.module.scss'
 
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
@@ -23,6 +25,7 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
   const [toggle, setToggle] = useState(false)
   const [toggleDelete, setToggleDelete] = useState(false)
   const dispatch = useTypedDispatch()
+  const navigate = useNavigate()
 
   const handleEditPack = () => {
     setToggle(!toggle)
@@ -34,6 +37,10 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
     setToggleDelete(!toggleDelete)
     // dispatch(setPackId(packId))
     // dispatch(setPackName(name))
+  }
+  const handleLearnPack = () => {
+    dispatch(setPackId(packId))
+    navigate('/cards')
   }
 
   return (
@@ -48,7 +55,7 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
         {updated}
       </p>
       <div className={s.btnContainer}>
-        <Button styleType="iconPrimary" className={s.btnLearn}>
+        <Button styleType="iconPrimary" className={s.btnLearn} onClick={handleLearnPack}>
           <LearnIcon width="18" />
         </Button>
 
