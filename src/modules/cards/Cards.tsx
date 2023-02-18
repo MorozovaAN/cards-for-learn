@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
@@ -10,11 +10,14 @@ import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
+import { AddCardModal } from 'modules/cards/modals/AddCardModal'
+import { Button } from 'UI/button/Button'
 
 export const Cards = () => {
   const cardsPack_id = useTypedSelector(state => state.packs.packId)
   const [searchParams, setSearchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams, cardsPack_id))
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     if (!searchParams.has('cardsPack_id')) {
@@ -28,8 +31,22 @@ export const Cards = () => {
         <div>
           <Search disabled={isFetching} selector={'Cards'} param={'cardQuestion'} />
           <ResetAllFilters disabled={isFetching} />
+
+          <Button onClick={() => setToggle(!toggle)} styleType={'primary'}>
+            Add New Card
+          </Button>
+
+          {toggle && <AddCardModal />}
+
           {data.cards.length ? (
-            data.cards.map(card => <Card key={card._id} question={card.question} />)
+            data.cards.map(card => (
+              <Card
+                key={card._id}
+                question={card.question}
+                answer={card.answer}
+                idCard={card._id}
+              />
+            ))
           ) : (
             <NotFound />
           )}

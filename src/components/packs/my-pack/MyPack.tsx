@@ -10,7 +10,8 @@ import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { DeletePackModal } from 'modules/packs/modals/DeletePackModal'
 import { UpdatePackName } from 'modules/packs/modals/UpdatePackName'
-import { setPackId, setPackName } from 'modules/packs/packsSlise'
+import { setPackId } from 'modules/packs/packsSlise'
+import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
 
 type PackTypeProps = {
@@ -40,7 +41,7 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
   }
   const handleLearnPack = () => {
     dispatch(setPackId(packId))
-    navigate('/cards')
+    navigate(PATH.CARDS)
   }
 
   return (
