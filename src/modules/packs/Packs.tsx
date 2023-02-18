@@ -4,11 +4,16 @@ import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
+import { setShowAddPackModal } from './packsSlise'
 
+import { ReactComponent as Plus } from 'assets/img/plus.svg'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
+import { idSelector } from 'modules/auth/authSelectors'
+import { AddPackModal } from 'modules/packs/modals/add-pack-modal/AddPackModal'
 import { PackType } from 'modules/packs/packsApi'
 
 type PacksType = {
@@ -18,71 +23,65 @@ type PacksType = {
 
 export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const [searchParams] = useSearchParams()
-  const myId = useTypedSelector(state => state.auth.id)
+  const myId = useTypedSelector(idSelector)
   const myPacksPage = searchParams.has('user_id')
   const packs = myPacksPage
     ? responsePacks
     : responsePacks?.filter((p: PackType) => p.user_id !== myId)
   const skeletons = []
+  const dispatch = useTypedDispatch()
 
   for (let i = 1; i <= 6; i++) {
     skeletons.push(
-      <div className={s.skeletonPackContainer}>
+      <div className={s.skeletonPackContainer} key={i}>
         <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
       </div>
     )
   }
 
-  return (
-    <>
-      {isFetching ? (
-        <>
-          {skeletons.map(s => {
-            return s
-          })}
-          {/*<div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>
-          <div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>
-          <div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>
-          <div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>
-          <div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>
-          <div className={s.skeletonPackContainer}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-          </div>*/}
-        </>
-      ) : (
-        packs?.map(p => {
-          const dateUpdate = formatDate(p.updated)
+  const addPackHandler = () => {
+    dispatch(setShowAddPackModal(true))
+  }
 
-          return myPacksPage ? (
-            <MyPack
-              key={p._id}
-              packId={p._id}
-              name={p.name}
-              cardsCount={p.cardsCount}
-              updated={dateUpdate}
-            />
-          ) : (
-            <OtherPack
-              key={p._id}
-              packId={p._id}
-              name={p.name}
-              cardsCount={p.cardsCount}
-              author={p.user_name}
-              updated={dateUpdate}
-            />
-          )
+  return (
+    <div className={s.packsContainer}>
+      {isFetching ? (
+        skeletons.map(s => {
+          return s
         })
+      ) : (
+        <>
+          {myPacksPage && (
+            <div className={s.addPack} onClick={addPackHandler}>
+              <Plus />
+            </div>
+          )}
+          {packs?.map(p => {
+            const dateUpdate = formatDate(p.updated)
+
+            return myPacksPage ? (
+              <MyPack
+                key={p._id}
+                packId={p._id}
+                name={p.name}
+                cardsCount={p.cardsCount}
+                updated={dateUpdate}
+              />
+            ) : (
+              <OtherPack
+                key={p._id}
+                packId={p._id}
+                name={p.name}
+                cardsCount={p.cardsCount}
+                author={p.user_name}
+                updated={dateUpdate}
+              />
+            )
+          })}
+        </>
       )}
-    </>
+
+      <AddPackModal />
+    </div>
   )
 }

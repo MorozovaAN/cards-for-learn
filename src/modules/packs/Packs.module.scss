@@ -17,3 +17,29 @@
   width: 300px ;
   height: 194px;
 }
+
+.addPack {
+
+  @include boxBorder;
+
+  @include transitionMain;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 300px;
+  height: 194px;
+
+  background-color: var(--color-secondary-base-transparent);
+
+  &:active {
+   transform: scale(1.1);
+  }
+
+  &:hover {
+   cursor: pointer;
+
+   background-color:var(--color-secondary-base);
+ }
+}
