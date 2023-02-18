@@ -8,7 +8,7 @@ export const PATH = {
   PROFILE: '/profile',
   PACKS: '/packs/',
   CARDS: '/cards',
-  CARD: '/card',
+  CARD: '/cards/:id/learn',
   ERROR_404: '/404',
   NOT_FOUND: '/*',
 } as const
