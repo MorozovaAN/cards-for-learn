@@ -13,12 +13,12 @@ export const AddCardModal = () => {
 
   const [searchParams, _] = useSearchParams()
   const id = searchParams.get('cardsPack_id')
-  const handleAddCard = () => {
+  const addCardHandler = () => {
     addCard({ card: { cardsPack_id: id ? id : '', question, answer } })
   }
-  const handleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setQuestion(e.currentTarget.value)
-  const handleChangeAnswer = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeAnswerHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAnswer(e.currentTarget.value)
 
   return (
@@ -30,14 +30,14 @@ export const AddCardModal = () => {
 
       <Input
         value={question}
-        onChange={handleChangeQuestion}
+        onChange={changeQuestionHandler}
         type="text"
         label="Question"
         autoFocus
       />
-      <Input value={answer} onChange={handleChangeAnswer} type="text" label="Answer" />
+      <Input value={answer} onChange={changeAnswerHandler} type="text" label="Answer" />
 
-      <Button disabled={!question} styleType="primary" onClick={handleAddCard}>
+      <Button disabled={!question} styleType="primary" onClick={addCardHandler}>
         Save
       </Button>
     </>

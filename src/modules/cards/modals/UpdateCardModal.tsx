@@ -18,13 +18,13 @@ export const UpdateCardModal: FC<UpdateCardModalProps> = ({ answer, question }) 
   const [questionValue, setQuestionValue] = useState<string>(question)
   const [answerValue, setAnswerValue] = useState<string>(answer)
 
-  const handleEditPack = () => {
+  const editCardHandler = () => {
     updateCard({ card: { _id: cardId, question: questionValue, answer: answerValue } })
   }
 
-  const handleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setQuestionValue(e.currentTarget.value)
-  const handleChangeAnswer = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeAnswerHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAnswerValue(e.currentTarget.value)
 
   return (
@@ -32,19 +32,19 @@ export const UpdateCardModal: FC<UpdateCardModalProps> = ({ answer, question }) 
       <Input
         autoFocus
         value={questionValue}
-        onChange={handleChangeQuestion}
+        onChange={changeQuestionHandler}
         type="text"
         label="Question"
         error={!questionValue.length ? 'write your question' : ''}
       />
       <Input
         value={answerValue}
-        onChange={handleChangeAnswer}
+        onChange={changeAnswerHandler}
         type="text"
         label="Answer"
         className={s.input}
       />
-      <Button onClick={handleEditPack} disabled={!questionValue} styleType="primary">
+      <Button onClick={editCardHandler} disabled={!questionValue} styleType="primary">
         Edit
       </Button>
     </>

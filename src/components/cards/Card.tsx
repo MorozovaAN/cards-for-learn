@@ -1,15 +1,14 @@
-import Rating from '@mui/material/Rating'
-
-import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
-import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { useDeleteCardMutation } from 'modules/cards/cardsApi'
-
 import React, { FC, useState } from 'react'
+
+import Rating from '@mui/material/Rating'
 
 import s from './Card.module.scss'
 
+import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
+import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { useDeleteCardMutation } from 'modules/cards/cardsApi'
 import { setCardId } from 'modules/cards/cardsSlise'
 import { UpdateCardModal } from 'modules/cards/modals/UpdateCardModal'
 
@@ -27,7 +26,7 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
   const dispatch = useTypedDispatch()
   const [toggle, setToggle] = useState(false)
 
-  const handleEditPack = () => {
+  const editCardHandler = () => {
     setToggle(!toggle)
     dispatch(setCardId(idCard))
   }
@@ -37,19 +36,24 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
   }
 
   return (
-    <div className={s.container}>
-      <div>{question}</div>
-      <div>{answer}</div>
-      <div>{updated}</div>
+    <>
+      <div className={s.container}>
+        <div>{question}</div>
+        <div>{answer}</div>
+        <div>{updated}</div>
 
-      <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
-      {myId === userId && (
-        <div className={s.icons}>
-          <EditIcon onClick={handleEditPack} />
-          <TrashIcon fill="black" onClick={deleteCardHandler} />
-        </div>
-      )}
+        <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
+
+        {myId === userId && (
+          <div className={s.icons}>
+            <EditIcon onClick={editCardHandler} />
+
+            <TrashIcon fill="black" onClick={deleteCardHandler} />
+          </div>
+        )}
+      </div>
+
       {toggle && <UpdateCardModal question={question} answer={answer} />}
-    </div>
+    </>
   )
 }
