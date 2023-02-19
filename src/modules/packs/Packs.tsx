@@ -10,6 +10,7 @@ import { ReactComponent as Plus } from 'assets/img/plus.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
+import { NotFound } from 'components/notFound/NotFound'
 import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { idSelector } from 'modules/auth/authSelectors'
@@ -65,6 +66,7 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
                 name={p.name}
                 cardsCount={p.cardsCount}
                 updated={dateUpdate}
+                privatePack={p.private}
               />
             ) : (
               <OtherPack

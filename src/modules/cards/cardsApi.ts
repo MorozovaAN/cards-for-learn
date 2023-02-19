@@ -15,14 +15,25 @@ export const cardsApi = createApi({
       query: arg => ({
         url: `card`,
         params: {
+          pageCount: '6',
           ...arg,
         },
       }),
       providesTags: result => ['cards'],
     }),
+    deleteCard: build.mutation({
+      query: arg => ({
+        method: 'DELETE',
+        url: `card`,
+        params: {
+          id: arg,
+        },
+      }),
+      invalidatesTags: ['cards'],
+    }),
   }),
 })
-export const { useGetCardsQuery } = cardsApi
+export const { useGetCardsQuery, useDeleteCardMutation } = cardsApi
 
 //types
 type GetCardsResponseType = {
@@ -40,14 +51,14 @@ type GetCardsResponseType = {
   token: string
   tokenDeathTime: number
 }
-type GetCardsRequestType = {
+export type GetCardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
   cardsPack_id: string
-  min?: number
+  min?: string
   sortCards?: string
-  page?: number
-  pageCount?: number
+  page?: string
+  pageCount?: string
 }
 type CardType = {
   answer: string

@@ -69,7 +69,10 @@ export const Profile = () => {
           <img src={avatar ? avatar : defaultAvatar} alt="user avatar" className={s.avatar} />
 
           <span className={s.photoUploader}>
-            <UpdateUserAvatar updateAvatarCallback={updateAvatarCallback} />
+            <UpdateUserAvatar
+              updateAvatarCallback={updateAvatarCallback}
+              disabled={isLoadingAvatar || isLoadingName}
+            />
           </span>
         </div>
       )}

@@ -70,7 +70,9 @@ export const authApi = createApi({
           if ((err as ErrorType)?.error?.data?.error) {
             dispatch(setNotification({ message: 'Incorrect email or password', type: 'error' }))
           } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+            const error = err as { error: { status: string } }
+
+            dispatch(setNotification({ message: error.error.status, type: 'error' }))
           }
         } finally {
           dispatch(setIsLoading(false))
