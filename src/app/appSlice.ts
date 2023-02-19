@@ -9,6 +9,10 @@ const initialState = {
     type: '' as NotificationType,
     open: false,
   },
+  modal: {
+    type: '' as ModalType,
+    open: false,
+  },
 }
 
 const appSlice = createSlice({
@@ -31,10 +35,16 @@ const appSlice = createSlice({
       state.notification.message = action.payload.message
       state.notification.type = action.payload.type
     },
+    setModal: (state, action: PayloadAction<{ type: ModalType; open: boolean }>) => {
+      state.modal.open = action.payload.open
+      state.modal.type = action.payload.type
+    },
   },
 })
 
 type NotificationType = '' | 'error' | 'success'
+type ModalType = '' | 'Add new pack' | 'Edit pack name' | 'Delete Pack'
 
-export const { setIsAuth, setIsLoggedIn, setNotification, setIsLoading } = appSlice.actions
+export const { setIsAuth, setIsLoggedIn, setNotification, setIsLoading, setModal } =
+  appSlice.actions
 export const appReducer = appSlice.reducer

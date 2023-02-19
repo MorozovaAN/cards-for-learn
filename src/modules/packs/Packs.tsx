@@ -4,8 +4,8 @@ import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
-import { setShowAddPackModal } from './packsSlise'
 
+import { setModal } from 'app/appSlice'
 import { ReactComponent as Plus } from 'assets/img/plus.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -13,7 +13,6 @@ import { formatDate } from 'common/utils/formatDate'
 import { MyPack } from 'components/packs/my-pack/MyPack'
 import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { idSelector } from 'modules/auth/authSelectors'
-import { AddPackModal } from 'modules/packs/modals/add-pack-modal/AddPackModal'
 import { PackType } from 'modules/packs/packsApi'
 
 type PacksType = {
@@ -40,7 +39,7 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   }
 
   const addPackHandler = () => {
-    dispatch(setShowAddPackModal(true))
+    dispatch(setModal({ open: true, type: 'Add new pack' }))
   }
 
   return (
@@ -80,8 +79,6 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
           })}
         </>
       )}
-
-      <AddPackModal />
     </div>
   )
 }

@@ -11,6 +11,7 @@ import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { Header, useMeMutation } from 'modules'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
+import { BaseModal } from 'UI/modal/BaseModal'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
@@ -37,6 +38,7 @@ export const App = () => {
   return (
     <div className={appClass}>
       <NotificationBar />
+      <BaseModal />
 
       {isLoggedIn && <Header />}
 
