@@ -10,7 +10,7 @@ import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { DeletePackModal } from 'modules/packs/modals/DeletePackModal'
 import { UpdatePackName } from 'modules/packs/modals/UpdatePackName'
-import { setPackId, setPackName } from 'modules/packs/packsSlise'
+import { setPackId } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackTypeProps = {
@@ -27,18 +27,18 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
 
-  const handleEditPack = () => {
+  const editPackHandler = () => {
     setToggle(!toggle)
     //я завела на имя и id стейт для дальнейшей передачи имени
     // dispatch(setPackId(packId))
     // dispatch(setPackName(name))
   }
-  const handleDeletePack = () => {
+  const deletePackHandler = () => {
     setToggleDelete(!toggleDelete)
     // dispatch(setPackId(packId))
     // dispatch(setPackName(name))
   }
-  const handleLearnPack = () => {
+  const learnPackHandler = () => {
     dispatch(setPackId(packId))
     navigate('/cards')
   }
@@ -55,15 +55,15 @@ export const MyPack: FC<PackTypeProps> = ({ packId, name, cardsCount, updated, p
         {updated}
       </p>
       <div className={s.btnContainer}>
-        <Button styleType="iconPrimary" className={s.btnLearn} onClick={handleLearnPack}>
+        <Button styleType="iconPrimary" className={s.btnLearn} onClick={learnPackHandler}>
           <LearnIcon width="18" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnEdit} onClick={handleEditPack}>
+        <Button styleType="iconPrimary" className={s.btnEdit} onClick={editPackHandler}>
           <EditIcon width="18" fill="#fff" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnTrash} onClick={handleDeletePack}>
+        <Button styleType="iconPrimary" className={s.btnTrash} onClick={deletePackHandler}>
           <TrashIcon width="18" height="20" />
         </Button>
       </div>

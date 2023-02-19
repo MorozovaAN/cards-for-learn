@@ -1,0 +1,24 @@
+@import "src/common/style-mixins/mixins";
+
+.filters {
+  display: flex;
+  column-gap: 25px;
+  align-items: flex-end;
+
+  height: 55px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 20px 0 ;
+
+}
+.name{
+
+  @include headline3(600);
+}
+.paginator {
+  margin-top: 15px;
+}
