@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 import s from './MyPack.module.scss'
 
@@ -7,8 +7,7 @@ import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { EditPackName } from 'modules/packs/modals/edit-pack-name-modal/EditPackName'
-import { useUpdatePackMutation } from 'modules/packs/packsApi'
-import { setCurrentPackName, setShowAddPackModal } from 'modules/packs/packsSlise'
+import { setCurrentPackName, setShowEditNamePackModal } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
@@ -23,7 +22,7 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated }) => {
 
   const openEditPackNameModalHandler = () => {
     dispatch(setCurrentPackName(name))
-    dispatch(setShowAddPackModal(true))
+    dispatch(setShowEditNamePackModal(true))
   }
 
   return (

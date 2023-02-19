@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { flatten } from '@reduxjs/toolkit/dist/query/utils'
 
 const initialState = {
   isShowButtonScroll: false,
@@ -26,7 +25,7 @@ const packsSlice = createSlice({
       state.showEditNamePackModal = action.payload
     },
     setCurrentPackName: (state, action: PayloadAction<string>) => {
-      state.packId = action.payload
+      state.currentPackName = action.payload
     },
   },
 })

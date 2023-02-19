@@ -55,11 +55,7 @@ export const AddPackModal = () => {
             error={!name.length && 'Write name of the new pack'}
           />
 
-          <div className={s.checkbox}>
-            <Checkbox onChange={() => setPrivatePack(!privatePack)}>
-              <p className={s.subtitle}>Private pack</p>
-            </Checkbox>
-          </div>
+          <Checkbox onChange={() => setPrivatePack(!privatePack)}>Private pack</Checkbox>
 
           <Button styleType="primary" onClick={handleAddPack} className={s.button} disabled={!name}>
             Save
