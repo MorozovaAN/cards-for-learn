@@ -8,8 +8,8 @@ import { setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
-import { setPackId } from 'modules/packs/packsSlise'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { setPackId, setPackName } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
@@ -21,17 +21,25 @@ type PackType = {
 }
 
 export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privatePack }) => {
-    const dispatch = useTypedDispatch()
-    const navigate = useNavigate()
+  const dispatch = useTypedDispatch()
+  const navigate = useNavigate()
 
   const openEditPackNameModalHandler = () => {
+    dispatch(setPackName(name))
+    dispatch(setPackId(packId))
     dispatch(setModal({ open: true, type: 'Edit pack name' }))
   }
 
-    const learnPackHandler = () => {
-        dispatch(setPackId(packId))
-        navigate('/cards')
-    }
+  const deletePackHandler = () => {
+    dispatch(setPackName(name))
+    dispatch(setPackId(packId))
+    dispatch(setModal({ open: true, type: 'Delete Pack' }))
+  }
+
+  const learnPackHandler = () => {
+    dispatch(setPackId(packId))
+    navigate('/cards')
+  }
 
   return (
     <div className={`${s.pack} ${privatePack ? s.privateValue : ''}`}>

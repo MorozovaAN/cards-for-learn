@@ -44,7 +44,7 @@ export const PacksPage = () => {
     <div>
       <div className={s.filters}>
         {responsePacks ? (
-          <Search selector="Packs" selector='Packs' param='packName' disabled={isFetching} />
+          <Search selector="Packs" param="packName" disabled={isFetching} />
         ) : (
           <div className={s.skeletonSearchContainer}>
             <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />

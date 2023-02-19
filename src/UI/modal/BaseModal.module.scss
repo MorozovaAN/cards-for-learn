@@ -1,7 +1,7 @@
 @import 'src/common/style-mixins/mixins';
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 

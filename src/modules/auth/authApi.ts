@@ -120,7 +120,7 @@ export const authApi = createApi({
       query: avatar => ({
         url: 'me',
         method: 'PUT',
-        body: { name: '', avatar },
+        body: { packName: '', avatar },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {

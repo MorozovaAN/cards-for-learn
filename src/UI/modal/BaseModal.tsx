@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { createPortal } from 'react-dom'
 
 import s from './BaseModal.module.scss'
+import { DeletePackModal } from './delete-pack-modal/DeletePackModal'
 
 import { setModal } from 'app/appSlice'
 import { ReactComponent as Close } from 'assets/img/icons/close.svg'
@@ -15,7 +16,18 @@ import { EditPackNameModal } from 'UI/modal/edit-pack-modal/EditPackNameModal'
 export const BaseModal = () => {
   const open = useTypedSelector(state => state.app.modal.open)
   const type = useTypedSelector(state => state.app.modal.type)
+  const root = document.querySelector<HTMLElement>('#root')
   const dispatch = useTypedDispatch()
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      if (root) root.style.filter = 'blur(1.5px)'
+    } else {
+      document.body.style.overflow = ''
+      if (root) root.style.filter = ''
+    }
+  }, [open])
 
   const closeModal = () => {
     dispatch(setModal({ type: '', open: false }))
@@ -34,6 +46,7 @@ export const BaseModal = () => {
 
           {type === 'Add new pack' && <AddNewPackModal />}
           {type === 'Edit pack name' && <EditPackNameModal />}
+          {type === 'Delete Pack' && <DeletePackModal />}
         </Box>
       </div>
     ),

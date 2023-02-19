@@ -4,6 +4,7 @@ import s from './AddNewPackModal.module.scss'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useAddPackMutation } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
@@ -13,11 +14,12 @@ export const AddNewPackModal = () => {
   const [addPack] = useAddPackMutation()
   const [name, setName] = useState<string>('')
   const [privatePack, setPrivatePack] = useState(false)
+  const packName = useTypedSelector(state => state.packs.packName)
   const dispatch = useTypedDispatch()
 
   const addPackHandler = async () => {
     dispatch(setModal({ open: false, type: '' }))
-    addPack({ cardsPack: { name, deckCover: '', private: privatePack } }).unwrap()
+    addPack({ cardsPack: { name: packName, deckCover: '', private: privatePack } }).unwrap()
   }
 
   return (
