@@ -31,9 +31,31 @@ export const cardsApi = createApi({
       }),
       invalidatesTags: ['cards'],
     }),
+    addNewCard: build.mutation<ResponseNewCardType, RequestNewCardType>({
+      query: body => ({
+        url: 'card',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'cards' }],
+    }),
+    updateCard: build.mutation<ResponseUpdateCardType, RequestUpdateCardType>({
+      query: body => ({
+        url: 'card',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [{ type: 'cards' }],
+    }),
   }),
 })
-export const { useGetCardsQuery, useDeleteCardMutation } = cardsApi
+
+export const {
+  useGetCardsQuery,
+  useAddNewCardMutation,
+  useUpdateCardMutation,
+  useDeleteCardMutation,
+} = cardsApi
 
 //types
 type GetCardsResponseType = {
@@ -75,4 +97,31 @@ type CardType = {
   user_id: string
   __v: number
   _id: string
+}
+export type ResponseNewCardType = {
+  newCard: CardType
+}
+export type RequestNewCardType = {
+  card: {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+  }
+}
+export type ResponseUpdateCardType = {
+  updatedCard: CardType
+}
+
+export type RequestUpdateCardType = {
+  card: {
+    _id: string
+    question: string
+    answer: string
+  }
 }
