@@ -19,7 +19,7 @@ type CardType = {
 }
 export const Card: FC<CardType> = ({ question, answer, grade, updated, id, userId }) => {
   const myId = useTypedSelector(state => state.auth.id)
-  const [deleteCard, {}] = useDeleteCardMutation()
+  const [deleteCard] = useDeleteCardMutation()
   const deleteCardHandler = () => {
     deleteCard(id)
   }
