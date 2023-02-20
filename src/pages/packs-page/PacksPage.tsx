@@ -94,13 +94,21 @@ export const PacksPage = () => {
         isFetching={isFetching}
       />
 
-      {responsePacks && (
+      {responsePacks ? (
         <Paginator
           pageCount={responsePacks.pageCount}
           totalCount={responsePacks.cardPacksTotalCount}
           currentPage={responsePacks.page}
           disabled={isFetching}
         />
+      ) : (
+        <div className={s.skeletonPaginationContainer}>
+          <Skeleton
+            classes={{ root: s.skeletonPagination }}
+            animation="wave"
+            variant="rectangular"
+          />
+        </div>
       )}
 
       {showButton && (

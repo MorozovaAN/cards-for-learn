@@ -8,7 +8,7 @@
   height: 70px;
 }
 
-.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters {
+.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {
 
   @include skeletonBase;
 
@@ -29,6 +29,10 @@
 
 .skeletonResetFiltersContainer .skeletonResetFilters {
   width: 42px;
+}
+
+.skeletonPaginationContainer  .skeletonPagination {
+  width: 595px;
 }
 
 .scrollBtn {
