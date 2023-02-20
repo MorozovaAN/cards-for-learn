@@ -19,7 +19,7 @@ export const packsApi = createApi({
       query: arg => ({
         url: `pack`,
         params: {
-          pageCount: '6',
+          pageCount: arg.user_id ? '5' : '6',
           min: arg.user_id ? '0' : '5',
           sortPacks: arg.user_id
             ? sortingPacksMethods.desUpdate

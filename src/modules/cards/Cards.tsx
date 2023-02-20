@@ -20,7 +20,7 @@ export const Cards = () => {
   const cardsPack_id = useTypedSelector(state => state.packs.packId)
   const myId = useTypedSelector(state => state.auth.id)
   const [searchParams, setSearchParams] = useSearchParams()
-  const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams, cardsPack_id))
+  const { data, isFetching } = useGetCardsQuery({ cardsPack_id, ...paramsHelper(searchParams) })
   const [toggle, setToggle] = useState(false)
 
   useEffect(() => {

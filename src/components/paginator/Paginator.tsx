@@ -31,7 +31,17 @@ export const Paginator: FC<PaginationPropsType> = ({
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
     searchParams.delete('page')
-    setSearchParams({ ...paramsHelper(searchParams), pageCount: event.target.value })
+    if (searchParams.has('user_id')) {
+      setSearchParams({
+        ...paramsHelper(searchParams),
+        pageCount: (Number(event.target.value) - 1).toString(),
+      })
+    } else {
+      setSearchParams({
+        ...paramsHelper(searchParams),
+        pageCount: event.target.value,
+      })
+    }
   }
 
   return (
@@ -64,7 +74,7 @@ export const Paginator: FC<PaginationPropsType> = ({
           fontSize: 'inherit',
           height: '30px',
         }}
-        value={pageCount.toString()}
+        value={searchParams.has('user_id') ? (pageCount + 1).toString() : pageCount.toString()}
         onChange={handleChangeRowsPerPage}
       >
         <MenuItem value={6}>6</MenuItem>
