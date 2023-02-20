@@ -20,10 +20,14 @@ export const BaseModal = () => {
   const root = document.querySelector<HTMLElement>('#root')
   const dispatch = useTypedDispatch()
   const scroll = calcScrollWidth()
+  const closeModalOnEscape = (e: KeyboardEvent) => {
+    e.key === 'Escape' && closeModal()
+  }
 
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
+      document.addEventListener('keyup', closeModalOnEscape)
       if (root) {
         root.append(scroll)
         root.style.filter = 'blur(1.5px)'
@@ -34,6 +38,8 @@ export const BaseModal = () => {
       document.body.style.overflow = ''
       if (root) root.style.filter = ''
     }
+
+    return () => document.removeEventListener('keyup', closeModalOnEscape)
   }, [open])
 
   const closeModal = () => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import s from './DeletePackModal.module.scss'
 
@@ -19,6 +19,16 @@ export const DeletePackModal = () => {
     await deletePack(packId).unwrap()
     dispatch(setModal({ open: false, type: '' }))
   }
+
+  const deletePackOnEnter = (e: KeyboardEvent) => {
+    e.key === 'Enter' && deletePackHandler()
+  }
+
+  useEffect(() => {
+    document.addEventListener('keyup', deletePackOnEnter)
+
+    return () => document.removeEventListener('keyup', deletePackOnEnter)
+  }, [])
 
   return (
     <>

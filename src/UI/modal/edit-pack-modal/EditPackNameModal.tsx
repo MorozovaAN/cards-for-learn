@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 
 import s from './EditPackNameModal.module.scss'
 
@@ -26,19 +26,27 @@ export const EditPackNameModal = () => {
     dispatch(setModal({ open: false, type: '' }))
   }
 
+  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.key === 'Enter' && newName && editPackNameHandler()
+  }
+
   return (
     <>
       <Input
         autoFocus
         value={newName}
         onChange={e => setNewName(e.currentTarget.value)}
+        onKeyUp={onEnterHandler}
         type="text"
         label="New pack name"
         error={!newName.length && 'Write new name of the pack'}
+        disabled={isLoading}
       />
 
       <div className={s.checkbox}>
-        <Checkbox onChange={() => setPrivatePack(!privatePack)}>Private pack</Checkbox>
+        <Checkbox onChange={() => setPrivatePack(!privatePack)} disabled={isLoading}>
+          Private pack
+        </Checkbox>
       </div>
 
       <Button

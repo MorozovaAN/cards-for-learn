@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 
 import s from './AddNewPackModal.module.scss'
 
@@ -10,7 +10,7 @@ import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 
 export const AddNewPackModal = () => {
-  const [addPack] = useAddPackMutation()
+  const [addPack, { isLoading }] = useAddPackMutation()
   const [name, setName] = useState<string>('')
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()
@@ -20,22 +20,35 @@ export const AddNewPackModal = () => {
     dispatch(setModal({ open: false, type: '' }))
   }
 
+  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.key === 'Enter' && name && addPackHandler()
+  }
+
   return (
     <>
       <Input
         autoFocus
         value={name}
         onChange={e => setName(e.currentTarget.value)}
+        onKeyUp={onEnterHandler}
         type="text"
         label="Name of the new pack"
         placeholder="write name of the new pack"
+        disabled={isLoading}
       />
 
       <div className={s.checkbox}>
-        <Checkbox onChange={() => setPrivatePack(!privatePack)}>Private pack</Checkbox>
+        <Checkbox onChange={() => setPrivatePack(!privatePack)} disabled={isLoading}>
+          Private pack
+        </Checkbox>
       </div>
 
-      <Button styleType="primary" disabled={!name} className={s.button} onClick={addPackHandler}>
+      <Button
+        styleType="primary"
+        disabled={!name || isLoading}
+        className={s.button}
+        onClick={addPackHandler}
+      >
         Save
       </Button>
     </>
