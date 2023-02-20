@@ -21,7 +21,6 @@ export const MyOtherButtons: FC<MyOtherButtonsType> = ({ disabled }) => {
   }
 
   const btnOtherOnClickHandler = () => {
-    /*searchParams.delete('user_id')*/
     setSearchParams({})
   }
 
