@@ -11,8 +11,6 @@ type LoadingProgressType = {
 export const LoadingProgress: FC<LoadingProgressType> = ({ privatePage }) => {
   const classes = `${s.linearProgress} ${privatePage ? s.linearProgressPrivatePage : ''}`
 
-  console.log(classes)
-
   return (
     <div className={classes}>
       <LinearProgress classes={{ root: s.progressBar, bar: s.progress }} />
