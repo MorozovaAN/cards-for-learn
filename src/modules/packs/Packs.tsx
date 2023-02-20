@@ -1,45 +1,61 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
 
+import { setModal } from 'app/appSlice'
+import { ReactComponent as Plus } from 'assets/img/plus.svg'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
-import { NotFound } from 'components/notFound/NotFound'
-import { MyPack } from 'components/packs/my-pack/MyPack'
-import { OtherPack } from 'components/packs/other-pack/OtherPack'
-import { AddPackModal } from 'modules/packs/modals/AddPackModal'
+import { idSelector } from 'modules/auth/authSelectors'
+import { MyPack } from 'modules/packs/my-pack/MyPack'
+import { OtherPack } from 'modules/packs/other-pack/OtherPack'
 import { PackType } from 'modules/packs/packsApi'
-import { Button } from 'UI/button/Button'
 
 type PacksType = {
-  responsePacks: PackType[]
+  responsePacks: PackType[] | null
+  isFetching: boolean
 }
 
-export const Packs: FC<PacksType> = ({ responsePacks }) => {
+export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const [searchParams] = useSearchParams()
-  const myId = useTypedSelector(state => state.auth.id)
+  const myId = useTypedSelector(idSelector)
   const myPacksPage = searchParams.has('user_id')
   const packs = myPacksPage
     ? responsePacks
-    : responsePacks.filter((p: PackType) => p.user_id !== myId)
+    : responsePacks?.filter((p: PackType) => p.user_id !== myId)
+  const skeletons = []
+  const dispatch = useTypedDispatch()
 
-  const [toggle, setToggle] = useState(false)
+  for (let i = 1; i <= 6; i++) {
+    skeletons.push(
+      <div className={s.skeletonPackContainer} key={i}>
+        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+      </div>
+    )
+  }
+
+  const addPackHandler = () => {
+    dispatch(setModal({ open: true, type: 'Add new pack' }))
+  }
 
   return (
-    <>
-      {myPacksPage && (
-        <Button styleType="primary" onClick={() => setToggle(!toggle)}>
-          Add new Pack
-        </Button>
-      )}
-
-      {toggle && <AddPackModal />}
-
-      <div className={s.packContainer}>
-        {packs.length ? (
-          packs.map(p => {
+    <div className={s.packsContainer}>
+      {isFetching ? (
+        skeletons.map(s => {
+          return s
+        })
+      ) : (
+        <>
+          {myPacksPage && (
+            <div className={s.addPack} onClick={addPackHandler}>
+              <Plus />
+            </div>
+          )}
+          {packs?.map(p => {
             const dateUpdate = formatDate(p.updated)
 
             return myPacksPage ? (
@@ -61,11 +77,9 @@ export const Packs: FC<PacksType> = ({ responsePacks }) => {
                 updated={dateUpdate}
               />
             )
-          })
-        ) : (
-          <NotFound />
-        )}
-      </div>
-    </>
+          })}
+        </>
+      )}
+    </div>
   )
 }

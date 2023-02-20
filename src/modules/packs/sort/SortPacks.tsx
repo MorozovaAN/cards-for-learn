@@ -25,11 +25,11 @@ type SortPacksType = {
 
 export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const myPacks = searchParams.get('user_id')
-    ? sortingPacksMethods.desUpdate
-    : sortingPacksMethods.desCardsCount
+  const userId = searchParams.get('user_id')
+  const myPacks = userId ? sortingPacksMethods.desUpdate : sortingPacksMethods.desCardsCount
   const sortValue = searchParams.get('sortPacks') ? searchParams.get('sortPacks') : myPacks
   const sortLabel = setSortLabel(sortValue as sortingPacksMethods)
+
   const selectOnChangeHandler = (_: any, value: string | null) => {
     value && setSearchParams({ ...paramsHelper(searchParams), sortPacks: value })
     if (
@@ -90,10 +90,12 @@ export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
           <StyledOption value={sortingPacksMethods.desUpdate}>early to late</StyledOption>
         </CustomOptionGroup>
 
-        <CustomOptionGroup label="Sort by creator name">
-          <StyledOption value={sortingPacksMethods.desUserName}>from A to Z</StyledOption>
-          <StyledOption value={sortingPacksMethods.ascUserName}>from Z to A</StyledOption>
-        </CustomOptionGroup>
+        {!userId && (
+          <CustomOptionGroup label="Sort by creator name">
+            <StyledOption value={sortingPacksMethods.desUserName}>from A to Z</StyledOption>
+            <StyledOption value={sortingPacksMethods.ascUserName}>from Z to A</StyledOption>
+          </CustomOptionGroup>
+        )}
       </CustomSelect>
     </div>
   )

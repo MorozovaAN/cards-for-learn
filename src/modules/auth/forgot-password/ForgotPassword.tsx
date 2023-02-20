@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import s from './ForgotPassword.module.scss'
 
@@ -53,7 +53,7 @@ export const ForgotPassword = () => {
   if (isSuccess) return <Navigate to={PATH.CHECK_EMAIL} />
 
   return (
-    <Box>
+    <Box size="L">
       <h2 className={s.headline}>Forgot your password?</h2>
 
       <p className={s.title}>Enter your email address and we will send you further instructions</p>

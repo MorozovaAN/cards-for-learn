@@ -72,7 +72,7 @@ export const LogUp = () => {
     !formik.values.password
 
   return (
-    <Box className={s.container}>
+    <Box size="L" className={s.container}>
       <h2 className={s.title}>Sign Up to Cards for learn</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>

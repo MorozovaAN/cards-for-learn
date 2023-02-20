@@ -15,12 +15,14 @@
 
   --color-secondary-base: #d8eede;
   --color-secondary-base-transparent: #d8eede73;
+  --color-secondary-dark: #bcdec5;
 
   --color-warn-base: #d30413;
   --color-warn-dark-100: #be0613;
 
   --color-on-primary-base: #000000;
   --color-on-primary-light-400: #676665;
+  --color-on-primary-light-transparent: #cec9c463;
   --color-on-primary-light-500: #969593;
 
   --color-success-base: #339536;
@@ -28,9 +30,14 @@
   /* Sizes */
   --width-main: 1020px;
   --width-box-l: 500px;
+  --width-box-m: 440px;
 
   --margin-l: 50px;
   --margin-m: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -50,4 +57,13 @@ h5,
 h6,
 ul {
   margin: 0;
+}
+
+#root {
+  display: flex;
+}
+
+#scrollId {
+  height: 100vh;
+
 }

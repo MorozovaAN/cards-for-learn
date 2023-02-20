@@ -43,7 +43,7 @@ export const SetNewPassword = () => {
   if (isSuccess) return <Navigate to={PATH.LOG_IN} />
 
   return (
-    <Box>
+    <Box size="L">
       <h2 className={s.title}>Create new password?</h2>
 
       <p className={s.subtitle}>

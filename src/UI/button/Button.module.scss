@@ -1,4 +1,9 @@
+@import 'src/common/style-mixins/mixins';
+
 @mixin defaultButton() {
+
+  @include transitionMain;
+
   cursor: pointer;
 
   box-sizing: border-box;
@@ -13,7 +18,9 @@
   border: none;
   border-radius: 30px;
 
-  transition: all 0.4s ease-in;
+  &:active {
+    transform: scale(1.1);
+  }
 }
 
 .primary {
@@ -28,12 +35,6 @@
     background: var(--color-primary-dark-100);
   }
 
-  &:active {
-    color: var(--color-primary-dark-100);
-
-    background: var(--color-background-dark-200);
-    outline: 1px solid var(--color-primary-dark-100);
-  }
 }
 
 .secondary {
@@ -45,12 +46,7 @@
   background: var(--color-secondary-base);
 
   &:hover {
-    background: var(--color-background-dark-500);
-  }
-
-  &:active {
-    background: var(--color-background-base);
-    outline: 1px solid var(--color-on-primary-base);
+    background: var(--color-secondary-dark);
   }
 }
 
@@ -64,13 +60,6 @@
 
   &:hover {
     background: var(--color-warn-dark-100);
-  }
-
-  &:active {
-    color: var(--color-warn-dark-100);
-
-    background: var(--color-background-base);
-    outline: 1px solid var(--color-warn-dark-100);
   }
 }
 
@@ -109,6 +98,9 @@
     cursor: pointer;
 
     background: var(--color-primary-dark-100);
+  }
+  &:active {
+    transform: scale(1.1);
   }
 }
 

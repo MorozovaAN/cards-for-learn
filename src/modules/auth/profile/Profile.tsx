@@ -45,13 +45,7 @@ export const Profile = () => {
 
   const showUserName = isLoadingName ? (
     <div className={s.skeletonNameContainer}>
-      <Skeleton
-        classes={{ root: s.skeletonName }}
-        width={300}
-        height={30}
-        animation="wave"
-        variant="rectangular"
-      />
+      <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
     </div>
   ) : (
     <div className={s.nameContainer}>
@@ -63,18 +57,12 @@ export const Profile = () => {
   )
 
   return (
-    <Box className={s.profileBox}>
+    <Box size="L" className={s.profileBox}>
       <h2 className={s.title}>Personal Information</h2>
 
       {isLoadingAvatar ? (
         <div className={s.skeletonAvatarContainer}>
-          <Skeleton
-            classes={{ root: s.skeletonAvatar }}
-            width={120}
-            height={120}
-            animation="wave"
-            variant="circular"
-          />
+          <Skeleton classes={{ root: s.skeletonAvatar }} animation="wave" variant="circular" />
         </div>
       ) : (
         <div className={s.imgContainer}>

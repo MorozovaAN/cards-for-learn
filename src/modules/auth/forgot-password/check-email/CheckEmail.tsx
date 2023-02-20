@@ -16,7 +16,7 @@ export const CheckEmail = () => {
   const email = useTypedSelector(emailSelector)
 
   return (
-    <Box>
+    <Box size="L">
       <h2 className={s.title}>Check Email</h2>
 
       <img src={checkEmail} alt="check email" />

@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react'
 
-import CircularProgress from '@mui/material/CircularProgress'
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import s from './PacksPage.module.scss'
+
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
+import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { Packs } from 'modules/packs/Packs'
-import s from 'modules/packs/Packs.module.scss'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { setShowButton } from 'modules/packs/packsSlise'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
-import { ButtonScroll } from 'UI/button/ButtonScroll'
+import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
   const [searchParams] = useSearchParams()
@@ -24,7 +26,7 @@ export const PacksPage = () => {
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
-    function handleScroll() {
+    const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
@@ -34,41 +36,90 @@ export const PacksPage = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', scrollHandler)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
-  return responsePacks ? (
+  return (
     <div>
       <div className={s.filters}>
-        <Search disabled={isFetching} selector={'Packs'} param={'packName'} />
-        <MyOtherButtons disabled={isFetching} />
-        <SortPacks disabled={isFetching} />
-        <ResetAllFilters disabled={isFetching} />
-      </div>
-
-      <div className={s.packsContainer}>
-        {isFetching ? (
-          <CircularProgress classes={{ root: s.circular }} size={60} />
+        {responsePacks ? (
+          <Search selector="Packs" param="packName" disabled={isFetching} />
         ) : (
-          <Packs responsePacks={responsePacks.cardPacks} />
+          <div className={s.skeletonSearchContainer}>
+            <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />
+          </div>
+        )}
+
+        {responsePacks ? (
+          <MyOtherButtons disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonButtonsContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonButtons }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
+        {responsePacks ? (
+          <SortPacks disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonSortPacksContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonSortPacks }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
+        {responsePacks ? (
+          <ResetAllFilters disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonResetFiltersContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonResetFilters }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
         )}
       </div>
 
-      <Paginator
-        pageCount={responsePacks.pageCount}
-        totalCount={responsePacks.cardPacksTotalCount}
-        currentPage={responsePacks.page}
-        disabled={isFetching}
+      <Packs
+        responsePacks={responsePacks ? responsePacks.cardPacks : null}
+        isFetching={isFetching}
       />
-      {showButton && (
-        <div className={s.scrollBtn}>
-          <ButtonScroll />
+
+      {responsePacks ? (
+        <Paginator
+          pageCount={responsePacks.pageCount}
+          totalCount={responsePacks.cardPacksTotalCount}
+          currentPage={responsePacks.page}
+          disabled={isFetching}
+        />
+      ) : (
+        <div className={s.skeletonPaginationContainer}>
+          <Skeleton
+            classes={{ root: s.skeletonPagination }}
+            animation="wave"
+            variant="rectangular"
+          />
         </div>
       )}
+
+      {showButton && (
+        <Button
+          className={s.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
+      )}
     </div>
-  ) : (
-    <CircularProgress classes={{ root: s.circular }} size={60} />
   )
 }

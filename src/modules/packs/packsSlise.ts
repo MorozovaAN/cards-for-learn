@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   isShowButtonScroll: false,
   packId: '',
-  name: '',
+  packName: '',
 }
 
 const packsSlice = createSlice({
@@ -17,7 +17,7 @@ const packsSlice = createSlice({
       state.packId = action.payload
     },
     setPackName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload
+      state.packName = action.payload
     },
   },
 })

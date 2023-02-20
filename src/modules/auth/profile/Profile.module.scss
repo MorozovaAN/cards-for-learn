@@ -1,7 +1,7 @@
 @import 'src/common/style-mixins/mixins';
 
 .profileBox {
-  background-color: var(--color-background-dark-100) ;
+  background-color: var(--color-background-base) ;
 }
 
 .avatar {
@@ -26,15 +26,13 @@
 }
 
 .skeletonNameContainer .skeletonName {
-  border-radius: 6px;
+  width:300px;
+  height: 30px;
 }
 
 .skeletonNameContainer .skeletonName, .skeletonAvatarContainer .skeletonAvatar{
-  background-color: rgb(224 221 217 / 65%);
 
-  &:after {
-    background: linear-gradient( 90deg, transparent, rgb(217 214 214 / 78%), transparent );
-  }
+ @include skeletonBase;
 }
 
 .email {
@@ -42,6 +40,13 @@
   @include subtitle;
 
   color: var(--color-on-primary-light-400);
+}
+
+.skeletonAvatarContainer .skeletonAvatar {
+  width: 120px;
+  height:120px;
+
+  border-radius: 50%;
 }
 
 .btnTextContainer,

@@ -1,5 +1,13 @@
-.app {
+.appDefault {
+  width: 100%;
+
   background: var(--color-background-base);
+}
+
+.appSecondary {
+  width: 100%;
+
+  background: var(--color-background-dark-100);
 }
 
 .contentContainer {
@@ -8,7 +16,7 @@
   height: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 10px var(--margin-m);
+  padding: 40px var(--margin-m);
 }
 
 .loader .circular {

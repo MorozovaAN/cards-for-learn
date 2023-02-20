@@ -106,3 +106,13 @@
 @mixin transitionMain() {
   transition: 0.3s ease-in;
 }
+
+
+@mixin skeletonBase() {
+  background-color: var(--color-background-dark-400);
+  border-radius: 10px;
+
+  &:after {
+    background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
+  }
+}

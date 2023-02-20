@@ -1,50 +1,46 @@
-.packsContainer {
-  padding: 20px 0;
+@import 'src/common/style-mixins/mixins';
 
-  //display: flex;
-  //flex-wrap: wrap;
-  //gap: 40px;
-  //justify-content: center;
-}
-.packContainer {
+.packsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+  justify-content: flex-start;
+
+  min-height: 434px;
+  padding: 40px 0;
+}
+
+
+.skeletonPackContainer .skeletonPack {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 194px;
+}
+
+.addPack {
+
+  @include boxBorder;
+
+  @include transitionMain;
+
+  display: flex;
+  align-items: center;
   justify-content: center;
 
-  padding: 20px 0;
-}
+  width: 300px;
+  height: 194px;
 
-.filters {
-  display: flex;
-  column-gap: 25px;
-  align-items: flex-end;
+  background-color: var(--color-secondary-base-transparent);
 
-  height: 55px;
-  margin-top: 40px;
-  margin-bottom: 30px;
-}
+  &:active {
+   transform: scale(1.1);
+  }
 
-.buttonsContainer {
-  display: flex;
-}
+  &:hover {
+   cursor: pointer;
 
-.btnMy {
-  width: 85px;
-  height: 42px;
-
-  border-radius: 10px 0 0 10px;
-}
-
-.btnOther {
-  width: 85px;
-  height: 42px;
-
-  background-color: var(--color-secondary-base);
-  border-radius:  0 10px 10px 0;
-}
-.scrollBtn {
-  position: fixed;
-  right: 100px;
-  bottom: 100px;
+   background-color:var(--color-secondary-base);
+ }
 }
