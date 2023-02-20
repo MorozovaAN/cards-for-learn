@@ -10,6 +10,7 @@ export const CardsPage = () => {
       <NavLink url={PATH.PACKS}>
         <p>&lArr; Back to Packs List</p>
       </NavLink>
+
       <Cards />
     </div>
   )
