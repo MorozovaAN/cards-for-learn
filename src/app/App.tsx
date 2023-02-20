@@ -43,7 +43,7 @@ export const App = () => {
 
       {isLoggedIn && <Header />}
 
-      {isLoading && <LoadingProgress />}
+      {isLoading && <LoadingProgress privatePage={!privetPage} />}
 
       <section className={sectionClasses}>
         <RoutesComponent />

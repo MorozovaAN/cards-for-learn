@@ -1,9 +1,20 @@
+import { FC } from 'react'
+
 import LinearProgress from '@mui/material/LinearProgress'
 
 import s from './LoadingProgress.module.scss'
-export const LoadingProgress = () => {
+
+type LoadingProgressType = {
+  privatePage: boolean
+}
+
+export const LoadingProgress: FC<LoadingProgressType> = ({ privatePage }) => {
+  const classes = `${s.linearProgress} ${privatePage ? s.linearProgressPrivatePage : ''}`
+
+  console.log(classes)
+
   return (
-    <div className={s.linearProgress}>
+    <div className={classes}>
       <LinearProgress classes={{ root: s.progressBar, bar: s.progress }} />
     </div>
   )
