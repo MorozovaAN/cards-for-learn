@@ -1,4 +1,4 @@
-@import "../../../common/style-mixins/mixins";
+@import "src/common/style-mixins/mixins";
 
 .pack {
 
@@ -7,7 +7,7 @@
   @include boxBorder;
 
   display: grid;
-  grid-template-rows: 24px 20px 20px;
+  grid-template-rows: 24px 22px 22px;
   gap: 12px;
   align-items: center;
 

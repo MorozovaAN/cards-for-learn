@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
+import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/other-pack/OtherPack.module.scss'
 import { setPackId } from 'modules/packs/packsSlise'
@@ -45,7 +45,7 @@ export const OtherPack: FC<PackType> = ({ packId, name, cardsCount, author, upda
       </p>
 
       <Button styleType="primary" className={s.button} onClick={learnPackHandler}>
-        <p>Learn this pack</p> <LearnIcon width="16" />
+        <p>Learn this pack</p> <LearnIcon width="16" className={s.learnIcon} />
       </Button>
     </div>
   )

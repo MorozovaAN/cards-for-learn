@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
-import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
+import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'

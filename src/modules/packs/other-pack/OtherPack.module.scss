@@ -1,4 +1,4 @@
-@import "../../../common/style-mixins/mixins";
+@import "src/common/style-mixins/mixins";
 
 .pack {
 
@@ -62,4 +62,8 @@
   padding: 6px 20px;
 
   font-size: 14px;
+}
+
+.learnIcon {
+  margin-bottom: 2px;
 }
