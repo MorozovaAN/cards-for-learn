@@ -10,6 +10,7 @@ import { setModal } from 'app/appSlice'
 import { ReactComponent as Close } from 'assets/img/icons/close.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { calcScrollWidth } from 'common/utils/CalcScrollWidth'
 import { Box } from 'UI/box/Box'
 import { AddNewPackModal } from 'UI/modal/add-new-pack-modal/AddNewPackModal'
 import { EditPackNameModal } from 'UI/modal/edit-pack-modal/EditPackNameModal'
@@ -18,12 +19,18 @@ export const BaseModal = () => {
   const { open, type } = useTypedSelector(modalSelector)
   const root = document.querySelector<HTMLElement>('#root')
   const dispatch = useTypedDispatch()
+  const scroll = calcScrollWidth()
 
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
-      if (root) root.style.filter = 'blur(1.5px)'
+      if (root) {
+        root.append(scroll)
+        root.style.filter = 'blur(1.5px)'
+      }
     } else {
+      document.querySelector(`#scrollId`)?.remove()
+
       document.body.style.overflow = ''
       if (root) root.style.filter = ''
     }

@@ -58,3 +58,12 @@ h6,
 ul {
   margin: 0;
 }
+
+#root {
+  display: flex;
+}
+
+#scrollId {
+  height: 100vh;
+
+}
