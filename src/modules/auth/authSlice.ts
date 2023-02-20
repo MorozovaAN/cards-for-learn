@@ -8,7 +8,7 @@ const initialState = {
   rememberMe: true,
   name: 'My name',
   avatar: '',
-  id: null as null | string,
+  id: '',
   clickAway: false,
 }
 
