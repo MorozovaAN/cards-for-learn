@@ -11,7 +11,7 @@ import { Input } from 'UI/input/Input'
 
 export const AddNewPackModal = () => {
   const [addPack, { isLoading }] = useAddPackMutation()
-  const [name, setName] = useState<string>('')
+  const [name, setName] = useState('')
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()
 
