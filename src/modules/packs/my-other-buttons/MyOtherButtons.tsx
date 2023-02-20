@@ -2,9 +2,8 @@ import React, { FC } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import s from './MyOtherButtons.module.scss'
-
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'modules/packs/my-other-buttons/MyOtherButtons.module.scss'
 import { Button } from 'UI/button/Button'
 
 type MyOtherButtonsType = {

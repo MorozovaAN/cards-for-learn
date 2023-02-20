@@ -36,6 +36,10 @@
   --margin-m: 20px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
 

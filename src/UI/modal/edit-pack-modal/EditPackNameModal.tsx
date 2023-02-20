@@ -6,14 +6,15 @@ import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useUpdatePackMutation } from 'modules/packs/packsApi'
+import { packIdSelector, packNameSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 
 export const EditPackNameModal = () => {
   const [updatePackName, { isLoading }] = useUpdatePackMutation()
-  const packName = useTypedSelector(state => state.packs.packName)
-  const packId = useTypedSelector(state => state.packs.packId)
+  const packName = useTypedSelector(packNameSelector)
+  const packId = useTypedSelector(packIdSelector)
   const [newName, setNewName] = useState('')
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()

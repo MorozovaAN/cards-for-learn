@@ -6,6 +6,7 @@ import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useAddPackMutation } from 'modules/packs/packsApi'
+import { packNameSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
@@ -14,7 +15,7 @@ export const AddNewPackModal = () => {
   const [addPack] = useAddPackMutation()
   const [name, setName] = useState<string>('')
   const [privatePack, setPrivatePack] = useState(false)
-  const packName = useTypedSelector(state => state.packs.packName)
+  const packName = useTypedSelector(packNameSelector)
   const dispatch = useTypedDispatch()
 
   const addPackHandler = async () => {

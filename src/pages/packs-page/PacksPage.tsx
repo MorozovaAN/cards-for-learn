@@ -5,18 +5,19 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './PacksPage.module.scss'
 
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { MyOtherButtons } from 'components/packs/my-other-buttons/MyOtherButtons'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
+import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { Packs } from 'modules/packs/Packs'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { setShowButton } from 'modules/packs/packsSlise'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
-import { ButtonScroll } from 'UI/button/ButtonScroll'
+import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
   const [searchParams] = useSearchParams()
@@ -25,7 +26,7 @@ export const PacksPage = () => {
   const dispatch = useTypedDispatch()
 
   useEffect(() => {
-    function handleScroll() {
+    const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
@@ -35,9 +36,9 @@ export const PacksPage = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', scrollHandler)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
   return (
@@ -103,9 +104,13 @@ export const PacksPage = () => {
       )}
 
       {showButton && (
-        <div className={s.scrollBtn}>
-          <ButtonScroll />
-        </div>
+        <Button
+          className={s.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
       )}
     </div>
   )

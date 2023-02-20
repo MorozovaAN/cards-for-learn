@@ -2,13 +2,12 @@ import React, { FC } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import s from './MyPack.module.scss'
-
-import { setModal } from 'app/appSlice'
+import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/teach.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import s from 'modules/packs/my-pack/MyPack.module.scss'
 import { setPackId, setPackName } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
@@ -24,16 +23,10 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privat
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
 
-  const openEditPackNameModalHandler = () => {
+  const openPackModalHandler = (type: ModalType) => {
     dispatch(setPackName(name))
     dispatch(setPackId(packId))
-    dispatch(setModal({ open: true, type: 'Edit pack name' }))
-  }
-
-  const deletePackHandler = () => {
-    dispatch(setPackName(name))
-    dispatch(setPackId(packId))
-    dispatch(setModal({ open: true, type: 'Delete Pack' }))
+    dispatch(setModal({ open: true, type }))
   }
 
   const learnPackHandler = () => {
@@ -63,12 +56,16 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privat
         <Button
           styleType="iconPrimary"
           className={s.btnEdit}
-          onClick={openEditPackNameModalHandler}
+          onClick={() => openPackModalHandler('Edit pack name')}
         >
           <EditIcon width="18" fill="#fff" />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnTrash} onClick={deletePackHandler}>
+        <Button
+          styleType="iconPrimary"
+          className={s.btnTrash}
+          onClick={() => openPackModalHandler('Delete Pack')}
+        >
           <TrashIcon width="18" height="20" />
         </Button>
       </div>

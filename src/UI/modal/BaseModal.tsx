@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import s from './BaseModal.module.scss'
 import { DeletePackModal } from './delete-pack-modal/DeletePackModal'
 
+import { modalSelector } from 'app/appSelectors'
 import { setModal } from 'app/appSlice'
 import { ReactComponent as Close } from 'assets/img/icons/close.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -14,8 +15,7 @@ import { AddNewPackModal } from 'UI/modal/add-new-pack-modal/AddNewPackModal'
 import { EditPackNameModal } from 'UI/modal/edit-pack-modal/EditPackNameModal'
 
 export const BaseModal = () => {
-  const open = useTypedSelector(state => state.app.modal.open)
-  const type = useTypedSelector(state => state.app.modal.type)
+  const { open, type } = useTypedSelector(modalSelector)
   const root = document.querySelector<HTMLElement>('#root')
   const dispatch = useTypedDispatch()
 

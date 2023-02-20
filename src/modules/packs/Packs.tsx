@@ -10,9 +10,9 @@ import { ReactComponent as Plus } from 'assets/img/plus.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
-import { MyPack } from 'components/packs/my-pack/MyPack'
-import { OtherPack } from 'components/packs/other-pack/OtherPack'
 import { idSelector } from 'modules/auth/authSelectors'
+import { MyPack } from 'modules/packs/my-pack/MyPack'
+import { OtherPack } from 'modules/packs/other-pack/OtherPack'
 import { PackType } from 'modules/packs/packsApi'
 
 type PacksType = {

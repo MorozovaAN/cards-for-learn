@@ -6,12 +6,13 @@ import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useDeletePackMutation } from 'modules/packs/packsApi'
+import { packIdSelector, packNameSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 
 export const DeletePackModal = () => {
   const [deletePack, { isLoading }] = useDeletePackMutation()
-  const packId = useTypedSelector(state => state.packs.packId)
-  const packName = useTypedSelector(state => state.packs.packName)
+  const packId = useTypedSelector(packIdSelector)
+  const packName = useTypedSelector(packNameSelector)
   const dispatch = useTypedDispatch()
 
   const deletePackHandler = async () => {
