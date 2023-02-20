@@ -17,12 +17,11 @@ export const MyOtherButtons: FC<MyOtherButtonsType> = ({ disabled }) => {
   const myPacks = searchParams.has('user_id')
 
   const btnMyOnClickHandler = () => {
-    setSearchParams({ user_id: myId ? myId : '' })
+    setSearchParams({ user_id: myId })
   }
 
   const btnOtherOnClickHandler = () => {
-    searchParams.delete('user_id')
-    setSearchParams(searchParams)
+    setSearchParams({})
   }
 
   return (

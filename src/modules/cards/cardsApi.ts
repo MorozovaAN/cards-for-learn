@@ -76,7 +76,7 @@ type GetCardsResponseType = {
 export type GetCardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
-  cardsPack_id: string
+  cardsPack_id?: string
   min?: string
   sortCards?: string
   page?: string
