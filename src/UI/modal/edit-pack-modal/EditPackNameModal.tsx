@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import s from './EditPackNameModal.module.scss'
 
@@ -15,19 +15,15 @@ export const EditPackNameModal = () => {
   const [updatePackName, { isLoading }] = useUpdatePackMutation()
   const packName = useTypedSelector(packNameSelector)
   const packId = useTypedSelector(packIdSelector)
-  const [newName, setNewName] = useState('')
+  const [newName, setNewName] = useState(packName)
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()
 
-  useEffect(() => {
-    if (packName) setNewName(packName)
-  }, [packName])
-
   const editPackNameHandler = async () => {
-    dispatch(setModal({ open: false, type: '' }))
-    updatePackName({
+    await updatePackName({
       cardsPack: { _id: packId, name: newName, private: privatePack },
     }).unwrap()
+    dispatch(setModal({ open: false, type: '' }))
   }
 
   return (

@@ -4,9 +4,7 @@ import s from './AddNewPackModal.module.scss'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useAddPackMutation } from 'modules/packs/packsApi'
-import { packNameSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
@@ -15,12 +13,11 @@ export const AddNewPackModal = () => {
   const [addPack] = useAddPackMutation()
   const [name, setName] = useState<string>('')
   const [privatePack, setPrivatePack] = useState(false)
-  const packName = useTypedSelector(packNameSelector)
   const dispatch = useTypedDispatch()
 
   const addPackHandler = async () => {
+    await addPack({ cardsPack: { name: name, deckCover: '', private: privatePack } }).unwrap()
     dispatch(setModal({ open: false, type: '' }))
-    addPack({ cardsPack: { name: packName, deckCover: '', private: privatePack } }).unwrap()
   }
 
   return (
@@ -31,7 +28,7 @@ export const AddNewPackModal = () => {
         onChange={e => setName(e.currentTarget.value)}
         type="text"
         label="Name of the new pack"
-        //error={!name.length && 'Write name of the new pack'}
+        placeholder="write name of the new pack"
       />
 
       <div className={s.checkbox}>
