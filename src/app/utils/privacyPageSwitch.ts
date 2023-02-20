@@ -1,4 +1,4 @@
-export const appBackgroundSwitch = (location: string): boolean => {
+export const privacyPageSwitch = (location: string): boolean => {
   switch (location) {
     case '/log-in':
       return true
