@@ -32,12 +32,10 @@ export const DeletePackModal = () => {
 
   return (
     <>
-      <div>
-        <p className={s.text}>
-          Do you really want to remove pack <span className={s.packName}>{packName}</span>?
-        </p>
-        <p>All cards in the pack will be removed</p>
-      </div>
+      <p>
+        Do you really want to remove pack <span className={s.packName}>{packName}</span>? All cards
+        in the pack will be removed.
+      </p>
 
       <Button
         styleType="warn"
