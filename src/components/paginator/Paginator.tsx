@@ -73,10 +73,10 @@ export const Paginator: FC<PaginationPropsType> = ({
   return (
     <div className={s.paginatorContainer}>
       <Pagination
-        disabled={disabled}
         onChange={changePageHandler}
         count={pages}
         page={currentPage}
+        disabled={disabled}
         size="small"
         shape="rounded"
         sx={{
@@ -94,9 +94,9 @@ export const Paginator: FC<PaginationPropsType> = ({
       <p className={s.showPerPage}>Show</p>
 
       <CustomSelect
-        disabled={disabled}
         value={perPageValue}
         onChange={changeNumberPacksPerPageHandler}
+        disabled={disabled}
       >
         <StyledOption value={'6'}>6</StyledOption>
         <StyledOption value={'9'}>9</StyledOption>
