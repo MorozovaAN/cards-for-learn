@@ -8,7 +8,7 @@ import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
-import { setPackId, setPackName } from 'modules/packs/packsSlise'
+import { setPackId, setPackName, setPrivateCheckbox } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
@@ -26,6 +26,7 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privat
   const openPackModalHandler = (type: ModalType) => {
     dispatch(setPackName(name))
     dispatch(setPackId(packId))
+    dispatch(setPrivateCheckbox(privatePack))
     dispatch(setModal({ open: true, type }))
   }
 

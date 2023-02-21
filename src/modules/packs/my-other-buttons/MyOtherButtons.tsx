@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import s from './MyOtherButtons.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { idSelector } from 'modules/auth/authSelectors'
 import { Button } from 'UI/button/Button'
 
 type MyOtherButtonsType = {
@@ -13,7 +14,7 @@ type MyOtherButtonsType = {
 
 export const MyOtherButtons: FC<MyOtherButtonsType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const myId = useTypedSelector(state => state.auth.id)
+  const myId = useTypedSelector(idSelector)
   const myPacks = searchParams.has('user_id')
 
   const btnMyOnClickHandler = () => {
