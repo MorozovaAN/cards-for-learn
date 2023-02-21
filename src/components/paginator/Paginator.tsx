@@ -29,9 +29,6 @@ export const Paginator: FC<PaginationPropsType> = ({
 }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const pages = Math.ceil(totalCount / pageCount)
-  const perPageValue = searchParams.has('user_id')
-    ? (pageCount + 1).toString()
-    : pageCount.toString()
 
   const changePageHandler = (event: ChangeEvent<unknown>, page: number) => {
     setSearchParams({ ...paramsHelper(searchParams), page: page.toString() })
@@ -94,7 +91,7 @@ export const Paginator: FC<PaginationPropsType> = ({
       <p className={s.showPerPage}>Show</p>
 
       <CustomSelect
-        value={perPageValue}
+        value={searchParams.has('user_id') ? (pageCount + 1).toString() : pageCount.toString()}
         onChange={changeNumberPacksPerPageHandler}
         disabled={disabled}
       >
