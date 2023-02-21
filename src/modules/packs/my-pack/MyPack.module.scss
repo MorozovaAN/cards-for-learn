@@ -6,6 +6,8 @@
 
   @include boxBorder;
 
+  position: relative;
+
   display: grid;
   grid-template-rows: 24px 22px 22px;
   gap: 12px;
@@ -14,11 +16,28 @@
   box-sizing: border-box;
   width: 300px;
   height: 194px;
-  padding: 15px;
+  padding: 20px 15px 15px 15px;
 
   line-height: 1.25;
 
   background-color: var(--color-secondary-base-transparent);
+}
+
+.tooltip {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}
+
+.tooltip::after {
+
+  @include tooltipAfter;
+
+}
+
+.tooltip:hover::after {
+
+  @include tooltipHover;
 }
 
 .pack p {
@@ -51,6 +70,8 @@
   @include headline3(600);
 
   overflow: hidden;
+
+  padding: 0 16px;
 
   text-align: center;
   text-overflow: ellipsis;

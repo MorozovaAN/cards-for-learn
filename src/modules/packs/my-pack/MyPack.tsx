@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
+import { ReactComponent as EditLock } from 'assets/img/icons/lock.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
@@ -36,8 +37,14 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privat
   }
 
   return (
-    <div className={`${s.pack} ${privatePack ? s.privateValue : ''}`}>
+    <div className={s.pack}>
       <p className={s.name}>{name}</p>
+
+      {privatePack && (
+        <div className={s.tooltip} data-tooltip="This pack is private">
+          <EditLock className={s.lock} />
+        </div>
+      )}
 
       <p>
         <span className={s.subtitle}>Cards in pack: </span>

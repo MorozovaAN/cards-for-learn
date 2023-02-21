@@ -116,3 +116,29 @@
     background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
   }
 }
+
+@mixin tooltipAfter() {
+  content: attr(data-tooltip);
+
+  position: absolute;
+  z-index: 20;
+  top: -30px;
+  right: -130px;
+
+  padding: 4px 7px;
+
+  color: var(--color-on-primary-base);
+
+  visibility: hidden;
+  opacity: 0;
+  background-color: var(--color-background-dark-400);
+  border-radius: 8px 8px 8px 0;
+  box-shadow: 1px 0 5px 1px var(--color-on-primary-light-400);
+
+  transition: all 0.3s ease-in-out;
+}
+
+@mixin tooltipHover() {
+  visibility: visible;
+  opacity: 1;
+}
