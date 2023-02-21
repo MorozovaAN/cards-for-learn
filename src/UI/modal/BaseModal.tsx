@@ -12,7 +12,10 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { calcScrollWidth } from 'common/utils/calcScrollWidth'
 import { Box } from 'UI/box/Box'
+import { AddCardModal } from 'UI/modal/add-new-card-modal/AddCardModal'
 import { AddNewPackModal } from 'UI/modal/add-new-pack-modal/AddNewPackModal'
+import { DeleteCardModal } from 'UI/modal/delete-card-modal/DeleteCardModal'
+import { UpdateCardModal } from 'UI/modal/edit-card-modal/UpdateCardModal'
 import { EditPackNameModal } from 'UI/modal/edit-pack-modal/EditPackNameModal'
 
 export const BaseModal = () => {
@@ -60,6 +63,9 @@ export const BaseModal = () => {
           {type === 'Add new pack' && <AddNewPackModal />}
           {type === 'Edit pack name' && <EditPackNameModal />}
           {type === 'Delete Pack' && <DeletePackModal />}
+          {type === 'Delete Card' && <DeleteCardModal />}
+          {type === 'Edit card name' && <UpdateCardModal />}
+          {type === 'Add new card' && <AddCardModal />}
         </Box>
       </div>
     ),

@@ -4,6 +4,7 @@ const initialState = {
   isShowButtonScroll: false,
   packId: '',
   packName: '',
+  privateCheck: false,
 }
 
 const packsSlice = createSlice({
@@ -19,8 +20,11 @@ const packsSlice = createSlice({
     setPackName: (state, action: PayloadAction<string>) => {
       state.packName = action.payload
     },
+    setPrivateCheckbox: (state, action: PayloadAction<boolean>) => {
+      state.privateCheck = action.payload
+    },
   },
 })
 
-export const { setShowButton, setPackId, setPackName } = packsSlice.actions
+export const { setShowButton, setPackId, setPackName, setPrivateCheckbox } = packsSlice.actions
 export const packsReducer = packsSlice.reducer

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Cards.module.scss'
 
+import { ModalType, setModal } from 'app/appSlice'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { paramsHelper } from 'common/utils/paramsHelper'
@@ -12,22 +14,27 @@ import { NotFound } from 'components/notFound/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
+import { idSelector } from 'modules/auth/authSelectors'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
-import { AddCardModal } from 'modules/cards/modals/AddCardModal'
+import { packIdSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 
 export const Cards = () => {
-  const cardsPack_id = useTypedSelector(state => state.packs.packId)
-  const myId = useTypedSelector(state => state.auth.id)
+  const cardsPack_id = useTypedSelector(packIdSelector)
+  const myId = useTypedSelector(idSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery({ cardsPack_id, ...paramsHelper(searchParams) })
-  const [toggle, setToggle] = useState(false)
+  const dispatch = useTypedDispatch()
 
   useEffect(() => {
     if (!searchParams.has('cardsPack_id')) {
       setSearchParams({ cardsPack_id: `${cardsPack_id}` })
     }
   }, [])
+
+  const openCardModalHandler = (type: ModalType) => {
+    dispatch(setModal({ open: true, type }))
+  }
 
   return (
     <>
@@ -37,15 +44,13 @@ export const Cards = () => {
             <p className={s.name}>{data.packName}</p>
 
             {data.packUserId === myId ? (
-              <Button onClick={() => setToggle(!toggle)} styleType="primary">
+              <Button onClick={() => openCardModalHandler('Add new card')} styleType="primary">
                 Add new card
               </Button>
             ) : (
               <Button styleType="primary">Learn pack</Button>
             )}
           </div>
-
-          {toggle && <AddCardModal />}
 
           <div className={s.filters}>
             <Search disabled={isFetching} selector={'Cards'} param={'cardQuestion'} />

@@ -6,7 +6,11 @@ import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useUpdatePackMutation } from 'modules/packs/packsApi'
-import { packIdSelector, packNameSelector } from 'modules/packs/packsSelectors'
+import {
+  packIdSelector,
+  packNameSelector,
+  privateCheckboxSelector,
+} from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
@@ -15,8 +19,9 @@ export const EditPackNameModal = () => {
   const [updatePackName, { isLoading }] = useUpdatePackMutation()
   const packName = useTypedSelector(packNameSelector)
   const packId = useTypedSelector(packIdSelector)
+  const privateCheckbox = useTypedSelector(privateCheckboxSelector)
   const [newName, setNewName] = useState(packName)
-  const [privatePack, setPrivatePack] = useState(false)
+  const [privatePack, setPrivatePack] = useState(privateCheckbox)
   const dispatch = useTypedDispatch()
 
   const editPackNameHandler = async () => {
@@ -44,7 +49,11 @@ export const EditPackNameModal = () => {
       />
 
       <div className={s.checkbox}>
-        <Checkbox onChange={() => setPrivatePack(!privatePack)} disabled={isLoading}>
+        <Checkbox
+          checked={privatePack}
+          onChange={() => setPrivatePack(!privatePack)}
+          disabled={isLoading}
+        >
           Private pack
         </Checkbox>
       </div>

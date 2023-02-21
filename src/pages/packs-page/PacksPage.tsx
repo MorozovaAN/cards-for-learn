@@ -15,6 +15,7 @@ import { Search } from 'components/search/Search'
 import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { Packs } from 'modules/packs/Packs'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
+import { showButtonScrollSelector } from 'modules/packs/packsSelectors'
 import { setShowButton } from 'modules/packs/packsSlise'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
 import { Button } from 'UI/button/Button'
@@ -22,7 +23,7 @@ import { Button } from 'UI/button/Button'
 export const PacksPage = () => {
   const [searchParams] = useSearchParams()
   const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
-  const showButton = useTypedSelector(state => state.packs.isShowButtonScroll)
+  const showButton = useTypedSelector(showButtonScrollSelector)
   const dispatch = useTypedDispatch()
 
   useEffect(() => {

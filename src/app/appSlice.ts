@@ -43,7 +43,14 @@ const appSlice = createSlice({
 })
 
 type NotificationType = '' | 'error' | 'success'
-export type ModalType = '' | 'Add new pack' | 'Edit pack name' | 'Delete Pack'
+export type ModalType =
+  | ''
+  | 'Add new pack'
+  | 'Edit pack name'
+  | 'Delete Pack'
+  | 'Add new card'
+  | 'Edit card name'
+  | 'Delete Card'
 
 export const { setIsAuth, setIsLoggedIn, setNotification, setIsLoading, setModal } =
   appSlice.actions

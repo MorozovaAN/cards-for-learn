@@ -1,16 +1,17 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 import Rating from '@mui/material/Rating'
 
 import s from './Card.module.scss'
 
+import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { useDeleteCardMutation } from 'modules/cards/cardsApi'
-import { setCardId } from 'modules/cards/cardsSlise'
-import { UpdateCardModal } from 'modules/cards/modals/UpdateCardModal'
+import { idSelector } from 'modules/auth/authSelectors'
+import { setCardAnswer, setCardId, setCardQuestion } from 'modules/cards/cardsSlise'
+import { Button } from 'UI/button/Button'
 
 type CardType = {
   question: string
@@ -21,18 +22,20 @@ type CardType = {
   userId: string
 }
 export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, userId }) => {
-  const myId = useTypedSelector(state => state.auth.id)
-  const [deleteCard] = useDeleteCardMutation()
+  const myId = useTypedSelector(idSelector)
   const dispatch = useTypedDispatch()
-  const [toggle, setToggle] = useState(false)
 
-  const editCardHandler = () => {
-    setToggle(!toggle)
+  const editCardHandler = (type: ModalType) => {
     dispatch(setCardId(idCard))
+    dispatch(setCardQuestion(question))
+    dispatch(setCardAnswer(answer))
+    dispatch(setModal({ open: true, type }))
   }
 
-  const deleteCardHandler = () => {
-    deleteCard(idCard)
+  const openCardModalHandler = (type: ModalType) => {
+    dispatch(setCardQuestion(question))
+    dispatch(setCardId(idCard))
+    dispatch(setModal({ open: true, type }))
   }
 
   return (
@@ -46,14 +49,24 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
 
         {myId === userId && (
           <div className={s.icons}>
-            <EditIcon onClick={editCardHandler} />
+            <Button
+              styleType="iconPrimary"
+              className={s.btnEdit}
+              onClick={() => editCardHandler('Edit card name')}
+            >
+              <EditIcon width="18" fill="#fff" />
+            </Button>
 
-            <TrashIcon fill="black" onClick={deleteCardHandler} />
+            <Button
+              styleType="iconPrimary"
+              className={s.btnTrash}
+              onClick={() => openCardModalHandler('Delete Card')}
+            >
+              <TrashIcon width="18" height="20" />
+            </Button>
           </div>
         )}
       </div>
-
-      {toggle && <UpdateCardModal question={question} answer={answer} />}
     </>
   )
 }
