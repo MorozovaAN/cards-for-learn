@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { createPortal } from 'react-dom'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
