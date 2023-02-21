@@ -35,19 +35,12 @@ export const Paginator: FC<PaginationPropsType> = ({
   }
 
   const changeNumberPacksPerPageHandler = (_: any, value: string | null) => {
-    searchParams.delete('page')
-    if (searchParams.has('user_id')) {
+    if (value) {
+      searchParams.has('page') && searchParams.delete('page')
       setSearchParams({
         ...paramsHelper(searchParams),
-        pageCount: (Number(value) - 1).toString(),
+        pageCount: searchParams.has('user_id') ? (Number(value) - 1).toString() : value,
       })
-    } else {
-      if (value) {
-        setSearchParams({
-          ...paramsHelper(searchParams),
-          pageCount: value,
-        })
-      }
     }
   }
 
