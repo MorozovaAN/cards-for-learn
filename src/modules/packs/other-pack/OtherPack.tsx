@@ -10,13 +10,13 @@ import { Button } from 'UI/button/Button'
 
 type PackType = {
   packId: string
-  name: string
+  packName: string
   cardsCount: number
   author: string
   updated: string
 }
 
-export const OtherPack: FC<PackType> = ({ packId, name, cardsCount, author, updated }) => {
+export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, updated }) => {
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
 
@@ -27,7 +27,7 @@ export const OtherPack: FC<PackType> = ({ packId, name, cardsCount, author, upda
 
   return (
     <div className={s.pack}>
-      <p className={s.name}>{name}</p>
+      <p className={s.name}>{packName}</p>
 
       <p>
         <span className={s.subtitle}>Cards in pack: </span>

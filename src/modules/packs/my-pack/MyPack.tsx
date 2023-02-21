@@ -9,25 +9,23 @@ import { ReactComponent as EditLock } from 'assets/img/icons/lock.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
-import { setPackId, setPackName, setPrivateCheckbox } from 'modules/packs/packsSlise'
+import { setPackId, setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
   packId: string
-  name: string
+  packName: string
   cardsCount: number
   updated: string
   privatePack: boolean
 }
 
-export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privatePack }) => {
+export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, privatePack }) => {
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
 
   const openPackModalHandler = (type: ModalType) => {
-    dispatch(setPackName(name))
-    dispatch(setPackId(packId))
-    dispatch(setPrivateCheckbox(privatePack))
+    dispatch(setPackInfo({ packId, packName, privatePack }))
     dispatch(setModal({ open: true, type }))
   }
 
@@ -38,7 +36,7 @@ export const MyPack: FC<PackType> = ({ packId, name, cardsCount, updated, privat
 
   return (
     <div className={s.pack}>
-      <p className={s.name}>{name}</p>
+      <p className={s.name}>{packName}</p>
 
       {privatePack && (
         <div className={s.tooltip} data-tooltip="This pack is private">
