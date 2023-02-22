@@ -14,6 +14,7 @@ export const AddNewPackModal = () => {
   const [name, setName] = useState('')
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()
+  const error = name.length > 50
 
   const addPackHandler = async () => {
     await addPack({ cardsPack: { name: name, deckCover: '', private: privatePack } }).unwrap()
@@ -21,7 +22,7 @@ export const AddNewPackModal = () => {
   }
 
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === 'Enter' && name && addPackHandler()
+    e.key === 'Enter' && name && !error && addPackHandler()
   }
 
   return (
@@ -35,6 +36,7 @@ export const AddNewPackModal = () => {
         label="Name of the new pack"
         placeholder="write name of the new pack"
         disabled={isLoading}
+        error={error && 'Sorry, max pack name length 50 symbols or less'}
       />
 
       <div className={s.checkbox}>
@@ -45,7 +47,7 @@ export const AddNewPackModal = () => {
 
       <Button
         styleType="primary"
-        disabled={!name || isLoading}
+        disabled={!name || isLoading || error}
         className={s.button}
         onClick={addPackHandler}
       >
