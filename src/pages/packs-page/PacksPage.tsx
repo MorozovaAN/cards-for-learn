@@ -8,6 +8,7 @@ import s from './PacksPage.module.scss'
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { errorHandler } from 'common/utils/errorHandler'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
@@ -22,7 +23,7 @@ import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
   const [searchParams] = useSearchParams()
-  const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
+  const { data: responsePacks, isFetching, error } = useGetPacksQuery(paramsHelper(searchParams))
   const showButton = useTypedSelector(showButtonScrollSelector)
   const dispatch = useTypedDispatch()
 
@@ -41,6 +42,10 @@ export const PacksPage = () => {
 
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
+
+  useEffect(() => {
+    error && errorHandler(error, dispatch)
+  }, [error])
 
   return (
     <div>
