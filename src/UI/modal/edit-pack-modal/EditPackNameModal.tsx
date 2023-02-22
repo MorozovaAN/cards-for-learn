@@ -23,6 +23,7 @@ export const EditPackNameModal = () => {
   const [newName, setNewName] = useState(packName)
   const [privatePack, setPrivatePack] = useState(privateCheckbox)
   const dispatch = useTypedDispatch()
+  const error = newName.length > 50
 
   const editPackNameHandler = async () => {
     await updatePackName({
@@ -32,7 +33,7 @@ export const EditPackNameModal = () => {
   }
 
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === 'Enter' && newName && editPackNameHandler()
+    e.key === 'Enter' && !error && newName && editPackNameHandler()
   }
 
   return (
@@ -44,7 +45,10 @@ export const EditPackNameModal = () => {
         onKeyUp={onEnterHandler}
         type="text"
         label="New pack name"
-        error={!newName.length && 'Write new name of the pack'}
+        error={
+          (!newName.length && 'Write new name of the pack') ||
+          (error && 'Sorry, max pack name length 50 symbols or less')
+        }
         disabled={isLoading}
       />
 
@@ -60,7 +64,7 @@ export const EditPackNameModal = () => {
 
       <Button
         styleType="primary"
-        disabled={!newName || isLoading}
+        disabled={!newName || isLoading || error}
         className={s.button}
         onClick={editPackNameHandler}
       >

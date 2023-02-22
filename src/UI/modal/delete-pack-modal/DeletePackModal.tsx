@@ -32,7 +32,7 @@ export const DeletePackModal = () => {
 
   return (
     <>
-      <p>
+      <p className={s.text}>
         Do you really want to remove pack <span className={s.packName}>{packName}</span>? All cards
         in the pack will be removed.
       </p>
