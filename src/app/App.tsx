@@ -31,14 +31,7 @@ export const App = () => {
     }
   }, [])
 
-  if (!isAuth)
-    return (
-      <div className={s.loader}>
-        <CircularProgress classes={{ root: s.circular }} size={60} />
-      </div>
-    )
-
-  return (
+  return isAuth ? (
     <div className={appClasses}>
       <NotificationBar />
       <BaseModal />
@@ -50,6 +43,10 @@ export const App = () => {
       <section className={sectionClasses}>
         <RoutesComponent />
       </section>
+    </div>
+  ) : (
+    <div className={s.loader}>
+      <CircularProgress classes={{ root: s.circular }} size={60} />
     </div>
   )
 }
