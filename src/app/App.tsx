@@ -37,7 +37,6 @@ export const App = () => {
       <BaseModal />
 
       {isLoggedIn && <Header />}
-
       {isLoading && <LoadingProgress privatePage={privetPage} />}
 
       <section className={sectionClasses}>
