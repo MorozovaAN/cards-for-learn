@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { setIsAuth, setIsLoading, setIsLoggedIn, setNotification } from 'app/appSlice'
 import { baseURL } from 'common/constants/base-URL'
-import { ErrorType } from 'common/types/types'
+import { ErrorInternetConnectType, ErrorType } from 'common/types/types'
 import { errorHandler } from 'common/utils/errorHandler'
 import { forgotPasswordCurrentEmail, setAuthData } from 'modules/auth/authSlice'
 
@@ -70,9 +70,7 @@ export const authApi = createApi({
           if ((err as ErrorType)?.error?.data?.error) {
             dispatch(setNotification({ message: 'Incorrect email or password', type: 'error' }))
           } else {
-            const error = err as { error: { status: string } }
-
-            dispatch(setNotification({ message: error.error.status, type: 'error' }))
+            errorHandler(err, dispatch)
           }
         } finally {
           dispatch(setIsLoading(false))
@@ -91,7 +89,7 @@ export const authApi = createApi({
           await queryFulfilled
           dispatch(setIsLoggedIn(false))
         } catch (err) {
-          dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
+          errorHandler(err, dispatch)
         } finally {
           dispatch(setIsLoading(false))
         }
@@ -131,7 +129,11 @@ export const authApi = createApi({
             setNotification({ message: 'Avatar image changed successfully', type: 'success' })
           )
         } catch (err) {
-          dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
+          if ((err as ErrorInternetConnectType)?.error?.status === 'FETCH_ERROR') {
+            dispatch(setNotification({ message: 'Internet connection error', type: 'error' }))
+          } else {
+            dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
+          }
         }
       },
     }),
@@ -176,6 +178,18 @@ export const authApi = createApi({
   }),
 })
 
+export const {
+  useForgotPasswordMutation,
+  useSetNewPasswordMutation,
+  useMeMutation,
+  useLogInMutation,
+  useLogOutMutation,
+  useLogUpMutation,
+  useUpdateUserNameMutation,
+  useUpdateUserAvatarMutation,
+} = authApi
+
+//types
 export interface Response {
   _id: string
   email: string
@@ -219,18 +233,3 @@ export type RequestSetNewPasswordType = {
 export type UpdateProfileType = {
   updatedUser: Response
 }
-
-export type UpdateProfile = {
-  name: string
-  avatar: string
-}
-export const {
-  useForgotPasswordMutation,
-  useSetNewPasswordMutation,
-  useMeMutation,
-  useLogInMutation,
-  useLogOutMutation,
-  useLogUpMutation,
-  useUpdateUserNameMutation,
-  useUpdateUserAvatarMutation,
-} = authApi

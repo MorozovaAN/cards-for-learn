@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { setIsLoading, setNotification } from 'app/appSlice'
 import { baseURL } from 'common/constants/base-URL'
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
-import { ErrorType } from 'common/types/types'
+import { errorHandler } from 'common/utils/errorHandler'
 
 export const packsApi = createApi({
   reducerPath: 'packsApi',
@@ -27,6 +26,13 @@ export const packsApi = createApi({
           ...arg,
         },
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+        } catch (err) {
+          errorHandler(err, dispatch)
+        }
+      },
       providesTags: result =>
         result
           ? [
@@ -45,13 +51,7 @@ export const packsApi = createApi({
         try {
           await queryFulfilled
         } catch (err) {
-          if ((err as ErrorType)?.error?.data?.error) {
-            dispatch(setNotification({ message: 'Incorrect email or password', type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Something went wrong', type: 'error' }))
-          }
-        } finally {
-          dispatch(setIsLoading(false))
+          errorHandler(err, dispatch)
         }
       },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
@@ -62,17 +62,33 @@ export const packsApi = createApi({
         method: 'PUT',
         body,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+        } catch (err) {
+          errorHandler(err, dispatch)
+        }
+      },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
+
     deletePack: build.mutation<ResponseDeletePackType, string>({
       query: packId => ({
         url: `/pack?id=${packId}`,
         method: 'DELETE',
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+        } catch (err) {
+          errorHandler(err, dispatch)
+        }
+      },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
     }),
   }),
 })
+
 export const {
   useGetPacksQuery,
   useAddPackMutation,
@@ -93,23 +109,12 @@ export type PackType = {
 }
 
 export type ResponsePacksType = {
-  cardPacks: ResponsePackType[]
+  cardPacks: PackType[]
   cardPacksTotalCount: number
   maxCardsCount: number
   minCardsCount: number
   page: number
   pageCount: number
-}
-
-export type ResponsePackType = {
-  _id: string
-  user_id: string
-  user_name: string
-  name: string
-  cardsCount: number
-  created: string
-  updated: string
-  private: boolean
 }
 
 export type UpdateNamePackType = {
