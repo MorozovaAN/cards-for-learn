@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
-import { privacyPageSwitch } from 'app/utils/privacyPageSwitch'
+import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { Header, useMeMutation } from 'modules'
 import { RoutesComponent } from 'routes/RoutesComponent'
@@ -19,9 +19,11 @@ export const App = () => {
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
-  const privetPage = privacyPageSwitch(location.pathname)
-  const appClasses = `${s.appDefault} ${privetPage ? s.appSecondary : ''}`
-  const sectionClasses = `${s.contentContainer} ${privetPage ? '' : s.contentContainerPrivatePages}`
+  const privetPage = isPrivatePage(location.pathname)
+  const appClasses = `${s.appDefault} ${
+    !privetPage || location.pathname === '/profile' ? s.appSecondary : ''
+  }`
+  const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
 
   useEffect(() => {
     if (!isAuth) {
@@ -29,25 +31,21 @@ export const App = () => {
     }
   }, [])
 
-  if (!isAuth)
-    return (
-      <div className={s.loader}>
-        <CircularProgress classes={{ root: s.circular }} size={60} />
-      </div>
-    )
-
-  return (
+  return isAuth ? (
     <div className={appClasses}>
       <NotificationBar />
       <BaseModal />
 
       {isLoggedIn && <Header />}
-
-      {isLoading && <LoadingProgress privatePage={!privetPage} />}
+      {isLoading && <LoadingProgress privatePage={privetPage} />}
 
       <section className={sectionClasses}>
         <RoutesComponent />
       </section>
+    </div>
+  ) : (
+    <div className={s.loader}>
+      <CircularProgress classes={{ root: s.circular }} size={60} />
     </div>
   )
 }

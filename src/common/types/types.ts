@@ -6,3 +6,9 @@ export type ErrorType = {
     status: number
   }
 }
+
+export type ErrorInternetConnectType = {
+  error: {
+    status: string
+  }
+}
