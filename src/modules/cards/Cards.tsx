@@ -53,7 +53,7 @@ export const Cards = () => {
           </div>
 
           <div className={s.filters}>
-            <Search disabled={isFetching} selector={'Cards'} param={'cardQuestion'} />
+            <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
             <ResetAllFilters disabled={isFetching} />
           </div>
 
