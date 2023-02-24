@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { convertFileToBase64 } from 'common/utils/toBase64'
+import { uploadImage } from 'common/utils/uploadImage'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
 import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
@@ -38,14 +38,7 @@ export const AddCardModal = () => {
     e.currentTarget.selectedIndex === 1 && setButton(true)
   }
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-
-      convertFileToBase64(file, (file64: string) => {
-        setQuestionImg(file64)
-      })
-    }
-    e.target.value = ''
+    uploadImage(e, dispatch, setQuestionImg)
   }
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
@@ -59,7 +52,13 @@ export const AddCardModal = () => {
       </select>
       {button ? (
         <label>
-          <input type="file" style={{ display: 'none' }} onChange={uploadHandler} ref={inputRef} />
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            onChange={uploadHandler}
+            ref={inputRef}
+            accept=".jpg,.png,.svg,.jpeg"
+          />
           <Button styleType={'primary'} onClick={selectFileHandler}>
             Upload image
           </Button>
