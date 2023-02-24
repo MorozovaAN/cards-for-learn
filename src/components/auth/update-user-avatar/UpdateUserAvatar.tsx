@@ -19,13 +19,19 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
+      const extension = file.name.slice(-4)
+
       if (file.size >= 110000) {
         dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
-      } else if (file.name.slice(-4) !== '.jpg' && file.name.slice(-4) !== '.png') {
-        console.log(file.name.slice(-4))
+      } else if (
+        extension !== '.jpg' &&
+        extension !== '.png' &&
+        extension !== '.svg' &&
+        extension !== 'jpeg'
+      ) {
         dispatch(
           setNotification({
-            message: 'Sorry,file extension can be .jpg or .png only',
+            message: 'Sorry, correct extensions .jpg, .png, .svg, .jpeg',
             type: 'error',
           })
         )
