@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import s from './Cards.module.scss'
 
 import { ModalType, setModal } from 'app/appSlice'
+import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
@@ -12,7 +13,6 @@ import { paramsHelper } from 'common/utils/paramsHelper'
 import { Card } from 'components/cards/Card'
 import { NotFound } from 'components/notFound/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
-import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
@@ -43,43 +43,52 @@ export const Cards = () => {
           <div className={s.container}>
             <p className={s.name}>{data.packName}</p>
 
-            {data.packUserId === myId ? (
-              <Button onClick={() => openCardModalHandler('Add new card')} styleType="primary">
-                Add new card
-              </Button>
-            ) : (
-              <Button styleType="primary">Learn pack</Button>
-            )}
-          </div>
+            <div className={s.filters}>
+              {data.packUserId === myId ? (
+                <Button onClick={() => openCardModalHandler('Add new card')} styleType="primary">
+                  Add new card
+                </Button>
+              ) : (
+                <Button styleType="primary" className={s.button}>
+                  <p>Learn pack</p>
+                  <LearnIcon stroke="#676665" width="17" />
+                </Button>
+              )}
+              <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
+            </div>
 
-          <div className={s.filters}>
-            <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
-            <ResetAllFilters disabled={isFetching} />
-          </div>
+            <div className={s.cardsContainer}>
+              <div className={s.cardsHeader}>
+                <p className={s.question}>Question</p>
+                <p className={s.answer}>Answer</p>
+                <p className={s.updated}>Last updated</p>
+                <p className={s.grade}>Grade</p>
+              </div>
+              {data.cards.length ? (
+                data.cards.map(card => (
+                  <Card
+                    key={card._id}
+                    idCard={card._id}
+                    question={card.question}
+                    grade={card.grade}
+                    answer={card.answer}
+                    updated={formatDate(card.updated)}
+                    userId={card.user_id}
+                  />
+                ))
+              ) : (
+                <NotFound />
+              )}
+            </div>
 
-          {data.cards.length ? (
-            data.cards.map(card => (
-              <Card
-                key={card._id}
-                idCard={card._id}
-                question={card.question}
-                grade={card.grade}
-                answer={card.answer}
-                updated={formatDate(card.updated)}
-                userId={card.user_id}
+            <div className={s.paginator}>
+              <Paginator
+                pageCount={data.pageCount}
+                totalCount={data.cardsTotalCount}
+                currentPage={data.page}
+                disabled={isFetching}
               />
-            ))
-          ) : (
-            <NotFound />
-          )}
-
-          <div className={s.paginator}>
-            <Paginator
-              pageCount={data.pageCount}
-              totalCount={data.cardsTotalCount}
-              currentPage={data.page}
-              disabled={isFetching}
-            />
+            </div>
           </div>
         </div>
       )}
