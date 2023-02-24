@@ -20,8 +20,17 @@ type CardType = {
   grade: number
   idCard: string
   userId: string
+  questionImg: string
 }
-export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, userId }) => {
+export const Card: FC<CardType> = ({
+  question,
+  questionImg,
+  answer,
+  grade,
+  updated,
+  idCard,
+  userId,
+}) => {
   const myId = useTypedSelector(idSelector)
   const dispatch = useTypedDispatch()
 
@@ -41,7 +50,13 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
   return (
     <>
       <div className={s.container}>
-        <div>{question}</div>
+        <div>
+          {questionImg ? (
+            <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
+          ) : (
+            question
+          )}
+        </div>
         <div>{answer}</div>
         <div>{updated}</div>
 

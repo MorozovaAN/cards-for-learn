@@ -1,9 +1,10 @@
-import React, { KeyboardEvent, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { convertFileToBase64 } from 'common/utils/toBase64'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
 import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
@@ -12,12 +13,15 @@ export const AddCardModal = () => {
   const [addCard, { isLoading }] = useAddNewCardMutation()
   const [question, setQuestion] = useState<string>('')
   const [answer, setAnswer] = useState<string>('')
+  const [button, setButton] = useState(false)
+  const [questionImg, setQuestionImg] = useState('')
   const dispatch = useTypedDispatch()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const [searchParams, _] = useSearchParams()
   const id = searchParams.get('cardsPack_id')
   const addCardHandler = async () => {
-    await addCard({ card: { cardsPack_id: id ? id : '', question, answer } })
+    await addCard({ card: { cardsPack_id: id ? id : '', question, answer, questionImg } })
     dispatch(setModal({ open: false, type: '' }))
   }
   const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -29,21 +33,47 @@ export const AddCardModal = () => {
     e.key === 'Enter' && addCardHandler()
   }
 
+  const onSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    e.currentTarget.selectedIndex === 0 && setButton(false)
+    e.currentTarget.selectedIndex === 1 && setButton(true)
+  }
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      convertFileToBase64(file, (file64: string) => {
+        setQuestionImg(file64)
+      })
+    }
+    e.target.value = ''
+  }
+  const selectFileHandler = () => {
+    inputRef && inputRef.current?.click()
+  }
+
   return (
     <>
-      <select>
+      <select onChange={onSelectChangeHandler}>
         <option value="0">Text</option>
-        <option value="1">Select2</option>
+        <option value="1">Image</option>
       </select>
-
-      <Input
-        value={question}
-        onChange={changeQuestionHandler}
-        type="text"
-        label="Question"
-        autoFocus
-        onKeyUp={onEnterHandler}
-      />
+      {button ? (
+        <label>
+          <input type="file" style={{ display: 'none' }} onChange={uploadHandler} ref={inputRef} />
+          <Button styleType={'primary'} onClick={selectFileHandler}>
+            Upload image
+          </Button>
+        </label>
+      ) : (
+        <Input
+          value={question}
+          onChange={changeQuestionHandler}
+          type="text"
+          label="Question"
+          autoFocus
+          onKeyUp={onEnterHandler}
+        />
+      )}
       <Input
         value={answer}
         onChange={changeAnswerHandler}
@@ -52,7 +82,11 @@ export const AddCardModal = () => {
         onKeyUp={onEnterHandler}
       />
 
-      <Button disabled={!question || isLoading} styleType="primary" onClick={addCardHandler}>
+      <Button
+        disabled={(!question && !questionImg) || isLoading}
+        styleType="primary"
+        onClick={addCardHandler}
+      >
         Save
       </Button>
     </>
