@@ -51,8 +51,9 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
 
         <div className={s.answerContainer}>
           <button className={s.answerButton} onClick={btnAnswerClickHandler}>
-            <p className={s.answerButtonText}>{showAnswer ? 'Hide answer ▾' : 'Show answer ▴'}</p>
+            <p className={s.answerButtonText}>{showAnswer ? 'Hide answer ▴' : 'Show answer ▾'}</p>
           </button>
+
           <AnimatePresence>
             {showAnswer && (
               <motion.div

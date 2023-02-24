@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Cards.module.scss'
@@ -8,14 +9,12 @@ import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { formatDate } from 'common/utils/formatDate'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { Card } from 'components/cards/Card'
-import { NotFound } from 'components/notFound/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
+import { CardsList } from 'modules/cards/cardsList/CardsList'
 import { packIdSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'
 
@@ -38,49 +37,37 @@ export const Cards = () => {
 
   return (
     <>
-      {data && (
-        <div>
-          <div className={s.container}>
+      <div>
+        <div className={s.container}>
+          {data ? (
             <p className={s.name}>{data.packName}</p>
-
-            <div className={s.filters}>
-              {data.packUserId === myId ? (
-                <Button onClick={() => openCardModalHandler('Add new card')} styleType="primary">
-                  Add new card
-                </Button>
-              ) : (
-                <Button styleType="primary" className={s.button}>
-                  <p>Learn pack</p>
-                  <LearnIcon stroke="#676665" width="17" />
-                </Button>
-              )}
-              <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
+          ) : (
+            <div className={s.skeletonNameContainer}>
+              <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
             </div>
+          )}
 
-            <div className={s.cardsContainer}>
-              <div className={s.cardsHeader}>
-                <p className={s.question}>Question</p>
-                <p className={s.answer}>Answer</p>
-                <p className={s.updated}>Last updated</p>
-                <p className={s.grade}>Grade</p>
-              </div>
-              {data.cards.length ? (
-                data.cards.map(card => (
-                  <Card
-                    key={card._id}
-                    idCard={card._id}
-                    question={card.question}
-                    grade={card.grade}
-                    answer={card.answer}
-                    updated={formatDate(card.updated)}
-                    userId={card.user_id}
-                  />
-                ))
-              ) : (
-                <NotFound />
-              )}
-            </div>
+          <div className={s.filters}>
+            {data?.packUserId === myId ? (
+              <Button
+                styleType="secondary"
+                className={s.button}
+                onClick={() => openCardModalHandler('Add new card')}
+              >
+                Add new card
+              </Button>
+            ) : (
+              <Button styleType="secondary" className={s.button}>
+                <p>Learn pack</p>
+                <LearnIcon className={s.learnIcon} stroke="#000" />
+              </Button>
+            )}
+            <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
+          </div>
 
+          <CardsList cards={data?.cards ? data.cards : null} isFetching={isFetching} />
+
+          {data ? (
             <div className={s.paginator}>
               <Paginator
                 pageCount={data.pageCount}
@@ -89,9 +76,17 @@ export const Cards = () => {
                 disabled={isFetching}
               />
             </div>
-          </div>
+          ) : (
+            <div className={s.skeletonPaginationContainer}>
+              <Skeleton
+                classes={{ root: s.skeletonPagination }}
+                animation="wave"
+                variant="rectangular"
+              />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   )
 }

@@ -29,14 +29,8 @@
   height: 100%;
 
   font-weight: 600;
-  color: var(--color-on-primary-light-400);
 
-  background-color: var(--color-background-dark-500);
   border-radius: 10px;
-
-  &:hover {
-    background-color:var(--color-background-dark-600);
-  }
 }
 
 .name{
@@ -50,51 +44,25 @@
   color: var(--color-primary-dark-100);
 }
 
+.skeletonNameContainer {  
+  margin: 16px auto 26px auto;
+}
+
+.skeletonNameContainer .skeletonName {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 25px;
+
+ border-radius: 4px;
+}
+
+.learnIcon {
+  width:16px;
+  margin-bottom: 1px;
+}
+
 .paginator {
   margin-top: 15px;
-}
-
-.cardsContainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-
-  width: 100%;
-  margin-top: 20px;
-}
-
-.cardsHeader {
-  display: flex;
-  column-gap: 16px;
-
-  padding: 12px;
-
-  color: var(--color-background-base);
-
-  background-color: var(--color-primary-base);
-  border-radius: 10px
-}
-
-.question {
-  width: 100%;
-  max-width: 200px;
-
-  text-align: center;
-}
-
-.answer {
-  width: 100%;
-  max-width: 499px;
-
-  text-align: center;
-}
-
-.grade {
-  width: 120px;
-
-  text-align: center;
-}
-
-.updated {
-  width: 100px;
 }
