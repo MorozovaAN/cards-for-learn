@@ -6,17 +6,16 @@ import { useSearchParams } from 'react-router-dom'
 import s from './Cards.module.scss'
 
 import { ModalType, setModal } from 'app/appSlice'
-import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
+import { Buttons } from 'modules/cards/buttons/Buttons'
+import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
-import { CardsList } from 'modules/cards/cardsList/CardsList'
 import { packIdSelector } from 'modules/packs/packsSelectors'
-import { Button } from 'UI/button/Button'
 
 export const Cards = () => {
   const cardsPack_id = useTypedSelector(packIdSelector)
@@ -35,6 +34,8 @@ export const Cards = () => {
     dispatch(setModal({ open: true, type }))
   }
 
+  const learnPackHandler = () => {}
+
   return (
     <>
       <div>
@@ -48,20 +49,13 @@ export const Cards = () => {
           )}
 
           <div className={s.filters}>
-            {data?.packUserId === myId ? (
-              <Button
-                styleType="secondary"
-                className={s.button}
-                onClick={() => openCardModalHandler('Add new card')}
-              >
-                Add new card
-              </Button>
-            ) : (
-              <Button styleType="secondary" className={s.button}>
-                <p>Learn pack</p>
-                <LearnIcon className={s.learnIcon} stroke="#000" />
-              </Button>
-            )}
+            <Buttons
+              myCards={data?.packUserId === myId}
+              isFetching={isFetching}
+              addCardCallBack={openCardModalHandler}
+              lernCallBack={learnPackHandler}
+            />
+
             <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
           </div>
 

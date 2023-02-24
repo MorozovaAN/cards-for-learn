@@ -40,7 +40,7 @@ export const CardsList: FC<CardsListType> = ({ cards, isFetching }) => {
         skeletons.map(s => {
           return s
         })
-      ) : cards ? (
+      ) : cards?.length ? (
         cards.map(card => (
           <Card
             key={card._id}
