@@ -67,6 +67,7 @@ export const Cards = () => {
                 answer={card.answer}
                 updated={formatDate(card.updated)}
                 userId={card.user_id}
+                questionImg={card.questionImg}
               />
             ))
           ) : (
