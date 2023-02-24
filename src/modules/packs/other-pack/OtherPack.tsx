@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/other-pack/OtherPack.module.scss'
@@ -20,7 +21,9 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
 
-  const learnPackHandler = () => {
+  const learnPackHandler = () => {}
+
+  const viewCardsHandler = () => {
     dispatch(setPackId(packId))
     navigate('/cards')
   }
@@ -44,9 +47,17 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
         {updated}
       </p>
 
-      <Button styleType="primary" className={s.button} onClick={learnPackHandler}>
-        <p>Learn this pack</p> <LearnIcon width="16" className={s.learnIcon} />
-      </Button>
+      <div className={s.buttonsContainer}>
+        <Button styleType="primary" className={s.button} onClick={learnPackHandler}>
+          <p>Learn pack</p>
+          <LearnIcon className={s.learnIcon} />
+        </Button>
+
+        <Button styleType="primary" className={s.button} onClick={viewCardsHandler}>
+          <p>View cards</p>
+          <CardsIcon className={s.cardsIcon} />
+        </Button>
+      </div>
     </div>
   )
 }
