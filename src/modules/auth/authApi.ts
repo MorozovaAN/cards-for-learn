@@ -131,8 +131,6 @@ export const authApi = createApi({
         } catch (err) {
           if ((err as ErrorInternetConnectType)?.error?.status === 'FETCH_ERROR') {
             dispatch(setNotification({ message: 'Internet connection error', type: 'error' }))
-          } else {
-            dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
           }
         }
       },
