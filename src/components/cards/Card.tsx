@@ -57,11 +57,13 @@ export const Card: FC<CardType> = ({
   return (
     <>
       <div className={s.container}>
-        <div className={s.question}>{questionImg ? (
+        <div className={s.question}>
+          {questionImg ? (
             <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
-        ) : (
+          ) : (
             question
-        )}</div>
+          )}
+        </div>
 
         <div className={myCards ? s.answerContainerMyCards : s.answerContainer}>
           <button className={s.answerButton} onClick={btnAnswerClickHandler}>

@@ -43,6 +43,7 @@ export const CardsList: FC<CardsListType> = ({ cards, myCards, isFetching }) => 
               answer={card.answer}
               updated={formatDate(card.updated)}
               userId={card.user_id}
+              questionImg={card.questionImg}
             />
           ))}
     </div>
