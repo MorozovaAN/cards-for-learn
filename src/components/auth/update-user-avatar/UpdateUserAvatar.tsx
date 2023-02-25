@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC } from 'react'
 
-import { convertFileToBase64 } from 'common/utils/toBase64'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { uploadImage } from 'common/utils/uploadImage'
 import s from 'components/auth/update-user-avatar/UpdateUserAvatar.module.scss'
 
 type UpdateProfileAvatarType = {
@@ -12,14 +13,9 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({
   updateAvatarCallback,
   disabled,
 }) => {
+  const dispatch = useTypedDispatch()
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-
-      convertFileToBase64(file, (file64: string) => {
-        updateAvatarCallback(file64)
-      })
-    }
+    uploadImage(e, dispatch, updateAvatarCallback)
   }
 
   return (
@@ -28,8 +24,9 @@ export const UpdateUserAvatar: FC<UpdateProfileAvatarType> = ({
         type="file"
         onChange={uploadHandler}
         className={s.input}
-        accept=".jpg,.png"
+        accept=".jpg,.png,.svg,.jpeg"
         disabled={disabled}
+        id={'fileUpload'}
       />
     </label>
   )

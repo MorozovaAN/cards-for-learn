@@ -21,8 +21,17 @@ type CardType = {
   grade: number
   idCard: string
   userId: string
+  questionImg: string
 }
-export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, userId }) => {
+export const Card: FC<CardType> = ({
+  question,
+  questionImg,
+  answer,
+  grade,
+  updated,
+  idCard,
+  userId,
+}) => {
   const myId = useTypedSelector(idSelector)
   const [showAnswer, setShowAnswer] = useState(false)
   const dispatch = useTypedDispatch()
@@ -48,7 +57,11 @@ export const Card: FC<CardType> = ({ question, answer, grade, updated, idCard, u
   return (
     <>
       <div className={s.container}>
-        <div className={s.question}>{question}</div>
+        <div className={s.question}>{questionImg ? (
+            <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
+        ) : (
+            question
+        )}</div>
 
         <div className={myCards ? s.answerContainerMyCards : s.answerContainer}>
           <button className={s.answerButton} onClick={btnAnswerClickHandler}>
