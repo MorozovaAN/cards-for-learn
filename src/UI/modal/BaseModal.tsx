@@ -54,20 +54,22 @@ export const BaseModal = () => {
       <div className={s.modal}>
         <div className={s.background} onClick={closeModal}></div>
 
-        <Box size="M" className={s.box}>
-          <div className={s.header}>
-            <Close className={s.close} onClick={closeModal} />
-            <h2 className={s.title}>{type}</h2>
-          </div>
+        <div className={s.container}>
+          <Box size="M">
+            <div className={s.header}>
+              <Close className={s.close} onClick={closeModal} />
+              <h2 className={s.title}>{type}</h2>
+            </div>
 
-          {type === 'Add new pack' && <AddNewPackModal />}
-          {type === 'Edit pack name' && <EditPackNameModal />}
-          {type === 'Delete Pack' && <DeletePackModal />}
+            {type === 'Add new pack' && <AddNewPackModal />}
+            {type === 'Edit pack name' && <EditPackNameModal />}
+            {type === 'Delete Pack' && <DeletePackModal />}
 
-          {type === 'Add new card' && <AddCardModal />}
-          {type === 'Edit card name' && <UpdateCardModal />}
-          {type === 'Delete Card' && <DeleteCardModal />}
-        </Box>
+            {type === 'Add new card' && <AddCardModal />}
+            {type === 'Edit card name' && <UpdateCardModal />}
+            {type === 'Delete Card' && <DeleteCardModal />}
+          </Box>
+        </div>
       </div>
     ),
     document.querySelector('body') as HTMLElement
