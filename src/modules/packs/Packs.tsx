@@ -28,16 +28,8 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const packs = myPacksPage
     ? responsePacks
     : responsePacks?.filter((p: PackType) => p.user_id !== myId)
-  const skeletons = []
+  const skeletons = [1, 2, 3, 4, 5, 6]
   const dispatch = useTypedDispatch()
-
-  for (let i = 1; i <= 6; i++) {
-    skeletons.push(
-      <div className={s.skeletonPackContainer} key={i}>
-        <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
-      </div>
-    )
-  }
 
   const addPackHandler = () => {
     dispatch(setModal({ open: true, type: 'Add new pack' }))
@@ -46,9 +38,11 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   return (
     <div className={s.packsContainer}>
       {isFetching ? (
-        skeletons.map(s => {
-          return s
-        })
+        skeletons.map(el => (
+          <div className={s.skeletonPackContainer} key={el}>
+            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+          </div>
+        ))
       ) : (
         <>
           {myPacksPage &&

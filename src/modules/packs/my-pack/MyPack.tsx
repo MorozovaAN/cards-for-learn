@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ModalType, setModal } from 'app/appSlice'
+import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as EditLock } from 'assets/img/icons/lock.svg'
@@ -29,7 +30,9 @@ export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, pr
     dispatch(setModal({ open: true, type }))
   }
 
-  const learnPackHandler = () => {
+  const learnPackHandler = () => {}
+
+  const viewCardsHandler = () => {
     dispatch(setPackId(packId))
     navigate('/cards')
   }
@@ -55,6 +58,10 @@ export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, pr
       </p>
 
       <div className={s.btnContainer}>
+        <Button styleType="iconPrimary" className={s.btnLearn} onClick={viewCardsHandler}>
+          <CardsIcon />
+        </Button>
+
         <Button styleType="iconPrimary" className={s.btnLearn} onClick={learnPackHandler}>
           <LearnIcon width="18" />
         </Button>

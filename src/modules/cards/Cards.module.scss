@@ -1,24 +1,60 @@
 @import "src/common/style-mixins/mixins";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 100%;
+  margin: 20px 0 ;
+}
+
 .filters {
   display: flex;
   column-gap: 25px;
   align-items: flex-end;
 
-  height: 55px;
+  width: 100%;
+  height: 42px;
 }
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  margin: 20px 0 ;
-
-}
 .name{
 
-  @include headline3(600);
+  @include headline2;
+
+  align-self: center;
+
+  margin: 16px 0 26px 0;
+
+  color: var(--color-primary-dark-100);
 }
+
+.skeletonNameContainer {  
+  margin: 16px auto 26px auto;
+}
+
+.skeletonNameContainer .skeletonName, .skeletonPaginationContainer .skeletonPagination {
+
+  @include skeletonBase;
+}
+
+.skeletonNameContainer .skeletonName {
+  width: 300px ;
+  height: 25px;
+
+  border-radius: 4px;
+}
+
+.skeletonPaginationContainer .skeletonPagination {
+  height: 42px;
+}
+
+.learnIcon {
+  width:16px;
+  margin-bottom: 1px;
+}
+
 .paginator {
   margin-top: 15px;
 }

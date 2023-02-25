@@ -1,0 +1,53 @@
+@import 'src/common/style-mixins/mixins';
+
+.skeletonMyCardsContainer .skeletonMyCards, .skeletonOtherCardsContainer .skeletonOtherCards {
+
+  @include skeletonBase;
+
+  height: 42px;
+}
+
+.skeletonMyCardsContainer .skeletonMyCards {
+  width: 60px;
+}
+
+.skeletonOtherCardsContainer .skeletonOtherCards {
+  width: 168.5px;
+}
+
+.skeletonMyCardsContainer {
+  width: 100%;
+}
+
+.buttonsContainer {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.learnPackBtn {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 200px;
+  height: 42px;
+
+  font-weight: 600;
+  color: var(--color-primary-base);
+
+  border-radius: 10px
+}
+
+.learnIcon {
+  width: 18px;
+  height: 19px;
+}
+
+.myPackBtn {
+  display: flex;
+  align-items: center;
+
+  height: 42px;
+}

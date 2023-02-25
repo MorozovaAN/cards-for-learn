@@ -1,18 +1,70 @@
+@import 'src/common/style-mixins/mixins';
+
 .container {
   display: flex;
+  column-gap: 16px;
   align-items: center;
   justify-content: space-between;
 
-  height: 60px;
-  margin-top: 20px;
-
+  padding: 15px;
 
   background-color: var(--color-secondary-base-transparent);
+  border-radius: 10px;
 }
-.icons {
-display: flex;
+
+.actions {
+  display: flex;
+  column-gap: 6px;
+
+  width: 260px;
 }
-.img {
-  width: 70px;
-  height: 50px;
+
+.question {
+  width: 100%;
+  max-width: 200px;
+}
+
+.answerContainer {
+  width: 100%;
+  max-width: 502px;
+}
+
+.answerContainerMyCards {
+  width: 100%;
+  max-width: 380px;
+}
+
+.answerButton {
+
+  @include title(600);
+
+  @include transitionMain;
+
+  cursor: pointer;
+
+  position: relative;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  color: var(--color-primary-base);
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  &:hover {
+    color: var(--color-primary-dark-100);
+  }
+}
+
+.answerButtonText {
+  margin-bottom: 8px;
+}
+
+.answer {
+  overflow: hidden;
+
+  text-align: center;
 }

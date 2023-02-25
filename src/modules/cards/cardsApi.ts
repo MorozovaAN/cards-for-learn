@@ -21,6 +21,7 @@ export const cardsApi = createApi({
       }),
       providesTags: result => ['cards'],
     }),
+
     deleteCard: build.mutation({
       query: arg => ({
         method: 'DELETE',
@@ -31,6 +32,7 @@ export const cardsApi = createApi({
       }),
       invalidatesTags: ['cards'],
     }),
+
     addNewCard: build.mutation<ResponseNewCardType, RequestNewCardType>({
       query: body => ({
         url: 'card',
@@ -39,6 +41,7 @@ export const cardsApi = createApi({
       }),
       invalidatesTags: [{ type: 'cards' }],
     }),
+
     updateCard: build.mutation<ResponseUpdateCardType, RequestUpdateCardType>({
       query: body => ({
         url: 'card',
@@ -73,6 +76,7 @@ type GetCardsResponseType = {
   token: string
   tokenDeathTime: number
 }
+
 export type GetCardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
@@ -82,7 +86,8 @@ export type GetCardsRequestType = {
   page?: string
   pageCount?: string
 }
-type CardType = {
+
+export type CardType = {
   answer: string
   cardsPack_id: string
   comments: string
@@ -100,9 +105,11 @@ type CardType = {
   __v: number
   _id: string
 }
+
 export type ResponseNewCardType = {
   newCard: CardType
 }
+
 export type RequestNewCardType = {
   card: {
     cardsPack_id: string
@@ -116,6 +123,7 @@ export type RequestNewCardType = {
     answerVideo?: string
   }
 }
+
 export type ResponseUpdateCardType = {
   updatedCard: CardType
 }

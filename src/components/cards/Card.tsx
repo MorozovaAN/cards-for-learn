@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 
 import Rating from '@mui/material/Rating'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import s from './Card.module.scss'
 
@@ -32,7 +33,9 @@ export const Card: FC<CardType> = ({
   userId,
 }) => {
   const myId = useTypedSelector(idSelector)
+  const [showAnswer, setShowAnswer] = useState(false)
   const dispatch = useTypedDispatch()
+  const myCards = userId === myId
 
   const editCardHandler = (type: ModalType) => {
     dispatch(setCardId(idCard))
@@ -47,23 +50,49 @@ export const Card: FC<CardType> = ({
     dispatch(setModal({ open: true, type }))
   }
 
+  const btnAnswerClickHandler = () => {
+    setShowAnswer(!showAnswer)
+  }
+
   return (
     <>
       <div className={s.container}>
-        <div>
+        <div className={s.question}>
           {questionImg ? (
             <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
           ) : (
             question
           )}
         </div>
-        <div>{answer}</div>
+
+        <div className={myCards ? s.answerContainerMyCards : s.answerContainer}>
+          <button className={s.answerButton} onClick={btnAnswerClickHandler}>
+            <p className={s.answerButtonText}>{showAnswer ? 'Hide answer ▴' : 'Show answer ▾'}</p>
+          </button>
+
+          <AnimatePresence>
+            {showAnswer && (
+              <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: 'auto' }}
+                exit={{ height: 0 }}
+                transition={{ duration: 0.3 }}
+                className={s.answer}
+              >
+                {answer}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
         <div>{updated}</div>
 
-        <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
+        <div>
+          <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
+        </div>
 
-        {myId === userId && (
-          <div className={s.icons}>
+        {myCards && (
+          <div className={s.actions}>
             <Button
               styleType="iconPrimary"
               className={s.btnEdit}

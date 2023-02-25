@@ -1,30 +1,25 @@
 import React, { useEffect } from 'react'
 
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Cards.module.scss'
 
-import { ModalType, setModal } from 'app/appSlice'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { formatDate } from 'common/utils/formatDate'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { Card } from 'components/cards/Card'
-import { NotFound } from 'components/notFound/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
-import { ResetAllFilters } from 'components/resetAllFilters/ResetAllFilters'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
+import { Buttons } from 'modules/cards/buttons/Buttons'
+import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
 import { packIdSelector } from 'modules/packs/packsSelectors'
-import { Button } from 'UI/button/Button'
 
 export const Cards = () => {
   const cardsPack_id = useTypedSelector(packIdSelector)
   const myId = useTypedSelector(idSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery({ cardsPack_id, ...paramsHelper(searchParams) })
-  const dispatch = useTypedDispatch()
 
   useEffect(() => {
     if (!searchParams.has('cardsPack_id')) {
@@ -32,58 +27,57 @@ export const Cards = () => {
     }
   }, [])
 
-  const openCardModalHandler = (type: ModalType) => {
-    dispatch(setModal({ open: true, type }))
-  }
-
   return (
     <>
-      {data && (
-        <div>
-          <div className={s.container}>
+      <div>
+        <div className={s.container}>
+          {data ? (
             <p className={s.name}>{data.packName}</p>
-
-            {data.packUserId === myId ? (
-              <Button onClick={() => openCardModalHandler('Add new card')} styleType="primary">
-                Add new card
-              </Button>
-            ) : (
-              <Button styleType="primary">Learn pack</Button>
-            )}
-          </div>
-
-          <div className={s.filters}>
-            <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
-            <ResetAllFilters disabled={isFetching} />
-          </div>
-
-          {data.cards.length ? (
-            data.cards.map(card => (
-              <Card
-                key={card._id}
-                idCard={card._id}
-                question={card.question}
-                grade={card.grade}
-                answer={card.answer}
-                updated={formatDate(card.updated)}
-                userId={card.user_id}
-                questionImg={card.questionImg}
-              />
-            ))
           ) : (
-            <NotFound />
+            <div className={s.skeletonNameContainer}>
+              <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
+            </div>
           )}
 
-          <div className={s.paginator}>
-            <Paginator
-              pageCount={data.pageCount}
-              totalCount={data.cardsTotalCount}
-              currentPage={data.page}
+          <div className={s.filters}>
+            <Buttons
+              myCards={data?.packUserId === myId}
+              packId={cardsPack_id}
+              packName={data?.packName ? data?.packName : ''}
+              privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
+              isFetching={!data?.cards}
             />
+
+            <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
           </div>
+
+          <CardsList
+            cards={data?.cards ? data.cards : null}
+            myCards={data?.packUserId === myId}
+            isFetching={isFetching}
+          />
+
+          {data ? (
+            <div className={s.paginator}>
+              <Paginator
+                pageCount={data.pageCount}
+                totalCount={data.cardsTotalCount}
+                currentPage={data.page}
+                disabled={isFetching}
+              />
+            </div>
+          ) : (
+            <div className={s.skeletonPaginationContainer}>
+              <Skeleton
+                classes={{ root: s.skeletonPagination }}
+                animation="wave"
+                variant="rectangular"
+              />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   )
 }
