@@ -5,9 +5,9 @@ import { useSearchParams } from 'react-router-dom'
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { uploadImage } from 'common/utils/uploadImage'
+import s from 'components/modal/add-new-card-modal/AddNewCardModal.module.scss'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
 import { Button } from 'UI/button/Button'
-import { Input } from 'UI/input/Input'
 
 export const AddCardModal = () => {
   const [addCard, { isLoading }] = useAddNewCardMutation()
@@ -24,14 +24,13 @@ export const AddCardModal = () => {
     await addCard({ card: { cardsPack_id: id ? id : '', question, answer, questionImg } })
     dispatch(setModal({ open: false, type: '' }))
   }
-  const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setQuestion(e.currentTarget.value)
-  const changeAnswerHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAnswer(e.currentTarget.value)
+  const changeQuestionHandler = (e: ChangeEvent<HTMLTextAreaElement>) => setQuestion(e.target.value)
 
-  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === 'Enter' && addCardHandler()
-  }
+  const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) => setAnswer(e.target.value)
+
+  // const onEnterHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  //   e.key === 'Enter' && addCardHandler()
+  // }
 
   const onSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     e.currentTarget.selectedIndex === 0 && setButton(false)
@@ -52,7 +51,7 @@ export const AddCardModal = () => {
       </select>
 
       {button ? (
-        <label>
+        <label className={s.label}>
           <input
             type="file"
             style={{ display: 'none' }}
@@ -60,31 +59,33 @@ export const AddCardModal = () => {
             ref={inputRef}
             accept=".jpg,.png,.svg,.jpeg"
           />
-          <Button styleType="primary" onClick={selectFileHandler}>
+          <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
             Upload image
           </Button>
         </label>
       ) : (
-        <Input
+        <textarea
           value={question}
           onChange={changeQuestionHandler}
-          type="text"
-          label="Question"
           autoFocus
-          onKeyUp={onEnterHandler}
+          // type="text"
+          // label="Question"
+          //onKeyUp={onEnterHandler}
         />
       )}
-      <Input
+      <textarea
         value={answer}
         onChange={changeAnswerHandler}
-        type="text"
-        label="Answer"
-        onKeyUp={onEnterHandler}
+        // type="text"
+        // label="Answer"
+        className={s.textarea}
+        //onKeyUp={onEnterHandler}
       />
 
       <Button
         disabled={(!question && !questionImg) || isLoading}
         styleType="primary"
+        className={s.button}
         onClick={addCardHandler}
       >
         Save

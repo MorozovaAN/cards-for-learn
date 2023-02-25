@@ -1,10 +1,9 @@
 import React, { KeyboardEvent, useState } from 'react'
 
-import s from './EditPackNameModal.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/modal/edit-pack-modal/EditPackNameModal.module.scss'
 import { useUpdatePackMutation } from 'modules/packs/packsApi'
 import {
   packIdSelector,

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 
-import s from './DeletePackModal.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/modal/delete-pack-modal/DeletePackModal.module.scss'
 import { useDeletePackMutation } from 'modules/packs/packsApi'
 import { packIdSelector, packNameSelector } from 'modules/packs/packsSelectors'
 import { Button } from 'UI/button/Button'

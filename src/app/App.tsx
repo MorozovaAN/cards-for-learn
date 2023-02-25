@@ -7,10 +7,10 @@ import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
 import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { BaseModal } from 'components/modal/BaseModal'
 import { Header, useMeMutation } from 'modules'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
-import { BaseModal } from 'UI/modal/BaseModal'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {

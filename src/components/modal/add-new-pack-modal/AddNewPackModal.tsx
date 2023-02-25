@@ -1,9 +1,8 @@
 import React, { KeyboardEvent, useState } from 'react'
 
-import s from './AddNewPackModal.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import s from 'components/modal/add-new-pack-modal/AddNewPackModal.module.scss'
 import { useAddPackMutation } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
