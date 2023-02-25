@@ -5,8 +5,6 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './Cards.module.scss'
 
-import { ModalType, setModal } from 'app/appSlice'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
@@ -22,19 +20,12 @@ export const Cards = () => {
   const myId = useTypedSelector(idSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery({ cardsPack_id, ...paramsHelper(searchParams) })
-  const dispatch = useTypedDispatch()
 
   useEffect(() => {
     if (!searchParams.has('cardsPack_id')) {
       setSearchParams({ cardsPack_id: `${cardsPack_id}` })
     }
   }, [])
-
-  const openCardModalHandler = (type: ModalType) => {
-    dispatch(setModal({ open: true, type }))
-  }
-
-  const learnPackHandler = () => {}
 
   return (
     <>
@@ -51,15 +42,21 @@ export const Cards = () => {
           <div className={s.filters}>
             <Buttons
               myCards={data?.packUserId === myId}
-              isFetching={isFetching}
-              addCardCallBack={openCardModalHandler}
-              lernCallBack={learnPackHandler}
+              packId={cardsPack_id}
+              packName={data?.packName ? data?.packName : ''}
+              privatePack={data?.packPrivate ? data?.packPrivate : false}
+              disabled={isFetching}
+              isFetching={!data?.cards}
             />
 
             <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
           </div>
 
-          <CardsList cards={data?.cards ? data.cards : null} isFetching={isFetching} />
+          <CardsList
+            cards={data?.cards ? data.cards : null}
+            myCards={data?.packUserId === myId}
+            isFetching={isFetching}
+          />
 
           {data ? (
             <div className={s.paginator}>

@@ -1,6 +1,6 @@
 @import 'src/common/style-mixins/mixins';
 
-.container {
+.cardsList {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -23,29 +23,39 @@
   border-radius: 10px
 }
 
-
-.question {
+.question, .answer, .actions, .answerMyCards, .grade, .gradeMyCards, .updated {
   width: 100%;
-  max-width: 200px;
 
   text-align: center;
+}
+
+.question {
+  max-width: 200px;
 }
 
 .answer {
-  width: 100%;
   max-width: 499px;
+}
 
-  text-align: center;
+.answerMyCards {
+  max-width: 377px;
 }
 
 .grade {
-  width: 120px;
+  max-width: 112px;
+}
 
-  text-align: center;
+.gradeMyCards {
+  max-width: 92px;
+
 }
 
 .updated {
-  width: 100px;
+  max-width: 100px;
+}
+
+.actions {
+  max-width: 125px;
 }
 
 .skeletonCardsContainer .skeletonCard {
