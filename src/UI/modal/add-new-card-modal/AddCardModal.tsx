@@ -17,9 +17,9 @@ export const AddCardModal = () => {
   const [questionImg, setQuestionImg] = useState('')
   const dispatch = useTypedDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const [searchParams, _] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('cardsPack_id')
+
   const addCardHandler = async () => {
     await addCard({ card: { cardsPack_id: id ? id : '', question, answer, questionImg } })
     dispatch(setModal({ open: false, type: '' }))
@@ -50,6 +50,7 @@ export const AddCardModal = () => {
         <option value="0">Text</option>
         <option value="1">Image</option>
       </select>
+
       {button ? (
         <label>
           <input
@@ -59,7 +60,7 @@ export const AddCardModal = () => {
             ref={inputRef}
             accept=".jpg,.png,.svg,.jpeg"
           />
-          <Button styleType={'primary'} onClick={selectFileHandler}>
+          <Button styleType="primary" onClick={selectFileHandler}>
             Upload image
           </Button>
         </label>
