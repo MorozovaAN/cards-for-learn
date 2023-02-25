@@ -57,7 +57,9 @@ export const Cards = () => {
             <ResetAllFilters disabled={isFetching} />
           </div>
 
-          {data.cards.length ? (
+          {!data.cards.length && searchParams.has('cardQuestion') ? (
+            <NotFound />
+          ) : (
             data.cards.map(card => (
               <Card
                 key={card._id}
@@ -70,8 +72,6 @@ export const Cards = () => {
                 questionImg={card.questionImg}
               />
             ))
-          ) : (
-            <NotFound />
           )}
 
           <div className={s.paginator}>
