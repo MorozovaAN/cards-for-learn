@@ -7,6 +7,7 @@ import s from './Cards.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
+import { NotFound } from 'components/notFound/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
@@ -52,11 +53,15 @@ export const Cards = () => {
             <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
           </div>
 
-          <CardsList
-            cards={data?.cards ? data.cards : null}
-            myCards={data?.packUserId === myId}
-            isFetching={isFetching}
-          />
+          {!data?.cards.length && searchParams.has('cardQuestion') ? (
+            <NotFound />
+          ) : (
+            <CardsList
+              cards={data?.cards ? data.cards : null}
+              myCards={data?.packUserId === myId}
+              isFetching={isFetching}
+            />
+          )}
 
           {data ? (
             <div className={s.paginator}>
