@@ -10,7 +10,7 @@ import { ReactComponent as EditLock } from 'assets/img/icons/lock.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
-import { setPackId, setPackInfo } from 'modules/packs/packsSlise'
+import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
@@ -19,9 +19,17 @@ type PackType = {
   cardsCount: number
   updated: string
   privatePack: boolean
+  user_id: string
 }
 
-export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, privatePack }) => {
+export const MyPack: FC<PackType> = ({
+  packId,
+  packName,
+  user_id,
+  cardsCount,
+  updated,
+  privatePack,
+}) => {
   const dispatch = useTypedDispatch()
   const navigate = useNavigate()
 
@@ -35,8 +43,7 @@ export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, pr
   }
 
   const viewCardsHandler = () => {
-    dispatch(setPackId(packId))
-    navigate('/cards')
+    navigate(`/cards?cardsPack_id=${packId}&user_id=${user_id}`)
   }
 
   return (

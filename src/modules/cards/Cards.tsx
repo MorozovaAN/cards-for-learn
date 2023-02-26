@@ -19,7 +19,6 @@ export const Cards = () => {
   const myId = useTypedSelector(idSelector)
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
-  const cardsPack_id = searchParams.get('cardsPack_id')
 
   return (
     <>
@@ -36,7 +35,7 @@ export const Cards = () => {
           <div className={s.filters}>
             <Buttons
               myCards={data?.packUserId === myId}
-              packId={cardsPack_id ? cardsPack_id : ''}
+              packId={searchParams.get('cardsPack_id') as string}
               packName={data?.packName ? data?.packName : ''}
               privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
