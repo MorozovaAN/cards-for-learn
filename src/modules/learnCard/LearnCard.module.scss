@@ -53,3 +53,18 @@
 
   opacity: 0.6;
 }
+.skeletonTitleContainer .skeletonLearn {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 24px;
+  
+}
+.skeletonSutTitleContainer .skeletonLearn {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 40px;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { NavLink, useSearchParams } from 'react-router-dom'
@@ -10,16 +10,6 @@ import { Answer } from './answer/Answer'
 import s from './LearnCard.module.scss'
 
 import { Button } from 'UI/button/Button'
-
-const skeletonTitleStyle = {
-  width: '300px',
-  height: '24x',
-}
-
-const skeletonSubtitleStyle = {
-  width: '300px',
-  height: '40px',
-}
 
 export const LearnCard = () => {
   const [searchParams] = useSearchParams()
@@ -65,14 +55,23 @@ export const LearnCard = () => {
         {data?.packName ? (
           `Learn pack '${data?.packName}'`
         ) : (
-          <Skeleton sx={skeletonTitleStyle} animation="wave" />
+          <div className={s.skeletonTitleContainer}>
+            <Skeleton classes={{ root: s.skeletonLearn }} animation="wave" variant="rectangular" />
+          </div>
         )}
       </h2>
+
       <div className={s.cardContainer}>
         <h3 className={s.subtitle}>
           Question:
           {isLoading ? (
-            <Skeleton sx={skeletonSubtitleStyle} animation="wave" />
+            <div className={s.skeletonSutTitleContainer}>
+              <Skeleton
+                classes={{ root: s.skeletonLearn }}
+                animation="wave"
+                variant="rectangular"
+              />
+            </div>
           ) : (
             <span className={s.text}>
               {card.questionImg ? <img alt="questionImg" src={card.questionImg} /> : card.question}
