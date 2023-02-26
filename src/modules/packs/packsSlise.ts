@@ -14,9 +14,7 @@ const packsSlice = createSlice({
     setShowButton: (state, action: PayloadAction<boolean>) => {
       state.isShowButtonScroll = action.payload
     },
-    setPackId: (state, action: PayloadAction<string>) => {
-      state.packId = action.payload
-    },
+
     setPackInfo: (
       state,
       action: PayloadAction<{ packId: string; packName: string; privatePack: boolean }>
@@ -28,5 +26,5 @@ const packsSlice = createSlice({
   },
 })
 
-export const { setShowButton, setPackId, setPackInfo } = packsSlice.actions
+export const { setShowButton, setPackInfo } = packsSlice.actions
 export const packsReducer = packsSlice.reducer
