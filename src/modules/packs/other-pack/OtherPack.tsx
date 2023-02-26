@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/other-pack/OtherPack.module.scss'
-import { setPackId } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type PackType = {
