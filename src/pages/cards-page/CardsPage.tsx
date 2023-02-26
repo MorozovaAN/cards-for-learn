@@ -1,15 +1,21 @@
 import React from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import { Cards } from 'modules/cards/Cards'
-import { PATH } from 'routes/routes'
-import { NavLink } from 'UI/nav-link/NavLink'
 
 export const CardsPage = () => {
+  const navigate = useNavigate()
+
   return (
     <div>
-      <NavLink url={PATH.PACKS}>
-        <p>&lArr; Back to Packs List</p>
-      </NavLink>
+      {/*<NavLink url={PATH.PACKS}>*/}
+      {/*  <p>&lArr; Back to Packs List</p>*/}
+      {/*</NavLink>*/}
+
+      <div onClick={() => navigate(-1)}>
+        <p>&lArr; Back to Pack List</p>
+      </div>
 
       <Cards />
     </div>
