@@ -72,8 +72,8 @@ export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
 
       <CustomSelect value={sortValue} onChange={selectOnChangeHandler} disabled={disabled}>
         <CustomOptionGroup label="Sort by pack name">
-          <StyledOption value={sortingPacksMethods.desName}>from A to Z</StyledOption>
-          <StyledOption value={sortingPacksMethods.ascName}>from Z to A</StyledOption>
+          <StyledOption value={sortingPacksMethods.ascName}>from A to Z</StyledOption>
+          <StyledOption value={sortingPacksMethods.desName}>from Z to A</StyledOption>
         </CustomOptionGroup>
 
         <CustomOptionGroup label="Sort by cards count">
@@ -92,8 +92,8 @@ export const SortPacks: FC<SortPacksType> = ({ disabled }) => {
 
         {!userId && (
           <CustomOptionGroup label="Sort by creator name">
-            <StyledOption value={sortingPacksMethods.desUserName}>from A to Z</StyledOption>
-            <StyledOption value={sortingPacksMethods.ascUserName}>from Z to A</StyledOption>
+            <StyledOption value={sortingPacksMethods.ascUserName}>from A to Z</StyledOption>
+            <StyledOption value={sortingPacksMethods.desUserName}>from Z to A</StyledOption>
           </CustomOptionGroup>
         )}
       </CustomSelect>
