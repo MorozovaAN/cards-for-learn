@@ -51,7 +51,7 @@ export const UpdateCardModal = () => {
         onKeyUp={onEnterHandler}
       />
       <Button onClick={editCardHandler} disabled={!questionValue || isLoading} styleType="primary">
-        Edit
+        Save
       </Button>
     </>
   )
