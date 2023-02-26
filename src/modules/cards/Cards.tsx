@@ -24,7 +24,7 @@ export const Cards = () => {
 
   useEffect(() => {
     if (!searchParams.has('cardsPack_id')) {
-      setSearchParams({ cardsPack_id: `${cardsPack_id}` })
+      setSearchParams({ cardsPack_id })
     }
   }, [])
 

@@ -39,7 +39,13 @@ export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, pr
 
   return (
     <div className={s.pack}>
-      <p className={s.name}>{packName}</p>
+      {packName.length > 15 ? (
+        <div className={s.tooltip} data-tooltip={packName}>
+          <p className={s.name}>{packName}</p>
+        </div>
+      ) : (
+        <p className={s.name}>{packName}</p>
+      )}
 
       {privatePack && (
         <div className={s.tooltip} data-tooltip="This pack is private">
