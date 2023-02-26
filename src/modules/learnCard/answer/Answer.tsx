@@ -38,13 +38,24 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
       </h3>
 
       <div>
-        <FormControl>
+        <FormControl
+          sx={{
+            '.css-u4tvz2-MuiFormLabel-root': {
+              color: '#017C6EFF',
+            },
+          }}
+        >
           <FormLabel id="controlled-radio-buttons-group">Rate yourself:</FormLabel>
           <RadioGroup
             aria-labelledby="controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
             value={value}
             onChange={handleChange}
+            sx={{
+              '.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+                color: '#017C6EFF',
+              },
+            }}
           >
             <FormControlLabel value="1" control={<Radio />} label="Did not know" />
             <FormControlLabel value="2" control={<Radio />} label="Forgot" />
