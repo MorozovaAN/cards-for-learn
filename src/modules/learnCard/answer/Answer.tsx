@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 
@@ -38,14 +37,7 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
       </h3>
 
       <div>
-        <FormControl
-          sx={{
-            '.css-u4tvz2-MuiFormLabel-root': {
-              color: '#017C6EFF',
-            },
-          }}
-        >
-          <FormLabel id="controlled-radio-buttons-group">Rate yourself:</FormLabel>
+        <FormControl>
           <RadioGroup
             aria-labelledby="controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
