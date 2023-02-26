@@ -63,7 +63,6 @@ export const LearnCard = () => {
 
       <div className={s.cardContainer}>
         <h3 className={s.subtitle}>
-          Question:
           {isLoading ? (
             <div className={s.skeletonSutTitleContainer}>
               <Skeleton
@@ -74,6 +73,7 @@ export const LearnCard = () => {
             </div>
           ) : (
             <span className={s.text}>
+              Question:
               {card.questionImg ? <img alt="questionImg" src={card.questionImg} /> : card.question}
             </span>
           )}
