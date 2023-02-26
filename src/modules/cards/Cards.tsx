@@ -17,16 +17,9 @@ import { useGetCardsQuery } from 'modules/cards/cardsApi'
 import { packIdSelector } from 'modules/packs/packsSelectors'
 
 export const Cards = () => {
-  const cardsPack_id = useTypedSelector(packIdSelector)
   const myId = useTypedSelector(idSelector)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const { data, isFetching } = useGetCardsQuery({ cardsPack_id, ...paramsHelper(searchParams) })
-
-  useEffect(() => {
-    if (!searchParams.has('cardsPack_id')) {
-      setSearchParams({ cardsPack_id })
-    }
-  }, [])
+  const [searchParams] = useSearchParams()
+  const { data, isFetching } = useGetCardsQuery({ ...paramsHelper(searchParams) })
 
   return (
     <>
@@ -43,7 +36,7 @@ export const Cards = () => {
           <div className={s.filters}>
             <Buttons
               myCards={data?.packUserId === myId}
-              packId={cardsPack_id}
+              packId={searchParams.get('cardsPack_id') as string}
               packName={data?.packName ? data?.packName : ''}
               privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
