@@ -19,13 +19,11 @@ type PackType = {
 
 export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, updated }) => {
   const navigate = useNavigate()
-  const dispatch = useTypedDispatch()
 
   const learnPackHandler = () => {}
 
   const viewCardsHandler = () => {
-    dispatch(setPackId(packId))
-    navigate('/cards')
+    navigate(`/cards?cardsPack_id=${packId}`)
   }
 
   return (
