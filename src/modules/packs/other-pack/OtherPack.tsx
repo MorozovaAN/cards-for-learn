@@ -18,7 +18,9 @@ type PackType = {
 export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, updated }) => {
   const navigate = useNavigate()
 
-  const learnPackHandler = () => {}
+  const learnPackHandler = () => {
+    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
+  }
 
   const viewCardsHandler = () => {
     navigate(`/cards?cardsPack_id=${packId}`)

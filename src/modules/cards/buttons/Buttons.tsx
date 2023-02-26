@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
+import { useNavigate } from 'react-router-dom'
 
 import s from './Buttons.module.scss'
 
@@ -20,6 +21,7 @@ type ButtonsType = {
   isFetching: boolean
   disabled: boolean
   privatePack: boolean
+  cardsCount: number
 }
 
 export const Buttons: FC<ButtonsType> = ({
@@ -29,8 +31,10 @@ export const Buttons: FC<ButtonsType> = ({
   privatePack,
   isFetching,
   disabled,
+  cardsCount,
 }) => {
   const dispatch = useTypedDispatch()
+  const navigate = useNavigate()
   const skeletons = [1, 2, 3, 4]
 
   const openModalHandler = (type: ModalType) => {
@@ -38,7 +42,9 @@ export const Buttons: FC<ButtonsType> = ({
     dispatch(setModal({ open: true, type }))
   }
 
-  const learnCardHandler = () => {}
+  const learnCardHandler = () => {
+    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
+  }
 
   const myCardsList = isFetching ? (
     skeletons.map(el => (
