@@ -1,4 +1,6 @@
-import React, { KeyboardEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
+
+import s from './UpdateCardModule.module.scss'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -6,7 +8,7 @@ import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import { answerSelector, cardIdSelector, questionSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
-import { Input } from 'UI/input/Input'
+import { Textarea } from 'UI/textarea/Textarea'
 
 export const UpdateCardModal = () => {
   const cardId = useTypedSelector(cardIdSelector)
@@ -23,34 +25,25 @@ export const UpdateCardModal = () => {
     dispatch(setModal({ open: false, type: '' }))
   }
 
-  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === 'Enter' && editCardHandler()
-  }
-
-  const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeQuestionHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setQuestionValue(e.currentTarget.value)
-  const changeAnswerHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+
+  const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setAnswerValue(e.currentTarget.value)
 
   return (
     <>
-      <Input
-        autoFocus
-        value={questionValue}
-        onChange={changeQuestionHandler}
-        onKeyUp={onEnterHandler}
-        type="text"
-        label="Question"
-        error={!questionValue.length && 'write your question'}
-      />
-      <Input
-        value={answerValue}
-        onChange={changeAnswerHandler}
-        type="text"
-        label="Answer"
-        onKeyUp={onEnterHandler}
-      />
-      <Button onClick={editCardHandler} disabled={!questionValue || isLoading} styleType="primary">
+      <Textarea autoFocus value={questionValue} onChange={changeQuestionHandler} label="Question" />
+      {/*  error={!questionValue.length && 'write your question'}*/}
+
+      <Textarea autoFocus value={answerValue} onChange={changeAnswerHandler} label="Answer" />
+
+      <Button
+        className={s.button}
+        onClick={editCardHandler}
+        disabled={!questionValue || isLoading}
+        styleType="primary"
+      >
         Save
       </Button>
     </>
