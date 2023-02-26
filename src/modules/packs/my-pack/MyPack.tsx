@@ -30,7 +30,9 @@ export const MyPack: FC<PackType> = ({ packId, packName, cardsCount, updated, pr
     dispatch(setModal({ open: true, type }))
   }
 
-  const learnPackHandler = () => {}
+  const learnPackHandler = () => {
+    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
+  }
 
   const viewCardsHandler = () => {
     dispatch(setPackId(packId))
