@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
@@ -14,12 +14,11 @@ import { idSelector } from 'modules/auth/authSelectors'
 import { Buttons } from 'modules/cards/buttons/Buttons'
 import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
-import { packIdSelector } from 'modules/packs/packsSelectors'
 
 export const Cards = () => {
   const myId = useTypedSelector(idSelector)
   const [searchParams] = useSearchParams()
-  const { data, isFetching } = useGetCardsQuery({ ...paramsHelper(searchParams) })
+  const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
 
   return (
     <>
@@ -41,6 +40,7 @@ export const Cards = () => {
               privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
               isFetching={!data?.cards}
+              cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
             />
 
             <Search disabled={isFetching} selector="Cards" param="cardQuestion" />

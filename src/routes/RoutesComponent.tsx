@@ -3,6 +3,8 @@ import React from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
+import { LearnCard } from '../modules/learnCard/LearnCard'
+
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
@@ -26,7 +28,7 @@ export const RoutesComponent = () => {
           <Route path={PATH.PROFILE} element={<ProfilePage />} />
           <Route path={PATH.PACKS} element={<PacksPage />} />
           <Route path={PATH.CARDS} element={<CardsPage />} />
-          {/*<Route path={PATH.CARD} element={<LearnCard />} />*/}
+          <Route path={PATH.CARD} element={<LearnCard />} />
         </Route>
 
         <Route path={PATH.MAIN} element={<Navigate to={PATH.LOG_IN} />} />

@@ -50,6 +50,14 @@ export const cardsApi = createApi({
       }),
       invalidatesTags: [{ type: 'cards' }],
     }),
+
+    updateCardGrade: build.mutation<ResponseUpdateCardGrade, RequestUpdateCardGrade>({
+      query: body => ({
+        url: 'grade',
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -58,6 +66,7 @@ export const {
   useAddNewCardMutation,
   useUpdateCardMutation,
   useDeleteCardMutation,
+  useUpdateCardGradeMutation,
 } = cardsApi
 
 //types
@@ -134,4 +143,18 @@ export type RequestUpdateCardType = {
     question: string
     answer: string
   }
+}
+export type ResponseUpdateCardGrade = {
+  updatedGrade: {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+  }
+}
+export type RequestUpdateCardGrade = {
+  grade: number
+  card_id: string
 }
