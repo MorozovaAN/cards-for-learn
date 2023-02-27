@@ -35,7 +35,7 @@ export const EditCardModal = () => {
         autoFocus
         value={questionValue}
         onChange={changeQuestionHandler}
-        error={!questionValue.length ? 'Write your question' : ''}
+        error={!questionValue.length ? 'Please, write your question' : ''}
         label="Question"
       />
 
@@ -43,7 +43,7 @@ export const EditCardModal = () => {
         autoFocus
         value={answerValue}
         onChange={changeAnswerHandler}
-        error={!answerValue.length ? 'Write your answer' : ''}
+        error={!answerValue.length ? 'Please, write your answer' : ''}
         label="Answer"
       />
 

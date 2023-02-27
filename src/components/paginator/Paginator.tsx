@@ -51,7 +51,7 @@ export const Paginator: FC<PaginationPropsType> = ({
             columnGap: '10px',
           },
           '.css-w05zow-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected': {
-            backgroundColor: '#017C6EFF',
+            backgroundColor: '#017c6e',
             color: '#ffffff',
             pointerEvents: 'none',
           },

@@ -33,7 +33,7 @@ export const AddNewPackModal = () => {
         onKeyUp={onEnterHandler}
         type="text"
         label="Name of the new pack"
-        placeholder="write name of the new pack"
+        placeholder="Please, write name of the new pack"
         disabled={isLoading}
         error={error && 'Sorry, max pack name length 50 symbols or less'}
       />

@@ -5,11 +5,11 @@ import selectUnstyledClasses from '@mui/base/SelectUnstyled/selectUnstyledClasse
 import { styled } from '@mui/system'
 
 export const StyledButton = styled('button')(
-  width => `
+  () => `
   font-size: 16px;
   box-sizing: border-box;
   height: 36px;
-  width: width;
+  width: 72px;
   padding: 12px;
   border-radius: 10px;
   border:none;
@@ -48,7 +48,7 @@ export const StyledListbox = styled('ul')(
   box-sizing: border-box;
   padding: 6px 0;
   margin: 12px 0;
-  width: 60px;
+  width: 72px;
   border-radius: 10px;
   overflow: auto;
   outline: 0px;
