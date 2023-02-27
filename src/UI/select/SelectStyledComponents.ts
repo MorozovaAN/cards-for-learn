@@ -5,11 +5,11 @@ import selectUnstyledClasses from '@mui/base/SelectUnstyled/selectUnstyledClasse
 import { styled } from '@mui/system'
 
 export const StyledButton = styled('button')(
-  () => `
+  width => `
   font-size: 16px;
   box-sizing: border-box;
   height: 36px;
-  width: 60px;
+  width: width;
   padding: 12px;
   border-radius: 10px;
   border:none;
@@ -19,7 +19,7 @@ export const StyledButton = styled('button')(
   background: var(--color-background-dark-400);
   color: var(--color-on-primary-light-400);
 
- &:hover, &:focus {
+  &:hover, &:focus {
     box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
   }
 
@@ -69,7 +69,7 @@ export const StyledOption = styled(OptionUnstyled)(
     border-bottom: none;
   }
   
- &:hover {
+  &:hover {
     background-color: var(--color-background-dark-500);
   }
 

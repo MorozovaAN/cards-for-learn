@@ -5,10 +5,13 @@ import { useLocation } from 'react-router-dom'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
+import { setModal } from 'app/appSlice'
 import { isPrivatePage } from 'app/utils/isPrivatePage'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { BaseModal } from 'components/modal/BaseModal'
 import { Header, useMeMutation } from 'modules'
+import { setClickAway } from 'modules/auth/authSlice'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
@@ -16,6 +19,7 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 export const App = () => {
   const [me] = useMeMutation()
   let location = useLocation()
+  const dispatch = useTypedDispatch()
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
@@ -30,6 +34,11 @@ export const App = () => {
       me()
     }
   }, [])
+
+  useEffect(() => {
+    dispatch(setModal({ open: false, type: '' }))
+    dispatch(setClickAway(true))
+  }, [location])
 
   return isAuth ? (
     <div className={appClasses}>

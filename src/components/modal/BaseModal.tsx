@@ -40,9 +40,14 @@ export const BaseModal = () => {
       document.body.style.overflow = ''
       if (root) root.style.filter = ''
     }
-
-    return () => document.removeEventListener('keyup', closeModalOnEscape)
   }, [open])
+
+  useEffect(() => {
+    return () => {
+      document.removeEventListener('keyup', closeModalOnEscape)
+      dispatch(setModal({ type: '', open: false }))
+    }
+  }, [])
 
   const closeModal = () => {
     dispatch(setModal({ type: '', open: false }))

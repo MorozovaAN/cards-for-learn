@@ -1,3 +1,18 @@
+@import 'src/common/style-mixins/mixins';
+
+.selectContainer {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.selectTitle {
+
+  @include subtitle(600);
+
+  color: var(--color-on-primary-light-400);
+}
+
 .label, .button {
   width: 100%;
 }

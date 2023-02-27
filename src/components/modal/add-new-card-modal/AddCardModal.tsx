@@ -8,6 +8,7 @@ import { uploadImage } from 'common/utils/uploadImage'
 import s from 'components/modal/add-new-card-modal/AddNewCardModal.module.scss'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
 import { Button } from 'UI/button/Button'
+import { Select } from 'UI/select/Select'
 import { Textarea } from 'UI/textarea/Textarea'
 
 export const AddCardModal = () => {
@@ -16,6 +17,7 @@ export const AddCardModal = () => {
   const [answer, setAnswer] = useState('')
   const [button, setButton] = useState(false)
   const [questionImg, setQuestionImg] = useState('')
+  const [selectValue, setSelectValue] = useState('Text')
   const dispatch = useTypedDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
   const [searchParams] = useSearchParams()
@@ -30,23 +32,32 @@ export const AddCardModal = () => {
 
   const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) => setAnswer(e.target.value)
 
-  const onSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    e.currentTarget.selectedIndex === 0 && setButton(false)
-    e.currentTarget.selectedIndex === 1 && setButton(true)
+  const onSelectChangeHandler = (value: string) => {
+    setSelectValue(value)
+    value === 'Text' && setButton(false)
+    value === 'Image' && setButton(true)
   }
+
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     uploadImage(e, dispatch, setQuestionImg)
   }
+
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
 
   return (
     <>
-      <select onChange={onSelectChangeHandler}>
-        <option value="0">Text</option>
-        <option value="1">Image</option>
-      </select>
+      <div className={s.selectContainer}>
+        <p className={s.selectTitle}>Choose a question format:</p>
+
+        <Select
+          value={selectValue}
+          onChangeCallback={onSelectChangeHandler}
+          options={['Text', 'Image']}
+          disabled={isLoading}
+        />
+      </div>
 
       {button ? (
         <label className={s.label}>
@@ -57,6 +68,7 @@ export const AddCardModal = () => {
             ref={inputRef}
             accept=".jpg,.png,.svg,.jpeg"
           />
+
           <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
             Upload image
           </Button>
