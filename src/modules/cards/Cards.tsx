@@ -20,6 +20,8 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
 
+  console.log('cards')
+
   return (
     <>
       <div>

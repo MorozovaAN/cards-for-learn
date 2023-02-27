@@ -25,6 +25,7 @@ export const App = () => {
   }`
   const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
 
+  console.log(window.history)
   useEffect(() => {
     if (!isAuth) {
       me()

@@ -14,6 +14,7 @@ import { Button } from 'UI/button/Button'
 export const LearnCard = () => {
   const navigate = useNavigate()
 
+  console.log('Learn')
   const [searchParams] = useSearchParams()
   const { data, isLoading } = useGetCardsQuery(paramsHelper(searchParams))
   const id = searchParams.get('cardsPack_id')
@@ -53,10 +54,6 @@ export const LearnCard = () => {
       {/*>*/}
       {/*  <p>&lArr; Back to Pack List</p>*/}
       {/*</NavLink>*/}
-
-      <div onClick={() => navigate(-1)} className={`${s.link} ${isLoading ? s.linkDisabled : ''}`}>
-        <p>&lArr; Back to Pack List</p>
-      </div>
 
       <h2 className={s.title}>
         {data?.packName ? (

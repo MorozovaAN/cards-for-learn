@@ -7,6 +7,8 @@ import { Cards } from 'modules/cards/Cards'
 export const CardsPage = () => {
   const navigate = useNavigate()
 
+  console.log('cards page')
+
   return (
     <div>
       {/*<NavLink url={PATH.PACKS}>*/}
