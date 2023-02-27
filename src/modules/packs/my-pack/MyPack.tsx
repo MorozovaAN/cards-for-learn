@@ -77,7 +77,7 @@ export const MyPack: FC<PackType> = ({
           styleType="iconPrimary"
           onClick={viewCardsHandler}
           className={s.cardsTooltip}
-          data-tooltip={'Pack cards'}
+          data-tooltip={'View pack cards'}
         >
           <CardsIcon />
         </Button>
@@ -95,7 +95,7 @@ export const MyPack: FC<PackType> = ({
           styleType="iconPrimary"
           onClick={() => openPackModalHandler('Edit pack name')}
           className={s.editTooltip}
-          data-tooltip={'Edit pack'}
+          data-tooltip={'Edit pack name'}
         >
           <EditIcon width="18" fill="#fff" />
         </Button>

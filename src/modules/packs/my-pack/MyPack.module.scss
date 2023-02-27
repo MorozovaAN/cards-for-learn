@@ -102,20 +102,28 @@
 
 .learnTooltip {
 
-@include btnMixin(62px, 134px)
+  @include btnMixin(62px, 134px)
 }
+
 .editTooltip {
 
-  @include btnMixin(62px, 206px)
+  @include btnMixin(62px, 206px);
+
+  white-space: nowrap;
 }
+
 .deleteTooltip {
 
-  @include btnMixin(62px, 278px)
+  @include btnMixin(62px, 278px);
+
+  white-space: nowrap;
 }
+
 .cardsTooltip {
 
   @include btnMixin(62px, 62px)
 }
+
 .subtitle {
 
   @include subtitle(500);
