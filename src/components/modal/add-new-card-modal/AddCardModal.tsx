@@ -48,34 +48,36 @@ export const AddCardModal = () => {
 
   return (
     <>
-      <div className={s.selectContainer}>
-        <p className={s.selectTitle}>Choose a question format:</p>
+      <div className={s.questionContainer}>
+        <div className={s.selectContainer}>
+          <p className={s.selectTitle}>Question format:</p>
 
-        <Select
-          value={selectValue}
-          onChangeCallback={onSelectChangeHandler}
-          options={['Text', 'Image']}
-          disabled={isLoading}
-        />
-      </div>
-
-      {button ? (
-        <label className={s.label}>
-          <input
-            type="file"
-            style={{ display: 'none' }}
-            onChange={uploadHandler}
-            ref={inputRef}
-            accept=".jpg,.png,.svg,.jpeg"
+          <Select
+            value={selectValue}
+            onChangeCallback={onSelectChangeHandler}
+            options={['Text', 'Image']}
+            disabled={isLoading}
           />
+        </div>
 
-          <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
-            Upload image
-          </Button>
-        </label>
-      ) : (
-        <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
-      )}
+        {button ? (
+          <label className={s.label}>
+            <input
+              type="file"
+              style={{ display: 'none' }}
+              onChange={uploadHandler}
+              ref={inputRef}
+              accept=".jpg,.png,.svg,.jpeg"
+            />
+
+            <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
+              Upload image
+            </Button>
+          </label>
+        ) : (
+          <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
+        )}
+      </div>
 
       <Textarea value={answer} onChange={changeAnswerHandler} label="Answer" />
 
