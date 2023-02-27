@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
 
+import { skeletonsSelector } from 'app/appSelectors'
 import { setModal } from 'app/appSlice'
 import { ReactComponent as Plus } from 'assets/img/plus.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -24,11 +25,11 @@ type PacksType = {
 export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const [searchParams] = useSearchParams()
   const myId = useTypedSelector(idSelector)
+  const skeletons = useTypedSelector(skeletonsSelector)
   const myPacksPage = searchParams.has('user_id')
   const packs = myPacksPage
     ? responsePacks
     : responsePacks?.filter((p: PackType) => p.user_id !== myId)
-  const skeletons = [1, 2, 3, 4, 5, 6]
   const dispatch = useTypedDispatch()
 
   const addPackHandler = () => {

@@ -6,6 +6,8 @@ import { CardType } from '../cardsApi'
 
 import s from './CardsList.module.scss'
 
+import { skeletonsSelector } from 'app/appSelectors'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { Card } from 'components/cards/Card'
 
@@ -16,7 +18,7 @@ type CardsListType = {
 }
 
 export const CardsList: FC<CardsListType> = ({ cards, myCards, isFetching }) => {
-  const skeletons = [1, 2, 3, 4, 5, 6]
+  const skeletons = useTypedSelector(skeletonsSelector)
 
   return (
     <div className={s.cardsList}>

@@ -19,13 +19,13 @@ import { Button } from 'UI/button/Button'
 
 export const PacksList = () => {
   const [searchParams] = useSearchParams()
-  const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
+  const { data, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
   const showButton = useTypedSelector(showButtonScrollSelector)
 
   return (
     <div>
       <div className={s.filters}>
-        {responsePacks ? (
+        {data ? (
           <Search selector="Packs" param="packName" disabled={isFetching} />
         ) : (
           <div className={s.skeletonSearchContainer}>
@@ -33,7 +33,7 @@ export const PacksList = () => {
           </div>
         )}
 
-        {responsePacks ? (
+        {data ? (
           <MyOtherButtons disabled={isFetching} />
         ) : (
           <div className={s.skeletonButtonsContainer}>
@@ -45,7 +45,7 @@ export const PacksList = () => {
           </div>
         )}
 
-        {responsePacks ? (
+        {data ? (
           <SortPacks disabled={isFetching} />
         ) : (
           <div className={s.skeletonSortPacksContainer}>
@@ -57,7 +57,7 @@ export const PacksList = () => {
           </div>
         )}
 
-        {responsePacks ? (
+        {data ? (
           <ResetAllFilters disabled={isFetching} />
         ) : (
           <div className={s.skeletonResetFiltersContainer}>
@@ -70,16 +70,13 @@ export const PacksList = () => {
         )}
       </div>
 
-      <Packs
-        responsePacks={responsePacks ? responsePacks.cardPacks : null}
-        isFetching={isFetching}
-      />
+      <Packs responsePacks={data ? data.cardPacks : null} isFetching={isFetching} />
 
-      {responsePacks ? (
+      {data ? (
         <Paginator
-          pageCount={responsePacks.pageCount}
-          totalCount={responsePacks.cardPacksTotalCount}
-          currentPage={responsePacks.page}
+          pageCount={data.pageCount}
+          totalCount={data.cardPacksTotalCount}
+          currentPage={data.page}
           disabled={isFetching}
         />
       ) : (

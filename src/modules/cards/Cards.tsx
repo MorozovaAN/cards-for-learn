@@ -16,9 +16,9 @@ import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
 
 export const Cards = () => {
-  const myId = useTypedSelector(idSelector)
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
+  const myId = useTypedSelector(idSelector)
 
   return (
     <>

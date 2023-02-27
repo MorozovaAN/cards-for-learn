@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
-import { setModal } from 'app/appSlice'
+import { setModal, setSkeletonsNumbers } from 'app/appSlice'
 import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -38,6 +38,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(setModal({ open: false, type: '' }))
     dispatch(setClickAway(true))
+    dispatch(setSkeletonsNumbers('6'))
   }, [location])
 
   return isAuth ? (

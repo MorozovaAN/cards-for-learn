@@ -1,10 +1,12 @@
 import { ChangeEvent, FC } from 'react'
 
 import Pagination from '@mui/material/Pagination'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 
 import s from './Paginator.module.scss'
 
+import { setSkeletonsNumbers } from 'app/appSlice'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Select } from 'UI/select/Select'
 
@@ -22,14 +24,21 @@ export const Paginator: FC<PaginationPropsType> = ({
   disabled,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useTypedDispatch()
+  let location = useLocation()
   const pages = Math.ceil(totalCount / pageCount)
   const selectOptions = ['6', '9', '12', '15']
+  const selectValue =
+    searchParams.has('user_id') && !location.pathname.includes('cards')
+      ? (pageCount + 1).toString()
+      : pageCount.toString()
 
   const changePageHandler = (event: ChangeEvent<unknown>, page: number) => {
     setSearchParams({ ...paramsHelper(searchParams), page: page.toString() })
   }
 
   const changeNumberPacksPerPageHandler = (value: string) => {
+    dispatch(setSkeletonsNumbers(value))
     searchParams.has('page') && searchParams.delete('page')
     setSearchParams({
       ...paramsHelper(searchParams),
@@ -61,7 +70,7 @@ export const Paginator: FC<PaginationPropsType> = ({
       <p className={s.showPerPage}>Show</p>
 
       <Select
-        value={searchParams.has('user_id') ? (pageCount + 1).toString() : pageCount.toString()}
+        value={selectValue}
         onChangeCallback={changeNumberPacksPerPageHandler}
         options={selectOptions}
         disabled={disabled}
