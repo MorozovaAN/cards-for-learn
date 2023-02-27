@@ -1,24 +1,22 @@
 import React, { ChangeEvent, useState } from 'react'
 
-import s from './UpdateCardModule.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/modal/edit-card-modal/EditCardModule.module.scss'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import { answerSelector, cardIdSelector, questionSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
 import { Textarea } from 'UI/textarea/Textarea'
 
-export const UpdateCardModal = () => {
+export const EditCardModal = () => {
+  const [updateCard, { isLoading }] = useUpdateCardMutation()
   const cardId = useTypedSelector(cardIdSelector)
   const question = useTypedSelector(questionSelector)
   const answer = useTypedSelector(answerSelector)
-  const [updateCard, { isLoading }] = useUpdateCardMutation()
+  const [questionValue, setQuestionValue] = useState(question)
+  const [answerValue, setAnswerValue] = useState(answer)
   const dispatch = useTypedDispatch()
-
-  const [questionValue, setQuestionValue] = useState<string>(question)
-  const [answerValue, setAnswerValue] = useState<string>(answer)
 
   const editCardHandler = async () => {
     await updateCard({ card: { _id: cardId, question: questionValue, answer: answerValue } })
@@ -33,15 +31,26 @@ export const UpdateCardModal = () => {
 
   return (
     <>
-      <Textarea autoFocus value={questionValue} onChange={changeQuestionHandler} label="Question" />
-      {/*  error={!questionValue.length && 'write your question'}*/}
+      <Textarea
+        autoFocus
+        value={questionValue}
+        onChange={changeQuestionHandler}
+        error={!questionValue.length ? 'Write your question' : ''}
+        label="Question"
+      />
 
-      <Textarea autoFocus value={answerValue} onChange={changeAnswerHandler} label="Answer" />
+      <Textarea
+        autoFocus
+        value={answerValue}
+        onChange={changeAnswerHandler}
+        error={!answerValue.length ? 'Write your answer' : ''}
+        label="Answer"
+      />
 
       <Button
         className={s.button}
         onClick={editCardHandler}
-        disabled={!questionValue || isLoading}
+        disabled={!questionValue || !answerValue || isLoading}
         styleType="primary"
       >
         Save

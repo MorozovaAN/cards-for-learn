@@ -13,7 +13,7 @@ import { AddNewPackModal } from 'components/modal/add-new-pack-modal/AddNewPackM
 import s from 'components/modal/BaseModal.module.scss'
 import { DeleteCardModal } from 'components/modal/delete-card-modal/DeleteCardModal'
 import { DeletePackModal } from 'components/modal/delete-pack-modal/DeletePackModal'
-import { UpdateCardModal } from 'components/modal/edit-card-modal/UpdateCardModal'
+import { EditCardModal } from 'components/modal/edit-card-modal/EditCardModal'
 import { EditPackNameModal } from 'components/modal/edit-pack-modal/EditPackNameModal'
 import { Box } from 'UI/box/Box'
 
@@ -65,7 +65,7 @@ export const BaseModal = () => {
             {type === 'Delete Pack' && <DeletePackModal />}
 
             {type === 'Add new card' && <AddCardModal />}
-            {type === 'Edit card name' && <UpdateCardModal />}
+            {type === 'Edit card name' && <EditCardModal />}
             {type === 'Delete Card' && <DeleteCardModal />}
           </Box>
         </div>
