@@ -65,6 +65,7 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
                   cardsCount={p.cardsCount}
                   updated={dateUpdate}
                   privatePack={p.private}
+                  user_id={p.user_id}
                 />
               ) : (
                 <OtherPack
