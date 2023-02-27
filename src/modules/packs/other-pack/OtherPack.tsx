@@ -28,7 +28,13 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
 
   return (
     <div className={s.pack}>
-      <p className={s.name}>{packName}</p>
+      {packName.length > 28 ? (
+        <div className={s.tooltip} data-tooltip={packName}>
+          <p className={s.name}>{packName}</p>
+        </div>
+      ) : (
+        <p className={s.name}>{packName}</p>
+      )}
 
       <p>
         <span className={s.subtitle}>Cards in pack: </span>

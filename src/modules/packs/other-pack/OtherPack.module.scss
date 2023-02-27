@@ -6,6 +6,8 @@
 
   @include boxBorder;
 
+  position: relative;
+
   display: grid;
   grid-template-rows: 24px repeat(3, 20px) 36px;
   gap: 12px;
@@ -18,13 +20,31 @@
 
   line-height: 1.25;
 
-  background-color: var(--color-secondary-base-transparent) ;
+  background-color: var(--color-secondary-base-transparent);
 }
 
 .pack p {
   overflow: hidden;
 
   max-height: 100%;
+}
+
+.tooltip {
+  overflow: hidden;
+
+  &::after {
+
+    @include tooltipAfter;
+
+    top: -15px;
+    right: -117px;
+
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
 }
 
 .name {
@@ -41,7 +61,7 @@
 
 .creator {
   overflow: hidden;
-  
+
   text-overflow: ellipsis;
   white-space: nowrap;
 }

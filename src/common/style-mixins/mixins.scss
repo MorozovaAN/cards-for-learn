@@ -122,9 +122,7 @@
 
   position: absolute;
   z-index: 20;
-  top: -30px;
-  right: -130px;
-
+  
   padding: 4px 7px;
 
   color: var(--color-on-primary-base);
@@ -141,4 +139,20 @@
 @mixin tooltipHover() {
   visibility: visible;
   opacity: 1;
+}
+
+@mixin btnMixin($bottom, $left) {
+
+  &::after {
+
+    @include tooltipAfter;
+
+    bottom: $bottom;
+    left: $left;
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
 }

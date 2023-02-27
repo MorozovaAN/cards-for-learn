@@ -23,21 +23,42 @@
   background-color: var(--color-secondary-base-transparent);
 }
 
-.tooltip {
+.lockTooltip {
   position: absolute;
   top: 10px;
   right: 12px;
+
+  &::after {
+
+    @include tooltipAfter;
+
+    top: -30px;
+    right: -130px;
+
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
 }
 
-.tooltip::after {
+.nameTooltip {
+  overflow: hidden;
 
-  @include tooltipAfter;
+  &::after {
 
-}
+    @include tooltipAfter;
 
-.tooltip:hover::after {
+    top: -14px;
+    right: -130px;
 
-  @include tooltipHover;
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
 }
 
 .pack p {
@@ -79,6 +100,22 @@
 
 }
 
+.learnTooltip {
+
+@include btnMixin(62px, 134px)
+}
+.editTooltip {
+
+  @include btnMixin(62px, 206px)
+}
+.deleteTooltip {
+
+  @include btnMixin(62px, 278px)
+}
+.cardsTooltip {
+
+  @include btnMixin(62px, 62px)
+}
 .subtitle {
 
   @include subtitle(500);
