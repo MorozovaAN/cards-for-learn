@@ -143,19 +143,4 @@
   opacity: 1;
 }
 
-/*
-@mixin btnMixin($bottom, $left) {
 
-  &::after {
-
-    @include tooltipAfter;
-
-    bottom: $bottom;
-    left: $left;
-  }
-
-  &:hover::after {
-
-    @include tooltipHover;
-  }
-}*/
