@@ -137,7 +137,7 @@ white-space: nowrap;
   }
 }
 
-.cardsTooltip, .deleteTooltip, .editTooltip, .learnTooltip:hover::after {
+.cardsTooltip, .deleteTooltip, .editTooltip, .learnTooltip, :hover::after {
 
   @include tooltipHover();
 
