@@ -117,12 +117,14 @@
   }
 }
 
-@mixin tooltipAfter() {
+@mixin tooltipAfter($bottom,$left) {
   content: attr(data-tooltip);
 
   position: absolute;
   z-index: 20;
-  
+  bottom: $bottom;
+  left: $left;
+
   padding: 4px 7px;
 
   color: var(--color-on-primary-base);
@@ -141,6 +143,7 @@
   opacity: 1;
 }
 
+/*
 @mixin btnMixin($bottom, $left) {
 
   &::after {
@@ -155,4 +158,4 @@
 
     @include tooltipHover;
   }
-}
+}*/

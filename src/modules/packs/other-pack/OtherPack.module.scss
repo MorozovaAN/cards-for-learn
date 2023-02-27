@@ -34,10 +34,9 @@
 
   &::after {
 
-    @include tooltipAfter;
+    @include tooltipAfter(185px,252px);
 
-    top: -15px;
-    right: -117px;
+white-space: nowrap;
 
   }
 
