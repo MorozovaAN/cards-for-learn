@@ -117,13 +117,13 @@
   }
 }
 
-@mixin tooltipAfter() {
+@mixin tooltipAfter($bottom,$left) {
   content: attr(data-tooltip);
 
   position: absolute;
   z-index: 20;
-  top: -30px;
-  right: -130px;
+  bottom: $bottom;
+  left: $left;
 
   padding: 4px 7px;
 
@@ -142,3 +142,5 @@
   visibility: visible;
   opacity: 1;
 }
+
+

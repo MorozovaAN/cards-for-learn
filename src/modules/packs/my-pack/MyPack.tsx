@@ -48,11 +48,17 @@ export const MyPack: FC<PackType> = ({
 
   return (
     <div className={s.pack}>
-      <p className={s.name}>{packName}</p>
+      {packName.length > 15 ? (
+        <div className={s.nameTooltip} data-tooltip={packName}>
+          <p className={s.name}>{packName}</p>
+        </div>
+      ) : (
+        <p className={s.name}>{packName}</p>
+      )}
 
       {privatePack && (
-        <div className={s.tooltip} data-tooltip="This pack is private">
-          <EditLock className={s.lock} />
+        <div className={s.lockTooltip} data-tooltip="This pack is private">
+          <EditLock />
         </div>
       )}
 
@@ -67,26 +73,38 @@ export const MyPack: FC<PackType> = ({
       </p>
 
       <div className={s.btnContainer}>
-        <Button styleType="iconPrimary" className={s.btnLearn} onClick={viewCardsHandler}>
+        <Button
+          styleType="iconPrimary"
+          onClick={viewCardsHandler}
+          className={s.cardsTooltip}
+          data-tooltip={'View pack cards'}
+        >
           <CardsIcon />
         </Button>
 
-        <Button styleType="iconPrimary" className={s.btnLearn} onClick={learnPackHandler}>
+        <Button
+          styleType="iconPrimary"
+          onClick={learnPackHandler}
+          className={s.learnTooltip}
+          data-tooltip={'Learn pack'}
+        >
           <LearnIcon width="18" />
         </Button>
 
         <Button
           styleType="iconPrimary"
-          className={s.btnEdit}
           onClick={() => openPackModalHandler('Edit pack name')}
+          className={s.editTooltip}
+          data-tooltip={'Edit pack name'}
         >
           <EditIcon width="18" fill="#fff" />
         </Button>
 
         <Button
           styleType="iconPrimary"
-          className={s.btnTrash}
           onClick={() => openPackModalHandler('Delete Pack')}
+          className={s.deleteTooltip}
+          data-tooltip={'Delete pack'}
         >
           <TrashIcon width="18" height="20" />
         </Button>
