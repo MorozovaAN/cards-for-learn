@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import s from './Buttons.module.scss'
 
@@ -11,11 +11,12 @@ import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as PlusIcon } from 'assets/img/icons/plus.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { idSelector } from 'modules/auth/authSelectors'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type ButtonsType = {
-  myCards: boolean
   packId: string
   packName: string
   isFetching: boolean
@@ -25,7 +26,6 @@ type ButtonsType = {
 }
 
 export const Buttons: FC<ButtonsType> = ({
-  myCards,
   packId,
   packName,
   privatePack,
@@ -33,8 +33,11 @@ export const Buttons: FC<ButtonsType> = ({
   disabled,
   cardsCount,
 }) => {
-  const dispatch = useTypedDispatch()
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const dispatch = useTypedDispatch()
+  const myId = useTypedSelector(idSelector)
+  const myCards = searchParams.get('user_id') === myId
   const skeletons = [1, 2, 3, 4]
 
   const openModalHandler = (type: ModalType) => {

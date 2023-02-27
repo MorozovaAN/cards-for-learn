@@ -12,25 +12,25 @@
   border-radius: 10px;
 }
 
-.actions {
-  display: flex;
-  column-gap: 6px;
+.question, .answerContainer, .answerContainerMyCards {
+  overflow: hidden;
 
-  width: 260px;
+  word-wrap: break-word;
+}
+
+.question, .answerContainer, .answerContainerMyCards {
+  width: 100%;
 }
 
 .question {
-  width: 100%;
   max-width: 200px;
 }
 
 .answerContainer {
-  width: 100%;
   max-width: 502px;
 }
 
 .answerContainerMyCards {
-  width: 100%;
   max-width: 380px;
 }
 
@@ -67,4 +67,11 @@
   overflow: hidden;
 
   text-align: center;
+}
+
+.actions {
+  display: flex;
+  column-gap: 6px;
+
+  width: 260px;
 }

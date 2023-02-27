@@ -1,57 +1,59 @@
-import React, { KeyboardEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/modal/edit-card-modal/EditCardModule.module.scss'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import { answerSelector, cardIdSelector, questionSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
-import { Input } from 'UI/input/Input'
+import { Textarea } from 'UI/textarea/Textarea'
 
-export const UpdateCardModal = () => {
+export const EditCardModal = () => {
+  const [updateCard, { isLoading }] = useUpdateCardMutation()
   const cardId = useTypedSelector(cardIdSelector)
   const question = useTypedSelector(questionSelector)
   const answer = useTypedSelector(answerSelector)
-  const [updateCard, { isLoading }] = useUpdateCardMutation()
+  const [questionValue, setQuestionValue] = useState(question)
+  const [answerValue, setAnswerValue] = useState(answer)
   const dispatch = useTypedDispatch()
-
-  const [questionValue, setQuestionValue] = useState<string>(question)
-  const [answerValue, setAnswerValue] = useState<string>(answer)
 
   const editCardHandler = async () => {
     await updateCard({ card: { _id: cardId, question: questionValue, answer: answerValue } })
     dispatch(setModal({ open: false, type: '' }))
   }
 
-  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.key === 'Enter' && editCardHandler()
-  }
-
-  const changeQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const changeQuestionHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setQuestionValue(e.currentTarget.value)
-  const changeAnswerHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+
+  const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setAnswerValue(e.currentTarget.value)
 
   return (
     <>
-      <Input
+      <Textarea
         autoFocus
         value={questionValue}
         onChange={changeQuestionHandler}
-        onKeyUp={onEnterHandler}
-        type="text"
+        error={!questionValue.length ? 'Please, write your question' : ''}
         label="Question"
-        error={!questionValue.length && 'write your question'}
       />
-      <Input
+
+      <Textarea
+        autoFocus
         value={answerValue}
         onChange={changeAnswerHandler}
-        type="text"
+        error={!answerValue.length ? 'Please, write your answer' : ''}
         label="Answer"
-        onKeyUp={onEnterHandler}
       />
-      <Button onClick={editCardHandler} disabled={!questionValue || isLoading} styleType="primary">
-        Edit
+
+      <Button
+        className={s.button}
+        onClick={editCardHandler}
+        disabled={!questionValue || !answerValue || isLoading}
+        styleType="primary"
+      >
+        Save
       </Button>
     </>
   )

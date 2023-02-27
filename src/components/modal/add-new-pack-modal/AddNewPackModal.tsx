@@ -1,9 +1,8 @@
 import React, { KeyboardEvent, useState } from 'react'
 
-import s from './AddNewPackModal.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import s from 'components/modal/add-new-pack-modal/AddNewPackModal.module.scss'
 import { useAddPackMutation } from 'modules/packs/packsApi'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
@@ -34,7 +33,7 @@ export const AddNewPackModal = () => {
         onKeyUp={onEnterHandler}
         type="text"
         label="Name of the new pack"
-        placeholder="write name of the new pack"
+        placeholder="Please, write name of the new pack"
         disabled={isLoading}
         error={error && 'Sorry, max pack name length 50 symbols or less'}
       />

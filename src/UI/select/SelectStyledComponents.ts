@@ -9,7 +9,7 @@ export const StyledButton = styled('button')(
   font-size: 16px;
   box-sizing: border-box;
   height: 36px;
-  width: 60px;
+  width: 72px;
   padding: 12px;
   border-radius: 10px;
   border:none;
@@ -19,7 +19,7 @@ export const StyledButton = styled('button')(
   background: var(--color-background-dark-400);
   color: var(--color-on-primary-light-400);
 
- &:hover, &:focus {
+  &:hover, &:focus {
     box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
   }
 
@@ -48,7 +48,7 @@ export const StyledListbox = styled('ul')(
   box-sizing: border-box;
   padding: 6px 0;
   margin: 12px 0;
-  width: 60px;
+  width: 72px;
   border-radius: 10px;
   overflow: auto;
   outline: 0px;
@@ -69,7 +69,7 @@ export const StyledOption = styled(OptionUnstyled)(
     border-bottom: none;
   }
   
- &:hover {
+  &:hover {
     background-color: var(--color-background-dark-500);
   }
 

@@ -1,10 +1,9 @@
 import React, { KeyboardEvent, useState } from 'react'
 
-import s from './EditPackNameModal.module.scss'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import s from 'components/modal/edit-pack-modal/EditPackNameModal.module.scss'
 import { useUpdatePackMutation } from 'modules/packs/packsApi'
 import {
   packIdSelector,
@@ -17,12 +16,12 @@ import { Input } from 'UI/input/Input'
 
 export const EditPackNameModal = () => {
   const [updatePackName, { isLoading }] = useUpdatePackMutation()
+  const dispatch = useTypedDispatch()
   const packName = useTypedSelector(packNameSelector)
   const packId = useTypedSelector(packIdSelector)
   const privateCheckbox = useTypedSelector(privateCheckboxSelector)
   const [newName, setNewName] = useState(packName)
   const [privatePack, setPrivatePack] = useState(privateCheckbox)
-  const dispatch = useTypedDispatch()
   const error = newName.length > 50
 
   const editPackNameHandler = async () => {
@@ -46,7 +45,7 @@ export const EditPackNameModal = () => {
         type="text"
         label="New pack name"
         error={
-          (!newName.length && 'Write new name of the pack') ||
+          (!newName.length && 'Please, write new name of the pack') ||
           (error && 'Sorry, max pack name length 50 symbols or less')
         }
         disabled={isLoading}

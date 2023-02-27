@@ -20,12 +20,12 @@ import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 
 export const Profile = () => {
+  const [updateUserName, { isLoading: isLoadingName }] = useUpdateUserNameMutation()
+  const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation()
+  const [logOut] = useLogOutMutation()
   const email = useTypedSelector(emailSelector)
   const name = useTypedSelector(nameSelector)
   const avatar = useTypedSelector(avatarSelector)
-  const [logOut] = useLogOutMutation()
-  const [updateUserName, { isLoading: isLoadingName }] = useUpdateUserNameMutation()
-  const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation()
   const [editMode, setEditMode] = useState(false)
 
   const updateNameCallback = (name: string) => {

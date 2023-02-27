@@ -13,6 +13,7 @@ const initialState = {
     type: '' as ModalType,
     open: false,
   },
+  skeletonsNumbers: [1, 2, 3, 4, 5, 6],
 }
 
 const appSlice = createSlice({
@@ -39,6 +40,24 @@ const appSlice = createSlice({
       state.modal.open = action.payload.open
       state.modal.type = action.payload.type
     },
+    setSkeletonsNumbers: (state, action: PayloadAction<string>) => {
+      let value
+
+      switch (action.payload) {
+        case '9':
+          value = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+          break
+        case '12':
+          value = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+          break
+        case '15':
+          value = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          break
+        default:
+          value = [1, 2, 3, 4, 5, 6]
+      }
+      state.skeletonsNumbers = value
+    },
   },
 })
 
@@ -52,6 +71,12 @@ export type ModalType =
   | 'Edit card name'
   | 'Delete Card'
 
-export const { setIsAuth, setIsLoggedIn, setNotification, setIsLoading, setModal } =
-  appSlice.actions
+export const {
+  setIsAuth,
+  setIsLoggedIn,
+  setNotification,
+  setIsLoading,
+  setModal,
+  setSkeletonsNumbers,
+} = appSlice.actions
 export const appReducer = appSlice.reducer
