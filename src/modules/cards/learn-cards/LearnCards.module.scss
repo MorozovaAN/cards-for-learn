@@ -1,0 +1,65 @@
+@import 'src/common/style-mixins/mixins';
+
+.learnCards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  align-items: self-start;
+}
+
+.title {
+
+  @include headline2;
+
+  align-self: center;
+
+  margin: 16px 0 26px 0;
+
+  color: var(--color-primary-dark-100);
+}
+
+.subtitle {
+
+  @include title(400);
+}
+
+.question {
+
+  @include title(600);
+}
+
+.link {
+
+  @include navigateLink();
+}
+
+.linkDisabled {
+  pointer-events: none;
+
+  opacity: 0.6;
+}
+
+.skeletonTitleContainer .skeletonTitle, .skeletonSubtitleContainer .skeletonSubtitle {
+
+  @include skeletonBase;
+
+  width: 440px;
+
+  border-radius: 4px;
+}
+
+.skeletonTitleContainer .skeletonTitle {
+  height: 25px;
+}
+
+.skeletonSubtitleContainer .skeletonSubtitle {
+  height: 18px;
+}
+
+.button {
+  width: 100%;
+}

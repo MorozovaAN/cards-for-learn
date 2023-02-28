@@ -11,7 +11,7 @@ import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
-import { setCardAnswer, setCardId, setCardQuestion } from 'modules/cards/cardsSlise'
+import { setCardInfo } from 'modules/cards/cardsSlise'
 import { Button } from 'UI/button/Button'
 
 type CardType = {
@@ -23,6 +23,7 @@ type CardType = {
   userId: string
   questionImg: string
 }
+
 export const Card: FC<CardType> = ({
   question,
   questionImg,
@@ -37,16 +38,8 @@ export const Card: FC<CardType> = ({
   const dispatch = useTypedDispatch()
   const myCards = userId === myId
 
-  const editCardHandler = (type: ModalType) => {
-    dispatch(setCardId(idCard))
-    dispatch(setCardQuestion(question))
-    dispatch(setCardAnswer(answer))
-    dispatch(setModal({ open: true, type }))
-  }
-
   const openCardModalHandler = (type: ModalType) => {
-    dispatch(setCardQuestion(question))
-    dispatch(setCardId(idCard))
+    dispatch(setCardInfo({ idCard, answer, question }))
     dispatch(setModal({ open: true, type }))
   }
 
@@ -96,7 +89,7 @@ export const Card: FC<CardType> = ({
             <Button
               styleType="iconPrimary"
               className={s.btnEdit}
-              onClick={() => editCardHandler('Edit card name')}
+              onClick={() => openCardModalHandler('Edit card name')}
             >
               <EditIcon width="18" fill="#fff" />
             </Button>

@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
 import { setModal, setSkeletonsNumbers } from 'app/appSlice'
+import { isAppSecondaryClass } from 'app/utils/isAppSecondaryClass'
 import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -25,7 +26,7 @@ export const App = () => {
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const privetPage = isPrivatePage(location.pathname)
   const appClasses = `${s.appDefault} ${
-    !privetPage || location.pathname === '/profile' ? s.appSecondary : ''
+    isAppSecondaryClass(location.pathname) ? s.appSecondary : ''
   }`
   const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
 

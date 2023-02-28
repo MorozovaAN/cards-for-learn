@@ -3,8 +3,6 @@ import React from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
-import { LearnCard } from '../modules/learnCard/LearnCard'
-
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
@@ -12,6 +10,7 @@ import { CardsPage } from 'pages/cards-page/CardsPage'
 import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
 import { ForgotPasswordPage } from 'pages/forgot-password-page/ForgotPasswordPage'
+import { LearnCardsPage } from 'pages/learn-cards-page/LearnCardsPage'
 import { LogInPage } from 'pages/log-in-page/LogInPage'
 import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/NewPasswordPage'
@@ -28,7 +27,7 @@ export const RoutesComponent = () => {
           <Route path={PATH.PROFILE} element={<ProfilePage />} />
           <Route path={PATH.PACKS} element={<PacksPage />} />
           <Route path={PATH.CARDS} element={<CardsPage />} />
-          <Route path={PATH.CARD} element={<LearnCard />} />
+          <Route path={PATH.LEARN_CARDS} element={<LearnCardsPage />} />
         </Route>
 
         <Route path={PATH.MAIN} element={<Navigate to={PATH.LOG_IN} />} />

@@ -1,14 +1,17 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 
-import { Button } from '../../../UI/button/Button'
-import { useUpdateCardGradeMutation } from '../../cards/cardsApi'
-
-import s from './Answer.module.scss'
+import { isLoadingSelector } from 'app/appSelectors'
+import { setIsLoading } from 'app/appSlice'
+import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { useUpdateCardGradeMutation } from 'modules/cards/cardsApi'
+import s from 'modules/cards/learn-cards/answer/Answer.module.scss'
+import { Button } from 'UI/button/Button'
 
 type CardAnswerType = {
   answer: string
@@ -16,14 +19,25 @@ type CardAnswerType = {
   handelNextCard: () => void
 }
 export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) => {
-  const [answerGrade] = useUpdateCardGradeMutation()
+  const [answerGrade, { isLoading }] = useUpdateCardGradeMutation()
+  const dispatch = useTypedDispatch()
+  const isAppLoading = useTypedSelector(isLoadingSelector)
   const [value, setValue] = useState('1')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value)
   }
 
-  const handelSubmit = async () => {
+  useEffect(() => {
+    isAppLoading && dispatch(setIsLoading(false))
+
+    return () => {
+      dispatch(setIsLoading(false))
+    }
+  }, [])
+
+  const setGradeHandler = async () => {
+    dispatch(setIsLoading(true))
     const grade = Number(value)
 
     await answerGrade({ grade, card_id })
@@ -32,11 +46,13 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
 
   return (
     <>
-      <h3 className={s.title}>
-        Answer: <span className={s.subtitle}>{answer}</span>
+      <h3 className={s.subtitle}>
+        <span className={s.answer}>Answer: </span>
+        {answer}
       </h3>
 
       <div>
+        <h3 className={s.rate}>Rate your answer:</h3>
         <FormControl>
           <RadioGroup
             aria-labelledby="controlled-radio-buttons-group"
@@ -46,6 +62,9 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
             sx={{
               '.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
                 color: '#017C6EFF',
+              },
+              '.MuiTypography-root': {
+                fontSize: '16px',
               },
             }}
           >
@@ -58,7 +77,12 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
         </FormControl>
       </div>
 
-      <Button styleType="primary" onClick={handelSubmit}>
+      <Button
+        styleType="primary"
+        onClick={setGradeHandler}
+        className={s.button}
+        disabled={isLoading}
+      >
         Next
       </Button>
     </>

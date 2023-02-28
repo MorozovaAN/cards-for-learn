@@ -1,46 +1,37 @@
 @import 'src/common/style-mixins/mixins';
 
-.packsContainer {
+.filters {
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: flex-start;
+  column-gap: 25px;
+  align-items: flex-end;
 
-  min-height: 434px;
-  padding: 40px 0;
+  height: 70px;
 }
 
-
-.skeletonPackContainer .skeletonPack {
+.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {
 
   @include skeletonBase;
 
-  width: 300px ;
-  height: 200px;
+  height: 42px;
 }
 
-.addPack {
+.skeletonSearchContainer .skeletonSearch {
+  width: 453px;
+}
 
-  @include boxBorder;
+.skeletonButtonsContainer .skeletonButtons {
+  width: 170px;
+}
 
-  @include transitionMain;
+.skeletonSortPacksContainer .skeletonSortPacks {
+  width: 240px;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.skeletonResetFiltersContainer .skeletonResetFilters {
+  width: 42px;
+}
 
-  width: 300px;
-  height: 194px;
-
-  background-color: var(--color-secondary-base-transparent);
-
-  &:active {
-   transform: scale(1.1);
-  }
-
-  &:hover {
-   cursor: pointer;
-
-   background-color:var(--color-secondary-base);
- }
+.skeletonPaginationContainer  .skeletonPagination {
+  width: 595px;
+  height: 34px;
 }

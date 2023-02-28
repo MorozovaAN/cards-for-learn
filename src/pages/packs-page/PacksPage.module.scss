@@ -1,41 +1,5 @@
 @import 'src/common/style-mixins/mixins';
 
-.filters {
-  display: flex;
-  column-gap: 25px;
-  align-items: flex-end;
-
-  height: 70px;
-}
-
-.skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {
-
-  @include skeletonBase;
-
-  height: 42px;
-}
-
-.skeletonSearchContainer .skeletonSearch {
-  width: 453px;
-}
-
-.skeletonButtonsContainer .skeletonButtons {
-  width: 170px;
-}
-
-.skeletonSortPacksContainer .skeletonSortPacks {
-  width: 240px;
-}
-
-.skeletonResetFiltersContainer .skeletonResetFilters {
-  width: 42px;
-}
-
-.skeletonPaginationContainer  .skeletonPagination {
-  width: 595px;
-  height: 34px;
-}
-
 .scrollBtn {
 
   @include transitionMain;
