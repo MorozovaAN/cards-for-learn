@@ -1,0 +1,19 @@
+@import 'src/common/style-mixins/mixins';
+
+.subtitle {
+
+  @include title(400);
+}
+
+.answer, .rate {
+
+  @include title(600);
+}
+
+.rate {
+  margin-bottom: 10px;
+}
+
+.button {
+  width: 100%;
+}

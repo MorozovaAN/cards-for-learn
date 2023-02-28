@@ -7,7 +7,7 @@ import s from './Cards.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { NotFound } from 'components/notFound/NotFound'
+import { NotFound } from 'components/not-found/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'

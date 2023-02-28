@@ -25,7 +25,9 @@ export const App = () => {
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const privetPage = isPrivatePage(location.pathname)
   const appClasses = `${s.appDefault} ${
-    !privetPage || location.pathname === '/profile' ? s.appSecondary : ''
+    !privetPage || location.pathname === '/profile' || location.pathname.includes('learn')
+      ? s.appSecondary
+      : ''
   }`
   const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
 

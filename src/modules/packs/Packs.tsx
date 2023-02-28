@@ -1,87 +1,104 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
 
-import { skeletonsSelector } from 'app/appSelectors'
-import { setModal } from 'app/appSlice'
-import { ReactComponent as Plus } from 'assets/img/plus.svg'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { formatDate } from 'common/utils/formatDate'
-import { NotFound } from 'components/notFound/NotFound'
-import { idSelector } from 'modules/auth/authSelectors'
-import { MyPack } from 'modules/packs/my-pack/MyPack'
-import { OtherPack } from 'modules/packs/other-pack/OtherPack'
-import { PackType } from 'modules/packs/packsApi'
+import { paramsHelper } from 'common/utils/paramsHelper'
+import { Paginator } from 'components/paginator/Paginator'
+import { ResetFilters } from 'components/reset-filters/ResetFilters'
+import { Search } from 'components/search/Search'
+import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
+import { PacksList } from 'modules/packs/packs-list/PacksList'
+import { useGetPacksQuery } from 'modules/packs/packsApi'
+import { showButtonScrollSelector } from 'modules/packs/packsSelectors'
+import { SortPacks } from 'modules/packs/sort/SortPacks'
+import { Button } from 'UI/button/Button'
 
-type PacksType = {
-  responsePacks: PackType[] | null
-  isFetching: boolean
-}
-
-export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
+export const Packs = () => {
   const [searchParams] = useSearchParams()
-  const myId = useTypedSelector(idSelector)
-  const skeletons = useTypedSelector(skeletonsSelector)
-  const myPacksPage = searchParams.has('user_id')
-  const packs = myPacksPage
-    ? responsePacks
-    : responsePacks?.filter((p: PackType) => p.user_id !== myId)
-  const dispatch = useTypedDispatch()
-
-  const addPackHandler = () => {
-    dispatch(setModal({ open: true, type: 'Add new pack' }))
-  }
+  const { data, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
+  const showButton = useTypedSelector(showButtonScrollSelector)
 
   return (
-    <div className={s.packsContainer}>
-      {isFetching ? (
-        skeletons.map(el => (
-          <div className={s.skeletonPackContainer} key={el}>
-            <Skeleton classes={{ root: s.skeletonPack }} animation="wave" variant="rectangular" />
+    <>
+      <div className={s.filters}>
+        {data ? (
+          <Search selector="Packs" param="packName" disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonSearchContainer}>
+            <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />
           </div>
-        ))
-      ) : (
-        <>
-          {myPacksPage &&
-            (!responsePacks?.length && searchParams.get('packName') !== null ? null : (
-              <div className={s.addPack} onClick={addPackHandler}>
-                <Plus />
-              </div>
-            ))}
-          {!responsePacks?.length && searchParams.get('packName') !== null ? (
-            <NotFound />
-          ) : (
-            packs?.map(p => {
-              const dateUpdate = formatDate(p.updated)
+        )}
 
-              return myPacksPage ? (
-                <MyPack
-                  key={p._id}
-                  packId={p._id}
-                  packName={p.name}
-                  cardsCount={p.cardsCount}
-                  updated={dateUpdate}
-                  privatePack={p.private}
-                  user_id={p.user_id}
-                />
-              ) : (
-                <OtherPack
-                  key={p._id}
-                  packId={p._id}
-                  packName={p.name}
-                  cardsCount={p.cardsCount}
-                  author={p.user_name}
-                  updated={dateUpdate}
-                />
-              )
-            })
-          )}
-        </>
+        {data ? (
+          <MyOtherButtons disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonButtonsContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonButtons }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
+        {data ? (
+          <SortPacks disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonSortPacksContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonSortPacks }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+
+        {data ? (
+          <ResetFilters disabled={isFetching} />
+        ) : (
+          <div className={s.skeletonResetFiltersContainer}>
+            <Skeleton
+              classes={{ root: s.skeletonResetFilters }}
+              animation="wave"
+              variant="rectangular"
+            />
+          </div>
+        )}
+      </div>
+
+      <PacksList responsePacks={data ? data.cardPacks : null} isFetching={isFetching} />
+
+      {data ? (
+        <Paginator
+          pageCount={data.pageCount}
+          totalCount={data.cardPacksTotalCount}
+          currentPage={data.page}
+          disabled={isFetching}
+        />
+      ) : (
+        <div className={s.skeletonPaginationContainer}>
+          <Skeleton
+            classes={{ root: s.skeletonPagination }}
+            animation="wave"
+            variant="rectangular"
+          />
+        </div>
       )}
-    </div>
+
+      {showButton && (
+        <Button
+          className={s.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
+      )}
+    </>
   )
 }

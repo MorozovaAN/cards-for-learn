@@ -2,16 +2,15 @@ import React, { FC } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import s from './ResetAllFilters.module.scss'
-
-import { ReactComponent as ResetFilters } from 'assets/img/icons/reset-all-filters.svg'
+import { ReactComponent as ResetFiltersIcon } from 'assets/img/icons/reset-all-filters.svg'
+import s from 'components/reset-filters/ResetFilters.module.scss'
 import { Button } from 'UI/button/Button'
 
 type ResetAllFiltersType = {
   disabled: boolean
 }
 
-export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
+export const ResetFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const resetFiltersHandler = () => {
@@ -30,7 +29,7 @@ export const ResetAllFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
       onClick={resetFiltersHandler}
       disabled={disabled}
     >
-      <ResetFilters />
+      <ResetFiltersIcon />
     </Button>
   )
 }

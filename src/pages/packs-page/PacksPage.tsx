@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { PacksList } from 'modules/packs/PacksList'
+import { Packs } from 'modules'
 import { setShowButton } from 'modules/packs/packsSlise'
 
 export const PacksPage = () => {
@@ -23,5 +23,5 @@ export const PacksPage = () => {
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
-  return <PacksList />
+  return <Packs />
 }
