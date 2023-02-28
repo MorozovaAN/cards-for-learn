@@ -55,8 +55,8 @@ export const Card: FC<CardType> = ({
           {questionImg ? (
             <img
               src={questionImg ? questionImg : image}
-              style={{ width: '70px', height: '50px' }}
-              alt=""
+              className={s.questionImg}
+              alt="question img"
             />
           ) : (
             question
