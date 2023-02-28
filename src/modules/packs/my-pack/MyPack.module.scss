@@ -32,8 +32,7 @@
 
     @include tooltipAfter(24px,14px);
 
-white-space: nowrap;
-
+    white-space: nowrap;
   }
 
   &:hover::after {
@@ -48,8 +47,6 @@ white-space: nowrap;
   &::after {
 
     @include tooltipAfter(178px,214px);
-
-
   }
 
   &:hover::after {
@@ -97,43 +94,31 @@ white-space: nowrap;
 
 }
 
-.learnTooltip {
-
-
+.cardsTooltip {
   &::after {
 
-    @include tooltipAfter(62px, 134px)
+    @include tooltipAfter(65px, 62px)
+  }
+}
+
+.learnTooltip {
+  &::after {
+
+    @include tooltipAfter(65px, 134px)
   }
 }
 
 .editTooltip {
-
-
   &::after {
 
-    @include tooltipAfter(62px, 206px);
+    @include tooltipAfter(65px, 206px);
   }
-
-
 }
 
 .deleteTooltip {
-
-
   &::after {
 
-    @include tooltipAfter(62px, 278px);
-  }
-
-
-}
-
-.cardsTooltip {
-
-
-  &::after {
-
-    @include tooltipAfter(62px, 62px)
+    @include tooltipAfter(65px, 278px);
   }
 }
 
@@ -142,6 +127,7 @@ white-space: nowrap;
   @include tooltipHover();
 
   white-space: nowrap;
+  
 }
 
 .subtitle {
