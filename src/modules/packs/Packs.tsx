@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
@@ -6,7 +6,6 @@ import { useSearchParams } from 'react-router-dom'
 import s from './Packs.module.scss'
 
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetFilters } from 'components/reset-filters/ResetFilters'
@@ -14,14 +13,15 @@ import { Search } from 'components/search/Search'
 import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { PacksList } from 'modules/packs/packs-list/PacksList'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
-import { showButtonScrollSelector } from 'modules/packs/packsSelectors'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
 import { Button } from 'UI/button/Button'
 
-export const Packs = () => {
+type PacksProps = {
+  toggle: boolean
+}
+export const Packs: FC<PacksProps> = ({ toggle }) => {
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
-  const showButton = useTypedSelector(showButtonScrollSelector)
 
   return (
     <>
@@ -90,7 +90,7 @@ export const Packs = () => {
         </div>
       )}
 
-      {showButton && (
+      {toggle && (
         <Button
           className={s.scrollBtn}
           styleType="icon"

@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { Packs } from 'modules'
-import { setShowButton } from 'modules/packs/packsSlise'
 
 export const PacksPage = () => {
-  const dispatch = useTypedDispatch()
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
     const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
-        dispatch(setShowButton(true))
+        setToggle(true)
       } else {
-        dispatch(setShowButton(false))
+        setToggle(false)
       }
     }
 
@@ -23,5 +21,5 @@ export const PacksPage = () => {
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
-  return <Packs />
+  return <Packs toggle={toggle} />
 }
