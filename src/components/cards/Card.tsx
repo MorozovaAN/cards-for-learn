@@ -8,6 +8,7 @@ import s from './Card.module.scss'
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
+import image from 'assets/img/question.png'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
@@ -52,7 +53,11 @@ export const Card: FC<CardType> = ({
       <div className={s.container}>
         <div className={s.question}>
           {questionImg ? (
-            <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
+            <img
+              src={questionImg ? questionImg : image}
+              style={{ width: '70px', height: '50px' }}
+              alt=""
+            />
           ) : (
             question
           )}
