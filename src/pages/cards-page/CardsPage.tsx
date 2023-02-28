@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -6,6 +6,23 @@ import { Cards } from 'modules/cards/Cards'
 
 export const CardsPage = () => {
   const navigate = useNavigate()
+  const [toggleBtn, setToggleBtn] = useState(false)
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      const top = window.scrollY
+
+      if (top >= 300) {
+        setToggleBtn(true)
+      } else {
+        setToggleBtn(false)
+      }
+    }
+
+    window.addEventListener('scroll', scrollHandler)
+
+    return () => window.removeEventListener('scroll', scrollHandler)
+  }, [])
 
   return (
     <div>
@@ -17,7 +34,7 @@ export const CardsPage = () => {
         <p>&lArr; Back to Pack List</p>
       </div>
 
-      <Cards />
+      <Cards toggle={toggleBtn} />
     </div>
   )
 }
