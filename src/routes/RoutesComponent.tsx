@@ -27,7 +27,7 @@ export const RoutesComponent = () => {
           <Route path={PATH.PROFILE} element={<ProfilePage />} />
           <Route path={PATH.PACKS} element={<PacksPage />} />
           <Route path={PATH.CARDS} element={<CardsPage />} />
-          <Route path={PATH.CARD} element={<LearnCardsPage />} />
+          <Route path={PATH.LEARN_CARDS} element={<LearnCardsPage />} />
         </Route>
 
         <Route path={PATH.MAIN} element={<Navigate to={PATH.LOG_IN} />} />
