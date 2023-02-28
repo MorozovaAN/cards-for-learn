@@ -81,6 +81,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
         className={inputClasses}
         id={label}
         onChange={inputChangeHandler}
+        autoComplete={type === 'password' ? 'off' : 'on'}
         {...restProps}
       />
       <div>
