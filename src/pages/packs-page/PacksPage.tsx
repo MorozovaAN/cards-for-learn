@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
+import s from './PacksPage.module.scss'
+
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Packs } from 'modules'
-import s from 'modules/packs/Packs.module.scss'
 import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
-  const [toggle, setToggle] = useState(false)
+  const [btnScrollUp, setBtnScrollUp] = useState(false)
 
   useEffect(() => {
     const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
-        setToggle(true)
+        setBtnScrollUp(true)
       } else {
-        setToggle(false)
+        setBtnScrollUp(false)
       }
     }
 
@@ -28,7 +29,7 @@ export const PacksPage = () => {
     <>
       <Packs />
 
-      {toggle && (
+      {btnScrollUp && (
         <Button
           className={s.scrollBtn}
           styleType="icon"

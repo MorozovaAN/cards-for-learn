@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Cards } from 'modules/cards/Cards'
-import scroll from 'modules/packs/Packs.module.scss'
+import scroll from 'pages/packs-page/PacksPage.module.scss'
 import { Button } from 'UI/button/Button'
 
 export const CardsPage = () => {
   const navigate = useNavigate()
-  const [toggleBtn, setToggleBtn] = useState(false)
+  const [btnScrollUp, setBtnScrollUp] = useState(false)
 
   useEffect(() => {
     const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
-        setToggleBtn(true)
+        setBtnScrollUp(true)
       } else {
-        setToggleBtn(false)
+        setBtnScrollUp(false)
       }
     }
 
@@ -39,7 +39,7 @@ export const CardsPage = () => {
 
       <Cards />
 
-      {toggleBtn && (
+      {btnScrollUp && (
         <Button
           className={scroll.scrollBtn}
           styleType="icon"
