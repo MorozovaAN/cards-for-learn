@@ -44,7 +44,7 @@ export const Cards = () => {
       </div>
 
       {!data?.cards.length && searchParams.has('cardQuestion') ? (
-        <NotFound notFound={'notFound'} />
+        <NotFound notFound="notFound" />
       ) : (
         <CardsList
           cards={data?.cards ? data.cards : null}

@@ -9,22 +9,21 @@ import s from './CardsList.module.scss'
 import { skeletonsSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
-import { Card } from 'components/cards/Card'
 import { NotFound } from 'components/not-found/NotFound'
+import { Card } from 'modules/cards/card/Card'
 
 type CardsListType = {
   cards: CardType[] | null
   myCards: boolean
   isFetching: boolean
 }
-
 export const CardsList: FC<CardsListType> = ({ cards, myCards, isFetching }) => {
   const skeletons = useTypedSelector(skeletonsSelector)
 
   return (
     <>
       {cards?.length === 0 ? (
-        <NotFound notFound={''} />
+        <NotFound />
       ) : (
         <div className={s.cardsList}>
           <div className={s.cardsListHeader}>

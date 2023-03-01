@@ -75,3 +75,20 @@
 
   width: 260px;
 }
+
+.gradeTooltip {
+  cursor: help;
+
+  position: relative;
+}
+
+.gradeTooltip::after {
+
+  @include tooltipAfter($bottom: 36px, $left: 36px);
+
+}
+
+.gradeTooltip:hover::after {
+
+  @include tooltipHover;
+}
