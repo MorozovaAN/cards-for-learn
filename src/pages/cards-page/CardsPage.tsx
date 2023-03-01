@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import scroll from '../../modules/packs/Packs.module.scss'
-import { Button } from '../../UI/button/Button'
-
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Cards } from 'modules/cards/Cards'
+import scroll from 'modules/packs/Packs.module.scss'
+import { Button } from 'UI/button/Button'
 
 export const CardsPage = () => {
   const navigate = useNavigate()

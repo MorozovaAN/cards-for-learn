@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import s from '../../modules/packs/Packs.module.scss'
-import { Button } from '../../UI/button/Button'
-
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Packs } from 'modules'
+import s from 'modules/packs/Packs.module.scss'
+import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
   const [toggle, setToggle] = useState(false)
