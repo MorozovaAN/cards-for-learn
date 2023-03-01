@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import s from './PacksPage.module.scss'
+
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Packs } from 'modules'
-import { setShowButton } from 'modules/packs/packsSlise'
+import { Button } from 'UI/button/Button'
 
 export const PacksPage = () => {
-  const dispatch = useTypedDispatch()
+  const [btnScrollUp, setBtnScrollUp] = useState(false)
 
   useEffect(() => {
     const scrollHandler = () => {
       const top = window.scrollY
 
       if (top >= 300) {
-        dispatch(setShowButton(true))
+        setBtnScrollUp(true)
       } else {
-        dispatch(setShowButton(false))
+        setBtnScrollUp(false)
       }
     }
 
@@ -23,5 +25,19 @@ export const PacksPage = () => {
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
-  return <Packs />
+  return (
+    <>
+      <Packs />
+
+      {btnScrollUp && (
+        <Button
+          className={s.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
+      )}
+    </>
+  )
 }
