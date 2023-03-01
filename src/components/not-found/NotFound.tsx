@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 import s from './NotFound.module.scss'
 
-type NotFoundProps = {
+type NotFoundType = {
   notFound: string
 }
-export const NotFound: FC<NotFoundProps> = ({ notFound }) => {
+export const NotFound: FC<NotFoundType> = ({ notFound }) => {
   return (
     <div className={s.text}>
       {notFound ? (
