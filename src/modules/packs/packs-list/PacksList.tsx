@@ -53,7 +53,7 @@ export const PacksList: FC<PacksType> = ({ responsePacks, isFetching }) => {
               </div>
             ))}
           {!responsePacks?.length && searchParams.get('packName') !== null ? (
-            <NotFound notFound={'notFound'} />
+            <NotFound notFound="notFound" />
           ) : (
             packs?.map(p => {
               const dateUpdate = formatDate(p.updated)
