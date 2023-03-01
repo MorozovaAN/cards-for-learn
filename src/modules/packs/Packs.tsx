@@ -5,8 +5,6 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
 
-import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetFilters } from 'components/reset-filters/ResetFilters'
@@ -14,14 +12,11 @@ import { Search } from 'components/search/Search'
 import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { PacksList } from 'modules/packs/packs-list/PacksList'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
-import { showButtonScrollSelector } from 'modules/packs/packsSelectors'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
-import { Button } from 'UI/button/Button'
 
 export const Packs = () => {
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
-  const showButton = useTypedSelector(showButtonScrollSelector)
 
   return (
     <>
@@ -88,16 +83,6 @@ export const Packs = () => {
             variant="rectangular"
           />
         </div>
-      )}
-
-      {showButton && (
-        <Button
-          className={s.scrollBtn}
-          styleType="icon"
-          onClick={() => window.scrollTo({ top: 0 })}
-        >
-          <ArrowUp width="19" height="23" />
-        </Button>
       )}
     </>
   )
