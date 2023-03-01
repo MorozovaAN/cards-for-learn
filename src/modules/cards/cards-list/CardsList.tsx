@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 
-import { NotFound } from '../../../components/not-found/NotFound'
 import { CardType } from '../cardsApi'
 
 import s from './CardsList.module.scss'
@@ -11,6 +10,7 @@ import { skeletonsSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { Card } from 'components/cards/Card'
+import { NotFound } from 'components/not-found/NotFound'
 
 type CardsListType = {
   cards: CardType[] | null
