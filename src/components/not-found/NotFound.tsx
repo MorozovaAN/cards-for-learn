@@ -11,7 +11,7 @@ export const NotFound: FC<NotFoundProps> = ({ notFound }) => {
       {notFound ? (
         <h2>Sorry we didn&apos;t find any results</h2>
       ) : (
-        <h2>You don&apos;t have any cards yet. Create them quickly.</h2>
+        <h2>You don&apos;t have any cards yet. </h2>
       )}
     </div>
   )
