@@ -9,7 +9,7 @@ import s from './CardsList.module.scss'
 import { skeletonsSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
-import { Card } from 'components/cards/Card'
+import { Card } from 'modules/cards/card/Card'
 
 type CardsListType = {
   cards: CardType[] | null

@@ -37,6 +37,7 @@ export const Card: FC<CardType> = ({
   const [showAnswer, setShowAnswer] = useState(false)
   const dispatch = useTypedDispatch()
   const myCards = userId === myId
+  const gradePercent = Math.round((grade * 100) / 5)
 
   const openCardModalHandler = (type: ModalType) => {
     dispatch(setCardInfo({ idCard, answer, question }))
@@ -80,25 +81,17 @@ export const Card: FC<CardType> = ({
 
         <div>{updated}</div>
 
-        <div>
+        <div className={s.gradeTooltip} data-tooltip={`I know the answer to ${gradePercent}%`}>
           <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
         </div>
 
         {myCards && (
           <div className={s.actions}>
-            <Button
-              styleType="iconPrimary"
-              className={s.btnEdit}
-              onClick={() => openCardModalHandler('Edit card name')}
-            >
+            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Edit card name')}>
               <EditIcon width="18" fill="#fff" />
             </Button>
 
-            <Button
-              styleType="iconPrimary"
-              className={s.btnTrash}
-              onClick={() => openCardModalHandler('Delete Card')}
-            >
+            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Delete Card')}>
               <TrashIcon width="18" height="20" />
             </Button>
           </div>
