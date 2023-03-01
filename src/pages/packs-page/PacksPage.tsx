@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
+import s from '../../modules/packs/Packs.module.scss'
+import { Button } from '../../UI/button/Button'
+
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Packs } from 'modules'
 
 export const PacksPage = () => {
@@ -21,5 +25,19 @@ export const PacksPage = () => {
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [])
 
-  return <Packs toggle={toggle} />
+  return (
+    <>
+      <Packs />
+
+      {toggle && (
+        <Button
+          className={s.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
+      )}
+    </>
+  )
 }

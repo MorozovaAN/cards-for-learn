@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import scroll from '../../modules/packs/Packs.module.scss'
+import { Button } from '../../UI/button/Button'
+
+import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { Cards } from 'modules/cards/Cards'
 
 export const CardsPage = () => {
@@ -34,7 +38,17 @@ export const CardsPage = () => {
         <p>&lArr; Back to Pack List</p>
       </div>
 
-      <Cards toggle={toggleBtn} />
+      <Cards />
+
+      {toggleBtn && (
+        <Button
+          className={scroll.scrollBtn}
+          styleType="icon"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <ArrowUp width="19" height="23" />
+        </Button>
+      )}
     </div>
   )
 }

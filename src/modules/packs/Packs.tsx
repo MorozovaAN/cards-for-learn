@@ -1,11 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import s from './Packs.module.scss'
 
-import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetFilters } from 'components/reset-filters/ResetFilters'
@@ -14,12 +13,8 @@ import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { PacksList } from 'modules/packs/packs-list/PacksList'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
-import { Button } from 'UI/button/Button'
 
-type PacksProps = {
-  toggle: boolean
-}
-export const Packs: FC<PacksProps> = ({ toggle }) => {
+export const Packs = () => {
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
 
@@ -88,16 +83,6 @@ export const Packs: FC<PacksProps> = ({ toggle }) => {
             variant="rectangular"
           />
         </div>
-      )}
-
-      {toggle && (
-        <Button
-          className={s.scrollBtn}
-          styleType="icon"
-          onClick={() => window.scrollTo({ top: 0 })}
-        >
-          <ArrowUp width="19" height="23" />
-        </Button>
       )}
     </>
   )

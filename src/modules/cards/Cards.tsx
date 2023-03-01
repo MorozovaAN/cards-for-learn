@@ -1,14 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
-import { Button } from '../../UI/button/Button'
-import scroll from '../packs/Packs.module.scss'
-
 import s from './Cards.module.scss'
 
-import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { NotFound } from 'components/not-found/NotFound'
@@ -19,10 +15,7 @@ import { Buttons } from 'modules/cards/buttons/Buttons'
 import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
 
-type CardsProps = {
-  toggle: boolean
-}
-export const Cards: FC<CardsProps> = ({ toggle }) => {
+export const Cards = () => {
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
   const myId = useTypedSelector(idSelector)
@@ -77,16 +70,6 @@ export const Cards: FC<CardsProps> = ({ toggle }) => {
             variant="rectangular"
           />
         </div>
-      )}
-
-      {toggle && (
-        <Button
-          className={scroll.scrollBtn}
-          styleType="icon"
-          onClick={() => window.scrollTo({ top: 0 })}
-        >
-          <ArrowUp width="19" height="23" />
-        </Button>
       )}
     </div>
   )
