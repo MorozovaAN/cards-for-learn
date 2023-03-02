@@ -41,6 +41,18 @@ export const LearnCards = () => {
     data && setCard(getCard(data.cards))
   }
 
+  const question = card.questionImg ? (
+    <div className={s.questionContainer}>
+      <h3 className={s.subtitleImg}>Question: </h3>
+      <img className={s.img} alt="question image" src={card.questionImg} />
+    </div>
+  ) : (
+    <h3 className={s.subtitle}>
+      <span className={s.subtitleQuestion}>Question: </span>
+      {card.question}
+    </h3>
+  )
+
   return (
     <div className={s.learnCards}>
       <h2 className={s.title}>
@@ -63,10 +75,7 @@ export const LearnCards = () => {
             />
           </div>
         ) : (
-          <h3 className={s.subtitle}>
-            <span className={s.question}>Question: </span>
-            {card.questionImg ? <img alt="questionImg" src={card.questionImg} /> : card.question}
-          </h3>
+          question
         )}
 
         {showAnswer ? (
