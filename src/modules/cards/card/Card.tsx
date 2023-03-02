@@ -55,7 +55,7 @@ export const Card: FC<CardType> = ({
         <div className={s.question}>
           {questionImg ? (
             <img
-              src={questionImg ? questionImg : image}
+              src={questionImg.includes('data:image') ? questionImg : image}
               className={s.questionImg}
               alt="question img"
             />
