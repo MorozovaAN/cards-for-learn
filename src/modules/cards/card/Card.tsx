@@ -53,7 +53,7 @@ export const Card: FC<CardType> = ({
       <div className={s.container}>
         <div className={s.question}>
           {questionImg ? (
-            <img src={questionImg} style={{ width: '70px', height: '50px' }} alt="" />
+            <img src={questionImg} className={s.img} alt="question image" />
           ) : (
             question
           )}

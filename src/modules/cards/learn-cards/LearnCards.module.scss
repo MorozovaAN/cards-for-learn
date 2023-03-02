@@ -7,10 +7,6 @@
   justify-content: center;
 }
 
-.box {
-  align-items: self-start;
-}
-
 .title {
 
   @include headline2;
@@ -22,34 +18,11 @@
   color: var(--color-primary-dark-100);
 }
 
-.subtitle {
-
-  @include title(400);
-}
-
-.question {
-
-  @include title(600);
-}
-
-.link {
-
-  @include navigateLink();
-}
-
-.linkDisabled {
-  pointer-events: none;
-
-  opacity: 0.6;
-}
-
 .skeletonTitleContainer .skeletonTitle, .skeletonSubtitleContainer .skeletonSubtitle {
 
-  @include skeletonBase;
+  @include skeletonBase(4px);
 
   width: 440px;
-
-  border-radius: 4px;
 }
 
 .skeletonTitleContainer .skeletonTitle {
@@ -58,6 +31,34 @@
 
 .skeletonSubtitleContainer .skeletonSubtitle {
   height: 18px;
+}
+
+.box {
+  align-items: self-start;
+}
+
+.questionContainer {
+  width: 100%;
+}
+
+.subtitle, .subtitleImg  {
+
+  @include title(600);
+}
+
+.subtitleImg {
+  margin-bottom: 10px;
+}
+
+.subtitleQuestion {
+
+  @include title(400);
+}
+
+.img {
+  width: 100%;
+
+  object-fit: cover;
 }
 
 .button {

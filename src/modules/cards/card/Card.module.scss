@@ -12,6 +12,13 @@
   border-radius: 10px;
 }
 
+.img {
+  width: 100%;
+  max-height: 160px;
+
+  object-fit: contain;
+}
+
 .question, .answerContainer, .answerContainerMyCards {
   overflow: hidden;
 
