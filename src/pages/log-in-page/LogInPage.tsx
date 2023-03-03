@@ -7,6 +7,8 @@ import s from './LogInPage.module.scss'
 import { LogIn } from 'modules'
 
 export const LogInPage = () => {
+  console.log('login page')
+
   return (
     <motion.div
       className={s.contentContainer}

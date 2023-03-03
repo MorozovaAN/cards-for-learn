@@ -20,6 +20,7 @@ export const authApi = createApi({
         method: 'POST',
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        console.log('me')
         try {
           const res = await queryFulfilled
 

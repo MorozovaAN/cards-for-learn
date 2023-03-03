@@ -18,6 +18,7 @@ type PackType = {
 export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, updated }) => {
   const navigate = useNavigate()
 
+  console.log('other packs')
   const learnPackHandler = () => {
     navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
   }

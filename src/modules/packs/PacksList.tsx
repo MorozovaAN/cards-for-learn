@@ -22,6 +22,8 @@ export const PacksList = () => {
   const { data: responsePacks, isFetching } = useGetPacksQuery(paramsHelper(searchParams))
   const showButton = useTypedSelector(showButtonScrollSelector)
 
+  console.log('packs list')
+
   return (
     <div>
       <div className={s.filters}>

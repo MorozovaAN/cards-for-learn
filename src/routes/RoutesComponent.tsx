@@ -3,7 +3,7 @@ import React from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
-import { PrivateRoutes } from './PrivateRoutes'
+/*import { PrivateRoutes } from './PrivateRoutes'*/
 import { PATH } from './routes'
 
 import { CardsPage } from 'pages/cards-page/CardsPage'
@@ -16,6 +16,7 @@ import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/NewPasswordPage'
 import { PacksPage } from 'pages/packs-page/PacksPage'
 import { ProfilePage } from 'pages/profile-page/ProfilePage'
+import { PrivateRoutes } from 'routes/PrivateRoutes'
 
 export const RoutesComponent = () => {
   const location = useLocation()

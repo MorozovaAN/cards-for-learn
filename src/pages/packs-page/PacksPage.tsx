@@ -7,6 +7,7 @@ import { setShowButton } from 'modules/packs/packsSlise'
 export const PacksPage = () => {
   const dispatch = useTypedDispatch()
 
+  console.log('packs page')
   useEffect(() => {
     const scrollHandler = () => {
       const top = window.scrollY

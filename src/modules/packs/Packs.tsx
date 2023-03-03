@@ -25,6 +25,8 @@ export const Packs: FC<PacksType> = ({ responsePacks, isFetching }) => {
   const [searchParams] = useSearchParams()
   const myId = useTypedSelector(idSelector)
   const myPacksPage = searchParams.has('user_id')
+
+  console.log('packs')
   const packs = myPacksPage
     ? responsePacks
     : responsePacks?.filter((p: PackType) => p.user_id !== myId)
