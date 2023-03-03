@@ -39,6 +39,7 @@ export const Card: FC<CardType> = ({
   const dispatch = useTypedDispatch()
   const myCards = userId === myId
   const gradePercent = Math.round((grade * 100) / 5)
+  const isImg = questionImg.includes('data:image')
 
   const openCardModalHandler = (type: ModalType) => {
     dispatch(setCardInfo({ idCard, answer, question }))
@@ -55,9 +56,9 @@ export const Card: FC<CardType> = ({
         <div className={s.question}>
           {questionImg ? (
             <img
-              src={questionImg.includes('data:image') ? questionImg : image}
-              className={s.questionImg}
-              alt="question img"
+              src={isImg ? questionImg : image}
+              className={isImg ? s.img : s.imgIcon}
+              alt="question image"
             />
           ) : (
             question
