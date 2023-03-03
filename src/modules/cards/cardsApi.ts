@@ -70,7 +70,7 @@ export const {
 } = cardsApi
 
 //types
-type GetCardsResponseType = {
+export type GetCardsResponseType = {
   cards: CardType[]
   cardsTotalCount: number
   maxGrade: number

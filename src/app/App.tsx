@@ -16,6 +16,7 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 export const App = () => {
   const [me] = useMeMutation()
   let location = useLocation()
+
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
