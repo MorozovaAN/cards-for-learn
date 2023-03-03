@@ -20,10 +20,18 @@
   align-items: center;
   justify-content: space-between;
 
+  box-sizing: border-box;
   width: 100%;
   max-width: var(--width-main);
   height: 100%;
   margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  cursor: pointer;
+
+  width: 184px;
 }
 
 .userInfo {
