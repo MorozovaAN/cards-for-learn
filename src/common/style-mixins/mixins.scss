@@ -117,7 +117,7 @@
   }
 }
 
-@mixin tooltipAfter($bottom,$left) {
+@mixin tooltipAfter($bottom, $left) {
   content: attr(data-tooltip);
 
   position: absolute;

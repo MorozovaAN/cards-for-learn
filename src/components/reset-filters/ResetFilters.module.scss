@@ -1,3 +1,5 @@
+@import "src/common/style-mixins/mixins";
+
 .button {
   flex-shrink: 0;
 
@@ -5,4 +7,17 @@
   height: 42px;
 
   border-radius: 10px;
+}
+
+.tooltip {
+  position: relative;
+  &::after {
+
+    @include tooltipAfter(47px, 7px);
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
 }

@@ -35,9 +35,6 @@
   &::after {
 
     @include tooltipAfter(185px,252px);
-
-white-space: nowrap;
-
   }
 
   &:hover::after {
