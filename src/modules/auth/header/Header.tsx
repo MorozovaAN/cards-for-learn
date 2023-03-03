@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import logo from 'assets/img/logo.svg'
+import logo from 'assets/img/logo.png'
 import avatarPlug from 'assets/img/user-avatar-default.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -37,7 +37,7 @@ export const Header = () => {
     <header className={s.headerContainer}>
       <nav className={s.headerContent}>
         <Link to={PATH.PACKS}>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className={s.logo} />
         </Link>
 
         <div className={s.userInfo}>
