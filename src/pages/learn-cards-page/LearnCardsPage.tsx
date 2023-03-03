@@ -19,7 +19,7 @@ export const LearnCardsPage = () => {
       {/*</NavLink>*/}
 
       <div onClick={() => navigate(-1)}>
-        <p>&lArr; Back to Pack List</p>
+        <p>&lArr; Back to Cards List</p>
       </div>
 
       <LearnCards />

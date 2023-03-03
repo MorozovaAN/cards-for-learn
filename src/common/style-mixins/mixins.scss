@@ -108,9 +108,9 @@
 }
 
 
-@mixin skeletonBase() {
+@mixin skeletonBase($border-radius: 10px) {
   background-color: var(--color-background-dark-400);
-  border-radius: 10px;
+  border-radius: $border-radius;
 
   &:after {
     background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
