@@ -78,7 +78,7 @@ export const ForgotPassword = () => {
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Do you remember your password?</p>
         <NavLink url={PATH.LOG_IN} styleType="primary">
-          Try to logging in
+          Try to log in
         </NavLink>
       </div>
     </Box>

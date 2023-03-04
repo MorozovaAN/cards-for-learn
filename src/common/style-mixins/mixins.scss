@@ -108,16 +108,16 @@
 }
 
 
-@mixin skeletonBase() {
+@mixin skeletonBase($border-radius: 10px) {
   background-color: var(--color-background-dark-400);
-  border-radius: 10px;
+  border-radius: $border-radius;
 
   &:after {
     background: linear-gradient( 90deg, transparent, var(--color-on-primary-light-transparent), transparent );
   }
 }
 
-@mixin tooltipAfter($bottom,$left) {
+@mixin tooltipAfter($bottom, $left) {
   content: attr(data-tooltip);
 
   position: absolute;
@@ -127,7 +127,9 @@
 
   padding: 4px 7px;
 
+  font-size: 13px;
   color: var(--color-on-primary-base);
+  white-space: nowrap;
 
   visibility: hidden;
   opacity: 0;

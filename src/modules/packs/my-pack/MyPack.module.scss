@@ -24,62 +24,19 @@
 }
 
 .lockTooltip {
+  cursor: help;
+
   position: absolute;
   top: 10px;
   right: 12px;
-
   &::after {
 
     @include tooltipAfter(24px,14px);
-
-white-space: nowrap;
-
   }
 
   &:hover::after {
 
     @include tooltipHover;
-  }
-}
-
-.nameTooltip {
-  overflow: hidden;
-
-  &::after {
-
-    @include tooltipAfter(178px,214px);
-
-
-  }
-
-  &:hover::after {
-
-    @include tooltipHover;
-  }
-}
-
-.pack p {
-  overflow: hidden;
-
-  max-height: 100%;
-}
-
-.privateValue {
-  position: relative;
-
-  &:after {
-    content: '';
-
-    position: absolute;
-    top: 0;
-    right: 15px;
-
-    width: 15px;
-    height: 20px;
-
-    background-color: var(--color-primary-base);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
   }
 }
 
@@ -97,51 +54,57 @@ white-space: nowrap;
 
 }
 
-.learnTooltip {
-
+.nameTooltip {
+  overflow: hidden;
 
   &::after {
 
-    @include tooltipAfter(62px, 134px)
+    @include tooltipAfter(178px,214px);
+  }
+
+  &:hover::after {
+
+    @include tooltipHover;
+  }
+}
+
+.pack p {
+  overflow: hidden;
+
+  max-height: 100%;
+}
+
+.cardsTooltip {
+  &::after {
+
+    @include tooltipAfter(65px, 62px)
+  }
+}
+
+.learnTooltip {
+  &::after {
+
+    @include tooltipAfter(65px, 134px)
   }
 }
 
 .editTooltip {
-
-
   &::after {
 
-    @include tooltipAfter(62px, 206px);
+    @include tooltipAfter(65px, 206px);
   }
-
-
 }
 
 .deleteTooltip {
-
-
   &::after {
 
-    @include tooltipAfter(62px, 278px);
-  }
-
-
-}
-
-.cardsTooltip {
-
-
-  &::after {
-
-    @include tooltipAfter(62px, 62px)
+    @include tooltipAfter(65px, 278px);
   }
 }
 
 .cardsTooltip, .deleteTooltip, .editTooltip, .learnTooltip, :hover::after {
 
   @include tooltipHover();
-
-  white-space: nowrap;
 }
 
 .subtitle {

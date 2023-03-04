@@ -17,6 +17,7 @@ type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
+
 type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
   type: string
   label?: string
@@ -27,6 +28,7 @@ type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
   inputContainerClass?: string
   disableBtn?: boolean
 }
+
 export const Input: React.FC<SuperInputTextPropsType> = ({
   type,
   label,
@@ -42,7 +44,7 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [currentValue, setCurrentValue] = useState('')
 
-  const inputOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(e.currentTarget.value)
   }
   const togglePasswordVisible = () => {
@@ -78,7 +80,8 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
         type={typeLabel}
         className={inputClasses}
         id={label}
-        onChange={inputOnChange}
+        onChange={inputChangeHandler}
+        autoComplete={type === 'password' ? 'off' : 'on'}
         {...restProps}
       />
       <div>

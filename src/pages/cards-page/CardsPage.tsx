@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { BtnScrollUp } from 'components/btnScrollUp/BtnScrollUp'
 import { Cards } from 'modules/cards/Cards'
 
 export const CardsPage = () => {
@@ -16,6 +17,8 @@ export const CardsPage = () => {
       </Link>
 
       <Cards />
+
+      <BtnScrollUp />
     </div>
   )
 }

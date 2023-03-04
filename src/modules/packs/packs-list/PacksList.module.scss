@@ -1,0 +1,46 @@
+@import 'src/common/style-mixins/mixins';
+
+.packsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: flex-start;
+
+  min-height: 434px;
+  padding: 40px 0;
+}
+
+
+.skeletonPackContainer .skeletonPack {
+
+  @include skeletonBase;
+
+  width: 300px ;
+  height: 200px;
+}
+
+.addPack {
+
+  @include boxBorder;
+
+  @include transitionMain;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 300px;
+  height: 194px;
+
+  background-color: var(--color-secondary-base-transparent);
+
+  &:active {
+   transform: scale(1.1);
+  }
+
+  &:hover {
+   cursor: pointer;
+
+   background-color:var(--color-secondary-base);
+ }
+}
