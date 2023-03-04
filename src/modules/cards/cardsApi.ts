@@ -142,6 +142,7 @@ export type RequestUpdateCardType = {
     _id: string
     question: string
     answer: string
+    questionImg?: string
   }
 }
 export type ResponseUpdateCardGrade = {
