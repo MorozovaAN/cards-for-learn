@@ -45,9 +45,6 @@ export const EditCardModal = () => {
   }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (inputRef.current && inputRef.current.value) {
-      setQuestionImg(inputRef.current.value)
-    }
     uploadImage(e, dispatch, setQuestionImg)
   }
 
@@ -81,7 +78,10 @@ export const EditCardModal = () => {
           <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
             Upload image
           </Button>
-          <img width="70" src={questionImg} />
+
+          <div className={s.imgBox}>
+            <img width="70" src={questionImg} alt="pre img" />
+          </div>
         </label>
       ) : (
         <Textarea

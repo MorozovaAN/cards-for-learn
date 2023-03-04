@@ -39,12 +39,6 @@ export const AddCardModal = () => {
   }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-
-    // @ts-ignore
-    if (inputRef.current && inputRef.current.value && file.size < 112000) {
-      setQuestionImg(inputRef.current.value)
-    }
     uploadImage(e, dispatch, setQuestionImg)
   }
 
@@ -77,9 +71,12 @@ export const AddCardModal = () => {
             />
 
             <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
-              Add image
+              Upload image
             </Button>
-            <img width="70" src={questionImg} />
+
+            <div className={s.imgBox}>
+              <img width="70" src={questionImg} alt="pre img" />
+            </div>
           </label>
         ) : (
           <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
