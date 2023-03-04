@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 
+import { object } from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
@@ -23,7 +24,7 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
   }
 
   const viewCardsHandler = () => {
-    navigate(`/cards?cardsPack_id=${packId}`)
+    navigate(`/cards?cardsPack_id=${packId}`, { replace: true })
   }
 
   return (

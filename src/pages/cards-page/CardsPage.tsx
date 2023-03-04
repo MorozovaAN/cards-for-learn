@@ -14,7 +14,7 @@ export const CardsPage = () => {
       {/*  <p>&lArr; Back to Packs List</p>*/}
       {/*</NavLink>*/}
 
-      <div onClick={() => navigate(-1)}>
+      <div onClick={() => navigate('../')}>
         <p>&lArr; Back to Pack List</p>
       </div>
 

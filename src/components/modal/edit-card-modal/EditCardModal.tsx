@@ -1,4 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
+
+import { uploadImage } from '../../../common/utils/uploadImage'
+import { Select } from '../../../UI/select/Select'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -17,9 +20,15 @@ export const EditCardModal = () => {
   const [questionValue, setQuestionValue] = useState(question)
   const [answerValue, setAnswerValue] = useState(answer)
   const dispatch = useTypedDispatch()
+  const [button, setButton] = useState(false)
+  const [questionImg, setQuestionImg] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [selectValue, setSelectValue] = useState('Text')
 
   const editCardHandler = async () => {
-    await updateCard({ card: { _id: cardId, question: questionValue, answer: answerValue } })
+    await updateCard({
+      card: { _id: cardId, question: questionValue, answer: answerValue, questionImg },
+    })
     dispatch(setModal({ open: false, type: '' }))
   }
 
@@ -29,15 +38,60 @@ export const EditCardModal = () => {
   const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setAnswerValue(e.currentTarget.value)
 
+  const onSelectChangeHandler = (value: string) => {
+    setSelectValue(value)
+    value === 'Text' && setButton(false)
+    value === 'Image' && setButton(true)
+  }
+
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (inputRef.current && inputRef.current.value) {
+      setQuestionImg(inputRef.current.value)
+    }
+    uploadImage(e, dispatch, setQuestionImg)
+  }
+
+  const selectFileHandler = () => {
+    inputRef && inputRef.current?.click()
+  }
+
   return (
     <>
-      <Textarea
-        autoFocus
-        value={questionValue}
-        onChange={changeQuestionHandler}
-        error={!questionValue.length ? 'Please, write your question' : ''}
-        label="Question"
-      />
+      <div className={s.selectContainer}>
+        <p className={s.selectTitle}>Question format:</p>
+
+        <Select
+          value={selectValue}
+          onChangeCallback={onSelectChangeHandler}
+          options={['Text', 'Image']}
+          disabled={isLoading}
+        />
+      </div>
+
+      {button ? (
+        <label className={s.label}>
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            onChange={uploadHandler}
+            ref={inputRef}
+            accept=".jpg,.png,.svg,.jpeg"
+          />
+
+          <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
+            Upload image
+          </Button>
+          <img width="70" src={questionImg} />
+        </label>
+      ) : (
+        <Textarea
+          autoFocus
+          value={questionValue}
+          onChange={changeQuestionHandler}
+          error={!questionValue.length ? 'Please, write your question' : ''}
+          label="Question"
+        />
+      )}
 
       <Textarea
         autoFocus
@@ -50,7 +104,7 @@ export const EditCardModal = () => {
       <Button
         className={s.button}
         onClick={editCardHandler}
-        disabled={!questionValue || !answerValue || isLoading}
+        disabled={!questionValue || !answerValue || isLoading || !questionImg}
         styleType="primary"
       >
         Save
