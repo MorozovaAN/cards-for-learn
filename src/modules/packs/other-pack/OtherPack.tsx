@@ -1,12 +1,10 @@
 import React, { FC } from 'react'
 
-import { object } from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import s from 'modules/packs/other-pack/OtherPack.module.scss'
-import { Button } from 'UI/button/Button'
 
 type PackType = {
   packId: string
@@ -17,16 +15,6 @@ type PackType = {
 }
 
 export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, updated }) => {
-  const navigate = useNavigate()
-
-  const learnPackHandler = () => {
-    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
-  }
-
-  const viewCardsHandler = () => {
-    navigate(`/cards?cardsPack_id=${packId}`, { replace: true })
-  }
-
   return (
     <div className={s.pack}>
       {packName.length > 28 ? (
@@ -53,15 +41,15 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
       </p>
 
       <div className={s.buttonsContainer}>
-        <Button styleType="primary" className={s.button} onClick={learnPackHandler}>
+        <Link to={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`}>
           <p>Learn pack</p>
           <LearnIcon className={s.learnIcon} />
-        </Button>
+        </Link>
 
-        <Button styleType="primary" className={s.button} onClick={viewCardsHandler}>
+        <Link to={`/cards?cardsPack_id=${packId}`}>
           <p>View cards</p>
           <CardsIcon className={s.cardsIcon} />
-        </Button>
+        </Link>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { BtnScrollUp } from 'components/btnScrollUp/BtnScrollUp'
 import { Cards } from 'modules/cards/Cards'
@@ -14,9 +14,9 @@ export const CardsPage = () => {
       {/*  <p>&lArr; Back to Packs List</p>*/}
       {/*</NavLink>*/}
 
-      <div onClick={() => navigate(-1)}>
+      <Link to={''} onClick={() => navigate(-1)}>
         <p>&lArr; Back to Pack List</p>
-      </div>
+      </Link>
 
       <Cards />
 
