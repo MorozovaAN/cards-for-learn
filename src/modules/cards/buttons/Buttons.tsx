@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import s from './Buttons.module.scss'
 
@@ -34,7 +34,7 @@ export const Buttons: FC<ButtonsType> = ({
   cardsCount,
 }) => {
   const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
