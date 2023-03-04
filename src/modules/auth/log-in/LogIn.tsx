@@ -27,7 +27,6 @@ export const LogIn = () => {
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const dispatch = useTypedDispatch()
 
-  console.log('login')
   const formik = useFormik({
     initialValues: {
       email: '',

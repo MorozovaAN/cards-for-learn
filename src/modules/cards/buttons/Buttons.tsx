@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import s from './Buttons.module.scss'
 
@@ -34,7 +34,6 @@ export const Buttons: FC<ButtonsType> = ({
   cardsCount,
 }) => {
   const dispatch = useTypedDispatch()
-  const navigate = useNavigate()
   const skeletons = [1, 2, 3, 4]
 
   const openModalHandler = (type: ModalType) => {
@@ -42,9 +41,7 @@ export const Buttons: FC<ButtonsType> = ({
     dispatch(setModal({ open: true, type }))
   }
 
-  const learnCardHandler = () => {
-    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
-  }
+  const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const myCardsList = isFetching ? (
     skeletons.map(el => (
@@ -63,14 +60,9 @@ export const Buttons: FC<ButtonsType> = ({
         <PlusIcon width="20" height="20" />
       </Button>
 
-      <Button
-        styleType="secondary"
-        className={s.myPackBtn}
-        disabled={disabled}
-        onClick={learnCardHandler}
-      >
+      <Link to={learnUrl} className={s.myPackBtn}>
         <LearnIcon className={s.learnIcon} stroke="#017c6e" />
-      </Button>
+      </Link>
 
       <Button
         styleType="secondary"
@@ -97,15 +89,10 @@ export const Buttons: FC<ButtonsType> = ({
       <Skeleton classes={{ root: s.skeletonOtherCards }} animation="wave" variant="rectangular" />
     </div>
   ) : (
-    <Button
-      styleType="secondary"
-      disabled={disabled}
-      onClick={learnCardHandler}
-      className={s.learnPackBtn}
-    >
+    <Link to={learnUrl} className={s.learnPackBtn}>
       <p>Learn pack</p>
       <LearnIcon className={s.learnIcon} stroke="#017c6e" />
-    </Button>
+    </Link>
   )
 
   return (

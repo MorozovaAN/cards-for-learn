@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
-import { paramsHelper } from '../../common/utils/paramsHelper'
 import { CardType, useGetCardsQuery } from '../cards/cardsApi'
 
 import { Answer } from './answer/Answer'
 import s from './LearnCard.module.scss'
 
+import { paramsHelper } from 'common/utils/paramsHelper'
 import { Button } from 'UI/button/Button'
 
 export const LearnCard = () => {
-  const navigate = useNavigate()
-
-  console.log('Learn')
   const [searchParams] = useSearchParams()
   const { data, isLoading } = useGetCardsQuery(paramsHelper(searchParams))
-  const id = searchParams.get('cardsPack_id')
   const [showAnswer, setShowAnswer] = useState(false)
   const [card, setCard] = useState<CardType>({} as CardType)
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
@@ -19,8 +19,6 @@ export const Cards = () => {
   const myId = useTypedSelector(idSelector)
   const [searchParams] = useSearchParams()
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
-
-  console.log('cards')
 
   return (
     <>

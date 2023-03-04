@@ -15,7 +15,7 @@ type SearchType = {
 export const Search: FC<SearchType> = ({ disabled, selector, param }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState(searchParams.get(`${param}`))
-
+  const [over, setOver] = useState(false)
   const debouncedValue = useDebounce(value)
 
   const handleSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,7 @@ export const Search: FC<SearchType> = ({ disabled, selector, param }) => {
   }, [searchParams])
 
   useEffect(() => {
-    if (!value) {
+    if (!value && over) {
       searchParams.delete(`${param}`)
       setSearchParams(searchParams)
     }
@@ -49,6 +49,8 @@ export const Search: FC<SearchType> = ({ disabled, selector, param }) => {
       value={value ? value : ''}
       placeholder="Provide your text"
       disabled={disabled}
+      onMouseOver={() => setOver(true)}
+      onMouseLeave={() => setOver(false)}
     />
   )
 }

@@ -27,10 +27,8 @@ export const packsApi = createApi({
         },
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        console.log('get packs start')
         try {
           await queryFulfilled
-          console.log('get packs end')
         } catch (err) {
           errorHandler(err, dispatch)
         }

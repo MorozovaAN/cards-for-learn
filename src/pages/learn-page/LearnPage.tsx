@@ -8,8 +8,6 @@ import s from 'modules/learnCard/LearnCard.module.scss'
 export const LearnPage = () => {
   const navigate = useNavigate()
 
-  console.log('learn page')
-
   return (
     <>
       <div onClick={() => navigate(-1)} className={`${s.link}`}>
