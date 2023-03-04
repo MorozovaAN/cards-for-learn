@@ -39,7 +39,7 @@ export const Card: FC<CardType> = ({
   const dispatch = useTypedDispatch()
   const myCards = userId === myId
   const gradePercent = Math.round((grade * 100) / 5)
-  const isImg = questionImg.includes('data:image')
+  const isImg = questionImg?.includes('data:image')
 
   const openCardModalHandler = (type: ModalType) => {
     dispatch(setCardInfo({ idCard, answer, question }))
