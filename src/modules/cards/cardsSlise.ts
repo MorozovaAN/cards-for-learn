@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
   cardId: '',
-  question: '',
+  question: { type: '', content: '' },
   answer: '',
 }
 
@@ -12,14 +12,23 @@ const cardsSlice = createSlice({
   reducers: {
     setCardInfo: (
       state,
-      action: PayloadAction<{ idCard: string; question: string; answer: string }>
+      action: PayloadAction<{
+        idCard: string
+        question: { type: string; content: string }
+        answer: string
+      }>
     ) => {
       state.cardId = action.payload.idCard
-      state.question = action.payload.question
+      state.question.type = action.payload.question.type
+      state.question.content = action.payload.question.content
       state.answer = action.payload.answer
+    },
+    setQuestion: (state, action: PayloadAction<{ type: string; content: string }>) => {
+      state.question.type = action.payload.type
+      state.question.content = action.payload.content
     },
   },
 })
 
-export const { setCardInfo } = cardsSlice.actions
+export const { setCardInfo, setQuestion } = cardsSlice.actions
 export const cardsReducer = cardsSlice.reducer

@@ -5,13 +5,13 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import s from 'components/modal/delete-pack-modal/DeletePackModal.module.scss'
 import { useDeleteCardMutation } from 'modules/cards/cardsApi'
-import { cardIdSelector, questionSelector } from 'modules/cards/cardsSelectors'
+import { cardIdSelector, questionContentSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
 
 export const DeleteCardModal = () => {
   const [deleteCard, { isLoading }] = useDeleteCardMutation()
   const cardId = useTypedSelector(cardIdSelector)
-  const question = useTypedSelector(questionSelector)
+  const question = useTypedSelector(questionContentSelector)
   const dispatch = useTypedDispatch()
 
   const deleteCardHandler = async () => {

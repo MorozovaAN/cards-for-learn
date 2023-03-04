@@ -42,7 +42,16 @@ export const Card: FC<CardType> = ({
   const isImg = questionImg?.includes('data:image')
 
   const openCardModalHandler = (type: ModalType) => {
-    dispatch(setCardInfo({ idCard, answer, question }))
+    dispatch(
+      setCardInfo({
+        idCard,
+        answer,
+        question: {
+          type: questionImg ? 'Image' : 'Text',
+          content: questionImg ? questionImg : question,
+        },
+      })
+    )
     dispatch(setModal({ open: true, type }))
   }
 

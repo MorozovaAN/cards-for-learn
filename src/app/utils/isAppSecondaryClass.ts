@@ -1,18 +1,18 @@
 export const isAppSecondaryClass = (location: string): boolean => {
   switch (location) {
-    case '/log-in':
+    case '/log-in/':
       return true
-    case '/log-up':
+    case '/log-up/':
       return true
-    case '/password':
+    case '/password/':
       return true
     case '/set-new-password/:token':
       return true
-    case '/check-email':
+    case '/check-email/':
       return true
-    case '/profile':
+    case '/profile/':
       return true
-    case '/learn':
+    case '/learn/':
       return true
     default:
       return false

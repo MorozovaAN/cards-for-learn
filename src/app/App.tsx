@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
-import { useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
@@ -19,16 +19,18 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
-  const location = useLocation()
+  const [searchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
-  const privetPage = isPrivatePage(location.pathname)
+  const privetPage = isPrivatePage(window.location.pathname)
   const appClasses = `${s.appDefault} ${
-    isAppSecondaryClass(location.pathname) ? s.appSecondary : ''
+    isAppSecondaryClass(window.location.pathname) ? s.appSecondary : ''
   }`
   const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
+
+  console.log('app')
 
   useEffect(() => {
     if (!isAuth) {
@@ -40,7 +42,7 @@ export const App = () => {
     dispatch(setModal({ open: false, type: '' }))
     dispatch(setClickAway(true))
     dispatch(setSkeletonsNumbers('6'))
-  }, [location])
+  }, [searchParams])
 
   return isAuth ? (
     <div className={appClasses}>
