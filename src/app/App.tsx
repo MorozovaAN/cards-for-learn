@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
-import { useSearchParams } from 'react-router-dom'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
 import { setModal, setSkeletonsNumbers } from 'app/appSlice'
-import { isAppSecondaryClass } from 'app/utils/isAppSecondaryClass'
 import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -19,18 +17,12 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
-  const [searchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
+
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
-  const privetPage = isPrivatePage(window.location.pathname)
-  const appClasses = `${s.appDefault} ${
-    isAppSecondaryClass(window.location.pathname) ? s.appSecondary : ''
-  }`
-  const sectionClasses = `${s.contentContainer} ${privetPage ? s.contentContainerPrivatePages : ''}`
-
-  console.log('app')
+  const privetPage = isPrivatePage(location.pathname)
 
   useEffect(() => {
     if (!isAuth) {
@@ -38,21 +30,21 @@ export const App = () => {
     }
   }, [])
 
-  useEffect(() => {
+  window.addEventListener('popstate', e => {
     dispatch(setModal({ open: false, type: '' }))
     dispatch(setClickAway(true))
     dispatch(setSkeletonsNumbers('6'))
-  }, [searchParams])
+  })
 
   return isAuth ? (
-    <div className={appClasses}>
+    <div className={s.appDefault}>
       <NotificationBar />
       <BaseModal />
 
       {isLoggedIn && <Header />}
       {isLoading && <LoadingProgress privatePage={privetPage} />}
 
-      <section className={sectionClasses}>
+      <section className={s.contentContainer}>
         <RoutesComponent />
       </section>
     </div>

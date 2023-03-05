@@ -45,19 +45,3 @@
 
   color: var(--color-on-primary-light-400);
 }
-
-.errorContainer {
-  width: 100%;
-  height: 20px;
-}
-
-.error {
-
-  @include subtitle(500);
-
-  margin: 0;
-  padding: 6px 0;
-
-  color: var(--color-warn-base);
-  text-align: start;
-}

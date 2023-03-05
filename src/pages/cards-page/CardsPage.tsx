@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
-import { BtnScrollUp } from 'components/btnScrollUp/BtnScrollUp'
+import { BtnScrollUp } from 'components/btn-scroll-up/BtnScrollUp'
 import { Cards } from 'modules/cards/Cards'
 
 export const CardsPage = () => {

@@ -2,25 +2,28 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
+import s from './AddNewCardModal.module.scss'
+
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { SelectQuestion } from 'common/select-question/SelectQuestion'
 import { uploadImage } from 'common/utils/uploadImage'
-import s from 'components/modal/add-new-card-modal/AddNewCardModal.module.scss'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
+import { questionTypeSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
-import { Select } from 'UI/select/Select'
 import { Textarea } from 'UI/textarea/Textarea'
 
 export const AddCardModal = () => {
   const [addCard, { isLoading }] = useAddNewCardMutation()
-  const [question, setQuestion] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [button, setButton] = useState(false)
-  const [questionImg, setQuestionImg] = useState('')
-  const [selectValue, setSelectValue] = useState('Text')
-  const dispatch = useTypedDispatch()
-  const inputRef = useRef<HTMLInputElement>(null)
   const [searchParams] = useSearchParams()
+  const dispatch = useTypedDispatch()
+
+  const questionType = useTypedSelector(questionTypeSelector)
+  const [question, setQuestion] = useState('')
+  const [questionImg, setQuestionImg] = useState('')
+  const [answer, setAnswer] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
   const id = searchParams.get('cardsPack_id')
 
   const addCardHandler = async () => {
@@ -32,52 +35,41 @@ export const AddCardModal = () => {
 
   const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) => setAnswer(e.target.value)
 
-  const onSelectChangeHandler = (value: string) => {
-    setSelectValue(value)
-    value === 'Text' && setButton(false)
-    value === 'Image' && setButton(true)
-  }
-
-  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) =>
     uploadImage(e, dispatch, setQuestionImg)
-  }
 
-  const selectFileHandler = () => {
-    inputRef && inputRef.current?.click()
-  }
+  const selectFileHandler = () => inputRef && inputRef.current?.click()
 
   return (
     <>
       <div className={s.questionContainer}>
         <div className={s.selectContainer}>
           <p className={s.selectTitle}>Question format:</p>
-
-          <Select
-            value={selectValue}
-            onChangeCallback={onSelectChangeHandler}
-            options={['Text', 'Image']}
-            disabled={isLoading}
-          />
+          <SelectQuestion disabled={isLoading} />
         </div>
 
-        {button ? (
-          <label className={s.label}>
-            <input
-              type="file"
-              style={{ display: 'none' }}
-              onChange={uploadHandler}
-              ref={inputRef}
-              accept=".jpg,.png,.svg,.jpeg"
-            />
+        {questionType === 'Image' ? (
+          <div className={s.imgContainer}>
+            {questionImg && (
+              <div className={s.imgBox}>
+                <img src={questionImg} alt="question image" className={s.img} />
+              </div>
+            )}
 
-            <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
-              Upload image
-            </Button>
+            <label className={s.label}>
+              <input
+                type="file"
+                style={{ display: 'none' }}
+                onChange={uploadHandler}
+                ref={inputRef}
+                accept=".jpg,.png,.svg,.jpeg"
+              />
 
-            <div className={s.imgBox}>
-              <img width="70" src={questionImg} alt="pre img" />
-            </div>
-          </label>
+              <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
+                Upload image
+              </Button>
+            </label>
+          </div>
         ) : (
           <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
         )}
@@ -86,7 +78,7 @@ export const AddCardModal = () => {
       <Textarea value={answer} onChange={changeAnswerHandler} label="Answer" />
 
       <Button
-        disabled={(!question && !questionImg) || !answer || isLoading}
+        disabled={(questionType === 'Image' ? !questionImg : !question) || !answer || isLoading}
         styleType="primary"
         className={s.button}
         onClick={addCardHandler}

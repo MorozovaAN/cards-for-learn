@@ -37,6 +37,7 @@ export const Card: FC<CardType> = ({
   const myId = useTypedSelector(idSelector)
   const [showAnswer, setShowAnswer] = useState(false)
   const dispatch = useTypedDispatch()
+
   const myCards = userId === myId
   const gradePercent = Math.round((grade * 100) / 5)
   const isImg = questionImg?.includes('data:image')
@@ -46,10 +47,9 @@ export const Card: FC<CardType> = ({
       setCardInfo({
         idCard,
         answer,
-        question: {
-          type: questionImg ? 'Image' : 'Text',
-          content: questionImg ? questionImg : question,
-        },
+        questionType: questionImg ? 'Image' : 'Text',
+        questionText: question === 'no question' ? '' : question,
+        questionImg,
       })
     )
     dispatch(setModal({ open: true, type }))

@@ -18,8 +18,6 @@ export const Textarea: FC<TextareaType> = ({ label, error, ...restProps }) => {
       <p className={s.label}>{label}</p>
 
       <textarea className={s.textarea} {...restProps} />
-
-      <div className={s.errorContainer}>{error && <p className={s.error}>{error}</p>}</div>
     </div>
   )
 }

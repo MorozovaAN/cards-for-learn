@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
@@ -10,7 +10,8 @@ import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import {
   answerSelector,
   cardIdSelector,
-  questionContentSelector,
+  questionImgSelector,
+  questionTextSelector,
   questionTypeSelector,
 } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
@@ -19,39 +20,38 @@ import { Textarea } from 'UI/textarea/Textarea'
 export const EditCardModal = () => {
   const [updateCard, { isLoading }] = useUpdateCardMutation()
   const dispatch = useTypedDispatch()
+
   const cardId = useTypedSelector(cardIdSelector)
   const questionType = useTypedSelector(questionTypeSelector)
-  const questionContent = useTypedSelector(questionContentSelector)
+  const questionText = useTypedSelector(questionTextSelector)
+  const questionImg = useTypedSelector(questionImgSelector)
   const answer = useTypedSelector(answerSelector)
 
-  const [questionValue, setQuestionValue] = useState(questionContent)
+  const [questionTextValue, setQuestionTextValue] = useState(questionText)
+  const [questionImgValue, setQuestionImgValue] = useState(questionImg)
   const [answerValue, setAnswerValue] = useState(answer)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    setQuestionValue(questionContent)
-  }, [questionContent])
 
   const editCardHandler = async () => {
     await updateCard({
       card: {
         _id: cardId,
         answer: answerValue,
-        questionImg: questionValue,
-        question: questionValue,
+        questionImg: questionImgValue,
+        question: questionTextValue,
       },
     })
     dispatch(setModal({ open: false, type: '' }))
   }
 
   const changeQuestionHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setQuestionValue(e.currentTarget.value)
+    setQuestionTextValue(e.currentTarget.value)
 
   const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setAnswerValue(e.currentTarget.value)
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    uploadImage(e, dispatch, setQuestionValue)
+    uploadImage(e, dispatch, setQuestionImgValue)
   }
 
   const selectFileHandler = () => {
@@ -67,9 +67,9 @@ export const EditCardModal = () => {
 
       {questionType === 'Image' ? (
         <div className={s.imgContainer}>
-          {questionValue && (
+          {questionImgValue && (
             <div className={s.imgBox}>
-              <img src={questionValue} alt="question image" className={s.img} />
+              <img src={questionImgValue} alt="question image" className={s.img} />
             </div>
           )}
 
@@ -90,25 +90,22 @@ export const EditCardModal = () => {
       ) : (
         <Textarea
           autoFocus
-          value={questionValue}
+          value={questionTextValue}
           onChange={changeQuestionHandler}
-          error={!questionValue.length ? 'Please, write your question' : ''}
           label="Question"
         />
       )}
 
-      <Textarea
-        autoFocus
-        value={answerValue}
-        onChange={changeAnswerHandler}
-        error={!answerValue.length ? 'Please, write your answer' : ''}
-        label="Answer"
-      />
+      <Textarea value={answerValue} onChange={changeAnswerHandler} label="Answer" />
 
       <Button
         className={s.button}
         onClick={editCardHandler}
-        disabled={!questionValue || !answerValue || isLoading}
+        disabled={
+          (questionType === 'Image' ? !questionImgValue : !questionTextValue) ||
+          !answerValue ||
+          isLoading
+        }
         styleType="primary"
       >
         Save
