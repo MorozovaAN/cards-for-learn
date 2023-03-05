@@ -17,6 +17,7 @@ type CardsListType = {
   myCards: boolean
   isFetching: boolean
 }
+
 export const CardsList: FC<CardsListType> = ({ cards, myCards, isFetching }) => {
   const skeletons = useTypedSelector(skeletonsSelector)
 

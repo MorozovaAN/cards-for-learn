@@ -5,7 +5,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
 import { setModal, setSkeletonsNumbers } from 'app/appSlice'
-import { isPrivatePage } from 'app/utils/isPrivatePage'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { BaseModal } from 'components/modal/BaseModal'
@@ -22,7 +21,6 @@ export const App = () => {
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
-  const privetPage = isPrivatePage(location.pathname)
 
   useEffect(() => {
     if (!isAuth) {
@@ -42,7 +40,7 @@ export const App = () => {
       <BaseModal />
 
       {isLoggedIn && <Header />}
-      {isLoading && <LoadingProgress privatePage={privetPage} />}
+      {isLoading && <LoadingProgress privatePage={isLoggedIn} />}
 
       <section className={s.contentContainer}>
         <RoutesComponent />
