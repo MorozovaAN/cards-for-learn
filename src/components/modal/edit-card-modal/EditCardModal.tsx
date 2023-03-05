@@ -80,7 +80,7 @@ export const EditCardModal = () => {
           </Button>
 
           <div className={s.imgBox}>
-            <img width="70" src={questionImg} alt="pre img" />
+            <img width="70" src={questionImg} alt="" />
           </div>
         </label>
       ) : (
@@ -104,7 +104,7 @@ export const EditCardModal = () => {
       <Button
         className={s.button}
         onClick={editCardHandler}
-        disabled={!questionValue || !answerValue || isLoading || !questionImg}
+        disabled={!questionValue || !answerValue || isLoading}
         styleType="primary"
       >
         Save

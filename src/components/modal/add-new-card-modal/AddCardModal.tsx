@@ -75,7 +75,7 @@ export const AddCardModal = () => {
             </Button>
 
             <div className={s.imgBox}>
-              <img width="70" src={questionImg} alt="pre img" />
+              <img width="70" src={questionImg} alt="" />
             </div>
           </label>
         ) : (
