@@ -3,9 +3,9 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { SelectQuestion } from 'common/select-question/SelectQuestion'
 import { uploadImage } from 'common/utils/uploadImage'
 import s from 'components/modal/edit-card-modal/EditCardModule.module.scss'
+import { SelectQuestion } from 'components/select-question/SelectQuestion'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import {
   answerSelector,

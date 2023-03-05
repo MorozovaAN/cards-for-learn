@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
   cardId: '',
-  questionType: 'Text',
+  questionType: 'Text' as QuestionTypeType,
   questionText: '',
   questionImg: '',
   answer: '',
@@ -16,7 +16,7 @@ const cardsSlice = createSlice({
       state,
       action: PayloadAction<{
         idCard: string
-        questionType: string
+        questionType: QuestionTypeType
         questionText: string
         questionImg: string
         answer: string
@@ -28,7 +28,7 @@ const cardsSlice = createSlice({
       state.questionImg = action.payload.questionImg
       state.answer = action.payload.answer
     },
-    setQuestionType: (state, action: PayloadAction<string>) => {
+    setQuestionType: (state, action: PayloadAction<QuestionTypeType>) => {
       state.questionType = action.payload
     },
   },
@@ -36,3 +36,5 @@ const cardsSlice = createSlice({
 
 export const { setCardInfo, setQuestionType } = cardsSlice.actions
 export const cardsReducer = cardsSlice.reducer
+
+export type QuestionTypeType = 'Text' | 'Image'
