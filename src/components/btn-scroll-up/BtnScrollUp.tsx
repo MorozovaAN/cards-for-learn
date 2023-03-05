@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { ReactComponent as ArrowUp } from 'assets/img/icons/arrow-up.svg'
-import scroll from 'components/btnScrollUp/BtnScrollUp.module.scss'
+import scroll from 'components/btn-scroll-up/BtnScrollUp.module.scss'
 import { Button } from 'UI/button/Button'
 
 export const BtnScrollUp = () => {

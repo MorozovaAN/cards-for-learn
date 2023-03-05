@@ -1,51 +1,57 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 
-import { uploadImage } from '../../../common/utils/uploadImage'
-import { Select } from '../../../UI/select/Select'
-
 import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { uploadImage } from 'common/utils/uploadImage'
 import s from 'components/modal/edit-card-modal/EditCardModule.module.scss'
+import { SelectQuestion } from 'components/select-question/SelectQuestion'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
-import { answerSelector, cardIdSelector, questionSelector } from 'modules/cards/cardsSelectors'
+import {
+  answerSelector,
+  cardIdSelector,
+  questionImgSelector,
+  questionTextSelector,
+  questionTypeSelector,
+} from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
 import { Textarea } from 'UI/textarea/Textarea'
 
 export const EditCardModal = () => {
   const [updateCard, { isLoading }] = useUpdateCardMutation()
-  const cardId = useTypedSelector(cardIdSelector)
-  const question = useTypedSelector(questionSelector)
-  const answer = useTypedSelector(answerSelector)
-  const [questionValue, setQuestionValue] = useState(question)
-  const [answerValue, setAnswerValue] = useState(answer)
   const dispatch = useTypedDispatch()
-  const [button, setButton] = useState(false)
-  const [questionImg, setQuestionImg] = useState('')
+
+  const cardId = useTypedSelector(cardIdSelector)
+  const questionType = useTypedSelector(questionTypeSelector)
+  const questionText = useTypedSelector(questionTextSelector)
+  const questionImg = useTypedSelector(questionImgSelector)
+  const answer = useTypedSelector(answerSelector)
+
+  const [questionTextValue, setQuestionTextValue] = useState(questionText)
+  const [questionImgValue, setQuestionImgValue] = useState(questionImg)
+  const [answerValue, setAnswerValue] = useState(answer)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [selectValue, setSelectValue] = useState('Text')
 
   const editCardHandler = async () => {
     await updateCard({
-      card: { _id: cardId, question: questionValue, answer: answerValue, questionImg },
+      card: {
+        _id: cardId,
+        answer: answerValue,
+        questionImg: questionImgValue,
+        question: questionTextValue,
+      },
     })
     dispatch(setModal({ open: false, type: '' }))
   }
 
   const changeQuestionHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setQuestionValue(e.currentTarget.value)
+    setQuestionTextValue(e.currentTarget.value)
 
   const changeAnswerHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setAnswerValue(e.currentTarget.value)
 
-  const onSelectChangeHandler = (value: string) => {
-    setSelectValue(value)
-    value === 'Text' && setButton(false)
-    value === 'Image' && setButton(true)
-  }
-
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    uploadImage(e, dispatch, setQuestionImg)
+    uploadImage(e, dispatch, setQuestionImgValue)
   }
 
   const selectFileHandler = () => {
@@ -56,55 +62,50 @@ export const EditCardModal = () => {
     <>
       <div className={s.selectContainer}>
         <p className={s.selectTitle}>Question format:</p>
-
-        <Select
-          value={selectValue}
-          onChangeCallback={onSelectChangeHandler}
-          options={['Text', 'Image']}
-          disabled={isLoading}
-        />
+        <SelectQuestion disabled={isLoading} />
       </div>
 
-      {button ? (
-        <label className={s.label}>
-          <input
-            type="file"
-            style={{ display: 'none' }}
-            onChange={uploadHandler}
-            ref={inputRef}
-            accept=".jpg,.png,.svg,.jpeg"
-          />
+      {questionType === 'Image' ? (
+        <div className={s.imgContainer}>
+          {questionImgValue && (
+            <div className={s.imgBox}>
+              <img src={questionImgValue} alt="question image" className={s.img} />
+            </div>
+          )}
 
-          <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
-            Upload image
-          </Button>
+          <label className={s.label}>
+            <input
+              type="file"
+              style={{ display: 'none' }}
+              onChange={uploadHandler}
+              ref={inputRef}
+              accept=".jpg,.png,.svg,.jpeg"
+            />
 
-          <div className={s.imgBox}>
-            <img width="70" src={questionImg} alt="pre img" />
-          </div>
-        </label>
+            <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
+              Upload image
+            </Button>
+          </label>
+        </div>
       ) : (
         <Textarea
           autoFocus
-          value={questionValue}
+          value={questionTextValue}
           onChange={changeQuestionHandler}
-          error={!questionValue.length ? 'Please, write your question' : ''}
           label="Question"
         />
       )}
 
-      <Textarea
-        autoFocus
-        value={answerValue}
-        onChange={changeAnswerHandler}
-        error={!answerValue.length ? 'Please, write your answer' : ''}
-        label="Answer"
-      />
+      <Textarea value={answerValue} onChange={changeAnswerHandler} label="Answer" />
 
       <Button
         className={s.button}
         onClick={editCardHandler}
-        disabled={!questionValue || !answerValue || isLoading || !questionImg}
+        disabled={
+          (questionType === 'Image' ? !questionImgValue : !questionTextValue) ||
+          !answerValue ||
+          isLoading
+        }
         styleType="primary"
       >
         Save
