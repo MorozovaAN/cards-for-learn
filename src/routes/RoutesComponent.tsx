@@ -1,12 +1,10 @@
 import React from 'react'
 
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { PrivateRoutes } from './PrivateRoutes'
 import { PATH } from './routes'
 
-import { isLoggedInSelector } from 'app/appSelectors'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { CardsPage } from 'pages/cards-page/CardsPage'
 import { CheckEmailPage } from 'pages/check-email-page/CheckEmailPage'
 import { ErrorPage } from 'pages/error-page/ErrorPage'
@@ -17,13 +15,11 @@ import { LogUpPage } from 'pages/log-up-page/LogUpPage'
 import { NewPasswordPage } from 'pages/new-password-page/NewPasswordPage'
 import { PacksPage } from 'pages/packs-page/PacksPage'
 import { ProfilePage } from 'pages/profile-page/ProfilePage'
+import { PrivateAuthRoutes } from 'routes/PrivateAuthRoutes'
 
 export const RoutesComponent = () => {
-  const location = useLocation()
-  const isLoggedIn = useTypedSelector(isLoggedInSelector)
-
   return (
-    <Routes location={location} key={location.pathname}>
+    <Routes>
       <Route element={<PrivateRoutes />}>
         <Route path={PATH.PROFILE} element={<ProfilePage />} />
         <Route path={PATH.PACKS} element={<PacksPage />} />
@@ -31,17 +27,16 @@ export const RoutesComponent = () => {
         <Route path={PATH.LEARN_CARDS} element={<LearnCardsPage />} />
       </Route>
 
-      <Route
-        path={PATH.MAIN}
-        element={isLoggedIn ? <Navigate to={PATH.PACKS} /> : <Navigate to={PATH.LOG_IN} />}
-      />
-      <Route path={PATH.LOG_IN} element={<LogInPage />} />
-      <Route path={PATH.LOG_UP} element={<LogUpPage />} />
-      <Route path={PATH.PASS_RECOVERY} element={<ForgotPasswordPage />} />
-      <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
-      <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />
-      <Route path={PATH.ERROR_404} element={<ErrorPage />} />
-      <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
+      <Route element={<PrivateAuthRoutes />}>
+        <Route path={PATH.MAIN} element={<Navigate to={PATH.LOG_IN} />} />
+        <Route path={PATH.LOG_IN} element={<LogInPage />} />
+        <Route path={PATH.LOG_UP} element={<LogUpPage />} />
+        <Route path={PATH.PASS_RECOVERY} element={<ForgotPasswordPage />} />
+        <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
+        <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />
+        <Route path={PATH.ERROR_404} element={<ErrorPage />} />
+        <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
+      </Route>
     </Routes>
   )
 }

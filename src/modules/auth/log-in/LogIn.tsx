@@ -1,14 +1,11 @@
 import React from 'react'
 
 import { useFormik } from 'formik'
-import { Navigate } from 'react-router-dom'
 
 import s from './LogIn.module.scss'
 
-import { isLoggedInSelector } from 'app/appSelectors'
 import { setIsLoading } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
-import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { useLogInMutation } from 'modules/auth/authApi'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
@@ -16,6 +13,7 @@ import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
+
 interface FormikErrorType {
   email?: string
   password?: string
@@ -24,7 +22,6 @@ interface FormikErrorType {
 
 export const LogIn = () => {
   const [setLogin, { isLoading }] = useLogInMutation()
-  const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -59,8 +56,6 @@ export const LogIn = () => {
       setLogin(values)
     },
   })
-
-  if (isLoggedIn) return <Navigate to={PATH.PACKS} />
 
   return (
     <Box size="L" className={s.container}>
