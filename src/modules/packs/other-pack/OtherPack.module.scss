@@ -77,17 +77,12 @@
   height: 100%;
 }
 
-.button {
+.btnContainer {
   display: flex;
   column-gap: 5px;
   align-items: center;
-  align-self: end;
-  justify-content: center;
 
   height: 100%;
-  padding: 6px 15px;
-
-  font-size: 14px;
 }
 
 .learnIcon {
@@ -98,4 +93,5 @@
 .cardsIcon {
   width: 16px;
   height: 20px;
+  margin-bottom: 2px;
 }

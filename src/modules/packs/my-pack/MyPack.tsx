@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 
-import { useNavigate } from 'react-router-dom'
-
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
@@ -12,6 +10,7 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 type PackType = {
   packId: string
@@ -31,19 +30,10 @@ export const MyPack: FC<PackType> = ({
   privatePack,
 }) => {
   const dispatch = useTypedDispatch()
-  const navigate = useNavigate()
 
   const openPackModalHandler = (type: ModalType) => {
     dispatch(setPackInfo({ packId, packName, privatePack }))
     dispatch(setModal({ open: true, type }))
-  }
-
-  const learnPackHandler = () => {
-    navigate(`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`)
-  }
-
-  const viewCardsHandler = () => {
-    navigate(`/cards?cardsPack_id=${packId}&user_id=${user_id}`)
   }
 
   return (
@@ -73,23 +63,20 @@ export const MyPack: FC<PackType> = ({
       </p>
 
       <div className={s.btnContainer}>
-        <Button
-          styleType="iconPrimary"
-          onClick={viewCardsHandler}
-          className={s.cardsTooltip}
-          data-tooltip={'View pack cards'}
-        >
-          <CardsIcon />
-        </Button>
+        <div data-tooltip="View pack cards" className={s.cardsTooltip}>
+          <NavLink url={`/cards?cardsPack_id=${packId}&user_id=${user_id}`} styleType="btnIcon">
+            <CardsIcon />
+          </NavLink>
+        </div>
 
-        <Button
-          styleType="iconPrimary"
-          onClick={learnPackHandler}
-          className={s.learnTooltip}
-          data-tooltip={'Learn pack'}
-        >
-          <LearnIcon width="18" />
-        </Button>
+        <div data-tooltip="Learn pack" className={s.learnTooltip}>
+          <NavLink
+            url={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`}
+            styleType="btnIcon"
+          >
+            <LearnIcon width="18" />
+          </NavLink>
+        </div>
 
         <Button
           styleType="iconPrimary"

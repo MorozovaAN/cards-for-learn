@@ -27,7 +27,7 @@
   align-items: center;
 }
 
-.learnPackBtn {
+.otherPackLearnBtn {
   display: flex;
   column-gap: 10px;
   align-items: center;
@@ -35,11 +35,6 @@
 
   width: 200px;
   height: 42px;
-
-  font-weight: 600;
-  color: var(--color-primary-base);
-
-  border-radius: 10px
 }
 
 .learnIcon {
@@ -48,8 +43,16 @@
 }
 
 .myPackBtn {
-  display: flex;
-  align-items: center;
-
+  width: 25%;
   height: 42px;
+
+}
+
+.myPackLearnBtn {
+  padding: 8px 20px;
+
+  background: var(--color-secondary-base);
+  &:hover {
+    background: var(--color-secondary-dark);
+  }
 }

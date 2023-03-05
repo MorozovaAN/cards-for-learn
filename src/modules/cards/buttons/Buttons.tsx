@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import Skeleton from '@mui/material/Skeleton'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import s from './Buttons.module.scss'
 
@@ -15,6 +15,7 @@ import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 type ButtonsType = {
   packId: string
@@ -39,13 +40,12 @@ export const Buttons: FC<ButtonsType> = ({
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
   const skeletons = [1, 2, 3, 4]
+  const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const openModalHandler = (type: ModalType) => {
     dispatch(setPackInfo({ packId, packName, privatePack }))
     dispatch(setModal({ open: true, type }))
   }
-
-  const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const myCardsList = isFetching ? (
     skeletons.map(el => (
@@ -61,12 +61,17 @@ export const Buttons: FC<ButtonsType> = ({
         disabled={disabled}
         onClick={() => openModalHandler('Add new card')}
       >
-        <PlusIcon width="20" height="20" />
+        <PlusIcon width="20" height="26" />
       </Button>
 
-      <Link to={learnUrl} className={s.myPackBtn}>
+      <NavLink
+        url={learnUrl}
+        styleType="btnIcon"
+        className={`${s.myPackBtn} ${s.myPackLearnBtn}`}
+        disabled={disabled}
+      >
         <LearnIcon className={s.learnIcon} stroke="#017c6e" />
-      </Link>
+      </NavLink>
 
       <Button
         styleType="secondary"
@@ -74,7 +79,7 @@ export const Buttons: FC<ButtonsType> = ({
         disabled={disabled}
         onClick={() => openModalHandler('Edit pack name')}
       >
-        <EditIcon width="18" fill="#017c6e" />
+        <EditIcon width="18" height="26" fill="#017c6e" />
       </Button>
 
       <Button
@@ -83,7 +88,7 @@ export const Buttons: FC<ButtonsType> = ({
         disabled={disabled}
         onClick={() => openModalHandler('Delete Pack')}
       >
-        <TrashIcon width="18" height="20" fill="#017c6e" />
+        <TrashIcon width="18" height="26" fill="#017c6e" />
       </Button>
     </>
   )
@@ -93,10 +98,15 @@ export const Buttons: FC<ButtonsType> = ({
       <Skeleton classes={{ root: s.skeletonOtherCards }} animation="wave" variant="rectangular" />
     </div>
   ) : (
-    <Link to={learnUrl} className={s.learnPackBtn}>
+    <NavLink
+      url={learnUrl}
+      className={s.otherPackLearnBtn}
+      styleType="buttonSecondary"
+      disabled={disabled}
+    >
       <p>Learn pack</p>
       <LearnIcon className={s.learnIcon} stroke="#017c6e" />
-    </Link>
+    </NavLink>
   )
 
   return (

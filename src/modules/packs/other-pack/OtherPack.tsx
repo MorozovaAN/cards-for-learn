@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 
-import { Link } from 'react-router-dom'
-
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import s from 'modules/packs/other-pack/OtherPack.module.scss'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 type PackType = {
   packId: string
@@ -41,15 +40,19 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
       </p>
 
       <div className={s.buttonsContainer}>
-        <Link to={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`}>
-          <p>Learn pack</p>
-          <LearnIcon className={s.learnIcon} />
-        </Link>
+        <NavLink url={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`} styleType="button">
+          <div className={s.btnContainer}>
+            <p>Learn pack</p>
+            <LearnIcon className={s.learnIcon} />
+          </div>
+        </NavLink>
 
-        <Link to={`/cards?cardsPack_id=${packId}`}>
-          <p>View cards</p>
-          <CardsIcon className={s.cardsIcon} />
-        </Link>
+        <NavLink url={`/cards?cardsPack_id=${packId}`} styleType="button">
+          <div className={s.btnContainer}>
+            <p>View cards</p>
+            <CardsIcon className={s.cardsIcon} />
+          </div>
+        </NavLink>
       </div>
     </div>
   )
