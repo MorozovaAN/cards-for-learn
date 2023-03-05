@@ -16,6 +16,7 @@ export const Select: FC<SelectType> = ({ options, value, onChangeCallback, disab
     value && onChangeCallback(value)
   }
 
+  console.log('select')
   const CustomSelect = forwardRef(function CustomSelect<TValue extends {}>(
     props: SelectUnstyledProps<TValue>,
     ref: ForwardedRef<HTMLButtonElement>

@@ -19,7 +19,7 @@ import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
-  const location = useLocation()
+  /*const location = useLocation()*/
   const dispatch = useTypedDispatch()
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
@@ -36,11 +36,11 @@ export const App = () => {
     }
   }, [])
 
-  useEffect(() => {
+  window.addEventListener('popstate', () => {
     dispatch(setModal({ open: false, type: '' }))
     dispatch(setClickAway(true))
     dispatch(setSkeletonsNumbers('6'))
-  }, [location])
+  })
 
   return isAuth ? (
     <div className={appClasses}>

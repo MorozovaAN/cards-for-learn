@@ -62,6 +62,9 @@ export const AddCardModal = () => {
 
         {button ? (
           <label className={s.label}>
+            <div className={s.imgBox}>
+              <img width="70" src={questionImg} alt="" />
+            </div>
             <input
               type="file"
               style={{ display: 'none' }}
@@ -73,10 +76,6 @@ export const AddCardModal = () => {
             <Button styleType="primary" onClick={selectFileHandler} className={s.button}>
               Upload image
             </Button>
-
-            <div className={s.imgBox}>
-              <img width="70" src={questionImg} alt="pre img" />
-            </div>
           </label>
         ) : (
           <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />

@@ -4,6 +4,7 @@ const initialState = {
   cardId: '',
   question: '',
   answer: '',
+  questionImg: '',
 }
 
 const cardsSlice = createSlice({
@@ -12,11 +13,17 @@ const cardsSlice = createSlice({
   reducers: {
     setCardInfo: (
       state,
-      action: PayloadAction<{ idCard: string; question: string; answer: string }>
+      action: PayloadAction<{
+        idCard: string
+        question: string
+        answer: string
+        questionImg: string
+      }>
     ) => {
       state.cardId = action.payload.idCard
       state.question = action.payload.question
       state.answer = action.payload.answer
+      state.questionImg = action.payload.questionImg
     },
   },
 })
