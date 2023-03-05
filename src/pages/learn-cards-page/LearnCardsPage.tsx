@@ -5,22 +5,16 @@ import { useNavigate } from 'react-router-dom'
 import s from './LearnCardsPage.module.scss'
 
 import { LearnCards } from 'modules/cards/learn-cards/LearnCards'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 export const LearnCardsPage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className={s.contentContainer}>
-      {/*<NavLink*/}
-      {/*  to={`/cards?cardsPack_id=${id}`}*/}
-      {/*  className={`${s.link} ${isLoading ? s.linkDisabled : ''}`}*/}
-      {/*>*/}
-      {/*  <p>&lArr; Back to Pack List</p>*/}
-      {/*</NavLink>*/}
-
-      <div onClick={() => navigate(-1)}>
-        <p>&lArr; Back to Cards List</p>
-      </div>
+    <div className={s.learnCardsPage}>
+      <NavLink url="" onClick={() => navigate(-1)} styleType="default">
+        <p>&lArr; Back</p>
+      </NavLink>
 
       <LearnCards />
     </div>

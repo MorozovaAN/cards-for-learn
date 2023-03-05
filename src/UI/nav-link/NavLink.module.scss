@@ -1,24 +1,5 @@
 @import 'src/common/style-mixins/mixins';
 
-/*.link {
-
-  @include title(600);
-
-  display: inline-block;
-
-  width: fit-content;
-  margin: 0;
-
-  color: inherit;
-  text-decoration: none;
-
-  transition: all 0.3s linear;
-
-  &:hover {
-    color: var(--color-primary-base);
-  }
-}*/
-
 .link {
   cursor: pointer;
 
@@ -30,6 +11,17 @@
   text-decoration: none;
 
   transition: all 0.3s linear;
+}
+
+.default {
+
+  @include title(600);
+
+  color: var(--color-on-primary-base);
+
+  &:hover {
+    color: var(--color-primary-base);
+  }
 }
 
 .primary {
@@ -47,12 +39,13 @@
 
 .button {
 
-  @include title;
+  @include subtitle;
 
-  width: 100%;
-  padding: 6px 15px;
+  height: 100%;
+  padding: 6px 16px;
 
   color: var(--color-background-base);
+  letter-spacing: 0.6px;
 
   background: var(--color-primary-base);
   border-radius: 30px;
@@ -60,4 +53,34 @@
   &:hover {
     background: var(--color-primary-dark-100);
   }
+}
+
+.buttonSecondary {
+  font-weight: 600;
+  color: var(--color-primary-base);
+
+  background: var(--color-secondary-base);
+  border-radius: 10px;
+
+  &:hover {
+    background: var(--color-secondary-dark);
+  }
+}
+
+.btnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 35px;
+
+  background: var(--color-primary-base);
+  border-radius: 30px;
+}
+
+.disabled {
+  pointer-events: none;
+
+  opacity: 0.5;
 }

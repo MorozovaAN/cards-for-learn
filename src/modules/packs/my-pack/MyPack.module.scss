@@ -74,6 +74,15 @@
   max-height: 100%;
 }
 
+.btnContainer {
+  display: flex;
+  column-gap: 12px;
+}
+
+.cardsTooltip, .deleteTooltip, .editTooltip, .learnTooltip {
+  width: 25%;
+}
+
 .cardsTooltip {
   &::after {
 
@@ -112,9 +121,4 @@
   @include subtitle(500);
 
   color: var(--color-primary-base);
-}
-
-.btnContainer {
-  display: flex;
-  column-gap: 12px;
 }

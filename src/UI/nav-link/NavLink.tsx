@@ -5,17 +5,28 @@ import { Link } from 'react-router-dom'
 import s from './NavLink.module.scss'
 
 type NavLinkType = {
-  url: string
+  url: string | ''
   children: ReactNode
-  styleType: 'primary' | 'default' | 'button'
+  styleType: 'primary' | 'default' | 'button' | 'buttonSecondary' | 'btnIcon'
   className?: string
+  onClick?: () => void
+  disabled?: boolean
 }
 
-export const NavLink: FC<NavLinkType> = ({ url, children, styleType, className }) => {
-  const linkClasses = `${s.link} ${styleType && s[styleType]} ${className && className}`
+export const NavLink: FC<NavLinkType> = ({
+  url,
+  children,
+  styleType,
+  className,
+  onClick,
+  disabled,
+}) => {
+  const linkClasses = ` ${className && className} ${s.link} ${styleType && s[styleType]} ${
+    disabled && s.disabled
+  }`
 
   return (
-    <Link to={url} className={linkClasses}>
+    <Link to={url} className={linkClasses} onClick={onClick}>
       {children}
     </Link>
   )

@@ -81,7 +81,12 @@ export const LearnCards = () => {
         {showAnswer ? (
           <Answer card_id={card._id} answer={card.answer} handelNextCard={nextCard} />
         ) : (
-          <Button styleType="primary" className={s.button} onClick={() => setShowAnswer(true)}>
+          <Button
+            styleType="primary"
+            className={s.button}
+            onClick={() => setShowAnswer(true)}
+            disabled={isLoading}
+          >
             Show answer
           </Button>
         )}

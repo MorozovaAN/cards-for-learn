@@ -1,22 +1,21 @@
 import React from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
+import s from './CardsPage.module.scss'
 
 import { BtnScrollUp } from 'components/btn-scroll-up/BtnScrollUp'
 import { Cards } from 'modules/cards/Cards'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 export const CardsPage = () => {
   const navigate = useNavigate()
 
   return (
-    <div>
-      {/*<NavLink url={PATH.PACKS}>*/}
-      {/*  <p>&lArr; Back to Packs List</p>*/}
-      {/*</NavLink>*/}
-
-      <Link to={''} onClick={() => navigate(-1)}>
-        <p>&lArr; Back to Pack List</p>
-      </Link>
+    <div className={s.contentContainer}>
+      <NavLink url="" onClick={() => navigate(-1)} styleType="default">
+        <p>&lArr; Back</p>
+      </NavLink>
 
       <Cards />
 

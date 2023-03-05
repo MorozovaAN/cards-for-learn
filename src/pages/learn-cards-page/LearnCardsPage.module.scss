@@ -1,5 +1,7 @@
-.contentContainer {
+.learnCardsPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  padding: 40px var(--margin-m);
 }
