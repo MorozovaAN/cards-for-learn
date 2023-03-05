@@ -1,3 +1,5 @@
+@import 'src/common/style-mixins/mixins';
+
 .profilePage {
   padding: 40px var(--margin-m);
 }
@@ -7,4 +9,19 @@
   justify-content: center;
 
   padding: var(--margin-l) 0;
+}
+
+.link {
+
+  @include title(600);
+
+
+  color: var(--color-on-primary-base);
+
+  background: transparent;
+  border:none;
+
+  &:hover {
+    color: var(--color-primary-base);
+  }
 }

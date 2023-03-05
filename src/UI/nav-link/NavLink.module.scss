@@ -1,6 +1,6 @@
 @import 'src/common/style-mixins/mixins';
 
-.link {
+.default {
   cursor: pointer;
 
   box-sizing: border-box;
@@ -13,11 +13,15 @@
   transition: all 0.3s linear;
 }
 
-.default {
+.link {
 
   @include title(600);
 
+
   color: var(--color-on-primary-base);
+
+  background: transparent;
+  border:none;
 
   &:hover {
     color: var(--color-primary-base);
