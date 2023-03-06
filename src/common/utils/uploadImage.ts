@@ -14,8 +14,8 @@ export const uploadImage = (
 
     const extension = file.name.slice(-4)
 
-    if (file.size > 112000) {
-      dispatch(setNotification({ message: 'Sorry, max file size - 112 Kb!', type: 'error' }))
+    if (file.size > 110000) {
+      dispatch(setNotification({ message: 'Sorry, max file size - 110 Kb!', type: 'error' }))
     } else if (
       extension !== '.jpg' &&
       extension !== '.png' &&

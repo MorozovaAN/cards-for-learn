@@ -25,9 +25,6 @@ export const RoutesComponent = () => {
         <Route path={PATH.PACKS} element={<PacksPage />} />
         <Route path={PATH.CARDS} element={<CardsPage />} />
         <Route path={PATH.LEARN_CARDS} element={<LearnCardsPage />} />
-
-        <Route path={PATH.ERROR_404} element={<ErrorPage />} />
-        <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
       </Route>
 
       <Route element={<PrivateAuthRoutes />}>
@@ -38,6 +35,8 @@ export const RoutesComponent = () => {
         <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
         <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />
       </Route>
+      <Route path={PATH.ERROR_404} element={<ErrorPage />} />
+      <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
     </Routes>
   )
 }
