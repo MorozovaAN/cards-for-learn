@@ -33,8 +33,10 @@
   --width-box-l: 500px;
   --width-box-m: 440px;
 
-  --margin-l: 50px;
+  --margin-xl: 50px;
+  --margin-l: 40px;
   --margin-m: 20px;
+  --margin-s: 10px;
 }
 
 html {

@@ -21,6 +21,7 @@ export const App = () => {
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
+  const appClasses = `${s.appDefault} ${!isLoggedIn ? s.appSecondary : ''}`
 
   useEffect(() => {
     if (!isAuth) {
@@ -35,14 +36,14 @@ export const App = () => {
   })
 
   return isAuth ? (
-    <div className={s.appDefault}>
+    <div className={appClasses}>
       <NotificationBar />
       <BaseModal />
 
       {isLoggedIn && <Header />}
       {isLoading && <LoadingProgress privatePage={isLoggedIn} />}
 
-      <section className={s.contentContainer}>
+      <section>
         <RoutesComponent />
       </section>
     </div>

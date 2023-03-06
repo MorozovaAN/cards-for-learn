@@ -1,6 +1,8 @@
+@import 'src/common/style-mixins/mixins';
+
 .errorContainer {
   display: flex;
-  column-gap: 50px;
+  column-gap: var(--margin-xl);
   align-items: center;
   justify-content: center;
 
@@ -10,7 +12,7 @@
 .textContainer {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap:  var(--margin-m);
   align-items: center;
 }
 
@@ -22,8 +24,7 @@
 }
 
 .subtitle {
-  margin: 0;
 
-  font-size: 16px;
-  font-weight: 500;
+  @include title(500);
+
 }

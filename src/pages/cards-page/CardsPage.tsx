@@ -9,13 +9,11 @@ import { NavLink } from 'UI/nav-link/NavLink'
 export const CardsPage = () => {
   return (
     <div className={s.cardsPage}>
-      <NavLink styleType="link">
-        <p>&lArr; Back</p>
-      </NavLink>
-
-      <Cards />
-
-      <BtnScrollUp />
+      <div className={s.contentContainer}>
+        <NavLink styleType="link">&lArr; Back</NavLink>
+        <Cards />
+        <BtnScrollUp />
+      </div>
     </div>
   )
 }

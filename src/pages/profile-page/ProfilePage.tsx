@@ -9,11 +9,11 @@ import { NavLink } from 'UI/nav-link/NavLink'
 export const ProfilePage = () => {
   return (
     <div className={s.profilePage}>
-      <NavLink url={PATH.PACKS} styleType="default" className={s.link}>
-        <p>&lArr; Back to Packs List</p>
-      </NavLink>
-
       <div className={s.contentContainer}>
+        <NavLink url={PATH.PACKS} styleType="default" className={s.link}>
+          <p>&lArr; Back to Packs List</p>
+        </NavLink>
+
         <Profile />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ForgotPassword } from 'modules'
-import { AnimationWrapper } from 'UI/animation-wrapper/animationWrapper'
+import { AnimationWrapper } from 'UI/animation-wrapper/AnimationWrapper'
 
 export const ForgotPasswordPage = () => {
   return (

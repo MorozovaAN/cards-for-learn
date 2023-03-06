@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
-import s from 'pages/log-in-page/LogInPage.module.scss'
+import s from './AnimationWrapper.module.scss'
 
 type AnimationWrapperType = {
   children: ReactNode

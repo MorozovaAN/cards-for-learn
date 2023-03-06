@@ -37,8 +37,8 @@ export const Search: FC<SearchType> = ({ disabled, selector, param }) => {
 
   useEffect(() => {
     if (!value && over) {
-      // searchParams.delete(`${param}`)
-      // setSearchParams(searchParams)
+      searchParams.delete(`${param}`)
+      setSearchParams(searchParams)
     }
   }, [value])
 
