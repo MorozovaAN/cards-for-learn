@@ -17,10 +17,6 @@
 
   border: none;
   border-radius: 30px;
-
-  &:active {
-    transform: translateY(4px);
-  }
 }
 
 .primary {
@@ -97,10 +93,6 @@
     cursor: pointer;
 
     background: var(--color-primary-dark-100);
-  }
-
-  &:active {
-    background: var(--color-background-base);
   }
 }
 
