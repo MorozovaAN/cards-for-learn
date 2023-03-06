@@ -42,7 +42,10 @@ export const Paginator: FC<PaginationPropsType> = ({
     searchParams.has('page') && searchParams.delete('page')
     setSearchParams({
       ...paramsHelper(searchParams),
-      pageCount: searchParams.has('user_id') ? (Number(value) - 1).toString() : value,
+      pageCount:
+        searchParams.has('user_id') && !location.pathname.includes('cards')
+          ? (Number(value) - 1).toString()
+          : value,
     })
   }
 
