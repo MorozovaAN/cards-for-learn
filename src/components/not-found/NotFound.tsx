@@ -9,11 +9,7 @@ type NotFoundType = {
 export const NotFound: FC<NotFoundType> = ({ notFound }) => {
   return (
     <div className={s.text}>
-      {notFound ? (
-        <h2>Sorry we didn&apos;t find any results</h2>
-      ) : (
-        <h2>You don&apos;t have any cards yet</h2>
-      )}
+      <h2>{notFound ? `Sorry we didn't find any results` : `You don't have any cards yet`}</h2>
     </div>
   )
 }

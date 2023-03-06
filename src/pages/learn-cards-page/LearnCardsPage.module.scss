@@ -1,7 +1,16 @@
+@import 'src/common/style-mixins/mixins';
+
 .learnCardsPage {
+
+  @include page;
+
+  background: var(--color-background-dark-100);
+}
+
+.contentContainer {
+
+  @include pageContainer;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  padding: 40px var(--margin-m);
 }

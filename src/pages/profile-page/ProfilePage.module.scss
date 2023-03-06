@@ -1,20 +1,27 @@
 @import 'src/common/style-mixins/mixins';
 
 .profilePage {
-  padding: 40px var(--margin-m);
+
+  @include page;
+
+  background: var(--color-background-dark-100);
 }
 
 .contentContainer {
-  display: flex;
-  justify-content: center;
 
-  padding: var(--margin-l) 0;
+  @include pageContainer;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--margin-xl);
+  align-items: center;
 }
 
 .link {
 
   @include title(600);
 
+  align-self: self-start;
 
   color: var(--color-on-primary-base);
 
