@@ -42,15 +42,9 @@ export const BaseModal = () => {
     }
   }, [open])
 
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('keyup', closeModalOnEscape)
-      dispatch(setModal({ type: '', open: false }))
-    }
-  }, [])
-
   const closeModal = () => {
     dispatch(setModal({ type: '', open: false }))
+    document.removeEventListener('keyup', closeModalOnEscape)
   }
 
   return createPortal(
