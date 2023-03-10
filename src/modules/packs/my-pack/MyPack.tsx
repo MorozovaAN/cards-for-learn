@@ -73,6 +73,7 @@ export const MyPack: FC<PackType> = ({
           <NavLink
             url={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`}
             styleType="btnIcon"
+            disabled={cardsCount === 0}
           >
             <LearnIcon width="18" />
           </NavLink>
