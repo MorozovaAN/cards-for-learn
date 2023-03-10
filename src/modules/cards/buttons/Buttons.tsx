@@ -68,7 +68,7 @@ export const Buttons: FC<ButtonsType> = ({
         url={learnUrl}
         styleType="btnIcon"
         className={`${s.myPackBtn} ${s.myPackLearnBtn}`}
-        disabled={disabled}
+        disabled={disabled || cardsCount === 0}
       >
         <LearnIcon className={s.learnIcon} stroke="#017c6e" />
       </NavLink>
