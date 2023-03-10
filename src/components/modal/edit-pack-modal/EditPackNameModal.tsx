@@ -10,6 +10,7 @@ import {
   packNameSelector,
   privateCheckboxSelector,
 } from 'modules/packs/packsSelectors'
+import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
@@ -29,6 +30,7 @@ export const EditPackNameModal = () => {
       cardsPack: { _id: packId, name: newName, private: privatePack },
     }).unwrap()
     dispatch(setModal({ open: false, type: '' }))
+    dispatch(setPackInfo({ packId: packId, packName: newName, privatePack: privateCheckbox }))
   }
 
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {

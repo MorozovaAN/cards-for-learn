@@ -14,16 +14,18 @@ import { idSelector } from 'modules/auth/authSelectors'
 import { Buttons } from 'modules/cards/buttons/Buttons'
 import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
+import { packNameSelector } from 'modules/packs/packsSelectors'
 
 export const Cards = () => {
   const [searchParams] = useSearchParams()
+  const packName = useTypedSelector(packNameSelector)
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
   const myId = useTypedSelector(idSelector)
 
   return (
     <div className={s.container}>
       {data ? (
-        <p className={s.name}>{data.packName}</p>
+        <p className={s.name}>{packName !== '' ? packName : data.packName}</p>
       ) : (
         <div className={s.skeletonNameContainer}>
           <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
