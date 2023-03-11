@@ -5,7 +5,6 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { uploadImage } from 'common/utils/uploadImage'
 import s from 'components/modal/edit-card-modal/EditCardModule.module.scss'
-import { SelectQuestion } from 'components/select-question/SelectQuestion'
 import { useUpdateCardMutation } from 'modules/cards/cardsApi'
 import {
   answerSelector,
@@ -60,11 +59,6 @@ export const EditCardModal = () => {
 
   return (
     <>
-      <div className={s.selectContainer}>
-        <p className={s.selectTitle}>Question format:</p>
-        <SelectQuestion disabled={isLoading} />
-      </div>
-
       {questionType === 'Image' ? (
         <div className={s.imgContainer}>
           {questionImgValue && (

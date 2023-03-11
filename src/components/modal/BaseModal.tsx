@@ -64,7 +64,7 @@ export const BaseModal = () => {
             {type === 'Delete Pack' && <DeletePackModal />}
 
             {type === 'Add new card' && <AddCardModal />}
-            {type === 'Edit card name' && <EditCardModal />}
+            {type === 'Edit card' && <EditCardModal />}
             {type === 'Delete Card' && <DeleteCardModal />}
           </Box>
         </div>

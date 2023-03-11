@@ -9,7 +9,6 @@ export const LearnCardsPage = () => {
   return (
     <div className={s.learnCardsPage}>
       <div className={s.contentContainer}>
-        <NavLink styleType="link">&lArr; Back</NavLink>
         <LearnCards />
       </div>
     </div>

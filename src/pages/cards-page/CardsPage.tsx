@@ -10,7 +10,6 @@ export const CardsPage = () => {
   return (
     <div className={s.cardsPage}>
       <div className={s.contentContainer}>
-        <NavLink styleType="link">&lArr; Back</NavLink>
         <Cards />
         <BtnScrollUp />
       </div>
