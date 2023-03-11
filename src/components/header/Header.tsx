@@ -32,22 +32,30 @@ export const Header = () => {
             <img src={logo} className={s.logo} alt="logo" />
           </h1>
         </Link>
-        <NavLink styleType={'primary'} url={PATH.PROFILE}>
-          <p>Profile</p>
-        </NavLink>
-        <NavLink styleType={'primary'} url={`/my-packs?user_id=${user_id}`}>
-          <p>My packs</p>
-        </NavLink>
-        <NavLink styleType={'primary'} url={PATH.PACKS}>
-          <p>Other packs</p>
-        </NavLink>
-        <Button onClick={logoutHandler} styleType={'secondary'}>
-          <LogoutIcon />
-        </Button>
 
-        <div className={s.userInfo}>
-          <p className={s.name}>{userName}</p>
-          <img src={avatar} className={s.avatar} alt="user avatar" />
+        <div className={s.linksContainer}>
+          <NavLink styleType="primary" url={PATH.PACKS}>
+            <p>Other packs</p>
+          </NavLink>
+
+          <NavLink styleType="primary" url={`/my-packs?user_id=${user_id}`}>
+            <p>My packs</p>
+          </NavLink>
+
+          <NavLink styleType="primary" url={PATH.PROFILE}>
+            <p>Profile</p>
+          </NavLink>
+        </div>
+
+        <div className={s.userInfoContainer}>
+          <div className={s.userInfo}>
+            <p className={s.name}>{userName}</p>
+            <img src={avatar} className={s.avatar} alt="user avatar" />
+          </div>
+
+          <Button onClick={logoutHandler} styleType="icon">
+            <LogoutIcon />
+          </Button>
         </div>
       </nav>
     </header>
