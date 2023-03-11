@@ -47,12 +47,12 @@ export const PacksList: FC<PacksType> = ({ responsePacks, isFetching }) => {
       ) : (
         <>
           {myPacksPage &&
-            (!responsePacks?.length && searchParams.get('packName') !== null ? null : (
+            (!packs?.length && searchParams.get('packName') !== null ? null : (
               <div className={s.addPack} onClick={addPackHandler}>
                 <Plus />
               </div>
             ))}
-          {!responsePacks?.length && searchParams.get('packName') !== null ? (
+          {!packs?.length && searchParams.get('packName') !== null ? (
             <NotFound notFound="notFound" />
           ) : (
             packs?.map(p => {
