@@ -44,6 +44,8 @@
 .subtitle, .subtitleImg  {
 
   @include title(600);
+
+  word-break: break-word;
 }
 
 .subtitleImg {
