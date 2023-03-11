@@ -15,14 +15,11 @@ import { Button } from 'UI/button/Button'
 import { NavLink } from 'UI/nav-link/NavLink'
 
 export const Header = () => {
+  const [logOut] = useLogOutMutation()
   const userName = useTypedSelector(nameSelector)
   const userAvatar = useTypedSelector(avatarSelector)
   const user_id = useTypedSelector(idSelector)
   const avatar = userAvatar ? userAvatar : avatarPlug
-  const [logOut] = useLogOutMutation()
-  const logoutHandler = () => {
-    logOut()
-  }
 
   return (
     <header className={s.headerContainer}>
@@ -53,7 +50,7 @@ export const Header = () => {
             <img src={avatar} className={s.avatar} alt="user avatar" />
           </div>
 
-          <Button onClick={logoutHandler} styleType="icon">
+          <Button onClick={() => logOut()} styleType="icon">
             <LogoutIcon />
           </Button>
         </div>
