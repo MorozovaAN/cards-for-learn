@@ -57,7 +57,7 @@ export const LearnCards = () => {
     <div className={s.learnCards}>
       <h2 className={s.title}>
         {data?.packName ? (
-          `Learn pack '${data?.packName}'`
+          `Learning pack '${data?.packName}'`
         ) : (
           <div className={s.skeletonTitleContainer}>
             <Skeleton classes={{ root: s.skeletonTitle }} animation="wave" variant="rectangular" />
