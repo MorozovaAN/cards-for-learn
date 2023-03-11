@@ -1,13 +1,24 @@
 @import 'src/common/style-mixins/mixins';
 
 .packsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  row-gap: 40px;
+  column-gap: 40px;
+  justify-content: space-evenly;
 
   min-height: 434px;
-  padding: 40px 0;
+  padding: var(--margin-l) 0;
+
+  @media (max-width: 1030px) {
+    grid-template-columns: repeat(2, 300px);
+    row-gap: var(--margin-l);
+    column-gap: 0;
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 300px;
+  }
 }
 
 

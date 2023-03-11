@@ -22,7 +22,9 @@ export const Packs = () => {
     <>
       <div className={s.filters}>
         {data ? (
-          <Search selector="Packs" param="packName" disabled={isFetching} />
+          <div className={s.search}>
+            <Search selector="Packs" param="packName" disabled={isFetching} />
+          </div>
         ) : (
           <div className={s.skeletonSearchContainer}>
             <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />
