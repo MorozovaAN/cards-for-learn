@@ -4,6 +4,7 @@ import { setModal } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import s from 'components/modal/delete-pack-modal/DeletePackModal.module.scss'
+import { packsApi } from 'modules'
 import { useDeleteCardMutation } from 'modules/cards/cardsApi'
 import {
   cardIdSelector,
@@ -23,6 +24,7 @@ export const DeleteCardModal = () => {
   const questionImg = useTypedSelector(questionImgSelector)
 
   const deleteCardHandler = async () => {
+    dispatch(packsApi.util.invalidateTags(['packs']))
     await deleteCard(cardId).unwrap()
     dispatch(setModal({ open: false, type: '' }))
   }
