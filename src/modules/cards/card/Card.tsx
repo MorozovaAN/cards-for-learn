@@ -102,7 +102,7 @@ export const Card: FC<CardType> = ({
 
         {myCards && (
           <div className={s.actions}>
-            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Edit card name')}>
+            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Edit card')}>
               <EditIcon width="18" fill="#fff" />
             </Button>
 

@@ -68,7 +68,7 @@ export type ModalType =
   | 'Edit pack name'
   | 'Delete Pack'
   | 'Add new card'
-  | 'Edit card name'
+  | 'Edit card'
   | 'Delete Card'
 
 export const {
