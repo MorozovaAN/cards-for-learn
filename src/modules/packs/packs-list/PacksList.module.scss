@@ -2,31 +2,41 @@
 
 .packsContainer {
   display: grid;
-  grid-template-columns: repeat(3, 300px);
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 40px;
   column-gap: 40px;
-  justify-content: space-evenly;
+
 
   min-height: 434px;
   padding: var(--margin-l) 0;
 
-  @media (max-width: 1030px) {
-    grid-template-columns: repeat(2, 300px);
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2,  1fr);
     row-gap: var(--margin-l);
-    column-gap: 0;
+    column-gap: 10%;
   }
 
   @media (max-width: 720px) {
-    grid-template-columns: 300px;
+    row-gap: var(--margin-l);
+   column-gap: var(--margin-l);
+  }
+
+  @media (max-width: 520px) {
+    gap: 20px;
+  }
+
+
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
   }
 }
 
 
-.skeletonPackContainer .skeletonPack {
+.skeletonPackContainer .skeletonPack, .skeletonPackContainer {
 
   @include skeletonBase;
 
-  width: 300px ;
+  width: 100%;
   height: 200px;
 }
 

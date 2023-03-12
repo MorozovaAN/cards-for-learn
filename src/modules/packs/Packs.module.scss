@@ -2,37 +2,22 @@
 
 .filters {
   display: grid;
-  grid-template-columns: 1fr 170px 240px auto;
+  grid-template-columns: 1fr auto auto;
   column-gap: 25px;
   align-items: flex-end;
 
   width: 100%;
   height: 70px;
 
-  @media (max-width: 930px) {
-    grid-template-columns: 170px 240px auto;
-    row-gap: var(--margin-m);
-
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.search {
-
-  @media (max-width: 930px) {
-    grid-column: 1/4;
-    grid-row: 2/3;
-
-    width: 100%;
-    margin: 0 auto;
+  @media (max-width: 520px) {
+    gap: var(--margin-s);
   }
 }
 
 .skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {
 
   @include skeletonBase;
-
+  
   height: 42px;
 }
 

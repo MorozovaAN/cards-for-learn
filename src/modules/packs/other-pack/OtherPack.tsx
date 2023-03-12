@@ -30,7 +30,7 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
       </p>
 
       <p className={s.creator}>
-        <span className={s.subtitle}>Create by: </span>
+        <span className={`${s.subtitle} ${s.creatorSubtitle}`}>Create by: </span>
         {author}
       </p>
 
@@ -40,16 +40,20 @@ export const OtherPack: FC<PackType> = ({ packId, packName, cardsCount, author, 
       </p>
 
       <div className={s.buttonsContainer}>
-        <NavLink url={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`} styleType="button">
+        <NavLink
+          url={`/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`}
+          styleType="button"
+          className={s.linkBtn}
+        >
           <div className={s.btnContainer}>
-            <p>Learn pack</p>
+            {document.body.clientWidth > 520 && <p>Learn pack</p>}
             <LearnIcon className={s.learnIcon} />
           </div>
         </NavLink>
 
-        <NavLink url={`/cards?cardsPack_id=${packId}`} styleType="button">
+        <NavLink url={`/cards?cardsPack_id=${packId}`} styleType="button" className={s.linkBtn}>
           <div className={s.btnContainer}>
-            <p>View cards</p>
+            {document.body.clientWidth > 520 && <p>View cards</p>}
             <CardsIcon className={s.cardsIcon} />
           </div>
         </NavLink>
