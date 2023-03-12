@@ -6,7 +6,6 @@
   row-gap: 40px;
   column-gap: 40px;
 
-
   min-height: 434px;
   padding: var(--margin-l) 0;
 
@@ -18,19 +17,17 @@
 
   @media (max-width: 720px) {
     row-gap: var(--margin-l);
-   column-gap: var(--margin-l);
+    column-gap: var(--margin-l);
   }
 
   @media (max-width: 520px) {
-    gap: 20px;
+    gap: var(--margin-m);
   }
-
 
   @media (max-width: 420px) {
     grid-template-columns: 1fr;
   }
 }
-
 
 .skeletonPackContainer .skeletonPack, .skeletonPackContainer {
 

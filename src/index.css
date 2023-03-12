@@ -37,6 +37,13 @@
   --margin-l: 40px;
   --margin-m: 20px;
   --margin-s: 10px;
+
+  --media-xl: 1000px;
+  --media-l: 900;
+  --media-m: 720px;
+  --media-s: 520px;
+  --media-xs: 420px;
+/*  todo удалить media размеры когда доделаем медиа*/
 }
 
 html {

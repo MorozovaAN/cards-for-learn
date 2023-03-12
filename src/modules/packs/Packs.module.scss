@@ -8,10 +8,6 @@
 
   width: 100%;
   height: 70px;
-
-  @media (max-width: 520px) {
-    gap: var(--margin-s);
-  }
 }
 
 .skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {

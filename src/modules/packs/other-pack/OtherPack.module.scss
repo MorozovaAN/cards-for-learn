@@ -23,28 +23,20 @@
   background-color: var(--color-secondary-base-transparent);
 
   @media (max-width: 1000px) {
-  padding: 16px 10px 12px 10px;
+    padding: 16px 10px 12px 10px;
   }
 
   @media (max-width: 600px) {
-    height: 170px;
+    height: 160px;
     padding: 14px 8px 10px 8px;
   }
   
   @media (max-width: 520px) {
     gap:0;
-
-    height: 180px;
   }
-}
-
-.pack p {
-  overflow: hidden;
-
-  max-height: 100%;
 
   @media (max-width: 420px) {
-    font-size: 14px;
+    gap:6px;
   }
 }
 
@@ -53,7 +45,7 @@
 
   &::after {
 
-    @include tooltipAfter(185px,252px);
+    @include tooltipAfter(185px, 252px);
   }
 
   &:hover::after {
@@ -62,11 +54,29 @@
   }
 }
 
-.creator {
+.name {
+
+  @include headline3(600);
+
   overflow: hidden;
 
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
+}
+
+.subtitleContainer {
+  overflow: hidden;
+
+  max-height: 100%;
+
+  @media (max-width: 420px) {
+    font-size: 14px;
+  }
 }
 
 .subtitle {
@@ -84,19 +94,11 @@
   }
 }
 
-p.name {
-
-  @include headline3(600);
-
+.creator {
   overflow: hidden;
 
-  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  @media (max-width: 420px) {
-    font-size: 16px;
-  }
 }
 
 .creatorSubtitle {
@@ -124,7 +126,6 @@ p.name {
   column-gap: 5px;
   align-items: center;
 
-
   height: 100%;
 }
 
@@ -138,6 +139,13 @@ p.name {
   
   @media (max-width: 600px) {
     padding: 3px 0;
+  }
+}
+
+.btnTitle {
+
+  @media (max-width: 520px) {
+    display: none;
   }
 }
 
