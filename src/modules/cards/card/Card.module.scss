@@ -107,17 +107,3 @@
   @include tooltipHover;
 }
 
-.editTooltip::after {
-
-  @include tooltipAfter($bottom: 37px, $left: 37px);
-}
-
-.deleteTooltip::after {
-
-  @include tooltipAfter($bottom: 37px, $left: 93px);
-}
-
-.editTooltip, .deleteTooltip, :hover::after {
-
-  @include tooltipHover;
-}
