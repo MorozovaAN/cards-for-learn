@@ -22,6 +22,8 @@
 }
 
 .buttonsContainer {
+  position: relative;
+
   display: flex;
   column-gap: 10px;
   align-items: center;
@@ -45,14 +47,45 @@
 .myPackBtn {
   width: 25%;
   height: 42px;
-
 }
 
 .myPackLearnBtn {
-  padding: 8px 20px;
+  padding: 21px 21px;
 
   background: var(--color-secondary-base);
+
   &:hover {
     background: var(--color-secondary-dark);
   }
+}
+.addTooltip {
+  &::after {
+
+    @include tooltipAfter(45px, 45px)
+  }
+}
+
+.learnTooltip {
+  &::after {
+
+    @include tooltipAfter(45px, 115px)
+  }
+}
+
+.editTooltip {
+  &::after {
+
+    @include tooltipAfter(45px, 182px);
+  }
+}
+
+.deleteTooltip {
+  &::after {
+
+    @include tooltipAfter(45px, 250px);
+  }
+}
+.addTooltip,.learnTooltip,.editTooltip,.deleteTooltip,:hover::after {
+
+  @include tooltipHover();
 }

@@ -102,11 +102,21 @@ export const Card: FC<CardType> = ({
 
         {myCards && (
           <div className={s.actions}>
-            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Edit card')}>
+            <Button
+              styleType="iconPrimary"
+              onClick={() => openCardModalHandler('Edit card')}
+              data-tooltip="Edit card"
+              className={s.editTooltip}
+            >
               <EditIcon width="18" fill="#fff" />
             </Button>
 
-            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Delete Card')}>
+            <Button
+              styleType="iconPrimary"
+              onClick={() => openCardModalHandler('Delete Card')}
+              data-tooltip="Delete card"
+              className={s.deleteTooltip}
+            >
               <TrashIcon width="18" height="20" />
             </Button>
           </div>

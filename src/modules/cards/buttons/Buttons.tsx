@@ -57,36 +57,41 @@ export const Buttons: FC<ButtonsType> = ({
     <>
       <Button
         styleType="secondary"
-        className={s.myPackBtn}
+        className={`${s.myPackBtn} ${s.addTooltip}`}
         disabled={disabled}
         onClick={() => openModalHandler('Add new card')}
+        data-tooltip={'Add new card'}
       >
         <PlusIcon width="20" height="26" />
       </Button>
 
-      <NavLink
-        url={learnUrl}
-        styleType="btnIcon"
-        className={`${s.myPackBtn} ${s.myPackLearnBtn}`}
-        disabled={disabled || cardsCount === 0}
-      >
-        <LearnIcon className={s.learnIcon} stroke="#017c6e" />
-      </NavLink>
+      <div data-tooltip={'Learn pack'} className={s.learnTooltip}>
+        <NavLink
+          url={learnUrl}
+          styleType="btnIcon"
+          className={s.myPackLearnBtn}
+          disabled={disabled || cardsCount === 0}
+        >
+          <LearnIcon className={s.learnIcon} stroke="#017c6e" />
+        </NavLink>
+      </div>
 
       <Button
         styleType="secondary"
-        className={s.myPackBtn}
+        className={`${s.myPackBtn} ${s.editTooltip}`}
         disabled={disabled}
         onClick={() => openModalHandler('Edit pack name')}
+        data-tooltip={'Edit pack name'}
       >
         <EditIcon width="18" height="26" fill="#017c6e" />
       </Button>
 
       <Button
         styleType="secondary"
-        className={s.myPackBtn}
+        className={`${s.myPackBtn} ${s.deleteTooltip}`}
         disabled={disabled}
         onClick={() => openModalHandler('Delete Pack')}
+        data-tooltip={'Delete pack'}
       >
         <TrashIcon width="18" height="26" fill="#017c6e" />
       </Button>
