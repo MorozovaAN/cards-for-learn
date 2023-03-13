@@ -7,6 +7,11 @@
   height: 42px;
 
   border-radius: 10px;
+
+  @media (max-width: 520px) {
+    width: 37px;
+    height: 37px;
+  }
 }
 
 .tooltip {
@@ -22,5 +27,14 @@
   &:hover::after {
 
     @include tooltipHover;
+  }
+}
+
+.icon {
+
+  @media (max-width: 520px) {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
   }
 }

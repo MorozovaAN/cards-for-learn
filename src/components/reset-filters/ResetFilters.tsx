@@ -24,14 +24,14 @@ export const ResetFilters: FC<ResetAllFiltersType> = ({ disabled }) => {
   }
 
   return (
-    <div className={s.tooltip} data-tooltip={'Reset all filters'}>
+    <div className={s.tooltip} data-tooltip="Reset all filters">
       <Button
         styleType="iconPrimary"
         className={s.button}
         onClick={resetFiltersHandler}
         disabled={disabled}
       >
-        <ResetFiltersIcon />
+        <ResetFiltersIcon className={s.icon} />
       </Button>
     </div>
   )

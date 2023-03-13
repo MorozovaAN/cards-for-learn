@@ -1,15 +1,50 @@
+@import 'src/common/style-mixins/mixins';
+
 .paginatorContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   align-items: center;
   justify-content: flex-start;
 
-  height: 26px;
+  @media (max-width: 620px) {
+    column-gap: 12px;
+  }
+
+  @media (max-width: 420px) {
+    column-gap: 4px;
+  }
 }
 
 .pagination {
-  color: var(--color-background-base);
+  flex-shrink: 0;
+}
 
-  background-color: var(--color-primary-base);
+.paginationUl {
+  column-gap: 10px;
+
+  li {
+
+    @include transitionMain;
+
+    border-radius: 4px;
+  }
+
+  li:hover {
+   background-color: var(--color-background-dark-400);
+  }
+
+  @media (max-width: 500px) {
+    column-gap: 4px;
+  }
+}
+
+.selectContainer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+
+  @media (max-width: 340px) {
+   display: none;
+  }
 }
 
 .showPerPage {
@@ -17,4 +52,12 @@
 
   margin-right: 11px;
   margin-left: 11px;
+  
+  @media (max-width: 650px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 620px) {
+   display: none;
+  }
 }

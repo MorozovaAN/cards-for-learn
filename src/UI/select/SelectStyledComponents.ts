@@ -39,6 +39,14 @@ export const StyledButton = styled('button')(
     content: '▾';
     float: right;
   }
+  
+  @media (max-width: 620px) {
+    height: 32px;
+  }
+  
+  @media (max-width: 500px) {
+   font-size: 14px;
+  }
   `
 )
 
@@ -55,6 +63,10 @@ export const StyledListbox = styled('ul')(
   background: var(--color-background-dark-400);
   color: var(--color-on-primary-light-400);
   box-shadow: 0px -1px 10px 1px var(--color-on-primary-light-400);
+  
+  @media (max-width: 500px) {
+   font-size: 14px;
+  }
   `
 )
 

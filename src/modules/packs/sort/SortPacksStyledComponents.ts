@@ -65,6 +65,16 @@ export const StyledButton = styled('button')(
        width: 21px;
      }
   }
+  
+  @media (max-width: 520px) {
+    width: 37px;
+    height: 37px;
+    
+    &::after {
+     top: 6px;
+     left: 8px;
+    }
+  }
   `
 )
 
@@ -81,6 +91,11 @@ export const StyledListBox = styled('ul')(
   background: var(--color-background-dark-400);
   color: var(--color-on-primary-light-400);
   box-shadow: 0px 7px 15px var(--color-on-primary-light-400);
+  
+  @media (max-width: 520px) {
+   font-size: 13px;
+   width: 200px;
+  }
   `
 )
 

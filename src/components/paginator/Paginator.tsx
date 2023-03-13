@@ -56,13 +56,12 @@ export const Paginator: FC<PaginationPropsType> = ({
         count={pages}
         page={currentPage}
         disabled={disabled}
+        siblingCount={document.body.clientWidth < 420 ? 0 : 1} //todo fix
         size="small"
         shape="rounded"
+        classes={{ root: s.pagination, ul: s.paginationUl }}
         sx={{
-          '.MuiPagination-ul': {
-            columnGap: '10px',
-          },
-          '.css-w05zow-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected': {
+          '.MuiPaginationItem-root.Mui-selected': {
             backgroundColor: '#017c6e',
             color: '#ffffff',
             pointerEvents: 'none',
@@ -70,16 +69,18 @@ export const Paginator: FC<PaginationPropsType> = ({
         }}
       />
 
-      <p className={s.showPerPage}>Show</p>
+      <div className={s.selectContainer}>
+        <p className={s.showPerPage}>Show</p>
 
-      <Select
-        value={selectValue}
-        onChangeCallback={changeNumberPacksPerPageHandler}
-        options={selectOptions}
-        disabled={disabled}
-      />
+        <Select
+          value={selectValue}
+          onChangeCallback={changeNumberPacksPerPageHandler}
+          options={selectOptions}
+          disabled={disabled}
+        />
 
-      <p className={s.showPerPage}>packs per page</p>
+        <p className={s.showPerPage}>packs per page</p>
+      </div>
     </div>
   )
 }
