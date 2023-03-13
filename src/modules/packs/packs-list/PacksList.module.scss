@@ -3,8 +3,8 @@
 .packsContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 40px;
-  column-gap: 40px;
+  row-gap:  var(--margin-l);
+  column-gap:  var(--margin-l);
 
   min-height: 434px;
   padding: var(--margin-l) 0;

@@ -18,8 +18,6 @@
   height: 200px;
   padding: 15px 15px 17px 15px;
 
-  line-height: 1.25;
-
   background-color: var(--color-secondary-base-transparent);
 
   @media (max-width: 1000px) {
@@ -71,8 +69,6 @@
 
 .subtitleContainer {
   overflow: hidden;
-
-  max-height: 100%;
 
   @media (max-width: 420px) {
     font-size: 14px;
