@@ -38,7 +38,7 @@ export const MyPack: FC<PackType> = ({
 
   return (
     <div className={s.pack}>
-      {packName.length > 15 ? (
+      {packName.length > 22 ? (
         <div className={s.nameTooltip} data-tooltip={packName}>
           <p className={s.name}>{packName}</p>
         </div>

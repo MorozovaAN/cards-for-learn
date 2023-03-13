@@ -9,6 +9,7 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { uploadImage } from 'common/utils/uploadImage'
 import { SelectQuestion } from 'components/select-question/SelectQuestion'
+import { packsApi } from 'modules'
 import { useAddNewCardMutation } from 'modules/cards/cardsApi'
 import { questionTypeSelector } from 'modules/cards/cardsSelectors'
 import { Button } from 'UI/button/Button'
@@ -27,6 +28,7 @@ export const AddCardModal = () => {
   const id = searchParams.get('cardsPack_id')
 
   const addCardHandler = async () => {
+    dispatch(packsApi.util.invalidateTags(['packs']))
     await addCard({ card: { cardsPack_id: id ? id : '', question, answer, questionImg } })
     dispatch(setModal({ open: false, type: '' }))
   }
@@ -71,14 +73,33 @@ export const AddCardModal = () => {
             </label>
           </div>
         ) : (
-          <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
+          <Textarea
+            value={question}
+            onChange={changeQuestionHandler}
+            autoFocus
+            label="Question"
+            maxLength={400}
+            limit={400}
+            symbols={question.trim().length}
+          />
         )}
       </div>
 
-      <Textarea value={answer} onChange={changeAnswerHandler} label="Answer" />
+      <Textarea
+        value={answer}
+        onChange={changeAnswerHandler}
+        label="Answer"
+        maxLength={800}
+        limit={800}
+        symbols={answer.trim().length}
+      />
 
       <Button
-        disabled={(questionType === 'Image' ? !questionImg : !question) || !answer || isLoading}
+        disabled={
+          (questionType === 'Image' ? !questionImg : !question.trim().length) ||
+          !answer.trim().length ||
+          isLoading
+        }
         styleType="primary"
         className={s.button}
         onClick={addCardHandler}
