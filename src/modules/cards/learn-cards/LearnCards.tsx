@@ -48,8 +48,8 @@ export const LearnCards = () => {
     </div>
   ) : (
     <h3 className={s.subtitle}>
-      <span className={s.subtitleQuestion}>Question: </span>
-      {card.question}
+      <span>Question: </span>
+      <span className={s.subtitleQuestion}>{card.question}</span>
     </h3>
   )
 
