@@ -24,8 +24,14 @@
   width: var(--width-box-l);
   padding: 50px 40px;
   
-  @media (max-width: 420px) {
+  @media (max-width: 720px) {
+    row-gap: 15px;
+
     padding: 20px 30px;
+  }
+
+  @media (max-width: 520px) {
+     width: 100%;
   }
 }
 

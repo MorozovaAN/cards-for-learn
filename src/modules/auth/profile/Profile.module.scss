@@ -68,4 +68,8 @@
   position: relative;
 
   width: 100%;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 }
