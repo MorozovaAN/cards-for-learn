@@ -49,7 +49,6 @@
   border-radius: 50%;
 }
 
-.btnTextContainer,
 .nameContainer {
   display: flex;
   column-gap: 5px;
@@ -58,8 +57,15 @@
   max-width: 100%;
 }
 
+.btnTextContainer {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center
+}
+
 .logout {
   position: relative;
 
-  width: 127px;
+  width: 100%;
 }
