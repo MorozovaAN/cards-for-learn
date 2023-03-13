@@ -13,10 +13,12 @@ export const AddNewPackModal = () => {
   const [name, setName] = useState('')
   const [privatePack, setPrivatePack] = useState(false)
   const dispatch = useTypedDispatch()
-  const error = name.length > 50
+  const error = name.trim().length > 50
 
   const addPackHandler = async () => {
-    await addPack({ cardsPack: { name: name, deckCover: '', private: privatePack } }).unwrap()
+    await addPack({
+      cardsPack: { name: name.trim(), deckCover: '', private: privatePack },
+    }).unwrap()
     dispatch(setModal({ open: false, type: '' }))
   }
 
@@ -46,7 +48,7 @@ export const AddNewPackModal = () => {
 
       <Button
         styleType="primary"
-        disabled={!name || isLoading || error}
+        disabled={!name.trim().length || isLoading || error}
         className={s.button}
         onClick={addPackHandler}
       >
