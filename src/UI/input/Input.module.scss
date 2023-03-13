@@ -49,6 +49,15 @@
 
     -webkit-text-fill-color: var(--color-on-primary-light-400) !important;
   }
+
+  @media (max-width: 520px) {
+    padding: 10px;
+
+    font-size: 14px;
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
 }
 
 .label {

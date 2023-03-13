@@ -96,7 +96,7 @@ export const Profile = () => {
         disabled={isLoadingName || isLoadingAvatar}
       >
         <div className={s.btnTextContainer}>
-          <Logout fill="#fff" width="17" /> <span>LogOut</span>
+          <Logout fill="#fff" width="17" /> <span>Logout</span>
         </div>
       </Button>
     </Box>

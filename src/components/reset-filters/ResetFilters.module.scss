@@ -7,17 +7,34 @@
   height: 42px;
 
   border-radius: 10px;
+
+  @media (max-width: 520px) {
+    width: 37px;
+    height: 37px;
+  }
 }
 
 .tooltip {
   position: relative;
   &::after {
 
-    @include tooltipAfter(47px, 7px);
+    @include tooltipAfter(50px, -64px);
+
+    border-radius: 8px 8px 0 8px;
+    box-shadow: -1px 0 5px 1px var(--color-on-primary-light-400);
   }
 
   &:hover::after {
 
     @include tooltipHover;
+  }
+}
+
+.icon {
+
+  @media (max-width: 520px) {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
   }
 }

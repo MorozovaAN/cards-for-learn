@@ -3,4 +3,8 @@
 
   font-size: 14px;
   color: var(--color-on-primary-base);
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 }

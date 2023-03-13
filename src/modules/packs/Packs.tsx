@@ -9,7 +9,6 @@ import { paramsHelper } from 'common/utils/paramsHelper'
 import { Paginator } from 'components/paginator/Paginator'
 import { ResetFilters } from 'components/reset-filters/ResetFilters'
 import { Search } from 'components/search/Search'
-import { MyOtherButtons } from 'modules/packs/my-other-buttons/MyOtherButtons'
 import { PacksList } from 'modules/packs/packs-list/PacksList'
 import { useGetPacksQuery } from 'modules/packs/packsApi'
 import { SortPacks } from 'modules/packs/sort/SortPacks'
@@ -22,22 +21,12 @@ export const Packs = () => {
     <>
       <div className={s.filters}>
         {data ? (
-          <Search selector="Packs" param="packName" disabled={isFetching} />
+          <div className={s.search}>
+            <Search selector="Packs" param="packName" disabled={isFetching} />
+          </div>
         ) : (
           <div className={s.skeletonSearchContainer}>
             <Skeleton classes={{ root: s.skeletonSearch }} animation="wave" variant="rectangular" />
-          </div>
-        )}
-
-        {data ? (
-          <MyOtherButtons disabled={isFetching} />
-        ) : (
-          <div className={s.skeletonButtonsContainer}>
-            <Skeleton
-              classes={{ root: s.skeletonButtons }}
-              animation="wave"
-              variant="rectangular"
-            />
           </div>
         )}
 

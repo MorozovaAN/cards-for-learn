@@ -4,6 +4,8 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import selectUnstyledClasses from '@mui/base/SelectUnstyled/selectUnstyledClasses'
 import styled from '@mui/system/styled'
 
+import sortIcon from 'assets/img/icons/sort.svg'
+
 export const StyledButton = styled('button')(
   () => `
   font-size: 16px;
@@ -19,6 +21,7 @@ export const StyledButton = styled('button')(
   border:none;
   transition: 0.3s ease-in;
   cursor: pointer;
+  position:relative;
    
   &:hover, &:focus {
     box-shadow: 0 0 0 3px var(--color-primary-base-transparent);
@@ -40,6 +43,38 @@ export const StyledButton = styled('button')(
     content: '▾';
     float: right;
   }
+  
+  @media (max-width: 720px) {
+     width: 42px;
+     font-size: 0;
+     background: var(--color-primary-base);
+      
+     &:hover, &:focus {
+       background: var(--color-primary-dark-100);
+       box-shadow: none;
+     }
+     
+     &::after {
+       content:'';
+       background: url(${sortIcon}) no-repeat;
+       background-size: contain;
+       position: absolute;
+       top: 9px;
+       left: 11px;
+       height: 25px;
+       width: 21px;
+     }
+  }
+  
+  @media (max-width: 520px) {
+    width: 37px;
+    height: 37px;
+    
+    &::after {
+     top: 6px;
+     left: 8px;
+    }
+  }
   `
 )
 
@@ -56,6 +91,11 @@ export const StyledListBox = styled('ul')(
   background: var(--color-background-dark-400);
   color: var(--color-on-primary-light-400);
   box-shadow: 0px 7px 15px var(--color-on-primary-light-400);
+  
+  @media (max-width: 520px) {
+   font-size: 13px;
+   width: 200px;
+  }
   `
 )
 

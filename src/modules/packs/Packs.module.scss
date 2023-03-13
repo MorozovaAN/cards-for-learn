@@ -1,37 +1,59 @@
 @import 'src/common/style-mixins/mixins';
 
 .filters {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   column-gap: 25px;
   align-items: flex-end;
 
+  width: 100%;
   height: 70px;
+
+  @media (max-width: 600px) {
+    column-gap: 15px;
+  }
+
+  @media (max-width: 420px){
+    column-gap: 15px;
+  }
 }
 
 .skeletonSearchContainer .skeletonSearch,  .skeletonButtonsContainer .skeletonButtons, .skeletonSortPacksContainer .skeletonSortPacks, .skeletonResetFiltersContainer .skeletonResetFilters, .skeletonPaginationContainer  .skeletonPagination {
 
   @include skeletonBase;
-
+  
   height: 42px;
+
+  @media (max-width: 520px){
+    height: 37px;
+  }
 }
 
-.skeletonSearchContainer .skeletonSearch {
-  width: 453px;
-}
-
-.skeletonButtonsContainer .skeletonButtons {
-  width: 170px;
+.skeletonSearchContainer .skeletonSearch,.skeletonSearchContainer {
+  width: 100%;
 }
 
 .skeletonSortPacksContainer .skeletonSortPacks {
   width: 240px;
+
+  @media (max-width: 720px) {
+    width: 42px;
+  }
+
+  @media (max-width: 520px) {
+    width: 37px;
+  }
 }
 
 .skeletonResetFiltersContainer .skeletonResetFilters {
   width: 42px;
+
+  @media (max-width: 520px) {
+    width: 37px;
+  }
 }
 
 .skeletonPaginationContainer  .skeletonPagination {
-  width: 595px;
-  height: 34px;
+  width: 70%;
+  height: 32px;
 }

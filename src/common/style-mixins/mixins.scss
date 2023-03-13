@@ -19,6 +19,14 @@
 
   font-size: 18px;
   font-weight: $fontWeight;
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 520px) {
+    font-size: 14px;
+  }
 }
 
 @mixin title($fontWeight: 400, $opacity: 1) {
@@ -37,6 +45,10 @@
   font-weight: $fontWeight;
 
   opacity: $opacity;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 }
 
 //-------container-------
@@ -100,7 +112,6 @@
 
   font-size: 13px;
   color: var(--color-on-primary-base);
-  letter-spacing: 1px;
   white-space: nowrap;
 
   visibility: hidden;
