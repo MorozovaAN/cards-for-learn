@@ -87,6 +87,7 @@ export const EditCardModal = () => {
           value={questionTextValue}
           onChange={changeQuestionHandler}
           label="Question"
+          maxLength={400}
           limit={400}
           symbols={questionTextValue.trim().length}
         />
@@ -96,6 +97,7 @@ export const EditCardModal = () => {
         value={answerValue}
         onChange={changeAnswerHandler}
         label="Answer"
+        maxLength={800}
         limit={800}
         symbols={answerValue.trim().length}
       />
