@@ -73,14 +73,33 @@ export const AddCardModal = () => {
             </label>
           </div>
         ) : (
-          <Textarea value={question} onChange={changeQuestionHandler} autoFocus label="Question" />
+          <Textarea
+            value={question}
+            onChange={changeQuestionHandler}
+            autoFocus
+            label="Question"
+            maxLength={400}
+            limit={400}
+            symbols={question.trim().length}
+          />
         )}
       </div>
 
-      <Textarea value={answer} onChange={changeAnswerHandler} label="Answer" />
+      <Textarea
+        value={answer}
+        onChange={changeAnswerHandler}
+        label="Answer"
+        maxLength={800}
+        limit={800}
+        symbols={answer.trim().length}
+      />
 
       <Button
-        disabled={(questionType === 'Image' ? !questionImg : !question) || !answer || isLoading}
+        disabled={
+          (questionType === 'Image' ? !questionImg : !question.trim().length) ||
+          !answer.trim().length ||
+          isLoading
+        }
         styleType="primary"
         className={s.button}
         onClick={addCardHandler}

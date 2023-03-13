@@ -23,14 +23,16 @@ export const EditPackNameModal = () => {
   const privateCheckbox = useTypedSelector(privateCheckboxSelector)
   const [newName, setNewName] = useState(packName)
   const [privatePack, setPrivatePack] = useState(privateCheckbox)
-  const error = newName.length > 50
+  const error = newName.trim().length > 50
 
   const editPackNameHandler = async () => {
     await updatePackName({
-      cardsPack: { _id: packId, name: newName, private: privatePack },
+      cardsPack: { _id: packId, name: newName.trim(), private: privatePack },
     }).unwrap()
     dispatch(setModal({ open: false, type: '' }))
-    dispatch(setPackInfo({ packId: packId, packName: newName, privatePack: privateCheckbox }))
+    dispatch(
+      setPackInfo({ packId: packId, packName: newName.trim(), privatePack: privateCheckbox })
+    )
   }
 
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -65,7 +67,7 @@ export const EditPackNameModal = () => {
 
       <Button
         styleType="primary"
-        disabled={!newName || isLoading || error}
+        disabled={!newName.trim().length || isLoading || error}
         className={s.button}
         onClick={editPackNameHandler}
       >

@@ -87,17 +87,25 @@ export const EditCardModal = () => {
           value={questionTextValue}
           onChange={changeQuestionHandler}
           label="Question"
+          limit={400}
+          symbols={questionTextValue.trim().length}
         />
       )}
 
-      <Textarea value={answerValue} onChange={changeAnswerHandler} label="Answer" />
+      <Textarea
+        value={answerValue}
+        onChange={changeAnswerHandler}
+        label="Answer"
+        limit={800}
+        symbols={answerValue.trim().length}
+      />
 
       <Button
         className={s.button}
         onClick={editCardHandler}
         disabled={
-          (questionType === 'Image' ? !questionImgValue : !questionTextValue) ||
-          !answerValue ||
+          (questionType === 'Image' ? !questionImgValue : !questionTextValue.trim().length) ||
+          !answerValue.trim().length ||
           isLoading
         }
         styleType="primary"
