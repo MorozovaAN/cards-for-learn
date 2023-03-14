@@ -5,6 +5,18 @@
 
   font-size: 28px;
   font-weight: 600;
+
+  @media (max-width: 600px) {
+    font-size: 26px;
+  }
+
+  @media (max-width: 420px) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 340px) {
+    font-size: 20px;
+  }
 }
 
 @mixin headline2() {
@@ -36,6 +48,10 @@
   font-weight: $fontWeight;
 
   opacity: $opacity;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 }
 
 @mixin subtitle($fontWeight: 400, $opacity: 1) {
@@ -64,6 +80,10 @@
   max-width: var(--width-main);
   margin: 0 auto;
   padding: var(--margin-l) var(--margin-m);
+
+  @media (max-width: 600px) {
+    padding: var(--margin-m) var(--margin-m);
+  }
 }
 
 @mixin navigateContainer {
