@@ -36,9 +36,9 @@
 
   width: 180px;
 
-  @media (max-width: 500px) {
+  @media (max-width: 700px) {
     width: 170px;
-    }
+  }
 }
 
 .linksContainer {
@@ -93,20 +93,17 @@
 .burgerBtn {
   display: none;
 
-
   @media(max-width: 650px) {
     position: absolute;
     z-index: 2;
     top:15px;
-    right: 5px;
+    right: 25px;
 
     display: block;
 
     width: 30px;
     height: 30px;
-
   }
-
 }
 
 .line {
