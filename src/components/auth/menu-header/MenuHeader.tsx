@@ -12,6 +12,7 @@ import { ReactComponent as UserIcon } from 'assets/img/icons/user.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { ClickAwayListener } from 'common/utils/сlickAwayListener'
+import { useLogOutMutation } from 'modules'
 import { clickAwaySelector } from 'modules/auth/authSelectors'
 import { setClickAway } from 'modules/auth/authSlice'
 import { PATH } from 'routes/routes'
@@ -33,7 +34,7 @@ const itemVariants: Variants = {
 export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
   const clickAway = useTypedSelector(clickAwaySelector)
   const headerClickAway = useTypedSelector(state => state.app.headerClickAway)
-
+  const [logout] = useLogOutMutation()
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
 
@@ -49,6 +50,9 @@ export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
 
   const clickAwayHandler = () => {
     dispatch(setClickAway(true))
+  }
+  const logoutHandler = () => {
+    logout()
   }
 
   useEffect(() => {
@@ -74,7 +78,7 @@ export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
             <PacksIcon /> Packs
           </motion.li>
 
-          <motion.li variants={itemVariants}>
+          <motion.li variants={itemVariants} onClick={logoutHandler}>
             <LogoutIcon /> Logout
           </motion.li>
         </MenuList>
