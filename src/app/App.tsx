@@ -12,16 +12,18 @@ import { Header, useMeMutation } from 'modules'
 import { setClickAway } from 'modules/auth/authSlice'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
+import { NavLink } from 'UI/nav-link/NavLink'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
   const dispatch = useTypedDispatch()
-
+  const activeMenu = useTypedSelector(state => state.app.burger)
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const appClasses = `${s.appDefault} ${!isLoggedIn ? s.appSecondary : ''}`
+  const openCloseMenu = `${s.menu} ${activeMenu ? s.active : ''}`
 
   useEffect(() => {
     if (!isAuth) {
