@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import s from './MenuHeader.module.scss'
 
+import { setBurger, setHeaderClickAway } from 'app/appSlice'
 import { ReactComponent as LogoutIcon } from 'assets/img/icons/exit.svg'
 import { ReactComponent as PacksIcon } from 'assets/img/icons/packs.svg'
 import { ReactComponent as UserIcon } from 'assets/img/icons/user.svg'
@@ -17,9 +18,7 @@ import { PATH } from 'routes/routes'
 import { MenuList } from 'UI/menu-list/MenuList'
 
 type MenuHeaderType = {
-  isLeave: boolean
   open: boolean
-  setShowMenu: (showMenu: boolean) => void
 }
 
 const itemVariants: Variants = {
@@ -31,20 +30,21 @@ const itemVariants: Variants = {
   closed: { opacity: 0, y: 0, transition: { duration: 0.2 } },
 }
 
-export const MenuHeader: FC<MenuHeaderType> = ({ isLeave, open, setShowMenu }) => {
+export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
   const clickAway = useTypedSelector(clickAwaySelector)
+  const headerClickAway = useTypedSelector(state => state.app.headerClickAway)
 
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
 
   const profileNavigateHandler = () => {
-    setShowMenu(false)
     navigate(PATH.PROFILE)
+    dispatch(setBurger(false))
   }
 
   const packsNavigateHandler = () => {
-    setShowMenu(false)
     navigate(PATH.PACKS)
+    dispatch(setBurger(false))
   }
 
   const clickAwayHandler = () => {
@@ -52,10 +52,11 @@ export const MenuHeader: FC<MenuHeaderType> = ({ isLeave, open, setShowMenu }) =
   }
 
   useEffect(() => {
-    if (open && isLeave && clickAway) {
-      setShowMenu(false)
+    if (clickAway && headerClickAway) {
+      dispatch(setBurger(false))
+      dispatch(setHeaderClickAway(false))
     }
-  }, [open, isLeave, clickAway])
+  }, [clickAway, headerClickAway])
 
   return (
     <motion.div
@@ -74,7 +75,7 @@ export const MenuHeader: FC<MenuHeaderType> = ({ isLeave, open, setShowMenu }) =
           </motion.li>
 
           <motion.li variants={itemVariants}>
-            <LogoutIcon /> Log out
+            <LogoutIcon /> Logout
           </motion.li>
         </MenuList>
       </ClickAwayListener>

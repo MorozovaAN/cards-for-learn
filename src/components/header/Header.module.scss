@@ -15,6 +15,8 @@
 }
 
 .headerContent {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,12 +35,20 @@
   display: block;
 
   width: 180px;
+
+  @media (max-width: 500px) {
+    width: 170px;
+    }
 }
 
 .linksContainer {
   display: flex;
   column-gap: 30px;
   align-items: center;
+
+  @media (max-width: 720px) {
+    column-gap: 15px;
+  }
 }
 
 .userInfoContainer {
@@ -71,4 +81,73 @@
   height: 36px;
 
   border-radius: 50%;
+}
+
+@media (max-width: 650px) {
+  .linksContainer, .userInfoContainer {
+    display: none;
+  }
+}
+
+
+.burgerBtn {
+  display: none;
+
+
+  @media(max-width: 650px) {
+    position: absolute;
+    z-index: 2;
+    top:15px;
+    right: 5px;
+
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+  }
+
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: none;
+
+  width: 25px;
+  height: 3px;
+
+  background-color: var(--color-on-primary-base);
+
+  transition: all 0.5s;
+
+  &:nth-child(2) {
+    top: calc(50% - 7px);
+  }
+
+  &:nth-child(3) {
+    top: calc(50% + 7px);
+  }
+
+  @media(max-width: 650px) {
+    display: block;
+  }
+}
+
+
+.active.line:nth-child(1) {
+  display: none;
+}
+
+.active.line:nth-child(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);
+}
+
+.active.line:nth-child(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg);
 }
