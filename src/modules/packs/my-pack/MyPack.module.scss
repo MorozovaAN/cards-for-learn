@@ -2,24 +2,24 @@
 
 .pack {
 
-  @include subtitle;
+  @include pack;
 
-  @include boxBorder;
+  padding-top: 22px;
 
-  position: relative;
+  @media (max-width: 1000px) {
+    padding-top: 22px;
+  }
+}
 
-  display: grid;
-  grid-template-rows: 24px 22px 22px;
-  gap: 12px;
-  align-items: center;
+.lock {
 
-  box-sizing: border-box;
-  width: 300px;
-  height: 194px;
-  padding: 20px 15px 15px 15px;
+  @media (max-width: 700px) {
+    width: 14px;
+  }
 
-
-  background-color: var(--color-secondary-base-transparent);
+  @media (max-width: 500px) {
+    width: 12px;
+  }
 }
 
 .lockTooltip {
@@ -31,7 +31,10 @@
 
   &::after {
 
-    @include tooltipAfter(24px, 14px);
+    @include tooltipAfter(27px, -118px);
+
+    border-radius: 8px 8px 0 8px;
+    box-shadow: -1px 0 5px 1px var(--color-on-primary-light-400);
   }
 
   &:hover::after {
@@ -46,7 +49,7 @@
 
   overflow: hidden;
 
-  padding: 0 16px;
+  padding: 0 20px;
 
   text-align: center;
   text-overflow: ellipsis;
@@ -77,6 +80,14 @@
 .btnContainer {
   display: flex;
   column-gap: 12px;
+
+  @media (max-width: 500px){
+    column-gap: 8px;
+  }
+
+  @media (max-width: 420px){
+    height: 32px;
+  }
 }
 
 .cardsTooltip, .deleteTooltip, .editTooltip, .learnTooltip {
@@ -86,28 +97,31 @@
 .cardsTooltip {
   &::after {
 
-    @include tooltipAfter(65px, 62px)
+    @include tooltipAfter(68px, 45px)
   }
 }
 
 .learnTooltip {
   &::after {
 
-    @include tooltipAfter(65px, 134px)
+    @include tooltipAfter(68px, 114px)
   }
 }
 
 .editTooltip {
   &::after {
 
-    @include tooltipAfter(65px, 206px);
+    @include tooltipAfter(68px, 184px);
   }
 }
 
 .deleteTooltip {
   &::after {
 
-    @include tooltipAfter(65px, 278px);
+    @include tooltipAfter(68px, 173px);
+
+    border-radius: 8px 8px 0 8px;
+    box-shadow: -1px 0 5px 1px var(--color-on-primary-light-400);
   }
 }
 
@@ -121,4 +135,12 @@
   @include subtitle(500);
 
   color: var(--color-primary-base);
+}
+
+.icon {
+  width: 18px;
+
+  @media (max-width: 600px) {
+    width: 16px;
+  }
 }
