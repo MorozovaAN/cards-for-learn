@@ -55,15 +55,13 @@ export const LearnCards = () => {
 
   return (
     <div className={s.learnCards}>
-      <h2 className={s.title}>
-        {data?.packName ? (
-          `Learning pack '${data?.packName}'`
-        ) : (
-          <div className={s.skeletonTitleContainer}>
-            <Skeleton classes={{ root: s.skeletonTitle }} animation="wave" variant="rectangular" />
-          </div>
-        )}
-      </h2>
+      {data?.packName ? (
+        <h2 className={s.title}>Learning pack {data?.packName}</h2>
+      ) : (
+        <div className={s.skeletonTitleContainer}>
+          <Skeleton classes={{ root: s.skeletonTitle }} animation="wave" variant="rectangular" />
+        </div>
+      )}
 
       <Box size="L" className={s.box}>
         {isLoading ? (

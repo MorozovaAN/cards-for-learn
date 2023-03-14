@@ -19,3 +19,20 @@
 .button {
   width: 100%;
 }
+
+.radio {
+  label {
+
+    @media (max-width: 600px) {
+      height: 36px;
+    }
+  }
+
+  label span {
+    font-size: 16px;
+
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
+  }
+}

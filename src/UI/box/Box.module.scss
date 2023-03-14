@@ -41,4 +41,20 @@
 
   width: var(--width-box-m);
   padding: 20px 30px 40px 30px;
+
+  @media (max-width: 600px) {
+    row-gap: 15px;
+
+    width: 380px;
+    padding: 10px 20px 30px 20px;
+  }
+
+  @media (max-width: 500px) {
+    row-gap: 15px;
+
+    width: 100vw;
+    padding: 10px 20px 30px 20px;
+
+    border-radius: 0;
+  }
 }
