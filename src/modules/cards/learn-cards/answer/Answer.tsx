@@ -59,12 +59,10 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
             name="controlled-radio-buttons-group"
             value={value}
             onChange={handleChange}
+            classes={{ root: s.radio }}
             sx={{
-              '.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+              '.MuiRadio-root.Mui-checked': {
                 color: '#017C6EFF',
-              },
-              '.MuiTypography-root': {
-                fontSize: '16px',
               },
             }}
           >

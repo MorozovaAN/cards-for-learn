@@ -3,16 +3,20 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
+import { idSelector } from 'modules/auth/authSelectors'
 import { CardType, useGetCardsQuery } from 'modules/cards/cardsApi'
 import { Answer } from 'modules/cards/learn-cards/answer/Answer'
 import s from 'modules/cards/learn-cards/LearnCards.module.scss'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
+import { NavLink } from 'UI/nav-link/NavLink'
 
 export const LearnCards = () => {
   const [searchParams] = useSearchParams()
   const { data, isLoading } = useGetCardsQuery(paramsHelper(searchParams))
+  const id = useTypedSelector(idSelector)
   const [showAnswer, setShowAnswer] = useState(false)
   const [card, setCard] = useState<CardType>({} as CardType)
 
@@ -55,15 +59,23 @@ export const LearnCards = () => {
 
   return (
     <div className={s.learnCards}>
-      <h2 className={s.title}>
-        {data?.packName ? (
-          `Learning pack '${data?.packName}'`
-        ) : (
-          <div className={s.skeletonTitleContainer}>
-            <Skeleton classes={{ root: s.skeletonTitle }} animation="wave" variant="rectangular" />
-          </div>
-        )}
-      </h2>
+      <NavLink
+        url={`/cards?cardsPack_id=${card.cardsPack_id}${
+          card.user_id === id ? `&user_id=${card.user_id}` : ''
+        }`}
+        styleType="link"
+        className={s.link}
+      >
+        <p>&lArr; To cards list</p>
+      </NavLink>
+
+      {data?.packName ? (
+        <h2 className={s.title}>Learning pack {data?.packName}</h2>
+      ) : (
+        <div className={s.skeletonTitleContainer}>
+          <Skeleton classes={{ root: s.skeletonTitle }} animation="wave" variant="rectangular" />
+        </div>
+      )}
 
       <Box size="L" className={s.box}>
         {isLoading ? (

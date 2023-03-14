@@ -105,6 +105,44 @@
   width: 100%;
 }
 
+@mixin pack() {
+
+  @include subtitle;
+
+  @include boxBorder;
+
+  position: relative;
+
+  display: grid;
+  grid-template-rows: auto repeat(3, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 200px;
+  padding: 15px 15px 17px 15px;
+
+  background-color: var(--color-secondary-base-transparent);
+
+  @media (max-width: 1000px) {
+    padding: 16px 10px 12px 10px;
+  }
+
+  @media (max-width: 600px) {
+    height: 160px;
+    padding: 14px 8px 10px 8px;
+  }
+
+  @media (max-width: 520px) {
+    gap:0;
+  }
+
+  @media (max-width: 420px) {
+    gap:6px;
+  }
+}
+
 //-------other-------
 
 @mixin transitionMain() {
@@ -141,6 +179,10 @@
   box-shadow: 1px 0 5px 1px var(--color-on-primary-light-400);
 
   transition: all 0.3s ease-in-out;
+
+  @media (max-width: 1020px) {
+    display: none;
+  }
 }
 
 @mixin tooltipHover() {

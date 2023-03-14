@@ -4,7 +4,7 @@ import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as CardsIcon } from 'assets/img/icons/cards.svg'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
-import { ReactComponent as EditLock } from 'assets/img/icons/lock.svg'
+import { ReactComponent as LockIcon } from 'assets/img/icons/lock.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import s from 'modules/packs/my-pack/MyPack.module.scss'
@@ -48,7 +48,7 @@ export const MyPack: FC<PackType> = ({
 
       {privatePack && (
         <div className={s.lockTooltip} data-tooltip="This pack is private">
-          <EditLock />
+          <LockIcon className={s.lock} />
         </div>
       )}
 
@@ -65,7 +65,7 @@ export const MyPack: FC<PackType> = ({
       <div className={s.btnContainer}>
         <div data-tooltip="View pack cards" className={s.cardsTooltip}>
           <NavLink url={`/cards?cardsPack_id=${packId}&user_id=${user_id}`} styleType="btnIcon">
-            <CardsIcon />
+            <CardsIcon className={s.icon} />
           </NavLink>
         </div>
 
@@ -75,7 +75,7 @@ export const MyPack: FC<PackType> = ({
             styleType="btnIcon"
             disabled={cardsCount === 0}
           >
-            <LearnIcon width="18" />
+            <LearnIcon className={s.icon} />
           </NavLink>
         </div>
 
@@ -83,18 +83,18 @@ export const MyPack: FC<PackType> = ({
           styleType="iconPrimary"
           onClick={() => openPackModalHandler('Edit pack name')}
           className={s.editTooltip}
-          data-tooltip={'Edit pack name'}
+          data-tooltip="Edit pack name"
         >
-          <EditIcon width="18" fill="#fff" />
+          <EditIcon className={s.icon} fill="#fff" />
         </Button>
 
         <Button
           styleType="iconPrimary"
           onClick={() => openPackModalHandler('Delete Pack')}
           className={s.deleteTooltip}
-          data-tooltip={'Delete pack'}
+          data-tooltip="Delete pack"
         >
-          <TrashIcon width="18" height="20" />
+          <TrashIcon className={s.icon} />
         </Button>
       </div>
     </div>
