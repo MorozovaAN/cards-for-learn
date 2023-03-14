@@ -68,6 +68,7 @@ export const Header = () => {
               <LogoutIcon />
             </Button>
           </div>
+
           <ClickAwayListener onClickAway={onClickAway}>
             <div className={s.burgerBtn} onClick={openBurgerMenuHandler}>
               <span className={burgerAction}></span>

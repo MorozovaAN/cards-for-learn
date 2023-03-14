@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react'
 
-import { motion, Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import s from './MenuHeader.module.scss'
@@ -20,15 +19,6 @@ import { MenuList } from 'UI/menu-list/MenuList'
 
 type MenuHeaderType = {
   open: boolean
-}
-
-const itemVariants: Variants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 24 },
-  },
-  closed: { opacity: 0, y: 0, transition: { duration: 0.2 } },
 }
 
 export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
@@ -62,27 +52,25 @@ export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
     }
   }, [clickAway, headerClickAway])
 
-  return (
-    <motion.div
-      initial={false}
-      animate={open ? 'open' : 'closed'}
-      className={open ? s.menuHeader : ''}
-    >
+  return open ? (
+    <div className={open ? s.menuHeader : ''}>
       <ClickAwayListener onClickAway={clickAwayHandler}>
         <MenuList>
-          <motion.li onClick={profileNavigateHandler} variants={itemVariants}>
+          <li onClick={profileNavigateHandler}>
             <UserIcon /> Profile
-          </motion.li>
+          </li>
 
-          <motion.li onClick={packsNavigateHandler} variants={itemVariants}>
+          <li onClick={packsNavigateHandler}>
             <PacksIcon /> Packs
-          </motion.li>
+          </li>
 
-          <motion.li variants={itemVariants} onClick={logoutHandler}>
+          <li onClick={logoutHandler}>
             <LogoutIcon /> Logout
-          </motion.li>
+          </li>
         </MenuList>
       </ClickAwayListener>
-    </motion.div>
+    </div>
+  ) : (
+    <></>
   )
 }
