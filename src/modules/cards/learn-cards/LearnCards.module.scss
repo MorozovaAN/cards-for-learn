@@ -9,6 +9,12 @@
   width: 100%;
 }
 
+.link {
+  align-self: flex-start;
+
+  margin-bottom: 15px;
+}
+
 .title {
 
   @include headline2;

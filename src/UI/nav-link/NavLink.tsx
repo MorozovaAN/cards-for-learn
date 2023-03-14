@@ -7,7 +7,7 @@ import s from './NavLink.module.scss'
 type NavLinkType = {
   url?: string
   children: ReactNode
-  styleType: 'default' | 'primary' | 'button' | 'buttonSecondary' | 'btnIcon'
+  styleType: 'default' | 'primary' | 'button' | 'buttonSecondary' | 'btnIcon' | 'link'
   className?: string
   disabled?: boolean
 }
