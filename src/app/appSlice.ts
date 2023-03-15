@@ -15,7 +15,6 @@ const initialState = {
   },
   skeletonsNumbers: [1, 2, 3, 4, 5, 6],
   burger: false,
-  headerClickAway: false,
 }
 
 const appSlice = createSlice({
@@ -63,9 +62,6 @@ const appSlice = createSlice({
     setBurger: (state, action: PayloadAction<boolean>) => {
       state.burger = action.payload
     },
-    setHeaderClickAway: (state, action: PayloadAction<boolean>) => {
-      state.headerClickAway = action.payload
-    },
   },
 })
 
@@ -87,6 +83,5 @@ export const {
   setModal,
   setSkeletonsNumbers,
   setBurger,
-  setHeaderClickAway,
 } = appSlice.actions
 export const appReducer = appSlice.reducer

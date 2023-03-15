@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 
 import s from './Header.module.scss'
 
-import { setBurger, setHeaderClickAway } from 'app/appSlice'
+import { burgerSelector } from 'app/appSelectors'
+import { setBurger } from 'app/appSlice'
 import { ReactComponent as LogoutIcon } from 'assets/img/icons/exit.svg'
 import logo from 'assets/img/logo.png'
 import avatarPlug from 'assets/img/user-avatar-default.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { ClickAwayListener } from 'common/utils/сlickAwayListener'
 import { MenuHeader } from 'components/auth/menu-header/MenuHeader'
 import { useLogOutMutation } from 'modules'
 import { avatarSelector, idSelector, nameSelector } from 'modules/auth/authSelectors'
@@ -20,18 +20,16 @@ import { NavLink } from 'UI/nav-link/NavLink'
 
 export const Header = () => {
   const [logOut] = useLogOutMutation()
-  const activeMenu = useTypedSelector(state => state.app.burger)
+  const activeMenu = useTypedSelector(burgerSelector)
   const dispatch = useTypedDispatch()
   const userName = useTypedSelector(nameSelector)
   const userAvatar = useTypedSelector(avatarSelector)
   const user_id = useTypedSelector(idSelector)
   const avatar = userAvatar ? userAvatar : avatarPlug
+  const burgerAction = `${s.line} ${activeMenu ? s.active : ''}`
+
   const openBurgerMenuHandler = () => {
     dispatch(setBurger(!activeMenu))
-  }
-  const burgerAction = `${s.line} ${activeMenu ? s.active : ''}`
-  const onClickAway = () => {
-    dispatch(setHeaderClickAway(true))
   }
 
   return (
@@ -69,14 +67,13 @@ export const Header = () => {
             </Button>
           </div>
 
-          <ClickAwayListener onClickAway={onClickAway}>
-            <div className={s.burgerBtn} onClick={openBurgerMenuHandler}>
-              <span className={burgerAction}></span>
-              <span className={burgerAction}></span>
-              <span className={burgerAction}></span>
-            </div>
-          </ClickAwayListener>
-          <MenuHeader open={activeMenu} />
+          <div className={s.burgerBtn} onClick={openBurgerMenuHandler} id="menuIcon">
+            <span className={burgerAction}></span>
+            <span className={burgerAction}></span>
+            <span className={burgerAction}></span>
+          </div>
+
+          <MenuHeader />
         </div>
       </nav>
     </header>
