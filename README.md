@@ -20,12 +20,12 @@ You can create your own card packs or learn from public packs. You can edit, del
 
 ## Authors:
 ### Frontend:
-![github icon](src/assets/img/icons/github.svg) [Morozova Anastasiya](https://github.com/MorozovaAN)  
-![github icon](src/assets/img/icons/github.svg)  [Svetlana Mysliatska](https://github.com/lily1215z)  
-![github icon](src/assets/img/icons/github.svg)  [Oleg Kozikov](https://github.com/Oldeg)
++ [Morozova Anastasiya](https://github.com/MorozovaAN)  
++ [Svetlana Mysliatska](https://github.com/lily1215z)  
++ [Oleg Kozikov](https://github.com/Oldeg)
 ### QA:
-![github icon](src/assets/img/icons/github.svg)  [Kirill Andronov](https://github.com/kirill-0)   
-![github icon](src/assets/img/icons/github.svg)  [Daria Razumovskaya](https://github.com/RazDaria) 
++ [Kirill Andronov](https://github.com/kirill-0)   
++ [Daria Razumovskaya](https://github.com/RazDaria) 
 
 ## Stack:
 - React
