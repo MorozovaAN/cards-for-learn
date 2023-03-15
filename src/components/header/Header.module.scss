@@ -96,7 +96,7 @@
   @media(max-width: 650px) {
     position: absolute;
     z-index: 2;
-    top:15px;
+    top: 15px;
     right: 25px;
 
     display: block;
@@ -120,6 +120,10 @@
   background-color: var(--color-on-primary-base);
 
   transition: all 0.5s;
+
+  &:nth-child(1) {
+    height: 3.2px;
+  }
 
   &:nth-child(2) {
     top: calc(50% - 7px);
@@ -148,3 +152,4 @@
   top: 50%;
   transform: translate(-50%, 0%) rotate(-45deg);
 }
+

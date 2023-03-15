@@ -1,3 +1,45 @@
+@import 'src/common/style-mixins/mixins';
+
 .menuHeader {
   position: relative;
+}
+
+.menuList {
+  content: '';
+
+  position: absolute;
+  z-index: 10;
+  top: 36px;
+  right: 6px;
+
+  width: max-content;
+  padding: 8px 0;
+
+  background-color: var(--color-background-base);
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px rgba(109, 109, 109, 0.4);
+}
+
+.menuList li {
+
+  @include transitionMain;
+
+  display: flex;
+  flex-shrink: 1;
+  column-gap: 10px;
+  align-items: center;
+
+  padding: 5px 20px;
+
+  list-style-type: none;
+
+  &:hover {
+    cursor: pointer;
+
+    background-color: var(--color-background-dark-500);
+  }
+}
+
+.menuList li svg {
+  width: 15px;
 }
