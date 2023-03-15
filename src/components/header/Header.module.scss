@@ -123,6 +123,8 @@
 
   &:nth-child(1) {
     height: 3.2px;
+
+
   }
 
   &:nth-child(2) {
@@ -140,7 +142,9 @@
 
 
 .active.line:nth-child(1) {
-  display: none;
+  transform: translateX(-30px);
+
+  opacity: 0;
 }
 
 .active.line:nth-child(2) {

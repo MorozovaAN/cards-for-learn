@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react'
 
-import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import s from './MenuHeader.module.scss'
@@ -29,14 +28,6 @@ export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
   const [logout] = useLogOutMutation()
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
-  const itemVariants: Variants = {
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: { stiffness: 300, damping: 24 },
-    },
-    closed: { opacity: 0, x: 100, transition: { duration: 0.2 } },
-  }
   const profileNavigateHandler = () => {
     navigate(PATH.PROFILE)
     dispatch(setBurger(false))
@@ -66,49 +57,23 @@ export const MenuHeader: FC<MenuHeaderType> = ({ open }) => {
   }, [clickAway, headerClickAway])
 
   return (
-    <motion.div
-      className={open ? s.menuHeader : ''}
-      initial={false}
-      animate={open ? 'open' : 'closed'}
-    >
+    <div className={s.menuHeader}>
       <ClickAwayListener onClickAway={clickAwayHandler}>
-        <motion.ul
-          className={s.menuList}
-          variants={{
-            open: {
-              clipPath: 'inset(0% 0% 0% 0% round 10px)',
-              transition: {
-                type: 'spring',
-                bounce: 0,
-                duration: 0.7,
-                delayChildren: 0.3,
-                staggerChildren: 0.05,
-              },
-            },
-            closed: {
-              clipPath: 'inset(10% 50% 90% 50% round 10px)',
-              transition: {
-                type: 'spring',
-                bounce: 0,
-                duration: 0.3,
-              },
-            },
-          }}
-        >
-          <motion.li onClick={profileNavigateHandler} variants={itemVariants}>
+        <ul className={open ? `${s.menuList} ${s.active}` : s.menuList}>
+          <li onClick={profileNavigateHandler}>
             <UserIcon /> Profile
-          </motion.li>
-          <motion.li onClick={packsNavigateHandler} variants={itemVariants}>
+          </li>
+          <li onClick={packsNavigateHandler}>
             <PacksIcon /> Packs
-          </motion.li>
-          <motion.li onClick={myPacksNavigateHandler} variants={itemVariants}>
+          </li>
+          <li onClick={myPacksNavigateHandler}>
             <MyPacks /> My packs
-          </motion.li>
-          <motion.li onClick={logoutHandler} variants={itemVariants}>
+          </li>
+          <li onClick={logoutHandler}>
             <LogoutIcon /> Logout
-          </motion.li>
-        </motion.ul>
+          </li>
+        </ul>
       </ClickAwayListener>
-    </motion.div>
+    </div>
   )
 }

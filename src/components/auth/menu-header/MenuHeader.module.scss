@@ -5,8 +5,6 @@
 }
 
 .menuList {
-  content: '';
-
   position: absolute;
   z-index: 10;
   top: 36px;
@@ -15,9 +13,20 @@
   width: max-content;
   padding: 8px 0;
 
+  visibility: hidden;
+  opacity: 0;
   background-color: var(--color-background-base);
+  clip-path: inset(0% 0% 100% 0%);
   border-radius: 10px;
   box-shadow: 1px 2px 10px rgba(109, 109, 109, 0.4);
+
+  transition: 0.3s;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+  clip-path: inset(0% 0% 0% 0%);
 }
 
 .menuList li {
@@ -33,11 +42,6 @@
 
   list-style-type: none;
 
-  &:hover {
-    cursor: pointer;
-
-    background-color: var(--color-background-dark-500);
-  }
 }
 
 .menuList li svg {
