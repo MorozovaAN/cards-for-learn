@@ -57,7 +57,7 @@ export const Buttons: FC<ButtonsType> = ({
     <>
       <Button
         styleType="secondary"
-        className={`${s.myPackBtn} ${s.addTooltip}`}
+        className={disabled ? `${s.myPackBtn}` : `${s.addTooltip} ${s.myPackBtn}`}
         disabled={disabled}
         onClick={() => openModalHandler('Add new card')}
         data-tooltip={'Add new card'}
@@ -78,7 +78,7 @@ export const Buttons: FC<ButtonsType> = ({
 
       <Button
         styleType="secondary"
-        className={`${s.myPackBtn} ${s.editTooltip}`}
+        className={disabled ? `${s.myPackBtn}` : `${s.editTooltip} ${s.myPackBtn}`}
         disabled={disabled}
         onClick={() => openModalHandler('Edit pack name')}
         data-tooltip={'Edit pack name'}
@@ -88,7 +88,7 @@ export const Buttons: FC<ButtonsType> = ({
 
       <Button
         styleType="secondary"
-        className={`${s.myPackBtn} ${s.deleteTooltip}`}
+        className={disabled ? `${s.myPackBtn}` : `${s.deleteTooltip} ${s.myPackBtn}`}
         disabled={disabled}
         onClick={() => openModalHandler('Delete Pack')}
         data-tooltip={'Delete pack'}
