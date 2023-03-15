@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import unknownImg from 'assets/img/icons/questionImg.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { idSelector } from 'modules/auth/authSelectors'
@@ -19,6 +20,7 @@ export const LearnCards = () => {
   const id = useTypedSelector(idSelector)
   const [showAnswer, setShowAnswer] = useState(false)
   const [card, setCard] = useState<CardType>({} as CardType)
+  const isImg = card?.questionImg?.includes('data:image') || card?.questionImg?.includes('https://')
 
   useEffect(() => {
     data && setCard(getCard(data?.cards))
@@ -27,7 +29,6 @@ export const LearnCards = () => {
   const getCard = (cards: CardType[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
     const rand = Math.random() * sum
-
     const res = cards.reduce(
       (acc: { sum: number; id: number }, card, i) => {
         const newSum = acc.sum + (6 - card.grade) * (6 - card.grade)
@@ -48,7 +49,14 @@ export const LearnCards = () => {
   const question = card.questionImg ? (
     <div className={s.questionContainer}>
       <h3 className={s.subtitleImg}>Question: </h3>
-      <img className={s.img} alt="question image" src={card.questionImg} />
+      {isImg ? (
+        <img className={s.img} alt="question image" src={card.questionImg} />
+      ) : (
+        <div className={s.unknownContainer}>
+          <img className={s.unknownImg} src={unknownImg} alt="question  image" />
+          <p>Invalid image</p>
+        </div>
+      )}
     </div>
   ) : (
     <h3 className={s.subtitle}>
