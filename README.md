@@ -20,12 +20,12 @@ You can create your own card packs or learn from public packs. You can edit, del
 
 ## Authors:
 ### Frontend:
-![Текст с описанием картинки](src/assets/img/icons/github.svg) [Morozova Anastasiya](https://github.com/MorozovaAN)  
-![Текст с описанием картинки](src/assets/img/icons/github.svg)  [Svetlana Mysliatska](https://github.com/lily1215z)  
-![Текст с описанием картинки](src/assets/img/icons/github.svg)  [Oleg Kozikov](https://github.com/Oldeg)
+![github icon](src/assets/img/icons/github.svg) [Morozova Anastasiya](https://github.com/MorozovaAN)  
+![github icon](src/assets/img/icons/github.svg)  [Svetlana Mysliatska](https://github.com/lily1215z)  
+![github icon](src/assets/img/icons/github.svg)  [Oleg Kozikov](https://github.com/Oldeg)
 ### QA:
-![Текст с описанием картинки](src/assets/img/icons/github.svg)  [Kirill Andronov](https://github.com/kirill-0)   
-![Текст с описанием картинки](src/assets/img/icons/github.svg)  [Daria Razumovskaya](https://github.com/RazDaria)
+![github icon](src/assets/img/icons/github.svg)  [Kirill Andronov](https://github.com/kirill-0)   
+![github icon](src/assets/img/icons/github.svg)  [Daria Razumovskaya](https://github.com/RazDaria) 
 
 ## Stack:
 - React
