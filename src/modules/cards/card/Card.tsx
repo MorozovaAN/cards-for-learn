@@ -63,17 +63,18 @@ export const Card: FC<CardType> = ({
     <>
       <div className={s.container}>
         <div className={s.question}>
+          <span className={s.subtitle}>Question:</span>
           {questionImg ? (
-            <img
-              src={isImg ? questionImg : image}
-              className={isImg ? s.img : s.imgIcon}
-              alt="question image"
-            />
+            <div className={s.imgContainer}>
+              <img
+                src={isImg ? questionImg : image}
+                className={isImg ? s.img : s.imgIcon}
+                alt="question image"
+              />
+              {!isImg && <span className={s.invalidImg}>invalid image</span>}
+            </div>
           ) : (
-            <>
-              <span className={s.subtitle}>Question:</span>
-              {question}
-            </>
+            question
           )}
         </div>
 

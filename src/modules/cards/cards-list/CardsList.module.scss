@@ -68,5 +68,9 @@
   @include skeletonBase;
 
   width: 100%;
-  height: 58px;
+  height: 60px;
+
+  @media (max-width: 800px) {
+    height: 100px;
+  }
 }
