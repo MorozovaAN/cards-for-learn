@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useFormik } from 'formik'
 
@@ -22,6 +22,7 @@ interface FormikErrorType {
 
 export const LogIn = () => {
   const [setLogin, { isLoading }] = useLogInMutation()
+  const [demo, setDemo] = useState(false)
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -46,7 +47,7 @@ export const LogIn = () => {
         errors.password = 'Password should be 8 symbols at less'
       }
 
-      return errors
+      return demo ? { password: '', email: '' } : errors
     },
 
     onSubmit: values => {
@@ -58,6 +59,7 @@ export const LogIn = () => {
   })
 
   const useDemoAcc = () => {
+    setDemo(true)
     dispatch(setIsLoading(true))
     setLogin({ email: 'mainmaill@inbox.ru', password: 'mainmaill12345', rememberMe: false })
   }
