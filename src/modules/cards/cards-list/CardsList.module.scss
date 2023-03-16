@@ -21,7 +21,11 @@
   color: var(--color-background-base);
 
   background-color: var(--color-primary-base);
-  border-radius: 10px
+  border-radius: 10px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 }
 
 .question, .answer, .actions, .answerMyCards, .grade, .gradeMyCards, .updated {
