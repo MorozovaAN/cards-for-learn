@@ -63,12 +63,16 @@ export const Card: FC<CardType> = ({
     <>
       <div className={s.container}>
         <div className={s.question}>
+          <span className={s.subtitle}>Question:</span>
           {questionImg ? (
-            <img
-              src={isImg ? questionImg : image}
-              className={isImg ? s.img : s.imgIcon}
-              alt="question image"
-            />
+            <div className={s.imgContainer}>
+              <img
+                src={isImg ? questionImg : image}
+                className={isImg ? s.img : s.imgIcon}
+                alt="question image"
+              />
+              {!isImg && <span className={s.invalidImg}>invalid image</span>}
+            </div>
           ) : (
             question
           )}
@@ -94,20 +98,34 @@ export const Card: FC<CardType> = ({
           </AnimatePresence>
         </div>
 
-        <div>{updated}</div>
+        <div>
+          <span className={s.subtitle}>Last updated:</span>
+          {updated}
+        </div>
 
         <div className={s.gradeTooltip} data-tooltip={`I know the answer to ${gradePercent}%`}>
+          <span className={s.subtitle}>Grade:</span>
           <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
         </div>
 
         {myCards && (
           <div className={s.actions}>
-            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Edit card')}>
-              <EditIcon width="18" fill="#fff" />
+            <Button
+              styleType="iconPrimary"
+              onClick={() => openCardModalHandler('Edit card')}
+              className={s.button}
+            >
+              <span className={s.btnTitle}>Edit card</span>
+              <EditIcon fill="#fff" className={s.btnIcon} />
             </Button>
 
-            <Button styleType="iconPrimary" onClick={() => openCardModalHandler('Delete Card')}>
-              <TrashIcon width="18" height="20" />
+            <Button
+              styleType="iconPrimary"
+              onClick={() => openCardModalHandler('Delete Card')}
+              className={s.button}
+            >
+              <span className={s.btnTitle}>Delete card</span>
+              <TrashIcon className={s.btnIcon} />
             </Button>
           </div>
         )}
