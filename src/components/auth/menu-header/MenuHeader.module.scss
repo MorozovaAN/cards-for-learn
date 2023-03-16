@@ -73,11 +73,6 @@
 
   @include transitionMain;
 
-  display: flex;
-  flex-shrink: 1;
-  column-gap: 10px;
-  align-items: center;
-
   padding: 5px 20px;
 
   list-style-type: none;
@@ -85,4 +80,33 @@
 
 .menuList li svg {
   width: 15px;
+}
+
+@mixin linkBase {
+
+  @include title(600);
+
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+.link {
+
+  @include linkBase;
+
+  color: var(--color-on-primary-base);
+  
+  &:hover {
+    color: var(--color-primary-base);
+  }
+}
+
+.linkActive {
+
+  @include linkBase;
+
+  color: var(--color-primary-base);
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useFormik } from 'formik'
 
@@ -22,6 +22,7 @@ interface FormikErrorType {
 
 export const LogIn = () => {
   const [setLogin, { isLoading }] = useLogInMutation()
+  const [demo, setDemo] = useState(false)
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -46,7 +47,7 @@ export const LogIn = () => {
         errors.password = 'Password should be 8 symbols at less'
       }
 
-      return errors
+      return demo ? { password: '', email: '' } : errors
     },
 
     onSubmit: values => {
@@ -57,9 +58,16 @@ export const LogIn = () => {
     },
   })
 
+  const useDemoAcc = () => {
+    setDemo(true)
+    dispatch(setIsLoading(true))
+    setLogin({ email: 'mainmaill@inbox.ru', password: 'mainmaill12345', rememberMe: false })
+  }
+
   return (
     <Box size="L" className={s.container}>
       <h2 className={s.title}>Sign in</h2>
+
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
@@ -68,6 +76,7 @@ export const LogIn = () => {
           {...formik.getFieldProps('email')}
           error={formik.touched.email ? formik.errors.email : ''}
         />
+
         <Input
           type="password"
           label="Password"
@@ -75,6 +84,11 @@ export const LogIn = () => {
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
         />
+
+        <button className={s.demoAcc} onClick={useDemoAcc}>
+          Use a demo account
+        </button>
+
         <Checkbox
           {...formik.getFieldProps('rememberMe')}
           checked={formik.values.rememberMe}

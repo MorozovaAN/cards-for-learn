@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { createPortal } from 'react-dom'
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import s from './MenuHeader.module.scss'
 
@@ -21,22 +21,15 @@ export const MenuHeader = () => {
   const activeMenu = useTypedSelector(burgerSelector)
   const myId = useTypedSelector(idSelector)
   const [logout] = useLogOutMutation()
-  const navigate = useNavigate()
   const dispatch = useTypedDispatch()
 
-  const profileNavigateHandler = () => {
-    navigate(PATH.PROFILE)
+  const toggleLinkHandler = () => {
     dispatch(setBurger(false))
   }
 
-  const packsNavigateHandler = () => {
-    navigate(PATH.PACKS)
-    dispatch(setBurger(false))
-  }
-
-  const myPacksNavigateHandler = () => {
-    navigate(`/my-packs?user_id=${myId}`)
-    dispatch(setBurger(false))
+  const logoutHandler = () => {
+    toggleLinkHandler()
+    logout()
   }
 
   return createPortal(
@@ -44,16 +37,34 @@ export const MenuHeader = () => {
       <div>
         <div className={s.background} onClick={() => dispatch(setBurger(false))}></div>
         <ul className={s.menuList}>
-          <li onClick={profileNavigateHandler}>
-            <UserIcon /> Profile
+          <li onClick={toggleLinkHandler}>
+            <NavLink
+              to={PATH.PROFILE}
+              className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+            >
+              <UserIcon /> Profile
+            </NavLink>
           </li>
-          <li onClick={packsNavigateHandler}>
-            <PacksIcon /> Packs
+
+          <li onClick={toggleLinkHandler}>
+            <NavLink
+              to={PATH.PACKS}
+              className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+            >
+              <PacksIcon /> Other packs
+            </NavLink>
           </li>
-          <li onClick={myPacksNavigateHandler}>
-            <MyPacks /> My packs
+
+          <li onClick={toggleLinkHandler}>
+            <NavLink
+              to={`/my-packs?user_id=${myId}`}
+              className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+            >
+              <MyPacks /> My packs
+            </NavLink>
           </li>
-          <li onClick={() => logout()}>
+
+          <li onClick={logoutHandler} className={s.link}>
             <LogoutIcon /> Logout
           </li>
         </ul>
