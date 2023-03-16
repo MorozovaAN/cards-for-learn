@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import s from './Header.module.scss'
 
@@ -16,7 +16,6 @@ import { useLogOutMutation } from 'modules'
 import { avatarSelector, idSelector, nameSelector } from 'modules/auth/authSelectors'
 import { PATH } from 'routes/routes'
 import { Button } from 'UI/button/Button'
-import { NavLink } from 'UI/nav-link/NavLink'
 
 export const Header = () => {
   const [logOut] = useLogOutMutation()
@@ -42,16 +41,22 @@ export const Header = () => {
         </Link>
 
         <div className={s.linksContainer}>
-          <NavLink styleType="primary" url={PATH.PACKS}>
-            <p>Other packs</p>
+          <NavLink to={PATH.PACKS} className={({ isActive }) => (isActive ? s.linkActive : s.link)}>
+            Other packs
           </NavLink>
 
-          <NavLink styleType="primary" url={`/my-packs?user_id=${user_id}`}>
-            <p>My packs</p>
+          <NavLink
+            to={`/my-packs?user_id=${user_id}`}
+            className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+          >
+            My packs
           </NavLink>
 
-          <NavLink styleType="primary" url={PATH.PROFILE}>
-            <p>Profile</p>
+          <NavLink
+            to={PATH.PROFILE}
+            className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+          >
+            Profile
           </NavLink>
         </div>
 

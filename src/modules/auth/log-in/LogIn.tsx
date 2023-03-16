@@ -57,9 +57,15 @@ export const LogIn = () => {
     },
   })
 
+  const useDemoAcc = () => {
+    dispatch(setIsLoading(true))
+    setLogin({ email: 'mainmaill@inbox.ru', password: 'mainmaill12345', rememberMe: false })
+  }
+
   return (
     <Box size="L" className={s.container}>
       <h2 className={s.title}>Sign in</h2>
+
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="email"
@@ -68,6 +74,7 @@ export const LogIn = () => {
           {...formik.getFieldProps('email')}
           error={formik.touched.email ? formik.errors.email : ''}
         />
+
         <Input
           type="password"
           label="Password"
@@ -75,6 +82,11 @@ export const LogIn = () => {
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
         />
+
+        <button className={s.demoAcc} onClick={useDemoAcc}>
+          Use a demo account
+        </button>
+
         <Checkbox
           {...formik.getFieldProps('rememberMe')}
           checked={formik.values.rememberMe}

@@ -31,3 +31,22 @@
 
   color: var(--color-on-primary-light-400);
 }
+
+.demoAcc {
+
+  @include title(600);
+
+  cursor: pointer;
+
+  width: fit-content;
+  margin: 0 auto;
+
+  color: var(--color-primary-base);
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  &:hover {
+    color: var(--color-on-primary-base);
+  }
+}
