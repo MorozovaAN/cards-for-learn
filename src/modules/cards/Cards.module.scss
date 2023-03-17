@@ -9,6 +9,19 @@
   width: 100%;
 }
 
+.nameAndFilters {
+  display: grid;
+  grid-template-columns: repeat(2, 120px) 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+
+  width: 100%;
+
+  text-align: center;
+
+
+}
+
 .filters {
   display: flex;
   column-gap: 25px;
@@ -18,18 +31,20 @@
   height: 42px;
 }
 
-.name{
+.name {
 
   @include headline2;
 
-  align-self: center;
+  grid-column: 1/4;
+
 
   margin: 16px 0 26px 0;
 
   color: var(--color-primary-dark-100);
+  text-align: center;
 }
 
-.skeletonNameContainer {  
+.skeletonNameContainer {
   margin: 16px auto 26px auto;
 }
 
@@ -39,7 +54,7 @@
 }
 
 .skeletonNameContainer .skeletonName {
-  width: 300px ;
+  width: 300px;
   height: 25px;
 
   border-radius: 4px;
@@ -51,10 +66,19 @@
 }
 
 .learnIcon {
-  width:16px;
+  width: 16px;
   margin-bottom: 1px;
 }
 
 .paginator {
   margin-top: 15px;
+}
+
+.searchWrapper {
+  grid-column: 3;
+  grid-row: 2;
+  
+}
+.nameAndButtons {
+  grid-row: 1;
 }

@@ -3,6 +3,7 @@ import React from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import s2 from './buttons/pack-bauttons/PackButtons.module.scss'
 import s from './Cards.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -11,7 +12,8 @@ import { NotFound } from 'components/not-found/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
 import { idSelector } from 'modules/auth/authSelectors'
-import { Buttons } from 'modules/cards/buttons/Buttons'
+import { CardButtons } from 'modules/cards/buttons/card-buttons/CardButtons'
+import { PackButtons } from 'modules/cards/buttons/pack-bauttons/PackButtons'
 import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
 import { packNameSelector } from 'modules/packs/packsSelectors'
@@ -24,16 +26,31 @@ export const Cards = () => {
 
   return (
     <div className={s.container}>
-      {data ? (
-        <p className={s.name}>{packName !== '' ? packName : data.packName}</p>
-      ) : (
-        <div className={s.skeletonNameContainer}>
-          <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
+      <div className={s.nameAndFilters}>
+        <div className={s.nameAndButtons}>
+          {data ? (
+            <p className={s.name}>{packName !== '' ? packName : data.packName}</p>
+          ) : (
+            <div className={s.skeletonNameContainer}>
+              <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
+            </div>
+          )}
+          <PackButtons
+            packId={searchParams.get('cardsPack_id') as string}
+            packName={data?.packName ? data?.packName : ''}
+            privatePack={data?.packPrivate ? data?.packPrivate : false}
+            disabled={isFetching}
+            isFetching={!data?.cards}
+          />
         </div>
-      )}
-
-      <div className={s.filters}>
-        <Buttons
+        <PackButtons
+          packId={searchParams.get('cardsPack_id') as string}
+          packName={data?.packName ? data?.packName : ''}
+          privatePack={data?.packPrivate ? data?.packPrivate : false}
+          disabled={isFetching}
+          isFetching={!data?.cards}
+        />
+        <CardButtons
           packId={searchParams.get('cardsPack_id') as string}
           packName={data?.packName ? data?.packName : ''}
           privatePack={data?.packPrivate ? data?.packPrivate : false}
@@ -42,7 +59,9 @@ export const Cards = () => {
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
         />
 
-        <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
+        <div className={s.searchWrapper}>
+          <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
+        </div>
       </div>
 
       {!data?.cards.length && searchParams.has('cardQuestion') ? (

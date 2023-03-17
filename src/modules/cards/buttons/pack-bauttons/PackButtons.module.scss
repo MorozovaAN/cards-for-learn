@@ -1,0 +1,82 @@
+@import '../../../../common/style-mixins/mixins';
+
+.myPackBtn {
+  grid-row: 2;
+
+  height: 42px;
+}
+
+.editBtn {
+  grid-column: 3;
+  grid-row: 2;
+
+  @media (max-width: 800px) {
+    grid-column: 4;
+    grid-row: 1;
+
+    margin-top: 7px;
+    padding: 0;
+
+    background: none;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.deleteBtn {
+  grid-column: 4;
+  grid-row: 2;
+
+  @media (max-width: 800px) {
+    grid-column: 5;
+    grid-row: 1;
+
+    margin-top: 7px;
+    padding: 0;
+
+    background: none;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.editTooltip {
+  &::after {
+
+    @include tooltipAfter(570px, 226px);
+  }
+
+
+}
+
+.deleteTooltip {
+  &::after {
+
+    @include tooltipAfter(570px, 296px);
+  }
+
+
+}
+
+.editTooltip, .deleteTooltip, :hover::after {
+
+  @include tooltipHover();
+
+
+}
+
+.buttonsContainer {
+
+  @media (min-width: 800px) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+
+
+}
