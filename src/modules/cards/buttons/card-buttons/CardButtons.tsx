@@ -54,19 +54,19 @@ export const CardButtons: FC<ButtonsType> = ({
     <div className={s.buttonsContainer}>
       <Button
         styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.addTooltip} ${s.myPackBtn} ${s.addBtn} `}
+        className={s.addTooltip}
         disabled={disabled}
         onClick={() => openModalHandler('Add new card')}
         data-tooltip="Add new card"
       >
-        <PlusIcon width="20" height="26" />
+        <PlusIcon width="20" height="26" className={s.plusIcon} />
       </Button>
 
-      <div data-tooltip={'Learn pack'} className={s.learnTooltip}>
+      <div data-tooltip="Learn pack" className={s.learnTooltip}>
         <NavLink
           url={learnUrl}
           styleType="btnIcon"
-          className={`${s.myPackLearnBtn} ${s.learnBtn}`}
+          className={s.learnBtn}
           disabled={disabled || cardsCount === 0}
         >
           <LearnIcon className={s.learnIcon} stroke="#017c6e" />

@@ -25,6 +25,7 @@ export const PackButtons: FC<ButtonsType> = ({ packId, privatePack, packName, di
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
   const skeletons = [1, 2, 3, 4]
+
   const openModalHandler = (type: ModalType) => {
     dispatch(setPackInfo({ packId, packName, privatePack }))
     dispatch(setModal({ open: true, type }))
@@ -34,21 +35,22 @@ export const PackButtons: FC<ButtonsType> = ({ packId, privatePack, packName, di
     <div className={s.buttonsContainer}>
       <Button
         styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.editTooltip} ${s.myPackBtn} ${s.editBtn}`}
+        className={s.editTooltip}
         disabled={disabled}
         onClick={() => openModalHandler('Edit pack name')}
         data-tooltip="Edit pack name"
       >
-        <EditIcon width="18" height="26" fill="#017c6e" />
+        <EditIcon fill="#017c6e" className={s.btnIcon} />
       </Button>
+
       <Button
         styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.deleteTooltip} ${s.myPackBtn} ${s.deleteBtn}`}
+        className={s.deleteTooltip}
         disabled={disabled}
         onClick={() => openModalHandler('Delete Pack')}
         data-tooltip="Delete pack"
       >
-        <TrashIcon width="18" height="26" fill="#017c6e" />
+        <TrashIcon fill="#017c6e" className={s.btnIcon} />
       </Button>
     </div>
   )

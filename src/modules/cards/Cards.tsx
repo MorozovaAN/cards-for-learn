@@ -3,7 +3,6 @@ import React from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
-import s2 from './buttons/pack-bauttons/PackButtons.module.scss'
 import s from './Cards.module.scss'
 
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -35,21 +34,17 @@ export const Cards = () => {
               <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
             </div>
           )}
-          <PackButtons
-            packId={searchParams.get('cardsPack_id') as string}
-            packName={data?.packName ? data?.packName : ''}
-            privatePack={data?.packPrivate ? data?.packPrivate : false}
-            disabled={isFetching}
-            isFetching={!data?.cards}
-          />
+          {document.body.clientWidth < 800 && (
+            <PackButtons
+              packId={searchParams.get('cardsPack_id') as string}
+              packName={data?.packName ? data?.packName : ''}
+              privatePack={data?.packPrivate ? data?.packPrivate : false}
+              disabled={isFetching}
+              isFetching={!data?.cards}
+            />
+          )}
         </div>
-        <PackButtons
-          packId={searchParams.get('cardsPack_id') as string}
-          packName={data?.packName ? data?.packName : ''}
-          privatePack={data?.packPrivate ? data?.packPrivate : false}
-          disabled={isFetching}
-          isFetching={!data?.cards}
-        />
+
         <CardButtons
           packId={searchParams.get('cardsPack_id') as string}
           packName={data?.packName ? data?.packName : ''}
@@ -58,6 +53,16 @@ export const Cards = () => {
           isFetching={!data?.cards}
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
         />
+
+        {document.body.clientWidth > 800 && (
+          <PackButtons
+            packId={searchParams.get('cardsPack_id') as string}
+            packName={data?.packName ? data?.packName : ''}
+            privatePack={data?.packPrivate ? data?.packPrivate : false}
+            disabled={isFetching}
+            isFetching={!data?.cards}
+          />
+        )}
 
         <div className={s.searchWrapper}>
           <Search disabled={isFetching} selector="Cards" param="cardQuestion" />

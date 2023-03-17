@@ -1,4 +1,96 @@
-@import '../../../../common/style-mixins/mixins';
+@import 'src/common/style-mixins/mixins';
+
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+
+  @media (max-width:460px) {
+    column-gap: 6px;
+  }
+}
+
+.otherPackLearnBtn {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 200px;
+  height: 42px;
+}
+
+.learnBtn {
+  height: 100%;
+
+  background: var(--color-secondary-base);
+}
+
+.learnIcon {
+  width: 18px;
+
+  @media (max-width:460px) {
+    width: 16px;
+  }
+}
+
+.plusIcon {
+  width: 20px;
+
+  @media (max-width:460px) {
+    width: 17px;
+  }
+}
+
+@mixin btn() {
+  width: 60px;
+  height: 42px;
+
+  @media (max-width:620px) {
+    width: 50px;
+  }
+
+  @media (max-width:500px) {
+    height: 37px;
+  }
+
+  @media (max-width:460px) {
+    width: 37px;
+  }
+}
+
+.addTooltip {
+
+  @include btn;
+  &::after {
+
+    @include tooltipAfter(570px, 86px)
+  }
+
+  @media (max-width: 620px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+  }
+}
+
+.learnTooltip {
+
+  @include btn;
+
+  &::after {
+
+    @include tooltipAfter(570px, 156px)
+  }
+}
+
+.addTooltip, .learnTooltip, :hover::after {
+
+  @include tooltipHover();
+}
+
 
 .skeletonMyCardsContainer .skeletonMyCards, .skeletonOtherCardsContainer .skeletonOtherCards {
 
@@ -19,98 +111,4 @@
 
 .skeletonMyCardsContainer {
   width: 100%;
-}
-
-
-.otherPackLearnBtn {
-  display: flex;
-  column-gap: 10px;
-  align-items: center;
-  justify-content: center;
-
-  width: 200px;
-  height: 42px;
-}
-
-.learnIcon {
-  width: 18px;
-  height: 19px;
-}
-
-.myPackBtn {
-  grid-row: 2;
-
-  height: 42px;
-}
-
-.myPackLearnBtn {
-  height: 42px;
-
-  background: var(--color-secondary-base);
-
-  &:hover {
-    background: var(--color-secondary-dark);
-  }
-}
-
-.addTooltip {
-  &::after {
-
-    @include tooltipAfter(570px, 86px)
-  }
-
-
-}
-
-.learnTooltip {
-  grid-row: 2;
-
-
-  &::after {
-
-    @include tooltipAfter(570px, 156px)
-  }
-
-
-}
-
-
-.addTooltip, .learnTooltip, :hover::after {
-
-  @include tooltipHover();
-
-
-}
-
-
-.addBtn {
-  grid-column: 1;
-  grid-row: 2;
-
-  @media (max-width: 800px) {
-    padding: 8px 0;
-  }
-
-  @media (max-width: 520px) {
-    max-height: 37px;
-    padding: 6px 0;
-  }
-
-
-}
-
-.learnBtn {
-  grid-column: 2;
-  grid-row: 2;
-
-  width: 60px;
-
-  @media (max-width: 520px) {
-    max-height: 37px;
-
-  }
-}
-.buttonsContainer {
-  display: flex;
-  justify-content: space-between;
 }

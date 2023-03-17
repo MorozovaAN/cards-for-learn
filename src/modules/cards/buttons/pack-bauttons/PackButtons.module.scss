@@ -1,82 +1,71 @@
-@import '../../../../common/style-mixins/mixins';
+@import 'src/common/style-mixins/mixins';
 
-.myPackBtn {
-  grid-row: 2;
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
 
   height: 42px;
-}
-
-.editBtn {
-  grid-column: 3;
-  grid-row: 2;
 
   @media (max-width: 800px) {
-    grid-column: 4;
-    grid-row: 1;
+    column-gap: 0;
 
-    margin-top: 7px;
+    height: 20px;
+    margin-left: 6px;
+  }
+}
+
+.btnIcon {
+  width: 18px;
+
+  @media (max-width: 800px) {
+    width: 16px;
+  }
+
+  @media (max-width: 420px) {
+    width: 14px;
+  }
+}
+
+@mixin btn() {
+  width: 60px;
+  height: 42px;
+
+  @media (max-width:800px) {
+    width: 30px;
+    height: 20px;
     padding: 0;
 
-    background: none;
+    background: transparent;
     &:hover {
-      background: none;
+      background-color: var(--color-background-dark-400);
     }
   }
 }
 
-.deleteBtn {
-  grid-column: 4;
-  grid-row: 2;
+.editTooltip, .deleteTooltip {
 
-  @media (max-width: 800px) {
-    grid-column: 5;
-    grid-row: 1;
-
-    margin-top: 7px;
-    padding: 0;
-
-    background: none;
-    &:hover {
-      background: none;
-    }
-  }
+  @include btn;
 }
 
 .editTooltip {
+
   &::after {
 
     @include tooltipAfter(570px, 226px);
   }
-
-
 }
 
 .deleteTooltip {
+  
   &::after {
 
     @include tooltipAfter(570px, 296px);
   }
-
-
 }
 
 .editTooltip, .deleteTooltip, :hover::after {
 
   @include tooltipHover();
-
-
 }
 
-.buttonsContainer {
-
-  @media (min-width: 800px) {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  @media (max-width: 800px) {
-    display: none;
-  }
-
-
-}
