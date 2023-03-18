@@ -39,6 +39,12 @@
   @media (max-width: 800px) {
     display: flex;
     justify-content: center;
+
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 600px) {
+    margin:0;
   }
 }
 
@@ -64,13 +70,24 @@
   text-align: center;
 
   @media (max-width: 800px) {
-    margin: 0;
+    margin: 0 0 10px 0;
+  }
+
+  @media (max-width: 600px) {
+    margin:0;
   }
 }
 
 .skeletonNameContainer {
   margin: 16px auto 26px auto;
 
+  @media (max-width: 800px) {
+    margin: 0 0 10px 0;
+  }
+
+  @media (max-width: 600px) {
+    margin:0;
+  }
 }
 
 .skeletonNameContainer .skeletonName, .skeletonPaginationContainer .skeletonPagination {

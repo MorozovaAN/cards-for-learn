@@ -1,6 +1,8 @@
 @import 'src/common/style-mixins/mixins';
 
 .buttonsContainer {
+  position: relative;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
@@ -55,7 +57,7 @@
   border-radius: 30px;
 
   @media (max-width: 800px) {
-  display:none;
+    display: none;
   }
 }
 
@@ -64,7 +66,7 @@
   justify-content: space-between;
 
   @media (max-width: 800px) {
-   display: none;
+    display: none;
   }
 
 }
@@ -76,14 +78,14 @@
   @media (max-width: 420px) {
     width: 20px;
   }
-  
+
 }
 
 .editTooltip {
 
   &::after {
 
-    @include tooltipAfter(570px, 237px);
+    @include tooltipAfter(44px, 44px);
   }
 }
 
@@ -91,7 +93,7 @@
 
   &::after {
 
-    @include tooltipAfter(570px, 307px);
+    @include tooltipAfter(44px, 115px);
   }
 }
 
