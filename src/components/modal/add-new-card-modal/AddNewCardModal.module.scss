@@ -24,23 +24,24 @@
 }
 
 .imgContainer {
+  overflow: hidden;
   display: flex;
-  column-gap:15px;
+  column-gap: 15px;
   align-items: center;
 
+  box-sizing: border-box;
   width: 100%;
-  max-height: 240px;
+  max-height: 230px;
 }
 
 .imgBox {
-  width: 100%;
+  display: flex;
 
-  text-align: center;
+  width: 100%;
+  max-height: 230px;
 }
 
 .img {
-  display: block;
-
   width: 100%;
 
   object-fit: contain;

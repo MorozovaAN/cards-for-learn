@@ -15,6 +15,12 @@
 
   border: none;
   border-radius: 30px;
+  &:disabled {
+    pointer-events: none;
+    cursor: default;
+
+    opacity: 0.5;
+  }
 }
 
 .primary {
