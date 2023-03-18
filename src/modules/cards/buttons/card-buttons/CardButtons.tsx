@@ -3,16 +3,13 @@ import React, { FC } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
-import s from './Buttons.module.scss'
-
 import { ModalType, setModal } from 'app/appSlice'
-import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as PlusIcon } from 'assets/img/icons/plus.svg'
-import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
+import s from 'modules/cards/buttons/card-buttons/CardButtons.module.scss'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 import { NavLink } from 'UI/nav-link/NavLink'
@@ -26,7 +23,7 @@ type ButtonsType = {
   cardsCount: number
 }
 
-export const Buttons: FC<ButtonsType> = ({
+export const CardButtons: FC<ButtonsType> = ({
   packId,
   packName,
   privatePack,
@@ -39,7 +36,7 @@ export const Buttons: FC<ButtonsType> = ({
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
-  const skeletons = [1, 2, 3, 4]
+  const skeletons = [1, 2]
   const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const openModalHandler = (type: ModalType) => {
@@ -48,54 +45,39 @@ export const Buttons: FC<ButtonsType> = ({
   }
 
   const myCardsList = isFetching ? (
-    skeletons.map(el => (
-      <div className={s.skeletonMyCardsContainer} key={el}>
-        <Skeleton classes={{ root: s.skeletonMyCards }} animation="wave" variant="rectangular" />
-      </div>
-    ))
+    <div className={s.skeletonCardButtonsContainer}>
+      {skeletons.map(el => (
+        <Skeleton
+          classes={{ root: s.skeletonCardButtons }}
+          animation="wave"
+          variant="rectangular"
+          key={el}
+        />
+      ))}
+    </div>
   ) : (
-    <>
+    <div className={s.buttonsContainer}>
       <Button
         styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.addTooltip} ${s.myPackBtn}`}
+        className={s.addTooltip}
         disabled={disabled}
         onClick={() => openModalHandler('Add new card')}
         data-tooltip="Add new card"
       >
-        <PlusIcon width="20" height="26" />
+        <PlusIcon width="20" height="26" className={s.plusIcon} />
       </Button>
 
-      <div data-tooltip={'Learn pack'} className={s.learnTooltip}>
+      <div data-tooltip="Learn pack" className={s.learnTooltip}>
         <NavLink
           url={learnUrl}
           styleType="btnIcon"
-          className={s.myPackLearnBtn}
+          className={s.learnBtn}
           disabled={disabled || cardsCount === 0}
         >
           <LearnIcon className={s.learnIcon} stroke="#017c6e" />
         </NavLink>
       </div>
-
-      <Button
-        styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.editTooltip} ${s.myPackBtn}`}
-        disabled={disabled}
-        onClick={() => openModalHandler('Edit pack name')}
-        data-tooltip="Edit pack name"
-      >
-        <EditIcon width="18" height="26" fill="#017c6e" />
-      </Button>
-
-      <Button
-        styleType="secondary"
-        className={disabled ? `${s.myPackBtn}` : `${s.deleteTooltip} ${s.myPackBtn}`}
-        disabled={disabled}
-        onClick={() => openModalHandler('Delete Pack')}
-        data-tooltip="Delete pack"
-      >
-        <TrashIcon width="18" height="26" fill="#017c6e" />
-      </Button>
-    </>
+    </div>
   )
 
   const otherCardsList = isFetching ? (
@@ -109,12 +91,10 @@ export const Buttons: FC<ButtonsType> = ({
       styleType="buttonSecondary"
       disabled={disabled}
     >
-      <p>Learn pack</p>
+      <span className={s.learnBtnText}>Learn pack</span>
       <LearnIcon className={s.learnIcon} stroke="#017c6e" />
     </NavLink>
   )
 
-  return (
-    <> {myCards ? <div className={s.buttonsContainer}> {myCardsList} </div> : otherCardsList}</>
-  )
+  return myCards ? myCardsList : otherCardsList
 }

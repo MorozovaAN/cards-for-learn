@@ -1,0 +1,148 @@
+@import 'src/common/style-mixins/mixins';
+
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+
+  @media (max-width: 460px) {
+    column-gap: 6px;
+  }
+}
+
+.otherPackLearnBtn {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 270px;
+  height: 100%;
+
+  @media (max-width: 800px) {
+    grid-column: 1;
+    grid-row: 2;
+
+    width: 100%;
+  }
+
+  @media (max-width: 620px) {
+    width: 100%;
+  }
+}
+
+.learnBtnText {
+
+  @media (max-width: 620px) {
+    display: none;
+  }
+}
+
+.learnBtn {
+  height: 100%;
+
+  background: var(--color-secondary-base);
+}
+
+.learnIcon {
+  width: 18px;
+
+  @media (max-width: 460px) {
+    width: 16px;
+  }
+}
+
+.plusIcon {
+  width: 20px;
+
+  @media (max-width: 460px) {
+    width: 17px;
+  }
+}
+
+@mixin btn() {
+  width: 60px;
+  height: 42px;
+
+  @media (max-width: 620px) {
+    width: 50px;
+  }
+
+  @media (max-width: 500px) {
+    height: 37px;
+  }
+
+  @media (max-width: 460px) {
+    width: 37px;
+  }
+}
+
+.addTooltip {
+
+  @include btn;
+
+  &::after {
+
+    @include tooltipAfter(570px, 97px)
+  }
+
+  @media (max-width: 620px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+  }
+}
+
+.learnTooltip {
+
+  @include btn;
+
+  &::after {
+
+    @include tooltipAfter(570px, 167px)
+  }
+}
+
+.addTooltip, .learnTooltip, :hover::after {
+
+  @include tooltipHover();
+}
+
+
+.skeletonCardButtonsContainer .skeletonCardButtons, .skeletonOtherCardsContainer .skeletonOtherCards {
+
+  @include skeletonBase;
+
+
+  height: 100%;
+}
+
+
+.skeletonCardButtonsContainer .skeletonCardButtons {
+  width: 60px;
+
+  border-radius: 30px;
+}
+
+.skeletonCardButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skeletonOtherCardsContainer .skeletonOtherCards {
+  grid-column: 1/3;
+  grid-row: 2;
+
+  width: 270px;
+
+
+  @media (max-width: 800px) {
+    grid-column: 1;
+
+    width: 100%;
+  }
+}
+
+

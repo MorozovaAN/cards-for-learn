@@ -9,6 +9,39 @@
   width: 100%;
 }
 
+.nameAndFilters {
+  display: grid;
+  grid-template-columns: repeat(2, 130px) 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+
+  width: 100%;
+
+  text-align: center;
+
+  @media (max-width: 800px) {
+    row-gap: 20px;
+  }
+
+  @media (max-width: 620px) {
+    grid-template-columns: repeat(2, 110px) 1fr;
+  }
+
+  @media (max-width: 460px) {
+    grid-template-columns: repeat(2, 80px) 1fr;
+  }
+}
+
+.nameAndButtons {
+  grid-column: 1/4;
+  grid-row: 1;
+
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .filters {
   display: flex;
   column-gap: 25px;
@@ -18,19 +51,26 @@
   height: 42px;
 }
 
-.name{
+.name {
 
   @include headline2;
 
-  align-self: center;
+  grid-column: 1/4;
+
 
   margin: 16px 0 26px 0;
 
   color: var(--color-primary-dark-100);
+  text-align: center;
+
+  @media (max-width: 800px) {
+    margin: 0;
+  }
 }
 
-.skeletonNameContainer {  
+.skeletonNameContainer {
   margin: 16px auto 26px auto;
+
 }
 
 .skeletonNameContainer .skeletonName, .skeletonPaginationContainer .skeletonPagination {
@@ -39,7 +79,9 @@
 }
 
 .skeletonNameContainer .skeletonName {
-  width: 300px ;
+  display: inline-block;
+
+  width: 300px;
   height: 25px;
 
   border-radius: 4px;
@@ -51,10 +93,20 @@
 }
 
 .learnIcon {
-  width:16px;
+  width: 16px;
   margin-bottom: 1px;
 }
 
 .paginator {
   margin-top: 15px;
 }
+
+.searchWrapper {
+  grid-column: 3;
+  grid-row: 2;
+
+  @media (max-width: 800px) {
+    grid-column: 2/4;
+  }
+}
+
