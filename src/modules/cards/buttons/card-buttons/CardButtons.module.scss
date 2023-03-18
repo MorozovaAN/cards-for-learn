@@ -1,6 +1,8 @@
 @import 'src/common/style-mixins/mixins';
 
 .buttonsContainer {
+  position: relative;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
@@ -83,7 +85,7 @@
 
   &::after {
 
-    @include tooltipAfter(570px, 97px)
+    @include tooltipAfter(44.5px, 44px)
   }
 
   @media (max-width: 620px) {
@@ -101,7 +103,7 @@
 
   &::after {
 
-    @include tooltipAfter(570px, 167px)
+    @include tooltipAfter(44.5px, 115px)
   }
 }
 
