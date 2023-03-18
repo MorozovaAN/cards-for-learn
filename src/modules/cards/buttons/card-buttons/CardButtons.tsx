@@ -36,7 +36,7 @@ export const CardButtons: FC<ButtonsType> = ({
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
-  const skeletons = [1, 2, 3, 4]
+  const skeletons = [1, 2]
   const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const openModalHandler = (type: ModalType) => {
@@ -45,11 +45,16 @@ export const CardButtons: FC<ButtonsType> = ({
   }
 
   const myCardsList = isFetching ? (
-    skeletons.map(el => (
-      <div className={s.skeletonMyCardsContainer} key={el}>
-        <Skeleton classes={{ root: s.skeletonMyCards }} animation="wave" variant="rectangular" />
-      </div>
-    ))
+    <div className={s.skeletonCardButtonsContainer}>
+      {skeletons.map(el => (
+        <Skeleton
+          classes={{ root: s.skeletonCardButtons }}
+          animation="wave"
+          variant="rectangular"
+          key={el}
+        />
+      ))}
+    </div>
   ) : (
     <div className={s.buttonsContainer}>
       <Button
@@ -86,10 +91,10 @@ export const CardButtons: FC<ButtonsType> = ({
       styleType="buttonSecondary"
       disabled={disabled}
     >
-      <p>Learn pack</p>
+      <span className={s.learnBtnText}>Learn pack</span>
       <LearnIcon className={s.learnIcon} stroke="#017c6e" />
     </NavLink>
   )
 
-  return <> {myCards ? myCardsList : otherCardsList}</>
+  return myCards ? myCardsList : otherCardsList
 }

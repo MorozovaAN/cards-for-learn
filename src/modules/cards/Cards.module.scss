@@ -26,7 +26,7 @@
   @media (max-width: 620px) {
     grid-template-columns: repeat(2, 110px) 1fr;
   }
-  
+
   @media (max-width: 460px) {
     grid-template-columns: repeat(2, 80px) 1fr;
   }
@@ -38,7 +38,6 @@
 
   @media (max-width: 800px) {
     display: flex;
-    align-items: center;
     justify-content: center;
   }
 }
@@ -71,6 +70,7 @@
 
 .skeletonNameContainer {
   margin: 16px auto 26px auto;
+
 }
 
 .skeletonNameContainer .skeletonName, .skeletonPaginationContainer .skeletonPagination {
@@ -79,6 +79,8 @@
 }
 
 .skeletonNameContainer .skeletonName {
+  display: inline-block;
+
   width: 300px;
   height: 25px;
 

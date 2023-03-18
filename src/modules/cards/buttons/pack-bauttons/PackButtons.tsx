@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 
+import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
 import { ModalType, setModal } from 'app/appSlice'
@@ -19,19 +20,36 @@ type ButtonsType = {
   disabled: boolean
   privatePack: boolean
 }
-export const PackButtons: FC<ButtonsType> = ({ packId, privatePack, packName, disabled }) => {
+export const PackButtons: FC<ButtonsType> = ({
+  packId,
+  privatePack,
+  packName,
+  disabled,
+  isFetching,
+}) => {
   const [searchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
   const myCards = searchParams.get('user_id') === myId
-  const skeletons = [1, 2, 3, 4]
+  const skeletons = [1, 2]
 
   const openModalHandler = (type: ModalType) => {
     dispatch(setPackInfo({ packId, packName, privatePack }))
     dispatch(setModal({ open: true, type }))
   }
 
-  const cardButtons = (
+  const cardButtons = isFetching ? (
+    <div className={s.skeletonPackButtonsContainer}>
+      {skeletons.map(el => (
+        <Skeleton
+          classes={{ root: s.skeletonPackButtons }}
+          animation="wave"
+          variant="rectangular"
+          key={el}
+        />
+      ))}
+    </div>
+  ) : (
     <div className={s.buttonsContainer}>
       <Button
         styleType="secondary"
@@ -55,5 +73,5 @@ export const PackButtons: FC<ButtonsType> = ({ packId, privatePack, packName, di
     </div>
   )
 
-  return <> {myCards ? cardButtons : null}</>
+  return myCards ? cardButtons : null
 }
