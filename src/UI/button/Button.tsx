@@ -12,9 +12,7 @@ type ButtonType = DefaultButtonType & {
 }
 
 export const Button: FC<ButtonType> = ({ styleType, className, ...restProps }) => {
-  const finalClassName = `${styleType && s[styleType]} ${className && className} ${
-    restProps.disabled ? s.disabled : ''
-  }`.trim()
+  const finalClassName = `${styleType && s[styleType]} ${className && className}`.trim()
 
   return (
     <button className={finalClassName} {...restProps}>

@@ -46,7 +46,7 @@
   column-gap: 30px;
   align-items: center;
 
-  @media (max-width: 720px) {
+  @media (max-width: 900px) {
     column-gap: 15px;
   }
 }
@@ -83,7 +83,7 @@
   border-radius: 50%;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 820px) {
   .linksContainer, .userInfoContainer {
     display: none;
   }
@@ -93,7 +93,7 @@
 .burgerBtn {
   display: none;
 
-  @media(max-width: 650px) {
+  @media(max-width: 820px) {
     position: absolute;
     z-index: 2;
     top: 15px;
@@ -123,8 +123,6 @@
 
   &:nth-child(1) {
     height: 3.2px;
-
-
   }
 
   &:nth-child(2) {
@@ -135,7 +133,7 @@
     top: calc(50% + 7px);
   }
 
-  @media(max-width: 650px) {
+  @media(max-width: 820px) {
     display: block;
   }
 }
