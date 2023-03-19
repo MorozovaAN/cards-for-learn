@@ -73,6 +73,7 @@ export const LearnCards = () => {
         }`}
         styleType="link"
         className={s.link}
+        disabled={isLoading}
       >
         <p>&lArr; To cards list</p>
       </NavLink>

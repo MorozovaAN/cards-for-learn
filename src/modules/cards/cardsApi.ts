@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { baseURL } from 'common/constants/base-URL'
+import { errorHandler } from 'common/utils/errorHandler'
+import { setPackInfo } from 'modules/packs/packsSlise'
 
 export const cardsApi = createApi({
   reducerPath: 'cardsApi',
@@ -20,6 +22,16 @@ export const cardsApi = createApi({
         },
       }),
       providesTags: result => ['cards'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled
+          const { packName, packPrivate } = res.data
+
+          dispatch(setPackInfo({ packName, privatePack: packPrivate }))
+        } catch (err) {
+          errorHandler(err, dispatch)
+        }
+      },
     }),
 
     deleteCard: build.mutation({

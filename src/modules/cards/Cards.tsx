@@ -15,11 +15,12 @@ import { CardButtons } from 'modules/cards/buttons/card-buttons/CardButtons'
 import { PackButtons } from 'modules/cards/buttons/pack-bauttons/PackButtons'
 import { CardsList } from 'modules/cards/cards-list/CardsList'
 import { useGetCardsQuery } from 'modules/cards/cardsApi'
-import { packNameSelector } from 'modules/packs/packsSelectors'
+import { packLoadingSelector, packNameSelector } from 'modules/packs/packsSelectors'
 
 export const Cards = () => {
   const [searchParams] = useSearchParams()
   const packName = useTypedSelector(packNameSelector)
+  const isPackLoading = useTypedSelector(packLoadingSelector)
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
   const myId = useTypedSelector(idSelector)
 
@@ -27,18 +28,16 @@ export const Cards = () => {
     <div className={s.container}>
       <div className={s.nameAndFilters}>
         <div className={s.nameAndButtons}>
-          {data ? (
-            <p className={s.name}>{packName !== '' ? packName : data.packName}</p>
-          ) : (
+          {!data || isPackLoading ? (
             <div className={s.skeletonNameContainer}>
               <Skeleton classes={{ root: s.skeletonName }} animation="wave" variant="rectangular" />
             </div>
+          ) : (
+            <p className={s.name}>{packName !== '' ? packName : data?.packName}</p>
           )}
           {document.body.clientWidth < 800 && (
             <PackButtons
               packId={searchParams.get('cardsPack_id') as string}
-              packName={data?.packName ? data?.packName : ''}
-              privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
               isFetching={!data?.cards}
             />
@@ -47,8 +46,6 @@ export const Cards = () => {
 
         <CardButtons
           packId={searchParams.get('cardsPack_id') as string}
-          packName={data?.packName ? data?.packName : ''}
-          privatePack={data?.packPrivate ? data?.packPrivate : false}
           disabled={isFetching}
           isFetching={!data?.cards}
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
@@ -57,8 +54,6 @@ export const Cards = () => {
         {document.body.clientWidth > 800 && (
           <PackButtons
             packId={searchParams.get('cardsPack_id') as string}
-            packName={data?.packName ? data?.packName : ''}
-            privatePack={data?.packPrivate ? data?.packPrivate : false}
             disabled={isFetching}
             isFetching={!data?.cards}
           />
