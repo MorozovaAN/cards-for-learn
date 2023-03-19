@@ -37,8 +37,6 @@ export const Cards = () => {
           {document.body.clientWidth < 800 && (
             <PackButtons
               packId={searchParams.get('cardsPack_id') as string}
-              packName={data?.packName ? data?.packName : ''}
-              privatePack={data?.packPrivate ? data?.packPrivate : false}
               disabled={isFetching}
               isFetching={!data?.cards}
             />
@@ -47,8 +45,6 @@ export const Cards = () => {
 
         <CardButtons
           packId={searchParams.get('cardsPack_id') as string}
-          packName={data?.packName ? data?.packName : ''}
-          privatePack={data?.packPrivate ? data?.packPrivate : false}
           disabled={isFetching}
           isFetching={!data?.cards}
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
@@ -57,8 +53,6 @@ export const Cards = () => {
         {document.body.clientWidth > 800 && (
           <PackButtons
             packId={searchParams.get('cardsPack_id') as string}
-            packName={data?.packName ? data?.packName : ''}
-            privatePack={data?.packPrivate ? data?.packPrivate : false}
             disabled={isFetching}
             isFetching={!data?.cards}
           />

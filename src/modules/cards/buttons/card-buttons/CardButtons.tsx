@@ -10,31 +10,25 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
 import s from 'modules/cards/buttons/card-buttons/CardButtons.module.scss'
+import { packNameSelector, privateCheckboxSelector } from 'modules/packs/packsSelectors'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 import { NavLink } from 'UI/nav-link/NavLink'
 
 type ButtonsType = {
   packId: string
-  packName: string
   isFetching: boolean
   disabled: boolean
-  privatePack: boolean
   cardsCount: number
 }
 
-export const CardButtons: FC<ButtonsType> = ({
-  packId,
-  packName,
-  privatePack,
-  isFetching,
-  disabled,
-  cardsCount,
-}) => {
+export const CardButtons: FC<ButtonsType> = ({ packId, isFetching, disabled, cardsCount }) => {
   const [searchParams] = useSearchParams()
 
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
+  const packName = useTypedSelector(packNameSelector)
+  const privatePack = useTypedSelector(privateCheckboxSelector)
   const myCards = searchParams.get('user_id') === myId
   const skeletons = [1, 2]
   const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`

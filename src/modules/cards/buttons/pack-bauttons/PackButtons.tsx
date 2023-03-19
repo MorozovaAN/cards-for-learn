@@ -10,26 +10,21 @@ import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { idSelector } from 'modules/auth/authSelectors'
 import s from 'modules/cards/buttons/pack-bauttons/PackButtons.module.scss'
+import { packNameSelector, privateCheckboxSelector } from 'modules/packs/packsSelectors'
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
 type ButtonsType = {
   packId: string
-  packName: string
   isFetching: boolean
   disabled: boolean
-  privatePack: boolean
 }
-export const PackButtons: FC<ButtonsType> = ({
-  packId,
-  privatePack,
-  packName,
-  disabled,
-  isFetching,
-}) => {
+export const PackButtons: FC<ButtonsType> = ({ packId, disabled, isFetching }) => {
   const [searchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
+  const packName = useTypedSelector(packNameSelector)
+  const privatePack = useTypedSelector(privateCheckboxSelector)
   const myCards = searchParams.get('user_id') === myId
   const skeletons = [1, 2]
 

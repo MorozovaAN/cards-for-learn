@@ -12,9 +12,11 @@ const packsSlice = createSlice({
   reducers: {
     setPackInfo: (
       state,
-      action: PayloadAction<{ packId: string; packName: string; privatePack: boolean }>
+      action: PayloadAction<{ packId?: string; packName: string; privatePack: boolean }>
     ) => {
-      state.packId = action.payload.packId
+      if (action.payload.packId) {
+        state.packId = action.payload.packId
+      }
       state.packName = action.payload.packName
       state.privatePack = action.payload.privatePack
     },
