@@ -4,6 +4,7 @@ const initialState = {
   packId: '',
   packName: '',
   privatePack: false,
+  isLoading: false,
 }
 
 const packsSlice = createSlice({
@@ -20,8 +21,11 @@ const packsSlice = createSlice({
       state.packName = action.payload.packName
       state.privatePack = action.payload.privatePack
     },
+    setIsPackLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload
+    },
   },
 })
 
-export const { setPackInfo } = packsSlice.actions
+export const { setPackInfo, setIsPackLoading } = packsSlice.actions
 export const packsReducer = packsSlice.reducer

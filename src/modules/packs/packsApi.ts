@@ -4,7 +4,7 @@ import { baseURL } from 'common/constants/base-URL'
 import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
 import { sortingPacksMethods } from 'common/constants/sortingMethods'
 import { errorHandler } from 'common/utils/errorHandler'
-import { setPackInfo } from 'modules/packs/packsSlise'
+import { setIsPackLoading, setPackInfo } from 'modules/packs/packsSlise'
 
 export const packsApi = createApi({
   reducerPath: 'packsApi',
@@ -64,6 +64,7 @@ export const packsApi = createApi({
         body,
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsPackLoading(true))
         try {
           const res = await queryFulfilled
           const { name, _id, private: isPrivate } = res.data.updatedCardsPack
@@ -71,6 +72,8 @@ export const packsApi = createApi({
           dispatch(setPackInfo({ packId: _id, packName: name, privatePack: isPrivate }))
         } catch (err) {
           errorHandler(err, dispatch)
+        } finally {
+          dispatch(setIsPackLoading(false))
         }
       },
       invalidatesTags: [{ type: 'packs', id: 'LIST' }],
