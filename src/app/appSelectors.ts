@@ -7,3 +7,4 @@ export const notificationSelector = (state: RootStateType) => state.app.notifica
 export const modalSelector = (state: RootStateType) => state.app.modal
 export const skeletonsSelector = (state: RootStateType) => state.app.skeletonsNumbers
 export const burgerSelector = (state: RootStateType) => state.app.burger
+export const windowWidthSelector = (state: RootStateType) => state.app.windowWidth
