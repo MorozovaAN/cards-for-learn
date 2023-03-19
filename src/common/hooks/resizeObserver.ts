@@ -1,18 +1,25 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useTypedSelector } from './useTypedSelector'
+
+import { setWindowWidth } from 'app/appSlice'
 
 export const resizeObserver = () => {
-  const [size, setSize] = useState(0)
-
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize(window.innerWidth)
-    }
-
-    window.addEventListener('resize', updateSize)
-    updateSize()
-
-    return () => window.removeEventListener('resize', updateSize)
-  }, [])
-
-  return size
+  // const windowWidth = useTypedSelector(state => state.app.windowWidth)
+  // const app = document.querySelector('#id')
+  //
+  // function updateSize() {
+  //   console.log('updateSize')
+  //   if (windowWidth !== Number(app?.clientWidth)) {
+  //     console.log('in if')
+  //     setWindowWidth(Number(app?.clientWidth))
+  //     app?.removeEventListener('resize', updateSize)
+  //
+  //     setTimeout(() => {
+  //       app?.addEventListener('resize', updateSize)
+  //     }, 1000)
+  //   }
+  // }
+  //
+  // app?.addEventListener('resize', updateSize)
 }

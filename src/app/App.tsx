@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 
 import CircularProgress from '@mui/material/CircularProgress'
 
+import { resizeObserver } from '../common/hooks/resizeObserver'
+
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
-import { setModal, setSkeletonsNumbers } from 'app/appSlice'
+import { setModal, setSkeletonsNumbers, setWindowWidth } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { BaseModal } from 'components/modal/BaseModal'
@@ -21,6 +23,25 @@ export const App = () => {
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const appClasses = `${s.appDefault} ${!isLoggedIn ? s.appSecondary : ''}`
+  const windowWidth = useTypedSelector(state => state.app.windowWidth)
+
+  console.log('app')
+  console.log('windowWidth ' + windowWidth)
+
+  function updateSize(event: any) {
+    //console.log(event.currentTarget.innerWidth)
+    if (windowWidth !== Number(event.currentTarget.innerWidth)) {
+      dispatch(setWindowWidth(Number(event.currentTarget.innerWidth)))
+      window.removeEventListener('resize', updateSize)
+
+      setTimeout(() => {
+        console.log('timer')
+        window.addEventListener('resize', updateSize)
+      }, 3000)
+    }
+  }
+
+  window.addEventListener('resize', updateSize)
 
   useEffect(() => {
     if (!isAuth) {
@@ -35,7 +56,7 @@ export const App = () => {
   })
 
   return isAuth ? (
-    <div id={'app'} className={appClasses}>
+    <div id="app" className={appClasses}>
       <NotificationBar />
       <BaseModal />
 
