@@ -116,6 +116,16 @@
 .answer {
   overflow: hidden;
 
+  text-align: justify;
+
+  @media (max-width: 800px) {
+    align-self: flex-start;
+  }
+}
+
+.answerCenter {
+  overflow: hidden;
+
   text-align: center;
 
   @media (max-width: 800px) {

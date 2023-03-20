@@ -5,8 +5,10 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 
 import s from './Paginator.module.scss'
 
+import { windowWidthSelector } from 'app/appSelectors'
 import { setSkeletonsNumbers } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
+import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { Select } from 'UI/select/Select'
 
@@ -25,7 +27,9 @@ export const Paginator: FC<PaginationPropsType> = ({
 }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
-  let location = useLocation()
+  const location = useLocation()
+
+  const windowWidth = useTypedSelector(windowWidthSelector)
   const pages = Math.ceil(totalCount / pageCount)
   const selectOptions = ['6', '9', '12', '15']
   const selectValue =
@@ -56,7 +60,7 @@ export const Paginator: FC<PaginationPropsType> = ({
         count={pages}
         page={currentPage}
         disabled={disabled}
-        siblingCount={document.body.clientWidth < 420 ? 0 : 1} //todo fix
+        siblingCount={windowWidth < 420 ? 0 : 1}
         size="small"
         shape="rounded"
         classes={{ root: s.pagination, ul: s.paginationUl }}

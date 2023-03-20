@@ -15,6 +15,7 @@ const initialState = {
   },
   skeletonsNumbers: [1, 2, 3, 4, 5, 6],
   burger: false,
+  windowWidth: 0,
 }
 
 const appSlice = createSlice({
@@ -62,6 +63,9 @@ const appSlice = createSlice({
     setBurger: (state, action: PayloadAction<boolean>) => {
       state.burger = action.payload
     },
+    setWindowWidth: (state, action: PayloadAction<number>) => {
+      state.windowWidth = action.payload
+    },
   },
 })
 
@@ -83,5 +87,6 @@ export const {
   setModal,
   setSkeletonsNumbers,
   setBurger,
+  setWindowWidth,
 } = appSlice.actions
 export const appReducer = appSlice.reducer

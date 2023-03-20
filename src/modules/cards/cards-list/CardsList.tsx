@@ -10,7 +10,7 @@ import { skeletonsSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { formatDate } from 'common/utils/formatDate'
 import { NotFound } from 'components/not-found/NotFound'
-import { Card } from 'modules/cards/card/Card'
+import { Card } from 'modules/cards/cards-list/card/Card'
 
 type CardsListType = {
   cards: CardType[] | null

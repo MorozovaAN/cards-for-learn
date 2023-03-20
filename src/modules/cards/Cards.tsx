@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import s from './Cards.module.scss'
 
+import { windowWidthSelector } from 'app/appSelectors'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import { NotFound } from 'components/not-found/NotFound'
@@ -21,6 +22,7 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const packName = useTypedSelector(packNameSelector)
   const isPackLoading = useTypedSelector(packLoadingSelector)
+  const windowWidth = useTypedSelector(windowWidthSelector)
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
   const myId = useTypedSelector(idSelector)
 
@@ -35,7 +37,7 @@ export const Cards = () => {
           ) : (
             <p className={s.name}>{packName !== '' ? packName : data?.packName}</p>
           )}
-          {document.body.clientWidth < 800 && (
+          {windowWidth < 800 && (
             <PackButtons
               packId={searchParams.get('cardsPack_id') as string}
               disabled={isFetching}
@@ -51,7 +53,7 @@ export const Cards = () => {
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
         />
 
-        {document.body.clientWidth > 800 && (
+        {windowWidth >= 800 && (
           <PackButtons
             packId={searchParams.get('cardsPack_id') as string}
             disabled={isFetching}

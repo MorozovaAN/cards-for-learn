@@ -65,6 +65,7 @@ export const Card: FC<CardType> = ({
       <div className={s.container}>
         <div className={s.question}>
           <span className={s.subtitle}>Question:</span>
+
           {questionImg ? (
             <div className={s.imgContainer}>
               <img
@@ -91,7 +92,7 @@ export const Card: FC<CardType> = ({
                 animate={{ height: 'auto' }}
                 exit={{ height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={s.answer}
+                className={answer.length < 25 ? s.answerCenter : s.answer}
               >
                 {answer}
               </motion.div>

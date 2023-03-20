@@ -4,41 +4,41 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
-import { setModal, setSkeletonsNumbers } from 'app/appSlice'
+import { setModal, setSkeletonsNumbers, setWindowWidth } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
+import { resizeObserver } from 'common/utils/resizeObserver'
 import { BaseModal } from 'components/modal/BaseModal'
 import { Header, useMeMutation } from 'modules'
 import { setClickAway } from 'modules/auth/authSlice'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
-import { NavLink } from 'UI/nav-link/NavLink'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
 
 export const App = () => {
   const [me] = useMeMutation()
   const dispatch = useTypedDispatch()
-  const activeMenu = useTypedSelector(state => state.app.burger)
   const isAuth = useTypedSelector(isAuthSelector)
   const isLoading = useTypedSelector(isLoadingSelector)
   const isLoggedIn = useTypedSelector(isLoggedInSelector)
   const appClasses = `${s.appDefault} ${!isLoggedIn ? s.appSecondary : ''}`
-  const openCloseMenu = `${s.menu} ${activeMenu ? s.active : ''}`
 
   useEffect(() => {
+    dispatch(setWindowWidth(window.innerWidth))
+    resizeObserver(dispatch)
     if (!isAuth) {
       me()
     }
   }, [])
 
-  window.addEventListener('popstate', e => {
+  window.addEventListener('popstate', () => {
     dispatch(setModal({ open: false, type: '' }))
     dispatch(setClickAway(true))
     dispatch(setSkeletonsNumbers('6'))
   })
 
   return isAuth ? (
-    <div className={appClasses}>
+    <div id="app" className={appClasses}>
       <NotificationBar />
       <BaseModal />
 
