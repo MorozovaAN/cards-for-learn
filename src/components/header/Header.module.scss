@@ -172,6 +172,8 @@
 
   @include title(600);
 
+  pointer-events: none;
+
   color: var(--color-on-primary-base);
   text-decoration: none;
 }

@@ -44,6 +44,9 @@
   height: 100%;
 
   background: var(--color-secondary-base);
+  &:hover{
+    background: var(--color-secondary-dark);
+  }
 }
 
 .learnIcon {
