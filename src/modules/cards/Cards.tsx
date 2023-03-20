@@ -6,11 +6,8 @@ import { useSearchParams } from 'react-router-dom'
 import s from './Cards.module.scss'
 
 import { windowWidthSelector } from 'app/appSelectors'
-import { resizeObserver } from 'common/hooks/resizeObserver'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
-import { useDebounce } from 'common/utils/useDebounce'
 import { NotFound } from 'components/not-found/NotFound'
 import { Paginator } from 'components/paginator/Paginator'
 import { Search } from 'components/search/Search'
@@ -40,13 +37,13 @@ export const Cards = () => {
           ) : (
             <p className={s.name}>{packName !== '' ? packName : data?.packName}</p>
           )}
-          {window.innerWidth < 800 && (
+          {(width !== 0 ? width : document.body.clientWidth) <= 800 ? (
             <PackButtons
               packId={searchParams.get('cardsPack_id') as string}
               disabled={isFetching}
               isFetching={!data?.cards}
             />
-          )}
+          ) : null}
         </div>
 
         <CardButtons
@@ -56,13 +53,13 @@ export const Cards = () => {
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
         />
 
-        {window.innerWidth > 800 && (
+        {(width !== 0 ? width : document.body.clientWidth) > 800 ? (
           <PackButtons
             packId={searchParams.get('cardsPack_id') as string}
             disabled={isFetching}
             isFetching={!data?.cards}
           />
-        )}
+        ) : null}
 
         <div className={s.searchWrapper}>
           <Search disabled={isFetching} selector="Cards" param="cardQuestion" />

@@ -1,25 +1,20 @@
-import { useEffect, useState } from 'react'
-
-import { useTypedSelector } from './useTypedSelector'
+import { useEffect, useRef } from 'react'
 
 import { setWindowWidth } from 'app/appSlice'
+import { AppDispatchType } from 'common/hooks/useTypedDispatch'
 
-export const resizeObserver = () => {
-  // const windowWidth = useTypedSelector(state => state.app.windowWidth)
-  // const app = document.querySelector('#id')
-  //
-  // function updateSize() {
-  //   console.log('updateSize')
-  //   if (windowWidth !== Number(app?.clientWidth)) {
-  //     console.log('in if')
-  //     setWindowWidth(Number(app?.clientWidth))
-  //     app?.removeEventListener('resize', updateSize)
-  //
-  //     setTimeout(() => {
-  //       app?.addEventListener('resize', updateSize)
-  //     }, 1000)
-  //   }
-  // }
-  //
-  // app?.addEventListener('resize', updateSize)
+export const resizeObserver = (dispatch: AppDispatchType) => {
+  const value = useRef()
+
+  useEffect(() => {
+    const resize = (e: any) => {
+      value.current = e.currentTarget.innerWidth
+      value.current === 800 && dispatch(setWindowWidth(800))
+      value.current === 802 && dispatch(setWindowWidth(802))
+    }
+
+    window.addEventListener('resize', resize)
+
+    return () => window.removeEventListener('resize', resize)
+  }, [])
 }
