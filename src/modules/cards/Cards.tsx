@@ -22,7 +22,7 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const packName = useTypedSelector(packNameSelector)
   const isPackLoading = useTypedSelector(packLoadingSelector)
-  const width = useTypedSelector(windowWidthSelector)
+  const windowWidth = useTypedSelector(windowWidthSelector)
   const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
   const myId = useTypedSelector(idSelector)
 
@@ -37,13 +37,13 @@ export const Cards = () => {
           ) : (
             <p className={s.name}>{packName !== '' ? packName : data?.packName}</p>
           )}
-          {(width !== 0 ? width : document.body.clientWidth) <= 800 ? (
+          {windowWidth < 800 && (
             <PackButtons
               packId={searchParams.get('cardsPack_id') as string}
               disabled={isFetching}
               isFetching={!data?.cards}
             />
-          ) : null}
+          )}
         </div>
 
         <CardButtons
@@ -53,13 +53,13 @@ export const Cards = () => {
           cardsCount={data?.cardsTotalCount ? data?.cardsTotalCount : 0}
         />
 
-        {(width !== 0 ? width : document.body.clientWidth) > 800 ? (
+        {windowWidth >= 800 && (
           <PackButtons
             packId={searchParams.get('cardsPack_id') as string}
             disabled={isFetching}
             isFetching={!data?.cards}
           />
-        ) : null}
+        )}
 
         <div className={s.searchWrapper}>
           <Search disabled={isFetching} selector="Cards" param="cardQuestion" />
