@@ -24,8 +24,8 @@ type ButtonsType = {
 
 export const CardButtons: FC<ButtonsType> = ({ packId, isFetching, disabled, cardsCount }) => {
   const [searchParams] = useSearchParams()
-
   const dispatch = useTypedDispatch()
+
   const myId = useTypedSelector(idSelector)
   const packName = useTypedSelector(packNameSelector)
   const privatePack = useTypedSelector(privateCheckboxSelector)
