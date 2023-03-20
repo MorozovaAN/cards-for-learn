@@ -8,6 +8,7 @@ import s from './Card.module.scss'
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
 import image from 'assets/img/icons/questionImg.svg'
+import { ReactComponent as EmptyStarIcon } from 'assets/img/icons/star.svg'
 import { ReactComponent as TrashIcon } from 'assets/img/icons/trash.svg'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
@@ -105,7 +106,13 @@ export const Card: FC<CardType> = ({
 
         <div className={s.gradeTooltip} data-tooltip={`I know the answer to ${gradePercent}%`}>
           <span className={s.subtitle}>Grade:</span>
-          <Rating name="read-only" value={+grade.toFixed(2)} readOnly precision={0.2} />
+          <Rating
+            name="read-only"
+            value={+grade.toFixed(2)}
+            readOnly
+            precision={0.2}
+            emptyIcon={<EmptyStarIcon width="24" height="24" />}
+          />
         </div>
 
         {myCards && (
