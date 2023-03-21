@@ -115,11 +115,9 @@
   @include tooltipHover();
 }
 
-
 .skeletonCardButtonsContainer .skeletonCardButtons, .skeletonOtherCardsContainer .skeletonOtherCards {
 
   @include skeletonBase;
-
 
   height: 100%;
 }
@@ -141,7 +139,6 @@
   grid-row: 2;
 
   width: 270px;
-
 
   @media (max-width: 800px) {
     grid-column: 1;
