@@ -73,10 +73,10 @@ export const Card: FC<CardType> = ({
                 className={isImg ? s.img : s.imgIcon}
                 alt="question image"
               />
-              {!isImg && <span className={s.invalidImg}>invalid image</span>}
+              {!isImg && <span>invalid image</span>}
             </div>
           ) : (
-            question
+            <pre className={s.questionText}>{question}</pre>
           )}
         </div>
 
@@ -94,7 +94,7 @@ export const Card: FC<CardType> = ({
                 transition={{ duration: 0.3 }}
                 className={answer.length < 25 ? s.answerCenter : s.answer}
               >
-                {answer}
+                <pre className={s.answerText}>{answer}</pre>
               </motion.div>
             )}
           </AnimatePresence>

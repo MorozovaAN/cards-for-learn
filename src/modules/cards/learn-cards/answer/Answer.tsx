@@ -9,7 +9,7 @@ import { isLoadingSelector } from 'app/appSelectors'
 import { setIsLoading } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
-import { useUpdateCardGradeMutation } from 'modules/cards/cardsApi'
+import { cardsApi, useUpdateCardGradeMutation } from 'modules/cards/cardsApi'
 import s from 'modules/cards/learn-cards/answer/Answer.module.scss'
 import { Button } from 'UI/button/Button'
 
@@ -38,6 +38,7 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
 
   const setGradeHandler = async () => {
     dispatch(setIsLoading(true))
+    dispatch(cardsApi.util.invalidateTags(['cards']))
     const grade = Number(value)
 
     await answerGrade({ grade, card_id })

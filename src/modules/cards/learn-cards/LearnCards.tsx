@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import { isLoadingSelector } from 'app/appSelectors'
 import unknownImg from 'assets/img/icons/questionImg.svg'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { paramsHelper } from 'common/utils/paramsHelper'
@@ -16,7 +17,8 @@ import { NavLink } from 'UI/nav-link/NavLink'
 
 export const LearnCards = () => {
   const [searchParams] = useSearchParams()
-  const { data, isLoading } = useGetCardsQuery(paramsHelper(searchParams))
+  const { data, isFetching } = useGetCardsQuery(paramsHelper(searchParams))
+  const isLoading = useTypedSelector(isLoadingSelector)
   const id = useTypedSelector(idSelector)
   const [showAnswer, setShowAnswer] = useState(false)
   const [card, setCard] = useState<CardType>({} as CardType)
@@ -73,7 +75,7 @@ export const LearnCards = () => {
         }`}
         styleType="link"
         className={s.link}
-        disabled={isLoading}
+        disabled={isLoading || isFetching}
       >
         <p>&lArr; To cards list</p>
       </NavLink>
@@ -87,7 +89,7 @@ export const LearnCards = () => {
       )}
 
       <Box size="L" className={s.box}>
-        {isLoading ? (
+        {isFetching ? (
           <div className={s.skeletonSubtitleContainer}>
             <Skeleton
               classes={{ root: s.skeletonSubtitle }}
@@ -106,7 +108,7 @@ export const LearnCards = () => {
             styleType="primary"
             className={s.button}
             onClick={() => setShowAnswer(true)}
-            disabled={isLoading}
+            disabled={isFetching}
           >
             Show answer
           </Button>

@@ -81,6 +81,9 @@
 
   background: var(--color-primary-base);
   border-radius: 30px;
+  &:hover {
+    background: var(--color-primary-dark-100)
+  }
 }
 
 .disabled {
