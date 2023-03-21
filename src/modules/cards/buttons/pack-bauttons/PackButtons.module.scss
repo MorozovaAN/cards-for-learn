@@ -35,19 +35,54 @@
 }
 
 @mixin btn() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 60px;
   height: 42px;
+  padding: 0;
 
   @media (max-width: 800px) {
     width: 30px;
     height: 20px;
-    padding: 0;
 
     background: transparent;
     &:hover {
       background-color: var(--color-background-dark-400);
     }
   }
+}
+
+.editTooltip, .deleteTooltip {
+
+  @include btn;
+
+  @media (max-width: 420px) {
+    width: 20px;
+  }
+
+}
+
+.editTooltip {
+
+  &::after {
+
+    @include tooltipAfter(47px, 30px);
+  }
+}
+
+.deleteTooltip {
+
+  &::after {
+
+    @include tooltipAfter(47px, 100px);
+  }
+}
+
+.editTooltip, .deleteTooltip, :hover::after {
+
+  @include tooltipHover();
 }
 
 .skeletonPackButtonsContainer .skeletonPackButtons {
@@ -70,35 +105,3 @@
   }
 
 }
-
-.editTooltip, .deleteTooltip {
-
-  @include btn;
-
-  @media (max-width: 420px) {
-    width: 20px;
-  }
-
-}
-
-.editTooltip {
-
-  &::after {
-
-    @include tooltipAfter(44px, 44px);
-  }
-}
-
-.deleteTooltip {
-
-  &::after {
-
-    @include tooltipAfter(44px, 115px);
-  }
-}
-
-.editTooltip, .deleteTooltip, :hover::after {
-
-  @include tooltipHover();
-}
-

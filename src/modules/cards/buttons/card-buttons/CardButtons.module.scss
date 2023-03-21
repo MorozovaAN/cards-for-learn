@@ -18,18 +18,13 @@
   align-items: center;
   justify-content: center;
 
-  width: 270px;
+  grid-column: 1/3;
+  width:100%;
   height: 100%;
 
   @media (max-width: 800px) {
-    grid-column: 1;
     grid-row: 2;
-
-    width: 100%;
-  }
-
-  @media (max-width: 620px) {
-    width: 100%;
+    grid-column: 1/2;
   }
 }
 
@@ -88,7 +83,7 @@
 
   &::after {
 
-    @include tooltipAfter(44.5px, 44px)
+    @include tooltipAfter(47px, 30px)
   }
 
   @media (max-width: 620px) {
@@ -106,7 +101,7 @@
 
   &::after {
 
-    @include tooltipAfter(44.5px, 115px)
+    @include tooltipAfter(47px, 100px)
   }
 }
 

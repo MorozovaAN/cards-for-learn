@@ -10,7 +10,7 @@
 
   &::after {
 
-    @include tooltipAfter(185px, 252px);
+    @include tooltipAfter(193px, 16px);
   }
 
   &:hover::after {

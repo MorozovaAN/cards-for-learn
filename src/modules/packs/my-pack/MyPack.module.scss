@@ -62,7 +62,7 @@
 
   &::after {
 
-    @include tooltipAfter(178px, 214px);
+    @include tooltipAfter(185px, 38px);
   }
 
   &:hover::after {
@@ -76,6 +76,7 @@
 
   max-height: 100%;
 }
+
 .btnContainer {
   display: flex;
   column-gap: 12px;

@@ -58,7 +58,7 @@ export const CardButtons: FC<ButtonsType> = ({ packId, isFetching, disabled, car
         onClick={() => openModalHandler('Add new card')}
         data-tooltip="Add new card"
       >
-        <PlusIcon width="20" height="26" className={s.plusIcon} />
+        <PlusIcon className={s.plusIcon} />
       </Button>
 
       <div data-tooltip="Learn pack" className={s.learnTooltip}>
