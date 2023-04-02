@@ -85,10 +85,6 @@ export const LogIn = () => {
           error={formik.touched.password ? formik.errors.password : ''}
         />
 
-        <button className={s.demoAcc} onClick={useDemoAcc}>
-          Use a demo account
-        </button>
-
         <Checkbox
           {...formik.getFieldProps('rememberMe')}
           checked={formik.values.rememberMe}
@@ -115,7 +111,9 @@ export const LogIn = () => {
           Sign in
         </Button>
       </form>
-
+      <button className={s.demoAcc} onClick={useDemoAcc} disabled={isLoading}>
+        Use a demo account
+      </button>
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Don`t have an account?</p>
         <NavLink url={PATH.LOG_UP} styleType="primary">
