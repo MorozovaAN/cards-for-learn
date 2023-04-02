@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useFormik } from 'formik'
 
@@ -23,7 +23,6 @@ interface FormikErrorType {
 export const LogIn = () => {
   const [setLogin, { isLoading }] = useLogInMutation()
   const [demo, setDemo] = useState(false)
-  const [enter, setEnter] = useState('')
   const dispatch = useTypedDispatch()
 
   const formik = useFormik({
@@ -60,25 +59,10 @@ export const LogIn = () => {
   })
 
   const useDemoAcc = () => {
-    setEnter('')
     setDemo(true)
     dispatch(setIsLoading(true))
     setLogin({ email: 'mainmaill@inbox.ru', password: 'mainmaill12345', rememberMe: false })
   }
-
-  useEffect(() => {
-    document.addEventListener('keypress', e => {
-      if (e.key === 'Enter') {
-        setEnter('Enter')
-        const id = setTimeout(() => {
-          setEnter('')
-          clearTimeout(id)
-        }, 100)
-      }
-    })
-
-    return () => document.removeEventListener('keypress', e => {})
-  }, [])
 
   return (
     <Box size="L" className={s.container}>
@@ -100,14 +84,6 @@ export const LogIn = () => {
           {...formik.getFieldProps('password')}
           error={formik.touched.password ? formik.errors.password : ''}
         />
-
-        <button
-          className={s.demoAcc}
-          onClick={useDemoAcc}
-          disabled={isLoading || enter === 'Enter'}
-        >
-          Use a demo account
-        </button>
 
         <Checkbox
           {...formik.getFieldProps('rememberMe')}
@@ -135,7 +111,9 @@ export const LogIn = () => {
           Sign in
         </Button>
       </form>
-
+      <button className={s.demoAcc} onClick={useDemoAcc} disabled={isLoading}>
+        Use a demo account
+      </button>
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Don`t have an account?</p>
         <NavLink url={PATH.LOG_UP} styleType="primary">
