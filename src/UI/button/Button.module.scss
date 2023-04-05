@@ -1,9 +1,6 @@
 @import 'src/common/style-mixins/mixins';
 
 @mixin defaultButton() {
-
-  @include transitionMain;
-
   cursor: pointer;
 
   box-sizing: border-box;
@@ -15,6 +12,8 @@
 
   border: none;
   border-radius: 30px;
+
+  transition: 0.3s ease-in background;
   &:disabled {
     pointer-events: none;
     cursor: default;

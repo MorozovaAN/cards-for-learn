@@ -66,7 +66,7 @@ export const LogIn = () => {
 
   return (
     <Box size="L" className={s.container}>
-      <h2 className={s.title}>Sign in</h2>
+      <h2 className={s.title}>Sign in*</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
@@ -98,6 +98,7 @@ export const LogIn = () => {
         </NavLink>
 
         <Button
+          className={s.btnSignIn}
           type="submit"
           styleType="primary"
           disabled={
@@ -111,14 +112,18 @@ export const LogIn = () => {
           Sign in
         </Button>
       </form>
-      <button className={s.demoAcc} onClick={useDemoAcc} disabled={isLoading}>
+
+      <Button styleType="primary" onClick={useDemoAcc} className={s.btnDemoAcc}>
         Use a demo account
-      </button>
+      </Button>
+
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Don`t have an account?</p>
         <NavLink url={PATH.LOG_UP} styleType="primary">
           Sign Up
         </NavLink>
+
+        <p className={s.recommend}>*we recommend using the Google Chrome browser</p>
       </div>
     </Box>
   )

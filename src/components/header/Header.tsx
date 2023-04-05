@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Link, NavLink } from 'react-router-dom'
 
@@ -19,16 +19,22 @@ import { Button } from 'UI/button/Button'
 
 export const Header = () => {
   const [logOut] = useLogOutMutation()
-  const activeMenu = useTypedSelector(burgerSelector)
+  const menuIsActive = useTypedSelector(burgerSelector)
   const dispatch = useTypedDispatch()
   const userName = useTypedSelector(nameSelector)
   const userAvatar = useTypedSelector(avatarSelector)
   const user_id = useTypedSelector(idSelector)
   const avatar = userAvatar ? userAvatar : avatarPlug
-  const burgerAction = `${s.line} ${activeMenu ? s.active : ''}`
+  const burgerAction = `${s.line} ${menuIsActive ? s.active : ''}`
+
+  const scrollFunc = () => dispatch(setBurger(false))
+
+  useEffect(() => {
+    menuIsActive && document.addEventListener('scroll', scrollFunc, { once: true })
+  }, [menuIsActive])
 
   const openBurgerMenuHandler = () => {
-    dispatch(setBurger(!activeMenu))
+    dispatch(setBurger(!menuIsActive))
   }
 
   return (
