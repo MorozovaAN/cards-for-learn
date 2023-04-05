@@ -20,9 +20,9 @@ You can create your own card packs or learn from public packs. You can edit, del
 
 ## Authors:
 ### Frontend:
-+ [Morozova Anastasiya](https://github.com/MorozovaAN)  
-+ [Svetlana Mysliatska](https://github.com/lily1215z)  
++ [Morozova Anastasiya](https://github.com/MorozovaAN)
 + [Oleg Kozikov](https://github.com/Oldeg)
++ [Svetlana Mysliatska](https://github.com/lily1215z)
 ### QA:
 + [Kirill Andronov](https://github.com/kirill-0)   
 + [Daria Razumovskaya](https://github.com/RazDaria) 
