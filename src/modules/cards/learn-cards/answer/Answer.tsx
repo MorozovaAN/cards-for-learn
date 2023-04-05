@@ -38,10 +38,10 @@ export const Answer: FC<CardAnswerType> = ({ answer, handelNextCard, card_id }) 
 
   const setGradeHandler = async () => {
     dispatch(setIsLoading(true))
-    dispatch(cardsApi.util.invalidateTags(['cards']))
     const grade = Number(value)
 
     await answerGrade({ grade, card_id })
+    dispatch(cardsApi.util.invalidateTags(['cards']))
     handelNextCard()
   }
 
