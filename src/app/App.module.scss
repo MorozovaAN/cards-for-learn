@@ -14,11 +14,15 @@
     background: var(--color-background-base);
   }
 }
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.loader .circular {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  min-width: 100vw;
+  min-height: 100vh;
+}
 
+.loaderContainer .circular {
   color: var(--color-primary-base);
 }

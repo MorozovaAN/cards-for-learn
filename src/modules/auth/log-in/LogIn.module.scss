@@ -1,6 +1,8 @@
 @import 'src/common/style-mixins/mixins';
 
 .container {
+  position: relative;
+
   margin: var(--margin-xl) 0;
 }
 
@@ -32,21 +34,41 @@
   color: var(--color-on-primary-light-400);
 }
 
-.demoAcc {
+.btnDemoAcc {
+  position: absolute;
+  top: 447px;
+  right: 40px;
 
-  @include title(600);
+  width: 199px;
 
-  cursor: pointer;
-
-  width: fit-content;
-  margin: 0 auto;
-
-  color: var(--color-primary-base);
-
-  background-color: transparent;
-  border: none;
-  outline: none;
-  &:hover {
-    color: var(--color-on-primary-base);
+  @media (max-width:720px) {
+    top: 403px;
   }
+
+  @media (max-width:600px) {
+    top: 389px;
+  }
+
+  @media (max-width:520px) {
+    top: 381px;
+  }
+
+  @media (max-width:500px) {
+    position: static;
+  }
+}
+
+.btnSignIn {
+  width: 50%;
+
+  @media (max-width:500px) {
+    width: 100%;
+  }
+}
+
+.recommend {
+
+  @include subtitle;
+
+  margin-top: 18px;
 }
