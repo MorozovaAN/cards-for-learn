@@ -50,7 +50,7 @@ export const App = () => {
       </section>
     </div>
   ) : (
-    <div className={s.loader}>
+    <div className={s.loaderContainer}>
       <CircularProgress classes={{ root: s.circular }} size={60} />
     </div>
   )
