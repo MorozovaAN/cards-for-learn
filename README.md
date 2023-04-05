@@ -11,7 +11,7 @@ Then your score is taken into account when you show the cards. You will rarely b
 You can create your own card packs or learn from public packs. You can edit, delete, and make your packs private.
 
 ## How to use our project:
-- register or use a demo account
+- register or use a demo account [here](https://cards-for-learn-csenefy6y-morozovaan.vercel.app/log-in)
 - you can learn cards from other people's packs
 - create your own packs with cards, filling them with the information you want. For example, you can create a deck with words in different languages and their translation
 - learn the cards until you remember them
@@ -20,9 +20,9 @@ You can create your own card packs or learn from public packs. You can edit, del
 
 ## Authors:
 ### Frontend:
-+ [Morozova Anastasiya](https://github.com/MorozovaAN)  
-+ [Svetlana Mysliatska](https://github.com/lily1215z)  
++ [Morozova Anastasiya](https://github.com/MorozovaAN)
 + [Oleg Kozikov](https://github.com/Oldeg)
++ [Svetlana Mysliatska](https://github.com/lily1215z)
 ### QA:
 + [Kirill Andronov](https://github.com/kirill-0)   
 + [Daria Razumovskaya](https://github.com/RazDaria) 
