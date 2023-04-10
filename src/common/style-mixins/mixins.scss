@@ -73,10 +73,6 @@
   font-weight: $fontWeight;
 
   opacity: $opacity;
-
-  @media (max-width: 600px) {
-    font-size: 12px;
-  }
 }
 
 //-------container-------
@@ -91,11 +87,7 @@
   box-sizing: border-box;
   max-width: var(--width-main);
   margin: 0 auto;
-  padding: var(--margin-l) var(--margin-m);
-
-  @media (max-width: 600px) {
-    padding: var(--margin-m) var(--margin-m);
-  }
+  padding: var(--margin-l) var(--margin-l);
 }
 
 @mixin navigateContainer {
