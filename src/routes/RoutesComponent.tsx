@@ -36,6 +36,7 @@ export const RoutesComponent = () => {
         <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
         <Route path={PATH.SET_NEW_PASS} element={<NewPasswordPage />} />
       </Route>
+
       <Route path={PATH.ERROR_404} element={<ErrorPage />} />
       <Route path={PATH.NOT_FOUND} element={<Navigate to={PATH.ERROR_404} />} />
     </Routes>

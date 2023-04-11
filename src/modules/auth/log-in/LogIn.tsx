@@ -97,25 +97,25 @@ export const LogIn = () => {
           Forgot password?
         </NavLink>
 
-        <Button
-          className={s.btnSignIn}
-          type="submit"
-          styleType="primary"
-          disabled={
-            !!formik.errors.password ||
-            !!formik.errors.email ||
-            !formik.values.email ||
-            !formik.values.password ||
-            isLoading
-          }
-        >
-          Sign in
-        </Button>
-      </form>
+        <div className={s.buttonsContainer}>
+          <Button
+            type="submit"
+            styleType="primary"
+            disabled={
+              !formik.values.email ||
+              !formik.values.password ||
+              !!(formik.errors.password || formik.errors.email) ||
+              isLoading
+            }
+          >
+            Sign in
+          </Button>
 
-      <Button styleType="primary" onClick={useDemoAcc} className={s.btnDemoAcc}>
-        Use a demo account
-      </Button>
+          <Button styleType="primary" type="button" onClick={useDemoAcc} disabled={isLoading}>
+            Demo account
+          </Button>
+        </div>
+      </form>
 
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Don`t have an account?</p>
@@ -123,7 +123,7 @@ export const LogIn = () => {
           Sign Up
         </NavLink>
 
-        <p className={s.recommend}>*we recommend using the Google Chrome browser</p>
+        <p className={s.note}>*we recommend using the Google Chrome browser</p>
       </div>
     </Box>
   )
