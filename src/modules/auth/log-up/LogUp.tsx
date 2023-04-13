@@ -73,7 +73,7 @@ export const LogUp = () => {
 
   return (
     <Box size="L" className={s.container}>
-      <h2 className={s.title}>Sign Up to Cards for learn</h2>
+      <h2 className={s.title}>Sign Up to Cards for learn*</h2>
 
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
@@ -111,6 +111,8 @@ export const LogUp = () => {
           Sign In
         </NavLink>
       </div>
+
+      <p className={s.note}>*we recommend using the Google Chrome browser</p>
     </Box>
   )
 }

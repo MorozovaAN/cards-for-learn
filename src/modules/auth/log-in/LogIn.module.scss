@@ -34,41 +34,28 @@
   color: var(--color-on-primary-light-400);
 }
 
-.btnDemoAcc {
-  position: absolute;
-  top: 447px;
-  right: 40px;
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: var(--margin-m);
+  align-items: center;
 
-  width: 199px;
-
-  @media (max-width:720px) {
-    top: 403px;
-  }
-
-  @media (max-width:600px) {
-    top: 389px;
-  }
-
-  @media (max-width:520px) {
-    top: 381px;
-  }
-
-  @media (max-width:500px) {
-    position: static;
+  @media (max-width: 370px) {
+    column-gap: var(--margin-s);
   }
 }
 
-.btnSignIn {
-  width: 50%;
+.buttonsContainer button {
 
-  @media (max-width:500px) {
-    width: 100%;
+  @media (max-width: 370px) {
+    padding: 8px 10px;
+
+    font-size: 15px;
   }
 }
 
-.recommend {
+.note {
 
-  @include subtitle;
-
-  margin-top: 18px;
+  @include note;
 }
