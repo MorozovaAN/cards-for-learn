@@ -27,10 +27,10 @@ export const Header = () => {
   const avatar = userAvatar ? userAvatar : avatarPlug
   const burgerAction = `${s.line} ${menuIsActive ? s.active : ''}`
 
-  const scrollFunc = () => dispatch(setBurger(false))
+  const scrollHandler = () => dispatch(setBurger(false))
 
   useEffect(() => {
-    menuIsActive && document.addEventListener('scroll', scrollFunc, { once: true })
+    menuIsActive && document.addEventListener('scroll', scrollHandler, { once: true })
   }, [menuIsActive])
 
   const openBurgerMenuHandler = () => {

@@ -11,11 +11,11 @@
   right: 20px;
 
   width: max-content;
-  padding: 8px 0;
+  padding: 10px 0;
 
   background-color: var(--color-background-base);
   border-radius: 10px;
-  box-shadow: 1px 2px 10px rgba(109, 109, 109, 0.4);
+  box-shadow: 0 4px 12px rgba(109, 109, 109, 0.6);
 
   -webkit-animation-name: bounceInRight;
   animation-name: bounceInRight;
@@ -73,7 +73,7 @@
 
   @include transitionMain;
 
-  padding: 5px 20px;
+  padding: 8px 22px 8px 26px;
 
   list-style-type: none;
 }
@@ -84,7 +84,7 @@
 
 @mixin linkBase {
 
-  @include title(600);
+  @include headline3(600);
 
   display: flex;
   column-gap: 8px;
