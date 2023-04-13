@@ -13,7 +13,7 @@ import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
 
 export const SetNewPassword = () => {
-  const [setNewPassword, { isSuccess }] = useSetNewPasswordMutation()
+  const [setNewPassword, { isSuccess, isLoading }] = useSetNewPasswordMutation()
   const { token } = useParams()
 
   const formik = useFormik({
@@ -53,6 +53,7 @@ export const SetNewPassword = () => {
       <form onSubmit={formik.handleSubmit} className={s.form}>
         <Input
           type="password"
+          disabled={isLoading}
           error={formik.touched.password && formik.errors.password}
           placeholder="Password"
           {...formik.getFieldProps('password')}
@@ -61,7 +62,7 @@ export const SetNewPassword = () => {
         <Button
           type="submit"
           styleType="primary"
-          disabled={!!formik.errors.password || !formik.values.password}
+          disabled={!!formik.errors.password || !formik.values.password || isLoading}
         >
           Create new password
         </Button>

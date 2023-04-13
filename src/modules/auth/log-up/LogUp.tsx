@@ -107,7 +107,7 @@ export const LogUp = () => {
 
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Already have an account?</p>
-        <NavLink url={PATH.LOG_IN} styleType="primary">
+        <NavLink url={PATH.LOG_IN} styleType="primary" disabled={isLoading}>
           Sign In
         </NavLink>
       </div>

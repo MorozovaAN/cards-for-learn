@@ -93,7 +93,12 @@ export const LogIn = () => {
           Remember me
         </Checkbox>
 
-        <NavLink url={PATH.PASS_RECOVERY} styleType="primary" className={s.link}>
+        <NavLink
+          url={PATH.PASS_RECOVERY}
+          styleType="primary"
+          className={s.link}
+          disabled={isLoading}
+        >
           Forgot password?
         </NavLink>
 
@@ -119,7 +124,7 @@ export const LogIn = () => {
 
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Don`t have an account?</p>
-        <NavLink url={PATH.LOG_UP} styleType="primary">
+        <NavLink url={PATH.LOG_UP} styleType="primary" disabled={isLoading}>
           Sign Up
         </NavLink>
 
