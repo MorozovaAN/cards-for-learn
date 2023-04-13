@@ -18,7 +18,7 @@ export type ErrorsType = {
 }
 
 export const ForgotPassword = () => {
-  const [forgotPassword, { isSuccess }] = useForgotPasswordMutation()
+  const [forgotPassword, { isSuccess, isLoading }] = useForgotPasswordMutation()
   const index = window.location.href.lastIndexOf('/')
   const location = window.location.href.slice(0, index)
 
@@ -62,6 +62,7 @@ export const ForgotPassword = () => {
         <Input
           placeholder="Email"
           type="email"
+          disabled={isLoading}
           error={formik.touched.email ? formik.errors.email : ''}
           {...formik.getFieldProps('email')}
         />
@@ -69,7 +70,7 @@ export const ForgotPassword = () => {
         <Button
           type="submit"
           styleType="primary"
-          disabled={formik.values.email === '' || !!formik.errors.email}
+          disabled={formik.values.email === '' || !!formik.errors.email || isLoading}
         >
           Send Instructions
         </Button>
@@ -77,7 +78,7 @@ export const ForgotPassword = () => {
 
       <div className={s.navigateContainer}>
         <p className={s.subtitle}>Do you remember your password?</p>
-        <NavLink url={PATH.LOG_IN} styleType="primary">
+        <NavLink url={PATH.LOG_IN} styleType="primary" disabled={isLoading}>
           Try to log in
         </NavLink>
       </div>
