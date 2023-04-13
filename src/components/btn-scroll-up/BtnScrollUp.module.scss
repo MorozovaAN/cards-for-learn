@@ -15,24 +15,14 @@
   background-color: var(--color-background-dark-400);
   border: 1px solid var(--color-on-primary-light-400);
   border-radius: 50%;
-  box-shadow: 0 0 6px 0 var(--color-on-primary-light-400);
+  box-shadow: 0 0 10px 1px var(--color-on-primary-light-400);
 
   &:hover {
     background-color: var(--color-background-dark-500);
-  }
-
-  @media (max-width: 600px) {
-    width: 40px;
-    height: 40px;
   }
 }
 
 .arrow {
   width: 19px;
   height: 23px;
-
-  @media (max-width: 600px) {
-    width: 16px;
-    height: 19px;
-  }
 }
