@@ -27,10 +27,6 @@
 
   font-size: 18px;
   font-weight: $fontWeight;
-
-  @media (max-width: 600px) {
-    font-size: 16px;
-  }
 }
 
 @mixin title($fontWeight: 400, $opacity: 1) {
@@ -122,17 +118,34 @@
     padding: 16px 10px 12px 10px;
   }
 
-  @media (max-width: 600px) {
-    height: 160px;
-    padding: 14px 8px 10px 8px;
+  @media (max-width: 650px) {
+    gap: 18px;
+
+    width: 80%;
+    height: 220px;
+    padding: 20px;
+
+    font-size: 16px;
+    span {
+      font-size: 16px;
+      font-weight: 600;
+    }
   }
 
-  @media (max-width: 520px) {
-    gap:0;
+ @media (max-width: 520px) {
+   width: 100%;
   }
 
-  @media (max-width: 420px) {
-    gap:6px;
+  @media (max-width: 360px) {
+    gap: 20px;
+
+    height: 200px;
+    padding: 14px;
+
+    font-size: 14px;
+    span {
+      font-size: 14px;
+    }
   }
 }
 
