@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useFormik } from 'formik'
+import * as yup from 'yup'
+
+import {
+  emailValidationSchema,
+  passwordValidationSchema,
+} from '../../../common/constants/yup-validation-schemas'
 
 import s from './LogIn.module.scss'
 
-import { setIsLoading } from 'app/appSlice'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useLogInMutation } from 'modules/auth/authApi'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
@@ -14,16 +18,14 @@ import { Checkbox } from 'UI/checkbox/Checkbox'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
 
-interface FormikErrorType {
-  email?: string
-  password?: string
-  rememberMe?: boolean
-}
+const validationSchema = yup.object().shape({
+  email: emailValidationSchema,
+  password: passwordValidationSchema,
+  rememberMe: yup.boolean(),
+})
 
 export const LogIn = () => {
   const [setLogin, { isLoading }] = useLogInMutation()
-  const [demo, setDemo] = useState(false)
-  const dispatch = useTypedDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -31,36 +33,15 @@ export const LogIn = () => {
       password: '',
       rememberMe: false,
     },
-
-    validate: values => {
-      const errors: FormikErrorType = {}
-
-      if (!values.email) {
-        errors.email = 'Email is required'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-      }
-
-      if (!values.password.trim()) {
-        errors.password = 'Password is required'
-      } else if (values.password.trim().length < 8) {
-        errors.password = 'Password should be 8 symbols at less'
-      }
-
-      return demo ? { password: '', email: '' } : errors
-    },
+    validationSchema: validationSchema,
 
     onSubmit: values => {
-      dispatch(setIsLoading(true))
       values = { ...values, email: values.email.toLowerCase() }
-
       setLogin(values)
     },
   })
 
   const useDemoAcc = () => {
-    setDemo(true)
-    dispatch(setIsLoading(true))
     setLogin({ email: 'mainmaill@inbox.ru', password: 'mainmaill12345', rememberMe: false })
   }
 

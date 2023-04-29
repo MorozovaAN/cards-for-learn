@@ -7,8 +7,6 @@ import { useLogUpMutation } from '../authApi'
 
 import s from './LogUp.module.scss'
 
-import { setIsLoading } from 'app/appSlice'
-import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
@@ -23,7 +21,6 @@ type LogUpErrorType = {
 
 export const LogUp = () => {
   const [logUp, { isSuccess, isLoading }] = useLogUpMutation()
-  const dispatch = useTypedDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -56,7 +53,6 @@ export const LogUp = () => {
     },
 
     onSubmit: values => {
-      dispatch(setIsLoading(true))
       logUp({ email: values.email.toLowerCase(), password: values.password })
     },
   })

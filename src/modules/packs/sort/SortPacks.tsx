@@ -14,7 +14,7 @@ import {
   StyledPopper,
 } from './SortPacksStyledComponents'
 
-import { sortingPacksMethods } from 'common/constants/sortingMethods'
+import { sortingPacksMethods } from 'common/constants/sorting-methods'
 import { paramsHelper } from 'common/utils/paramsHelper'
 import s from 'modules/packs/sort/SortPacks.module.scss'
 import { setSortLabel } from 'modules/packs/sort/utils/setSortLabel'
