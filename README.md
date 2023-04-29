@@ -1,12 +1,12 @@
 ## Project:
-Cards for learn
+Cards for Learning
 
 ## Description:
 Learn the information you need with question-and-answer cards.  
 
 The basis of the project is a pack of cards. The card contains a question and an answer. In tutorial mode, you see a card with a question, mentally answer it, click "see answer" and rate how correctly you answered it.  
 
-Then your score is taken into account when you show the cards. You will rarely be shown a question that you know the answer. You will be shown a card with the question you need to learn. Showing cards in tutorial mode is endless.  
+Then your score is taken into account when you show the cards. You will rarely be shown a question that you know the answer to. You will be shown a card with the question you need to learn. Showing cards in tutorial mode is endless.  
 
 You can create your own card packs or learn from public packs. You can edit, delete, and make your packs private.
 
@@ -41,8 +41,9 @@ You can create your own card packs or learn from public packs. You can edit, del
 ## What was implemented on the project:
 - registration
 - login, logout
+- password recovery
 - profile page, where you can load your user avatar and update your user name
-- The packs page and the cards page for each pack with all the information on the packs and cards
+- packs page and cards page for each pack with all the information on the packs and cards
 - filters:
   + search by packs/cards name
   + sorting into my and other people's packs (by number of cards in packs, alphabetically, by date of creation))
