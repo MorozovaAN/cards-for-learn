@@ -1,16 +1,18 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+import { AppDispatchType } from '../common/hooks/useTypedDispatch'
+
+const initialState: initialStateType = {
   isAuth: false,
   isLoggedIn: false,
   isLoading: false,
   notification: {
     message: '',
-    type: '' as NotificationType,
+    type: '',
     open: false,
   },
   modal: {
-    type: '' as ModalType,
+    type: '',
     open: false,
   },
   skeletonsNumbers: [1, 2, 3, 4, 5, 6],
@@ -69,7 +71,36 @@ const appSlice = createSlice({
   },
 })
 
+export const resetParams = createAsyncThunk<void, void, { dispatch: AppDispatchType }>(
+  'app/resetParams',
+  async (_, { dispatch }) => {
+    dispatch(setModal({ open: false, type: '' }))
+    dispatch(setBurger(false))
+    dispatch(setSkeletonsNumbers('6'))
+  }
+)
+
+//types
+type initialStateType = {
+  isAuth: boolean
+  isLoggedIn: boolean
+  isLoading: boolean
+  notification: {
+    message: string
+    type: NotificationType
+    open: boolean
+  }
+  modal: {
+    type: ModalType
+    open: boolean
+  }
+  skeletonsNumbers: number[]
+  burger: boolean
+  windowWidth: number
+}
+
 type NotificationType = '' | 'error' | 'success'
+
 export type ModalType =
   | ''
   | 'Add new pack'
