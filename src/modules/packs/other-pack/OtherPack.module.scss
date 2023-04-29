@@ -29,17 +29,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  @media (max-width: 420px) {
-    font-size: 16px;
-  }
 }
 
 .subtitleContainer {
   overflow: hidden;
-
-  @media (max-width: 420px) {
-    font-size: 14px;
-  }
 }
 
 .subtitle {
@@ -51,10 +44,6 @@
   @media (max-width: 600px) {
     font-weight: 600;
   }
-
-  @media (max-width: 420px) {
-    font-size: 14px;
-  }
 }
 
 .creator {
@@ -62,17 +51,6 @@
 
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.creatorSubtitle {
-
-  @media (max-width: 520px) {
-    display: block;
-  }
-
-  @media (max-width: 420px) {
-    display: inline;
-  }
 }
 
 .buttonsContainer {
@@ -100,21 +78,19 @@
   width: 48%;
   padding: 6px 0;
   
-  @media (max-width: 600px) {
-    padding: 3px 0;
+  @media (max-width: 650px) {
+    font-size: 16px;
   }
 }
 
 .btnTitle {
-
-  @media (max-width: 520px) {
-    display: none;
+  
+  @media (max-width: 420px) {
+    font-size: 14px;
   }
 
   @media (max-width: 420px) {
-    display: block;
-
-    font-size: 14px;
+    display: none;
   }
 }
 

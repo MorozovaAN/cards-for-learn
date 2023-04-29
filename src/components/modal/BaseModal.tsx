@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 
 import { createPortal } from 'react-dom'
 
+import { getBoxSize } from '../../common/utils/getBoxSize'
+
 import { modalSelector } from 'app/appSelectors'
 import { setModal } from 'app/appSlice'
 import { ReactComponent as Close } from 'assets/img/icons/close.svg'
@@ -22,6 +24,7 @@ export const BaseModal = () => {
   const root = document.querySelector<HTMLElement>('#root')
   const dispatch = useTypedDispatch()
   const scroll = calcScrollWidth()
+  const boxSize = getBoxSize(type)
   const closeModalOnEscape = (e: KeyboardEvent) => {
     e.key === 'Escape' && closeModal()
   }
@@ -53,7 +56,7 @@ export const BaseModal = () => {
         <div className={s.background} onClick={closeModal}></div>
 
         <div className={s.container}>
-          <Box size="M">
+          <Box size={boxSize} className={s.box}>
             <div className={s.header}>
               <Close className={s.close} onClick={closeModal} />
               <h2 className={s.title}>{type}</h2>
