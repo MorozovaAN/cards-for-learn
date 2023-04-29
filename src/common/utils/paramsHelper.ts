@@ -1,4 +1,4 @@
-import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
+import { BaseQueryParamsType } from 'common/constants/base-query-params'
 import { GetCardsRequestType } from 'modules/cards/cardsApi'
 
 export const paramsHelper = (searchParams: URLSearchParams) => {

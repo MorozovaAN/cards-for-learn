@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
+import { BaseQueryParamsType } from 'common/constants/base-query-params'
 import { baseURL } from 'common/constants/base-URL'
-import { BaseQueryParamsType } from 'common/constants/baseQueryParams'
-import { sortingPacksMethods } from 'common/constants/sortingMethods'
+import { sortingPacksMethods } from 'common/constants/sorting-methods'
 import { errorHandler } from 'common/utils/errorHandler'
 import { setIsPackLoading, setPackInfo } from 'modules/packs/packsSlise'
 

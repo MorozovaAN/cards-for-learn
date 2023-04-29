@@ -9,7 +9,6 @@ const initialState = {
   name: 'My name',
   avatar: '',
   id: '',
-  clickAway: false,
 }
 
 const authSlice = createSlice({
@@ -29,11 +28,8 @@ const authSlice = createSlice({
     forgotPasswordCurrentEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload
     },
-    setClickAway: (state, action: PayloadAction<boolean>) => {
-      state.clickAway = action.payload
-    },
   },
 })
 
-export const { setAuthData, forgotPasswordCurrentEmail, setClickAway } = authSlice.actions
+export const { setAuthData, forgotPasswordCurrentEmail } = authSlice.actions
 export const authReducer = authSlice.reducer

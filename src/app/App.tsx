@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
 
-import CircularProgress from '@mui/material/CircularProgress'
+import { LoadingCircular } from '../UI/loading-circular/LoadingCircular'
 
 import s from 'app/App.module.scss'
 import { isAuthSelector, isLoadingSelector, isLoggedInSelector } from 'app/appSelectors'
-import { setModal, setSkeletonsNumbers, setWindowWidth } from 'app/appSlice'
+import { resetParams, setWindowWidth } from 'app/appSlice'
 import { useTypedDispatch } from 'common/hooks/useTypedDispatch'
 import { useTypedSelector } from 'common/hooks/useTypedSelector'
 import { resizeObserver } from 'common/utils/resizeObserver'
 import { BaseModal } from 'components/modal/BaseModal'
 import { Header, useMeMutation } from 'modules'
-import { setClickAway } from 'modules/auth/authSlice'
 import { RoutesComponent } from 'routes/RoutesComponent'
 import { LoadingProgress } from 'UI/loading-progress/LoadingProgress'
 import { NotificationBar } from 'UI/notification-bar/NotificationBar'
@@ -32,12 +31,12 @@ export const App = () => {
   }, [])
 
   window.addEventListener('popstate', () => {
-    dispatch(setModal({ open: false, type: '' }))
-    dispatch(setClickAway(true))
-    dispatch(setSkeletonsNumbers('6'))
+    dispatch(resetParams())
   })
 
-  return isAuth ? (
+  if (!isAuth) return <LoadingCircular />
+
+  return (
     <div id="app" className={appClasses}>
       <NotificationBar />
       <BaseModal />
@@ -48,10 +47,6 @@ export const App = () => {
       <section>
         <RoutesComponent />
       </section>
-    </div>
-  ) : (
-    <div className={s.loaderContainer}>
-      <CircularProgress classes={{ root: s.circular }} size={60} />
     </div>
   )
 }

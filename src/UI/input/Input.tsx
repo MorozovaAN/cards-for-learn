@@ -58,8 +58,8 @@ export const Input: React.FC<SuperInputTextPropsType> = ({
     passwordVisible ? setTypeLabel('text') : setTypeLabel(type)
   }, [passwordVisible])
 
-  const inputClasses = `${s.input} ${className ? className : ''} ${type && s[type]} ${
-    textChange && s.inputWithBtn
+  const inputClasses = `${s.input} ${className ? className : ''} ${type ? s[type] : ''} ${
+    textChange ? s.inputWithBtn : ''
   }`
 
   const inputContainerClasses = `${s.inputContainer} ${inputContainerClass && inputContainerClass}`

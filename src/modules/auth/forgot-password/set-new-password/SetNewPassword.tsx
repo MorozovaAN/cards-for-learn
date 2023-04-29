@@ -2,15 +2,21 @@ import React from 'react'
 
 import { useFormik } from 'formik'
 import { Navigate, useParams } from 'react-router-dom'
+import * as yup from 'yup'
+
+import { passwordValidationSchema } from '../../../../common/constants/yup-validation-schemas'
 
 import s from './SetNewPassword.module.scss'
 
 import { useSetNewPasswordMutation } from 'modules/auth/authApi'
-import { ErrorsType } from 'modules/auth/forgot-password/ForgotPassword'
 import { PATH } from 'routes/routes'
 import { Box } from 'UI/box/Box'
 import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
+
+const validationSchema = yup.object().shape({
+  password: passwordValidationSchema,
+})
 
 export const SetNewPassword = () => {
   const [setNewPassword, { isSuccess, isLoading }] = useSetNewPasswordMutation()
@@ -20,18 +26,7 @@ export const SetNewPassword = () => {
     initialValues: {
       password: '',
     },
-
-    validate: values => {
-      const errors: ErrorsType = {}
-
-      if (!values.password) {
-        errors.password = 'Required field'
-      } else if (values.password.trim().length < 8) {
-        errors.password = 'Password should be 8 symbols at less'
-      }
-
-      return errors
-    },
+    validationSchema: validationSchema,
 
     onSubmit: values => {
       if (token) {

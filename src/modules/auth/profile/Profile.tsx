@@ -23,22 +23,14 @@ export const Profile = () => {
   const [updateUserName, { isLoading: isLoadingName }] = useUpdateUserNameMutation()
   const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation()
   const [logOut] = useLogOutMutation()
+  const [editMode, setEditMode] = useState(false)
   const email = useTypedSelector(emailSelector)
   const name = useTypedSelector(nameSelector)
   const avatar = useTypedSelector(avatarSelector)
-  const [editMode, setEditMode] = useState(false)
-
-  const updateNameCallback = (name: string) => {
-    updateUserName(name)
-  }
-  const updateAvatarCallback = (avatar: string) => {
-    updateUserAvatar(avatar)
-  }
 
   const logout = () => {
     logOut().unwrap()
   }
-
   const editModeOpen = () => {
     setEditMode(true)
   }
@@ -57,7 +49,7 @@ export const Profile = () => {
   )
 
   return (
-    <Box size="L" className={s.profileBox}>
+    <Box size="M" className={s.profileBox}>
       <h2 className={s.title}>Personal Information</h2>
 
       {isLoadingAvatar ? (
@@ -70,7 +62,7 @@ export const Profile = () => {
 
           <span className={s.photoUploader}>
             <UpdateUserAvatar
-              updateAvatarCallback={updateAvatarCallback}
+              updateAvatarCallback={() => updateUserAvatar(avatar)}
               disabled={isLoadingAvatar || isLoadingName}
             />
           </span>
@@ -80,7 +72,7 @@ export const Profile = () => {
       {editMode ? (
         <UpdateUserName
           setEditMode={setEditMode}
-          updateNameCallback={updateNameCallback}
+          updateNameCallback={() => updateUserName(name)}
           editMode={editMode}
         />
       ) : (
@@ -96,7 +88,8 @@ export const Profile = () => {
         disabled={isLoadingName || isLoadingAvatar}
       >
         <div className={s.btnTextContainer}>
-          <Logout fill="#fff" width="17" /> <span>Logout</span>
+          <Logout fill="#fff" width="17" />
+          <span>Logout</span>
         </div>
       </Button>
     </Box>

@@ -41,6 +41,8 @@ export const authApi = createApi({
         body: logUpData,
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsLoading(true))
+
         try {
           await queryFulfilled
           dispatch(
@@ -61,6 +63,8 @@ export const authApi = createApi({
         body: loginData,
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        dispatch(setIsLoading(true))
+
         try {
           const res = await queryFulfilled
 
@@ -85,6 +89,7 @@ export const authApi = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         dispatch(setIsLoading(true))
+
         try {
           await queryFulfilled
           dispatch(setIsLoggedIn(false))
@@ -143,8 +148,9 @@ export const authApi = createApi({
         body,
       }),
       async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        dispatch(setIsLoading(true))
+
         try {
-          dispatch(setIsLoading(true))
           await queryFulfilled
           dispatch(forgotPasswordCurrentEmail(body.email))
         } catch (err) {
@@ -188,7 +194,7 @@ export const {
 } = authApi
 
 //types
-export interface Response {
+export type Response = {
   _id: string
   email: string
   rememberMe: boolean

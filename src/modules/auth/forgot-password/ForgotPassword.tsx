@@ -2,6 +2,9 @@ import React from 'react'
 
 import { useFormik } from 'formik'
 import { Navigate } from 'react-router-dom'
+import * as yup from 'yup'
+
+import { emailValidationSchema } from '../../../common/constants/yup-validation-schemas'
 
 import s from './ForgotPassword.module.scss'
 
@@ -12,10 +15,9 @@ import { Button } from 'UI/button/Button'
 import { Input } from 'UI/input/Input'
 import { NavLink } from 'UI/nav-link/NavLink'
 
-export type ErrorsType = {
-  email?: string
-  password?: string
-}
+const validationSchema = yup.object().shape({
+  email: emailValidationSchema,
+})
 
 export const ForgotPassword = () => {
   const [forgotPassword, { isSuccess, isLoading }] = useForgotPasswordMutation()
@@ -26,17 +28,7 @@ export const ForgotPassword = () => {
     initialValues: {
       email: '',
     },
-    validate: values => {
-      const errors: ErrorsType = {}
-
-      if (!values.email) {
-        errors.email = 'Required field'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-      }
-
-      return errors
-    },
+    validationSchema: validationSchema,
 
     onSubmit: values => {
       let payload = {

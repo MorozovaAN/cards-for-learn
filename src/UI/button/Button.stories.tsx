@@ -3,7 +3,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import icon from '../../assets/img/icons/teach.svg'
+import icon from '../../assets/img/icons/edit.svg'
 
 import { Button } from './Button'
 

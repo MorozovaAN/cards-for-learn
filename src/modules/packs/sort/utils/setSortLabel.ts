@@ -1,4 +1,4 @@
-import { sortingPacksMethods } from 'common/constants/sortingMethods'
+import { sortingPacksMethods } from 'common/constants/sorting-methods'
 
 export const setSortLabel = (value: sortingPacksMethods) => {
   const obj = {
