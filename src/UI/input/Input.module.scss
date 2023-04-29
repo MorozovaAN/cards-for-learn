@@ -49,15 +49,6 @@
 
     -webkit-text-fill-color: var(--color-on-primary-light-400) !important;
   }
-
-  @media (max-width: 520px) {
-    padding: 10px;
-
-    font-size: 14px;
-    &::placeholder {
-      font-size: 14px;
-    }
-  }
 }
 
 .label {
@@ -77,10 +68,6 @@
   position: absolute;
   right: 0;
   bottom: 29px;
-
-  @media (max-width: 520px) {
-    bottom: 28px;
-  }
 }
 
 .errorContainer {
@@ -110,11 +97,6 @@
   width: 24px;
   height: 24px;
   margin-right: 10px;
-
-  @media (max-width: 520px) {
-    width: 22px;
-    height: 22px;
-  }
 }
 
 .visibilityIconDisable {
