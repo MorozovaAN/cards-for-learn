@@ -4,6 +4,8 @@
 
   @include pack;
 
+  grid-template-rows: repeat(4, auto);
+
   padding-top: 22px;
 
   @media (max-width: 1000px) {

@@ -8,4 +8,8 @@
 .contentContainer  {
 
   @include pageContainer;
+
+  @media (max-width: 720px) {
+    padding-top: var(--margin-m);
+  }
 }

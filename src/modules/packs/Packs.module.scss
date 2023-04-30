@@ -1,5 +1,27 @@
 @import 'src/common/style-mixins/mixins';
 
+.packsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  min-height: 434px;
+  padding: var(--margin-l) 0;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2,  1fr);
+    row-gap: var(--margin-l);
+    column-gap: 6%;
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    padding: 30px 0;
+  }
+}
+
 .filters {
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -9,11 +31,7 @@
   width: 100%;
   height: 70px;
 
-  @media (max-width: 600px) {
-    column-gap: 15px;
-  }
-
-  @media (max-width: 420px){
+  @media (max-width: 820px) {
     column-gap: 15px;
   }
 }
@@ -23,10 +41,6 @@
   @include skeletonBase;
   
   height: 42px;
-
-  @media (max-width: 520px){
-    height: 37px;
-  }
 }
 
 .skeletonSearchContainer .skeletonSearch, .skeletonSearchContainer {
@@ -39,18 +53,10 @@
   @media (max-width: 720px) {
     width: 42px;
   }
-
-  @media (max-width: 520px) {
-    width: 37px;
-  }
 }
 
 .skeletonResetFiltersContainer .skeletonResetFilters {
   width: 42px;
-
-  @media (max-width: 520px) {
-    width: 37px;
-  }
 }
 
 .skeletonPaginationContainer  .skeletonPagination {
