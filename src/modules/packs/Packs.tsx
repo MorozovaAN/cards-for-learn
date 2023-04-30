@@ -55,7 +55,9 @@ export const Packs = () => {
         )}
       </div>
 
-      <PacksList responsePacks={data ? data.cardPacks : null} isFetching={isFetching} />
+      <div className={s.packsContainer}>
+        <PacksList responsePacks={data ? data.cardPacks : null} isFetching={isFetching} />
+      </div>
 
       {data ? (
         <Paginator

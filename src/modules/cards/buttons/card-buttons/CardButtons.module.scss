@@ -12,6 +12,11 @@
   }
 }
 
+.skeletonCardButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .otherPackLearnBtn {
   display: flex;
   grid-column: 1/3;
@@ -72,14 +77,6 @@
   @media (max-width: 620px) {
     width: 50px;
   }
-
-  @media (max-width: 500px) {
-    height: 37px;
-  }
-
-  @media (max-width: 460px) {
-    width: 37px;
-  }
 }
 
 .addTooltip {
@@ -115,23 +112,11 @@
   @include tooltipHover();
 }
 
-.skeletonCardButtonsContainer .skeletonCardButtons, .skeletonOtherCardsContainer .skeletonOtherCards {
+ .skeletonOtherCardsContainer .skeletonOtherCards {
 
   @include skeletonBase;
 
   height: 100%;
-}
-
-
-.skeletonCardButtonsContainer .skeletonCardButtons {
-  width: 60px;
-
-  border-radius: 30px;
-}
-
-.skeletonCardButtonsContainer {
-  display: flex;
-  justify-content: space-between;
 }
 
 .skeletonOtherCardsContainer .skeletonOtherCards {
