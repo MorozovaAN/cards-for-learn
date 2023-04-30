@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
 
-import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
+
+import { Skeletons } from '../../../../components/skeletons/Skeletons'
 
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as EditIcon } from 'assets/img/icons/edit.svg'
@@ -14,19 +15,19 @@ import { packNameSelector, privateCheckboxSelector } from 'modules/packs/packsSe
 import { setPackInfo } from 'modules/packs/packsSlise'
 import { Button } from 'UI/button/Button'
 
-type ButtonsType = {
+type PackButtonsType = {
   packId: string
   isFetching: boolean
   disabled: boolean
 }
-export const PackButtons: FC<ButtonsType> = ({ packId, disabled, isFetching }) => {
+
+export const PackButtons: FC<PackButtonsType> = ({ packId, disabled, isFetching }) => {
   const [searchParams] = useSearchParams()
   const dispatch = useTypedDispatch()
   const myId = useTypedSelector(idSelector)
   const packName = useTypedSelector(packNameSelector)
   const privatePack = useTypedSelector(privateCheckboxSelector)
   const myCards = searchParams.get('user_id') === myId
-  const skeletons = [1, 2]
 
   const openModalHandler = (type: ModalType) => {
     dispatch(setPackInfo({ packId, packName, privatePack }))
@@ -34,16 +35,7 @@ export const PackButtons: FC<ButtonsType> = ({ packId, disabled, isFetching }) =
   }
 
   const cardButtons = isFetching ? (
-    <div className={s.skeletonPackButtonsContainer}>
-      {skeletons.map(el => (
-        <Skeleton
-          classes={{ root: s.skeletonPackButtons }}
-          animation="wave"
-          variant="rectangular"
-          key={el}
-        />
-      ))}
-    </div>
+    <Skeletons components="packButtons" count={[1, 2]} />
   ) : (
     <div className={s.buttonsContainer}>
       <Button

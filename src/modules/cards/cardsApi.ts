@@ -117,7 +117,6 @@ export type CardType = {
   more_id: string
   question: string
   questionImg: string
-
   rating: number
   shots: number
   type: string

@@ -3,6 +3,8 @@ import React, { FC } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import { useSearchParams } from 'react-router-dom'
 
+import { Skeletons } from '../../../../components/skeletons/Skeletons'
+
 import { ModalType, setModal } from 'app/appSlice'
 import { ReactComponent as LearnIcon } from 'assets/img/icons/learn.svg'
 import { ReactComponent as PlusIcon } from 'assets/img/icons/plus.svg'
@@ -30,7 +32,6 @@ export const CardButtons: FC<ButtonsType> = ({ packId, isFetching, disabled, car
   const packName = useTypedSelector(packNameSelector)
   const privatePack = useTypedSelector(privateCheckboxSelector)
   const myCards = searchParams.get('user_id') === myId
-  const skeletons = [1, 2]
   const learnUrl = `/learn?pageCount=${cardsCount}&cardsPack_id=${packId}`
 
   const openModalHandler = (type: ModalType) => {
@@ -40,14 +41,7 @@ export const CardButtons: FC<ButtonsType> = ({ packId, isFetching, disabled, car
 
   const myCardsList = isFetching ? (
     <div className={s.skeletonCardButtonsContainer}>
-      {skeletons.map(el => (
-        <Skeleton
-          classes={{ root: s.skeletonCardButtons }}
-          animation="wave"
-          variant="rectangular"
-          key={el}
-        />
-      ))}
+      <Skeletons components="cardButtons" count={[1, 2]} />
     </div>
   ) : (
     <div className={s.buttonsContainer}>

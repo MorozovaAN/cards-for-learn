@@ -65,16 +65,6 @@ export const StyledButton = styled('button')(
        width: 21px;
      }
   }
-  
-  @media (max-width: 520px) {
-    width: 37px;
-    height: 37px;
-    
-    &::after {
-     top: 6px;
-     left: 8px;
-    }
-  }
   `
 )
 

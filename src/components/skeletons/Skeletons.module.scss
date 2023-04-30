@@ -1,0 +1,67 @@
+@import 'src/common/style-mixins/mixins';
+
+.skeletonPackContainer .skeletonPack, .skeletonPackContainer {
+
+  @include skeletonBase;
+
+  width: 100%;
+  height: 200px;
+
+  @media (max-width: 650px) {
+    height: 220px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 360px) {
+    height: 200px;
+  }
+}
+
+.skeletonPackContainer {
+
+  @media (max-width: 650px) {
+    width: 80%;
+  }
+
+  @media (max-width: 520px) {
+    width: 100%;
+  }
+}
+
+.skeletonCardsContainer .skeletonCard {
+
+  @include skeletonBase;
+
+  width: 100%;
+  height: 200px;
+}
+
+.skeletonPackButtonsContainer .skeletonPackButtons {
+  width: 60px;
+  height: 100%;
+
+  border-radius: 30px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.skeletonPackButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.skeletonCardButtonsContainer .skeletonCardButtons {
+
+  @include skeletonBase;
+
+  width: 60px;
+  height: 100%;
+
+  border-radius: 30px;
+}

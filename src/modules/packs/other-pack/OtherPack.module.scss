@@ -97,10 +97,18 @@
 .learnIcon {
   width: 15px;
   margin-bottom: 2px;
+
+  @media (max-width: 420px) {
+    width: 18px;
+  }
 }
 
 .cardsIcon {
   width: 16px;
   height: 20px;
   margin-bottom: 1px;
+
+  @media (max-width: 420px) {
+    width: 19px;
+  }
 }
